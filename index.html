@@ -686,6 +686,77 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+/* CITTÀ: fiocchi di neve (accoglienza, servizi, comfort), sacrificio ad Auril e rivali */
+.info-luogo { margin-top: 18px; padding: 14px 16px 15px; border-radius: 16px; background: var(--ardesia); border: 1px solid rgba(236, 230, 214, .08); }
+.scheda-mappa .info-luogo { background: rgba(16, 24, 32, .38); margin-top: 14px; }
+.fiocchi-riga { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.fiocchi-voce { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fiocchi-voce > span:first-child { font-size: 13px; color: var(--brina); }
+.fiocchi { display: flex; gap: 2px; color: #A8D4EC; }
+.fiocchi .i { width: 19px; height: 19px; }
+.fiocchi .i.spento { opacity: .2; }
+.fiocchi-voce em { font-style: normal; font-size: 14px; color: var(--avorio); }
+.info-luogo p { margin: 12px 0 0; font-size: 15px; line-height: 1.45; color: var(--avorio-2); }
+.info-luogo p strong { color: var(--lanterna-2); font-weight: 700; }
+.riga-fiocchi { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.riga-fiocchi + .riga-fiocchi { margin-top: 8px; }
+.riga-fiocchi > span { min-width: 96px; color: var(--avorio-2); }
+
+/* LEGENDE (mappa e commercio) */
+.legenda-sez { margin-top: 20px; }
+.legenda-sez:first-of-type { margin-top: 4px; }
+.legenda { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; }
+.legenda > li { display: grid; grid-template-columns: 46px 1fr; gap: 12px; align-items: center; }
+.legenda strong { display: block; font-weight: 700; }
+.legenda .fioco { font-size: 14px; line-height: 1.4; }
+.legenda--compatta { gap: 9px; }
+.leg-segno { width: 46px; height: 40px; display: grid; place-items: center; }
+.leg-med { width: 34px; height: 34px; border-radius: 50%; display: inline-grid; place-items: center; flex: none; color: var(--avorio);
+  background: rgba(16, 24, 32, .92); border: 1.5px solid var(--avorio); box-shadow: inset 0 0 0 2px rgba(16, 24, 32, .9); }
+.leg-med .i { width: 19px; height: 19px; }
+.leg-med.noto { border-style: dashed; color: var(--avorio-2); background: rgba(16, 24, 32, .62); }
+.leg-med.segreto { border-color: var(--c-fazione); color: var(--c-fazione); opacity: .8; }
+.leg-med--piccolo { width: 30px; height: 30px; }
+.leg-med--piccolo .i { width: 16px; height: 16px; }
+.leg-anello { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--lanterna); background: rgba(232, 163, 61, .14); box-shadow: 0 0 0 2px rgba(16, 24, 32, .5), 0 0 14px rgba(232, 163, 61, .45); }
+.leg-badge { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--lanterna); color: #22170A; font: 700 12px/20px var(--f-testo); text-align: center; }
+.leg-lanterna { color: var(--lanterna); }
+.leg-lanterna .i { width: 24px; height: 24px; }
+.leg-fiocchi { color: #A8D4EC; }
+.leg-fiocchi .i { width: 22px; height: 22px; }
+.leg-via { width: 40px; height: 12px; overflow: visible; }
+.leg-via path { fill: none; stroke: var(--lanterna); stroke-width: 2.5; stroke-dasharray: 5 4; stroke-linecap: round; }
+.leg-num { width: 46px; text-align: center; font: 700 17px var(--f-testo); color: var(--lanterna-2); }
+.leg-num .i { width: 20px; height: 20px; }
+.griglia-simboli { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 14px; margin-top: 12px; }
+.griglia-simboli > div { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--avorio-2); }
+.passi-legenda { margin: 10px 0 0; padding-left: 22px; display: grid; gap: 8px; }
+.passi-legenda li { padding-left: 4px; line-height: 1.45; color: var(--avorio-2); }
+.passi-legenda li strong { color: var(--avorio); }
+.formula-legenda { margin: 10px 0 4px; font: 400 26px/1.2 var(--f-titolo); color: var(--lanterna-2); }
+.eventi-legenda { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+.eventi-legenda li { display: grid; grid-template-columns: 74px 1fr; gap: 10px; align-items: baseline; }
+.eventi-legenda b { font-variant-numeric: tabular-nums; color: var(--lanterna-2); font-weight: 700; font-size: 14px; }
+.eventi-legenda strong { display: block; font-weight: 700; }
+.eventi-legenda .fioco { font-size: 14px; }
+.riga-legenda { margin: 4px 0 0; }
+
+/* Magia selvaggia: numero tirato al tavolo e tabella completa */
+.riga-dado { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; color: var(--avorio-2); }
+.riga-dado select { width: auto; min-width: 82px; }
+.riga-dado input { width: 104px; }
+.elenco-impulsi { list-style: none; padding: 0; margin: 10px 0 0; }
+.elenco-impulsi li { display: grid; grid-template-columns: 62px 1fr; gap: 10px; padding: 9px 8px; border-bottom: 1px solid rgba(236, 230, 214, .07); font-size: 15px; line-height: 1.42; color: var(--avorio-2); }
+.elenco-impulsi b { color: var(--lanterna-2); font-variant-numeric: tabular-nums; font-weight: 700; }
+.elenco-impulsi li.uscito { background: rgba(232, 163, 61, .13); border-radius: 10px; color: var(--avorio); }
+
+/* Ritratto ingrandito */
+.sigillo-btn { padding: 0; border: 0; background: none; border-radius: 50%; cursor: zoom-in; flex: none; }
+.sigillo-btn:focus-visible { outline: 2px solid var(--lanterna); outline-offset: 3px; }
+.ritratto-grande { margin: 0; text-align: center; }
+.ritratto-grande img { width: 100%; max-width: 360px; aspect-ratio: 1; object-fit: cover; display: block; margin: 0 auto; border-radius: 22px; box-shadow: 0 10px 30px rgba(0, 0, 0, .45); }
+.ritratto-grande figcaption { margin-top: 12px; color: var(--brina); }
+
 </style>
 </head>
 <body>
@@ -727,7 +798,7 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 // ---------------------------------------------------------------------
 // COSTANTI
 // ---------------------------------------------------------------------
-const VERSIONE = '1.2.0';
+const VERSIONE = '1.3.0';
 const VERSIONE_SCRIPT = 2;   // versione minima di Code.gs che serve a questa app
 const TABELLE = ['sessioni', 'voci', 'missioni', 'rapporti', 'mappe', 'config', 'commercio'];
 
@@ -759,6 +830,23 @@ const ATTEGGIAMENTI = { '-2': 'Ostile', '-1': 'Diffidente', '0': 'Neutrale', '1'
 // Rapporto tra un singolo personaggio giocante e un PNG, da -3 a +3
 const RAPPORTI = { '-3': 'Nemico', '-2': 'Ostile', '-1': 'Freddo', '0': 'Neutrale', '1': 'Cordiale', '2': 'Amico', '3': 'Fidato' };
 const TIPI_FAVORE = { 'ci-deve': 'Ci deve un favore', 'dobbiamo': 'Gli dobbiamo un favore', 'nota': 'Nota' };
+
+// Le Dieci-Città hanno tre valutazioni in fiocchi di neve, da 1 a 3 (più fiocchi, meglio è).
+// breve = quello che compare sotto i fiocchi; livelli = la spiegazione nella legenda della mappa.
+const FIOCCHI = {
+  accoglienza: { nome: 'Accoglienza', breve: ['', 'Scontrosi', 'Così così', 'Cordiali'],
+    livelli: ['', 'Gente scontrosa che non vi aiuterà', 'Un po\' di tutto: c\'è chi aiuta e chi no', 'Gente cordiale e disponibile'] },
+  servizi: { nome: 'Servizi', breve: ['', 'Quasi nulla', 'Pochi', 'Di tutto'],
+    livelli: ['', 'Difficile trovare qualunque servizio', 'Scelta limitata', 'Trovate quasi tutto quello che vi serve'] },
+  comfort: { nome: 'Comfort', breve: ['', 'Spartano', 'Discreto', 'Ottimo'],
+    livelli: ['', 'Al massimo un capanno freddo o una soffitta', 'Una taverna e stanze piene di spifferi', 'Cibo e bevande decenti, letti caldi'] }
+};
+// Come ogni città placa Auril nelle notti di luna nuova
+const SACRIFICI = {
+  umanoide: { nome: 'Una persona', testo: "Il pomeriggio prima della luna nuova si estrae a sorte un nome: chi esce viene lasciato al gelo, legato a un palo o mandato nella tundra. Si sospetta spesso che il sorteggio sia truccato." },
+  cibo: { nome: 'Cibo', testo: "Nelle notti di luna nuova il pescato di un giorno viene appeso su rastrelliere di legno a un miglio dal paese, per le creature di Auril." },
+  calore: { nome: 'Calore', testo: "Nelle notti di luna nuova nessuno accende fuochi dal tramonto all'alba: ci si scalda stando vicini. Chi accende un fuoco viene picchiato." }
+};
 
 // ---------------------------------------------------------------------
 // ICONE (24x24, solo tratto). ico('mappa') restituisce l'SVG pronto.
@@ -797,6 +885,10 @@ const ICONE = {
   teschio: 'M12 3a7 7 0 0 0-7 7c0 2.4 1.2 4 2.5 5v3.5h9V15c1.3-1 2.5-2.6 2.5-5a7 7 0 0 0-7-7z M8.5 11.5h2.5 M13 11.5h2.5 M10.5 18.5v2 M13.5 18.5v2',
   orologio: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2',
   info: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 11v5.5 M12 7.6v.4',
+  arma: 'M5 19l8.5-8.5 M13.5 10.5 19 5h1v1l-5.5 5.5 M4 16.5l3.5 3.5 M3.5 20.5l2-2',
+  protezione: 'M12 3l7 3v5.5c0 4.4-3 7.9-7 9.5-4-1.6-7-5.1-7-9.5V6z',
+  attrezzatura: 'M5 9h14v10.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z M8.5 9V6.5a3.5 3.5 0 0 1 7 0V9 M5 13.5h14 M10 13.5v2h4v-2',
+  fiocco: 'M12 2.5v19 M3.8 7.25l16.4 9.5 M3.8 16.75l16.4-9.5 M9.6 4.4 12 6.6l2.4-2.2 M9.6 19.6 12 17.4l2.4 2.2 M4.3 10.6l2.9.3-.6 2.9 M19.7 13.4l-2.9-.3.6-2.9',
   immagine: 'M4 5h16v14H4z M4 15l4.5-4.5 4 4 2.5-2.5L20 17 M15.5 9.5h.01',
   // simboli dei luoghi
   citta: 'M4 20V9l2-1.5L8 9v3h2V8l2-2 2 2v4h2V9l2-1.5L20 9v11z M10.5 20v-3.5a1.5 1.5 0 0 1 3 0V20',
@@ -1312,6 +1404,39 @@ function sigillo(v, classe) {
   const dentro = v.immagine ? `<img src="${esc(v.immagine)}" alt="">` : (v.tipo === 'luogo' || v.tipo === 'oggetto' || v.tipo === 'fazione' ? ico(iconaVoce(v)) : esc(iniziali(v.nome)));
   return `<span class="sigillo t-${cl}${morto} ${classe || ''}">${dentro}</span>`;
 }
+// Riquadro di una città: fiocchi di neve (accoglienza, servizi, comfort), sacrificio ad Auril e rivali.
+// Vuoto se il luogo non ha nessuna di queste informazioni. Lo usano la scheda del luogo e quella sulla mappa.
+function infoLuogoHTML(v) {
+  const f = v && v.fiocchi && typeof v.fiocchi === 'object' ? v.fiocchi : {};
+  const conFiocchi = Object.keys(FIOCCHI).filter(k => Number(f[k]));
+  const sac = v && SACRIFICI[v.sacrificio];
+  if (!conFiocchi.length && !sac && !(v && v.rivali)) return '';
+  let h = '<div class="info-luogo">';
+  if (conFiocchi.length) {
+    h += '<div class="fiocchi-riga">' + Object.keys(FIOCCHI).map(k => {
+      const n = clamp(Number(f[k]) || 0, 0, 3);
+      return `<div class="fiocchi-voce"><span>${FIOCCHI[k].nome}</span>
+        <span class="fiocchi" aria-label="${n} su 3">${[1, 2, 3].map(i => ico('fiocco', i <= n ? '' : 'spento')).join('')}</span>
+        <em>${n ? esc(FIOCCHI[k].breve[n]) : 'Non si sa'}</em></div>`;
+    }).join('') + '</div>';
+  }
+  if (sac) h += `<p><strong>Sacrificio ad Auril: ${esc(sac.nome.toLowerCase())}.</strong> ${esc(sac.testo)}</p>`;
+  if (v.rivali) h += `<p><strong>Rivali:</strong> ${testoRicco(v.rivali, 'riga')}</p>`;
+  return h + '</div>';
+}
+
+// Pulsante per la scheda di D&D Beyond. Su Android provo ad aprirla nell'app (pacchetto com.fandom.playercompanion):
+// se l'app non accetta il link, Chrome apre il sito come prima (S.browser_fallback_url).
+function bottoneBeyond(url) {
+  if (!url) return '';
+  const m = String(url).match(/^https?:\/\/([^/]*dndbeyond\.com)(\/[^#]*)?/i);
+  if (m && /Android/i.test(navigator.userAgent)) {
+    const intento = `intent://${m[1]}${m[2] || '/'}#Intent;scheme=https;package=com.fandom.playercompanion;S.browser_fallback_url=${encodeURIComponent(url)};end`;
+    return `<a class="btn btn--piccolo" href="${esc(intento)}">${ico('esterno')}D&amp;D Beyond</a>`;
+  }
+  return `<a class="btn btn--piccolo" href="${esc(url)}" target="_blank" rel="noopener">${ico('esterno')}D&amp;D Beyond</a>`;
+}
+
 // Scala a rombi: atteggiamento (-2..2) o rapporto (-3..3)
 function scala(valore, max) {
   valore = Number(valore) || 0;
@@ -1828,7 +1953,9 @@ function vistaVoce(id) {
   const t = TIPI_VOCE[v.tipo] || TIPI_VOCE.png;
   const luogo = v.luogo ? (risolvi(v.luogo, 'luogo') || v.luogo) : null;
   const sopra = v.tipo === 'luogo' ? (ICONE_LUOGO[v.icona] || 'Luogo') : v.tipo === 'pg' ? 'Della compagnia' : t.nome;
-  let h = `<header class="intestazione">${sigillo(v, 'sigillo--grande')}<div class="corpo">
+  // con un ritratto il sigillo si tocca per vederlo grande
+  const sig = v.immagine ? `<button class="sigillo-btn" data-a="ritratto" data-id="${esc(id)}" aria-label="Ingrandisci il ritratto">${sigillo(v, 'sigillo--grande')}</button>` : sigillo(v, 'sigillo--grande');
+  let h = `<header class="intestazione">${sig}<div class="corpo">
     <p class="sopra">${esc(sopra)}${v.segreto ? ', visibile solo al Master' : ''}</p>
     <h1 class="t1">${esc(v.nome)}</h1>
     ${v.ruolo ? `<p class="sotto">${esc(v.ruolo)}</p>` : ''}
@@ -1846,11 +1973,12 @@ function vistaVoce(id) {
     h += `<div style="display:flex;align-items:center;gap:12px;margin-top:16px"><span class="fioco">Verso il gruppo</span>${scala(v.atteggiamento, 2)}<strong style="font-weight:700">${esc(ATTEGGIAMENTI[v.atteggiamento] || '')}</strong></div>`;
   }
   if (v.tipo === 'pg') {
-    h += `<div class="azioni"><a class="btn btn--primario btn--piccolo" href="#/scheda/${encodeURIComponent(id)}">${ico('scheda')}Apri la scheda</a>${v.link ? `<a class="btn btn--piccolo" href="${esc(v.link)}" target="_blank" rel="noopener">${ico('esterno')}D&amp;D Beyond</a>` : ''}</div>`;
+    h += `<div class="azioni"><a class="btn btn--primario btn--piccolo" href="#/scheda/${encodeURIComponent(id)}">${ico('scheda')}Apri la scheda</a>${bottoneBeyond(v.link)}</div>`;
   }
   if (v.guida && !(I.sessioniDi[id] || []).length) {
     h += `<p class="nota-guida">${ico('diario')}Dalla guida della valle: non l'avete ancora incontrato. Compare nel diario appena lo citate in una sessione.</p>`;
   }
+  if (v.tipo === 'luogo') h += infoLuogoHTML(v);
   if (v.descrizione) h += `<section class="sezione"><div class="lettura">${testoRicco(v.descrizione)}</div></section>`;
 
   // Luoghi: chi ci trovi, luoghi interni, mappa
@@ -2036,6 +2164,9 @@ const SCHEMI = {
     { k: 'luogo', t: 'rif', l: 'Dove si trova', per: ['png', 'fazione', 'oggetto', 'pg'] },
     { k: 'luogo', t: 'rif', l: 'Fa parte di (per esempio la città di una locanda)', per: ['luogo'] },
     { k: 'icona', t: 'scelta', l: 'Simbolo sulla mappa', opz: ICONE_LUOGO, per: ['luogo'] },
+    { k: 'fiocchi', t: 'fiocchi', l: 'Accoglienza, servizi e comfort', per: ['luogo'] },
+    { k: 'sacrificio', t: 'scelta', l: 'Sacrificio ad Auril', opz: { '': 'Nessuno o non si sa', umanoide: 'Una persona (sorteggio)', cibo: 'Cibo', calore: 'Calore' }, per: ['luogo'] },
+    { k: 'rivali', t: 'ricco', l: 'Città rivali', ph: 'Es. #[Targos], #[Lonelywood]', per: ['luogo'] },
     { k: 'giocatore', t: 'testo', l: 'Chi lo gioca', per: ['pg'] },
     { k: 'regole', t: 'regole', l: 'Classe, razza e caratteristiche', per: ['pg'] },
     { k: 'livello', t: 'numero', l: 'Livello', per: ['pg'] },
@@ -2138,6 +2269,14 @@ function apriEditor(tab, id, preset) {
         gruppo = true;
         campo = `<div class="pillole">${Object.entries(TIPI_VOCE).map(([k, t]) => `<label><input type="radio" name="tipo" value="${k}" ${rec.tipo === k ? 'checked' : ''} data-a="ed-tipo"><span>${esc(t.nome)}</span></label>`).join('')}</div>`;
         break;
+      case 'fiocchi': {
+        // tre righe da 1 a 3 fiocchi di neve; "?" se non si sa
+        gruppo = true;
+        const f = v && typeof v === 'object' ? v : {};
+        campo = Object.entries(FIOCCHI).map(([k, d]) => `<div class="riga-fiocchi"><span>${esc(d.nome)}</span><div class="pillole">${['', 1, 2, 3].map(n =>
+          `<label><input type="radio" name="fiocchi-${k}" value="${n}" ${String(f[k] || '') === String(n) ? 'checked' : ''}><span>${n ? '❄'.repeat(n) : '?'}</span></label>`).join('')}</div></div>`).join('');
+        break;
+      }
       case 'atteggiamento':
         gruppo = true;
         campo = `<div class="pillole"><label><input type="radio" name="atteggiamento" value="" ${v === undefined || v === '' ? 'checked' : ''}><span>Non so</span></label>${Object.entries(ATTEGGIAMENTI).sort((a, b) => a[0] - b[0]).map(([k, l]) => `<label><input type="radio" name="atteggiamento" value="${k}" ${v !== undefined && v !== '' && String(v) === k ? 'checked' : ''}><span>${esc(l)}</span></label>`).join('')}</div>`;
@@ -2216,6 +2355,12 @@ function salvaEditor(form) {
         // salvo l'id se il nome corrisponde a una voce, altrimenti il nome così com'è
         const n = el.value.trim();
         rec[c.k] = n ? (risolviNome(n, c.k === 'luogo' ? 'luogo' : null) || n) : '';
+        break;
+      }
+      case 'fiocchi': {
+        const f = {};
+        Object.keys(FIOCCHI).forEach(k => { const sel = blocco.querySelector(`[name="fiocchi-${k}"]:checked`); if (sel && sel.value) f[k] = Number(sel.value); });
+        rec[c.k] = Object.keys(f).length ? f : '';
         break;
       }
       case 'atteggiamento': {
@@ -2427,6 +2572,7 @@ function mappaMonta() {
         <button class="btn-icona" data-a="mappa-zoom" data-f="1.6" aria-label="Avvicina">${ico('piu')}</button>
         <button class="btn-icona" data-a="mappa-zoom" data-f="0.625" aria-label="Allontana">${ico('meno')}</button>
         <button class="btn-icona gruppo-btn" data-a="mappa-gruppo" aria-label="Vai dal gruppo">${ico('lanterna')}</button>
+        <button class="btn-icona" data-a="mappa-legenda" aria-label="Legenda dei simboli">${ico('info')}</button>
       </div>
       <svg class="bussola" viewBox="0 -8 70 78" aria-hidden="true">
         <circle cx="35" cy="35" r="25"/><circle cx="35" cy="35" r="20.5" style="opacity:.45"/>
@@ -3113,6 +3259,30 @@ function mappaSeleziona(id, vola) {
   if (vola) mappaVola(id); else mappaRichiedi();
 }
 
+// Legenda della mappa: simboli dei luoghi, stati dei segnaposto, fiocchi di neve delle città e sacrifici ad Auril
+function apriLegendaMappa() {
+  const med = (icona, classe) => `<span class="leg-segno"><span class="leg-med ${classe || ''}">${ico(icona)}</span></span>`;
+  const righe = [
+    [med('locanda'), 'Luogo visitato', 'Ci siete stati: il bordo è pieno.'],
+    [med('locanda', 'noto'), 'Luogo noto', 'Sapete che esiste ma non ci siete ancora stati: il bordo è tratteggiato.'],
+    ['<span class="leg-segno"><span class="leg-anello"></span></span>', 'Luogo già disegnato', 'Sulle mappe del manuale città e locande sono già disegnate e scritte: l\'anello è il punto da toccare.'],
+    ['<span class="leg-segno"><span class="leg-badge">2</span></span>', 'Missioni in corso', 'Il numero conta le missioni ancora aperte in quel luogo.'],
+    [`<span class="leg-segno leg-lanterna">${ico('lanterna')}</span>`, 'Il gruppo', 'Dove vi trovate adesso. Si sposta con l\'import della sessione o con "Il gruppo è qui".'],
+    ['<span class="leg-segno"><svg class="leg-via" viewBox="0 0 40 10" aria-hidden="true"><path d="M2 7 C 12 1, 26 1, 38 6"/></svg></span>', 'Il vostro percorso', 'Il tratteggio ambra segue i luoghi visitati, sessione dopo sessione.'],
+    [med('punto', 'segreto'), 'Segreto', 'Visibile solo al Master finché non lo rivela.'],
+  ];
+  const simboli = Object.entries(ICONE_LUOGO).map(([k, l]) => `<div><span class="leg-med leg-med--piccolo">${ico(k)}</span>${esc(l)}</div>`).join('');
+  const fiocchi = Object.values(FIOCCHI).map(d => `<li><span class="leg-segno leg-fiocchi">${ico('fiocco')}</span><div><strong>${esc(d.nome)}</strong>
+    <span class="fioco">${[3, 2, 1].map(n => '❄'.repeat(n) + ' ' + esc(d.livelli[n])).join('<br>')}</span></div></li>`).join('');
+  const sacrifici = Object.values(SACRIFICI).map(d => `<li><span class="leg-segno leg-fiocchi">${ico('fiocco')}</span><div><strong>${esc(d.nome)}</strong><span class="fioco">${esc(d.testo)}</span></div></li>`).join('');
+  apriFoglio(`<div class="foglio-testa"><h2 class="t2">Legenda della mappa</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+    <section class="legenda-sez"><h3 class="t3">I segnaposto</h3><ul class="legenda">${righe.map(([segno, t, d]) => `<li>${segno}<div><strong>${t}</strong><span class="fioco">${d}</span></div></li>`).join('')}</ul>
+      <p class="fioco piccolo">I nomi compaiono da soli avvicinandosi; toccate un segnaposto per vedere chi c'è e cosa avete fatto lì.</p></section>
+    <section class="legenda-sez"><h3 class="t3">I simboli dei luoghi</h3><div class="griglia-simboli">${simboli}</div></section>
+    <section class="legenda-sez"><h3 class="t3">Le città: i fiocchi di neve</h3><p class="fioco" style="margin:6px 0 0">Ogni città delle Dieci-Città ha da uno a tre fiocchi per tre cose. Più fiocchi, meglio è.</p><ul class="legenda">${fiocchi}</ul></section>
+    <section class="legenda-sez"><h3 class="t3">I sacrifici ad Auril</h3><p class="fioco" style="margin:6px 0 0">Da poco più di un anno, nelle notti di luna nuova, ogni città offre qualcosa alla Fanciulla dei Ghiacci sperando che torni l'estate.</p><ul class="legenda">${sacrifici}</ul></section>`);
+}
+
 function mappaSchedaHTML(id) {
   const v = DB.voci[id];
   if (!v) return '';
@@ -3131,6 +3301,7 @@ function mappaSchedaHTML(id) {
     <button class="btn-icona" data-a="mappa-chiudi-scheda" aria-label="Chiudi">${ico('chiudi')}</button></div>`;
   if (gruppoQui) h += `<p style="display:flex;align-items:center;gap:8px;color:var(--lanterna-2);margin:12px 0 0;font-weight:700">${ico('lanterna')}Il gruppo è qui</p>`;
   if (primoParagrafo) h += `<div class="lettura" style="font-size:16px;margin-top:12px">${testoRicco(primoParagrafo)}</div>`;
+  h += infoLuogoHTML(v);
   const incontrati = abitanti.filter(a => !a.guida || (I.sessioniDi[a.id] || []).length);
   const daIncontrare = abitanti.filter(a => a.guida && !(I.sessioniDi[a.id] || []).length);
   if (incontrati.length) h += `<h3>Chi trovi qui</h3><div class="chips">${incontrati.map(a => chipVoce(a.id)).join('')}</div>`;
@@ -3850,7 +4021,9 @@ async function leggiPacchetto(file) {
     [conta('png'), 'PNG da incontrare'],
     [conta('fazione'), conta('fazione') === 1 ? 'fazione' : 'fazioni'],
     [pgs.length, 'personaggi del gruppo'],
-    [comm.filter(c => c.tipo === 'tratta').length, 'tratte per il commercio']
+    [voci.filter(v => v.immagine).length, 'ritratti e stemmi'],
+    [comm.filter(c => c.tipo === 'tratta').length, 'tratte per il commercio'],
+    [p.config && p.config.tabellaImpulsi ? 1 : 0, 'tabella degli impulsi']
   ].filter(r => r[0]);
   apriFoglio(`<div class="foglio-testa"><h2 class="t2">${esc(p.nome || 'Pacchetto')}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
     <form data-a="pacchetto-importa">
@@ -4527,7 +4700,7 @@ function vistaScheda(id) {
   const testa = `<header class="intestazione">${sigillo(pg, 'sigillo--grande')}<div class="corpo">
     <p class="sopra">${pg.giocatore ? 'Giocato da ' + esc(pg.giocatore) : 'Della compagnia'}</p>
     <h1 class="t1">${esc(pg.nome)}</h1><p class="sotto">${esc(descrizioneClasse(pg) || 'Classe non indicata')}</p></div></header>
-    <div class="azioni">${pg.link ? `<a class="btn btn--piccolo" href="${esc(pg.link)}" target="_blank" rel="noopener">${ico('esterno')}D&amp;D Beyond</a>` : ''}
+    <div class="azioni">${bottoneBeyond(pg.link)}
     <button class="btn btn--piccolo" data-a="modifica" data-tab="voci" data-id="${esc(id)}">${ico('modifica')}Modifica</button>
     <a class="btn btn--testo btn--piccolo" href="#/voce/${encodeURIComponent(id)}">Rapporti e cronologia</a></div>`;
   if (!cl) {
@@ -4588,8 +4761,13 @@ function vistaScheda(id) {
     h += `<section class="sezione"><h2>Magia selvaggia</h2>
       <div class="azioni" style="margin-top:0"><button class="btn btn--primario" data-a="dado-impulso" data-id="${esc(id)}">Tira il d20 dell'impulso</button>
       <button class="btn" data-a="dado-tabella" data-id="${esc(id)}">Tira sulla tabella (d100)</button></div>
+      <form class="riga-dado" data-a="dado-manuale"><span>Tirato al tavolo:</span>
+        <select name="dado" aria-label="Dado"><option value="20">d20</option><option value="100">d100</option></select>
+        <input type="number" name="n" min="1" max="100" inputmode="numeric" placeholder="Numero" aria-label="Numero uscito" required>
+        <button class="btn btn--piccolo" type="submit">Mostra</button></form>
       <div id="esito-dado" class="esito-dado" hidden></div>
-      <p class="fioco piccolo">${tab ? 'La tabella degli impulsi è stata inserita dal gruppo: il risultato compare qui sopra.' : 'La tabella è a pagina 112 del Manuale. Se volete vedere il risultato scritto qui, copiatela una volta nelle impostazioni della tabella.'}
+      <p class="fioco piccolo">${tab ? 'Con il d100 compare l\'effetto della tabella degli impulsi.' : 'La tabella è a pagina 112 del Manuale: inseritela una volta (o importate il pacchetto) e il risultato compare scritto qui.'}
+      ${tab ? '<button class="btn btn--testo btn--piccolo" data-a="impulsi-elenco">Vedi tutta la tabella</button>' : ''}
       <button class="btn btn--testo btn--piccolo" data-a="tabella-impulsi">${tab ? 'Modifica la tabella' : 'Inserisci la tabella'}</button></p></section>`;
   }
 
@@ -4644,6 +4822,31 @@ function apriTabellaImpulsi() {
     <form data-a="tabella-salva"><textarea name="tabella" class="alto" spellcheck="false">${esc(cfg('tabellaImpulsi', ''))}</textarea>
     <div class="foglio-piede"><button type="button" class="btn" data-a="chiudi">Annulla</button><button class="btn btn--primario" type="submit">${ico('check')}Salva</button></div></form>`);
 }
+// Risultato di un tiro della magia selvaggia, tirato dall'app o al tavolo: d20 per l'impulso, d100 per la tabella
+let ULTIMO_IMPULSO = 0;
+function mostraTiroImpulso(n, d100) {
+  const box = document.getElementById('esito-dado');
+  if (!box) return;
+  if (d100) ULTIMO_IMPULSO = n;
+  const riga = d100 ? rigaImpulso(n) : '';
+  box.innerHTML = `<span class="n">${n}</span><div>${d100
+    ? `<strong>Tabella degli impulsi</strong><br>${riga ? esc(riga) : 'Controlla il risultato ' + n + ' a pagina 112 del Manuale.'}`
+    : n === 1 ? `<strong>Impulso di magia selvaggia!</strong><br>Tira sulla tabella. <button class="btn btn--primario btn--piccolo" data-a="dado-tabella" style="margin-top:8px">Tira il d100</button>`
+      : '<strong>Niente impulso</strong><br>La magia resta sotto controllo, per stavolta.'}</div>`;
+  box.hidden = false;
+}
+
+// Tutta la tabella in un foglio, con evidenziato l'ultimo risultato uscito
+function apriElencoImpulsi() {
+  const righe = String(cfg('tabellaImpulsi', '')).split('\n').map(r => r.trim().match(/^(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?[\s.:)]+(.+)$/)).filter(Boolean);
+  const dentro = m => { const a = Number(m[1]) || 100, b = m[2] ? (Number(m[2]) || 100) : a; return ULTIMO_IMPULSO >= Math.min(a, b) && ULTIMO_IMPULSO <= Math.max(a, b); };
+  apriFoglio(`<div class="foglio-testa"><h2 class="t2">Impulsi di magia selvaggia</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+    <p class="fioco" style="margin-top:0">d100, Manuale del Giocatore pagina 112.${ULTIMO_IMPULSO ? ' Evidenziato l\'ultimo risultato: ' + ULTIMO_IMPULSO + '.' : ''}</p>
+    <ol class="elenco-impulsi">${righe.map(m => `<li class="${dentro(m) ? 'uscito' : ''}"><b>${esc(m[1])}${m[2] ? '–' + esc(m[2]) : ''}</b><span>${esc(m[3])}</span></li>`).join('')}</ol>`);
+  const uscito = document.querySelector('.elenco-impulsi .uscito');
+  if (uscito) uscito.scrollIntoView({ block: 'center' });
+}
+
 function rigaImpulso(n) {
   const righe = String(cfg('tabellaImpulsi', '')).split('\n');
   for (const r of righe) {
@@ -4903,6 +5106,54 @@ function registraEsito(spId, dado, segreto) {
 // ---------------------------------------------------------------------
 // Vista
 // ---------------------------------------------------------------------
+// Legenda del gioco delle tratte: il giro di una spedizione, il tiro con i valori attuali delle regole,
+// la tabella degli eventi e il significato dei simboli. Tutto letto dalle regole salvate, così resta in pari.
+function apriLegendaCommercio() {
+  const R = regoleCommercio();
+  const segno = n => (n > 0 ? '+' : '') + n;
+  const effetti = e => {
+    const x = [];
+    if (Number(e.perdita)) x.push(`perde il ${e.perdita}% del carico`);
+    if (Number(e.giorni) > 0) x.push(`+${e.giorni} ${Number(e.giorni) === 1 ? 'giorno' : 'giorni'}`);
+    if (Number(e.giorni) < 0) x.push(`${e.giorni} ${Number(e.giorni) === -1 ? 'giorno' : 'giorni'}`);
+    if (Number(e.prezzo)) x.push(`prezzo +${e.prezzo}%`);
+    if (e.conducente === 'morto') x.push('il conducente muore');
+    if (e.conducente === 'ferito') x.push('il conducente torna ferito');
+    if (e.mezzo === 'perso') x.push('il mezzo va perso');
+    if (e.mezzo === 'danneggiato') x.push('il mezzo si danneggia');
+    return x.length ? x.join(', ') : 'nessun effetto';
+  };
+  const eventi = comm('evento').sort((a, b) => (Number(a.min) || 0) - (Number(b.min) || 0));
+  const intervallo = e => Number(e.min) <= -100 ? `fino a ${e.max}` : Number(e.max) >= 200 ? `da ${e.min} in su` : `${e.min}–${e.max}`;
+  const oggetti = cat => comm('oggetto').filter(o => o.categoria === cat).map(o => `${esc(o.nome)} ${segno(Number(o.bonus) || 0)}`).join(', ');
+  const attenuati = cat => eventi.filter(e => e.mitiga === cat).map(e => esc(e.nome)).join(', ');
+  apriFoglio(`<div class="foglio-testa"><h2 class="t2">Come si gioca</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+    <section class="legenda-sez"><h3 class="t3">Il giro di una spedizione</h3><ol class="passi-legenda">
+      <li><strong>Preparate</strong> mezzo (slitta, carro o barca), conducente e merce. Se c'è un contratto, la merce va lì.</li>
+      <li><strong>Partite</strong> scegliendo tratta, meteo ed eventuale scorta: vedete subito il modificatore.</li>
+      <li><strong>Risolvete</strong> quando il Master lo dice: tira l'app, oppure scrivete il d100 tirato al tavolo. Il Master può tirare in segreto.</li>
+      <li><strong>Registrate</strong> l'esito: carichi arrivati, ricavo, paga e scorta. Il guadagno netto entra nella cassa.</li></ol></section>
+    <section class="legenda-sez"><h3 class="t3">Il tiro</h3>
+      <p class="formula-legenda">d100 + modificatore</p>
+      <ul class="legenda legenda--compatta">
+        <li><span class="leg-num">${segno(R.abilita)}</span><div>per ogni stella di esperienza del conducente (★ da 0 a 3)</div></li>
+        <li><span class="leg-num">+</span><div>il bonus di ogni oggetto equipaggiato</div></li>
+        <li><span class="leg-num">${segno(R.scorta)}</span><div>con la scorta armata (costa ${mo(R.costoScorta)} a viaggio)</div></li>
+        <li><span class="leg-num">${segno(-R.pericolo)}</span><div>per ogni punto di pericolo della tratta</div></li>
+        <li><span class="leg-num">${segno(R.neve)}</span><div>con la neve, ${segno(R.bufera)} con la bufera</div></li>
+        <li><span class="leg-num">${segno(R.danneggiato)}</span><div>se il mezzo è danneggiato</div></li></ul>
+      <p class="fioco piccolo">Il totale indica la riga della tabella degli eventi. Un 1 naturale è sempre la prima riga, un 100 naturale l'ultima.</p></section>
+    <section class="legenda-sez"><h3 class="t3">La tabella degli eventi</h3>
+      <ul class="eventi-legenda">${eventi.map(e => `<li><b>${esc(intervallo(e))}</b><div><strong>${esc(e.nome)}</strong><span class="fioco">${esc(effetti(e))}${e.mitiga ? `. Attenua: ${esc((CATEGORIE_EQUIP[e.mitiga] || e.mitiga).toLowerCase())}` : ''}</span></div></li>`).join('') || '<li class="vuoto">Ancora nessun evento.</li>'}</ul></section>
+    <section class="legenda-sez"><h3 class="t3">L'equipaggiamento</h3><p class="fioco" style="margin:6px 0 0">Ogni conducente ha un posto per categoria. L'oggetto aggiunge il suo bonus al tiro; se l'evento è legato alla sua categoria, perdite e ritardi si dimezzano, il conducente torna ferito invece che morto e il mezzo danneggiato invece che perso.</p>
+      <ul class="legenda legenda--compatta">${Object.entries(CATEGORIE_EQUIP).map(([k, l]) => `<li><span class="leg-num">${ico(k)}</span><div><strong>${esc(l)}</strong><span class="fioco">${oggetti(k) || 'Nessun oggetto'}${attenuati(k) ? '. Attenua: ' + attenuati(k) : ''}</span></div></li>`).join('')}</ul></section>
+    <section class="legenda-sez"><h3 class="t3">I simboli</h3><ul class="legenda legenda--compatta">
+      <li><span class="leg-num">★</span><div><strong>Esperienza del conducente</strong><span class="fioco">Da ☆☆☆ (alle prime armi) a ★★★ (veterano della pista).</span></div></li>
+      <li><span class="leg-num"><span class="stato-mezzo st-buono">ok</span></span><div><strong>Stato del mezzo</strong><span class="fioco">In ordine, danneggiato (${segno(R.danneggiato)} al tiro) o perso.</span></div></li>
+      <li><span class="leg-num">!</span><div><strong>Pericolo della tratta</strong><span class="fioco">Da 0 (pista sicura) a 5 (zona di predoni e mostri), deciso con il Master.</span></div></li>
+      <li><span class="leg-num">${ico('dado')}</span><div><strong>Tiro segreto</strong><span class="fioco">Il Master vede l'esito, i giocatori lo scoprono quando lo rivela.</span></div></li></ul></section>`);
+}
+
 function vistaCommercio(sez) {
   const saldo = saldoCassa();
   const pronta = comm('evento').length > 0;
@@ -4914,7 +5165,8 @@ function vistaCommercio(sez) {
       <div class="azioni"><button class="btn btn--primario" data-a="comm-prepara">${ico('slitta')}Prepara la compagnia</button></div></section>`;
   }
   const tab = [['spedizioni', 'Spedizioni'], ['flotta', 'Flotta'], ['mercato', 'Mercato'], ['regole', 'Regole']];
-  h += `<nav class="segmenti">${tab.map(([k, l]) => `<a href="#/commercio${k === 'spedizioni' ? '' : '?sez=' + k}" class="${sez === k ? 'attivo' : ''}">${l}</a>`).join('')}</nav>`;
+  h += `<nav class="segmenti">${tab.map(([k, l]) => `<a href="#/commercio${k === 'spedizioni' ? '' : '?sez=' + k}" class="${sez === k ? 'attivo' : ''}">${l}</a>`).join('')}</nav>
+    <p class="riga-legenda"><button class="btn btn--testo btn--piccolo" data-a="comm-legenda">${ico('info')}Come si gioca e cosa vogliono dire i simboli</button></p>`;
   const R = regoleCommercio();
 
   if (sez === 'flotta') {
@@ -5277,14 +5529,17 @@ document.addEventListener('click', async e => {
       break;
     }
     case 'dado-impulso': case 'dado-tabella': {
-      const box = document.getElementById('esito-dado');
       const d100 = a === 'dado-tabella';
-      const n = 1 + Math.floor(Math.random() * (d100 ? 100 : 20));
-      const riga = d100 ? rigaImpulso(n) : '';
-      box.innerHTML = `<span class="n">${n}</span><div>${d100
-        ? `<strong>Tabella degli impulsi</strong><br>${riga ? esc(riga) : 'Controlla il risultato ' + n + ' a pagina 112 del Manuale.'}`
-        : n === 1 ? `<strong>Impulso di magia selvaggia!</strong><br>Tira sulla tabella. <button class="btn btn--primario btn--piccolo" data-a="dado-tabella" style="margin-top:8px">Tira il d100</button>` : '<strong>Niente impulso</strong><br>La magia resta sotto controllo, per stavolta.'}</div>`;
-      box.hidden = false;
+      mostraTiroImpulso(1 + Math.floor(Math.random() * (d100 ? 100 : 20)), d100);
+      break;
+    }
+    case 'impulsi-elenco': apriElencoImpulsi(); break;
+    case 'mappa-legenda': apriLegendaMappa(); break;
+    case 'comm-legenda': apriLegendaCommercio(); break;
+    case 'ritratto': {
+      const v = DB.voci[el.dataset.id];
+      if (v && v.immagine) apriFoglio(`<div class="foglio-testa"><h2 class="t2">${esc(v.nome)}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <figure class="ritratto-grande"><img src="${esc(v.immagine)}" alt="Ritratto di ${esc(v.nome)}">${v.ruolo ? `<figcaption>${esc(v.ruolo)}</figcaption>` : ''}</figure>`);
       break;
     }
     case 'tabella-impulsi': apriTabellaImpulsi(); break;
@@ -5491,6 +5746,14 @@ document.addEventListener('submit', e => {
       break;
     }
     case 'pacchetto-importa': importaPacchetto(f); break;
+    case 'dado-manuale': {
+      // un numero tirato al tavolo: d20 da 1 a 20, d100 da 1 a 100
+      const d100 = f.querySelector('[name="dado"]').value === '100';
+      const n = Math.round(Number(f.querySelector('[name="n"]').value));
+      if (!(n >= 1 && n <= (d100 ? 100 : 20))) { avviso(d100 ? 'Scrivi un numero da 1 a 100' : 'Scrivi un numero da 1 a 20'); break; }
+      mostraTiroImpulso(n, d100);
+      break;
+    }
     case 'tabella-salva': setCfg('tabellaImpulsi', f.querySelector('[name="tabella"]').value.trim()); chiudiFoglio(); render(); break;
     case 'sp-salva': {
       const sp = leggiFormSpedizione(f);
@@ -5544,9 +5807,11 @@ document.addEventListener('change', async e => {
       const file = el.files[0];
       if (!file) return;
       let canvas;
-      try { ({ canvas } = await ridimensionaImmagine(file, 192, true, .82)); }
+      try { ({ canvas } = await ridimensionaImmagine(file, 320, true, .82)); }
       catch (x) { avviso('Non riesco a usare questa immagine: ' + x.message); return; }
-      const url = canvas.toDataURL('image/jpeg', .82);
+      // una cella del foglio Google tiene al massimo 50.000 caratteri: se serve abbasso la qualità
+      let url = canvas.toDataURL('image/jpeg', .82);
+      for (const q of [.72, .62, .5]) { if (url.length <= 40000) break; url = canvas.toDataURL('image/jpeg', q); }
       const form = el.closest('form');
       form.querySelector('[name="immagine"]').value = url;
       form.querySelector('#anteprima-img').innerHTML = `<img src="${url}" alt="">`;
