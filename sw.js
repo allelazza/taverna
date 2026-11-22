@@ -4,7 +4,7 @@
    - Le chiamate al foglio del gruppo (script.google.com) passano sempre dalla rete.
    Quando pubblichi una versione nuova dell'app puoi cambiare CACHE (es. 'taverna-v2')
    per forzare l'aggiornamento su tutti i telefoni. */
-const CACHE = 'taverna-v7';
+const CACHE = 'taverna-v9';
 const BASE = ['./', './index.html', './manifest.webmanifest', './icona-192.png', './icona-512.png', './icona-maschera-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

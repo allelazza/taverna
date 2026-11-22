@@ -390,6 +390,37 @@ a.riga:hover { background: rgba(236, 230, 214, .025); }
 .riga-campi .campo { flex: 1; }
 .prop { padding: 14px 16px; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.07); border-left: 3px solid var(--tc, var(--brina)); margin: 0 0 12px; }
 .prop.saltata { opacity: .5; }
+/* 1.7: revisione da correggere. Nomi e frasi delle proposte si scrivono, fatti e gesta sono righe numerate */
+.prop .nome-rev { font-size: 17px; font-weight: 700; padding: 6px 10px; border-radius: 10px; margin-bottom: 2px; }
+.prop textarea.breve, .righe-rev textarea.breve { min-height: 64px; font-size: 15px; padding: 9px 11px; margin: 0 0 8px; overflow: hidden; resize: none; }
+.scelta-rev { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.scelta-rev select { flex: 1 1 100%; width: 100%; min-width: 0; }
+.righe-rev { list-style: none; margin: 6px 0 8px; padding: 0; display: grid; gap: 6px; }
+.righe-rev > li { display: flex; gap: 10px; align-items: flex-start; }
+.righe-rev > li > input { margin-top: 12px; flex: none; width: 20px; height: 20px; accent-color: var(--lanterna); }
+.righe-rev > li .corpo { flex: 1; min-width: 0; position: relative; }
+.righe-rev > li.fuori .corpo { opacity: .5; }
+.righe-rev textarea.breve { margin: 0; padding-left: 34px; }
+.righe-rev .n-rev { position: absolute; left: 10px; top: 10px; }
+.n-rev { display: inline-block; min-width: 18px; margin-right: 6px; font: 700 13px var(--f-testo); color: var(--lanterna-2); font-variant-numeric: tabular-nums; }
+.luogo-rev { display: block; margin-top: 2px; }
+details.correzioni { margin: 0 0 18px; padding: 12px 14px; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(232,163,61,.3); }
+details.correzioni > summary { cursor: pointer; font-weight: 700; display: flex; gap: 8px; align-items: center; color: var(--avorio); }
+details.correzioni > summary .i { width: 18px; height: 18px; color: var(--lanterna); }
+details.correzioni textarea { min-height: 96px; font-size: 14px; margin-top: 10px; }
+details.correzioni code { font-size: 13px; color: var(--avorio); }
+details.formato-correzioni { margin-top: 10px; }
+details.formato-correzioni summary { cursor: pointer; font-size: 14px; color: var(--brina); }
+details.formato-correzioni pre { white-space: pre-wrap; font-size: 13px; line-height: 1.5; color: var(--avorio-2); margin: 8px 0 0; }
+.esito-correzioni { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; font-size: 14.5px; line-height: 1.4; }
+.esito-correzioni li { display: flex; gap: 8px; align-items: flex-start; }
+.esito-correzioni li .i { width: 17px; height: 17px; flex: none; margin-top: 2px; color: var(--c-luogo); }
+.esito-correzioni li.no .i { color: var(--cera); }
+.esito-correzioni strong { font-weight: 600; color: var(--avorio); }
+.scelta-wiki { margin-top: 10px; }
+.scelta-wiki .riga { width: 100%; background: none; border: 0; border-bottom: 1px solid rgba(236, 230, 214, .07); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.scelta-wiki .riga .tit { display: block; }
+.scelta-wiki .riga .sub { display: block; }
 .prop .testa { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
 .prop .testa .corpo { flex: 1; min-width: 0; }
 .prop .testa strong { display: block; font-size: 17px; font-weight: 700; }
@@ -824,6 +855,45 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .schede-bottino .conta { font: 500 12.5px var(--f-testo); color: var(--brina); margin-left: 4px; }
 .schede-bottino .on .conta { color: inherit; }
 .desc-bottino { margin-top: 4px; color: var(--avorio-2); font-size: 14.5px; line-height: 1.4; }
+/* 1.7: cariche, tabelle e cose segnate sotto un oggetto del bottino. I rombi sono quelli della scheda, più piccoli */
+.riquadro-alba { display: flex; gap: 12px; align-items: flex-start; margin: 14px 0 4px; padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(232,163,61,.45); background: var(--lanterna-ombra); }
+.riquadro-alba > .i { color: var(--lanterna); flex: none; margin-top: 2px; }
+.riquadro-alba > div { display: grid; gap: 3px; min-width: 0; }
+.cariche-bottino { margin: 8px 0 0; display: grid; gap: 4px; }
+.cb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-height: 36px; }
+.cb .pips { gap: 9px; margin: 6px 4px; }
+.cb .pip { width: 19px; height: 19px; border-radius: 4px; }
+.cb .pip-num { font-size: 22px; }
+.cb .pip-num small { font: 400 13.5px var(--f-testo); color: var(--brina); }
+.cb--nome { display: grid; grid-template-columns: minmax(0, 38%) 1fr; }
+.cb-comandi { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: 0; }
+.cb-nome { font-size: 13.5px; color: var(--avorio-2); line-height: 1.3; }
+.cb.esaurita .cb-nome { color: var(--brina); }
+.cb input.cb-quante { width: 64px; flex: none; min-height: 36px; padding: 4px 8px; }
+.cb-ricarica, .cb-segnato { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 2px; font-size: 14px; }
+.cb-segnato .chip { margin: 0; }
+.cb-segnati { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.chip-x { border: 0; background: transparent; color: var(--brina); font: inherit; font-size: 15px; line-height: 1; padding: 0 0 0 6px; cursor: pointer; }
+.tab-bottino { margin-top: 8px; padding: 8px 10px; border-radius: 12px; background: rgba(236, 230, 214, .035); border: 1px solid rgba(236, 230, 214, .07); }
+.tab-bottino.tb-ultima { border-color: rgba(208, 88, 63, .45); }
+.tb-testa { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.tb-titolo { font-size: 14.5px; color: var(--avorio); }
+.tab-bottino summary { cursor: pointer; font-size: 13.5px; color: var(--brina); margin-top: 6px; }
+.elenco-tabella li { grid-template-columns: 54px 1fr; font-size: 14px; padding: 7px 6px; }
+.elenco-tabella li.senza-num { grid-template-columns: 1fr; }
+.elenco-tabella .btn { min-height: 30px; padding: 0 8px; }
+.esito-bottino { margin-top: 10px; padding: 10px 12px; gap: 12px; }
+.esito-bottino .n { font-size: 38px; min-width: 48px; }
+.eb-testo { display: grid; gap: 3px; min-width: 0; }
+.azioni--strette { margin: 6px 0 0; gap: 8px; }
+/* nel modulo dell'oggetto */
+.cariche-editor { display: grid; gap: 10px; }
+.cb-ed { display: grid; gap: 4px; }
+.cb-ed > span { font-size: 14px; color: var(--avorio-2); }
+.cb-ed small { margin-top: 0; }
+.req-catalogo, .nota-campo { line-height: 1.4; }
+.campo select:disabled { opacity: .7; cursor: not-allowed; }
+.nota-campo { color: var(--lanterna-2) !important; }
 ul.gesta { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 10px; }
 ul.gesta li { position: relative; padding: 2px 0 2px 30px; line-height: 1.45; }
 ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; width: 16px; height: 16px; background: var(--lanterna);
@@ -913,7 +983,10 @@ ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; widt
 .esito-viaggio { margin-top: 8px; padding: 14px 16px; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(232,163,61,.3); }
 .ev-num { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
 .gruppo-bottino { margin: 20px 0 6px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.riga-bottino { flex-wrap: wrap; align-items: flex-start; }
 .riga-bottino .corpo { flex: 1; min-width: 0; }
+.riga-bottino > .btn { margin-top: -4px; }
+.extra-bottino { flex: 1 1 100%; margin-top: -8px; min-width: 0; }
 .lista--corta .riga { padding: 6px 0; }
 .lista--corta .riga strong { font-variant-numeric: tabular-nums; }
 .data-sessione { padding: 12px 14px; margin: 12px 0 0; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.07); }
@@ -973,7 +1046,7 @@ ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; widt
 // ---------------------------------------------------------------------
 // COSTANTI
 // ---------------------------------------------------------------------
-const VERSIONE = '1.6.1';
+const VERSIONE = '1.7';
 const VERSIONE_SCRIPT = 2;   // versione minima di Code.gs che serve a questa app
 const SCRIPT_CONSIGLIATO = 3; // con la 3 il foglio rifiuta i campi troppo lunghi invece di tagliarli ed è più veloce
 const TABELLE = ['sessioni', 'voci', 'missioni', 'rapporti', 'mappe', 'config', 'commercio'];
@@ -989,9 +1062,10 @@ const CAMPI_NUMERICI = ['numero', 'x', 'y', 'w', 'h', 'cx', 'cy', 'nomiStampati'
 // Campi che devono essere elenchi o oggetti. Se dal foglio arrivano come testo (cella rovinata o scritta a mano)
 // li riporto alla forma giusta: una sola cella sbagliata non deve bloccare l'app su tutti i telefoni.
 const CAMPI_ELENCO = ['alias', 'storia', 'eventi', 'citazioni', 'presenti', 'segnalibri', 'favori', 'extra', 'metamagie', 'etichette', 'sospesi', 'opzionali', 'talenti', 'condizioni', 'gesta'];
-const CAMPI_OGGETTO = ['car', 'risorse', 'fiocchi', 'esito', 'equip', '_annulla', 'privato', 'totem', 'serata'];
+// cariche e usate (1.7): le cariche degli oggetti del bottino, un numero per scorta ({ Cariche: 7 })
+const CAMPI_OGGETTO = ['car', 'risorse', 'fiocchi', 'esito', 'equip', '_annulla', 'privato', 'totem', 'serata', 'cariche', 'usate'];
 // testi scritti da voi: lo script vecchio (versione 2) leggeva come elenco anche un nome che inizia con [ o {
-const CAMPI_TESTO = ['nome', 'titolo', 'ruolo', 'descrizione', 'riassunto', 'inBreve', 'testo', 'note', 'ricompensa', 'bottino', 'trascrizione', 'giocatore', 'classe', 'razza', 'link'];
+const CAMPI_TESTO = ['nome', 'titolo', 'ruolo', 'descrizione', 'riassunto', 'inBreve', 'testo', 'note', 'ricompensa', 'bottino', 'trascrizione', 'giocatore', 'classe', 'razza', 'link', 'variante', 'ricarica'];
 
 // Tipi di voce del wiki. "classe" decide il colore (persona, luogo, fazione, oggetto)
 const TIPI_VOCE = {
@@ -1477,7 +1551,8 @@ function confrontaConCoda(tab, k, riga) {
 }
 
 // I campi che contano qualcosa: le variazioni di due dispositivi si sommano (vedi unisciValori)
-const CONTATORI = ['rapporti|valore', 'commercio|consegnati', 'voci|risorse'];
+// commercio|usate (1.7): le cariche usate degli oggetti del bottino, scorta per scorta, come le risorse delle schede
+const CONTATORI = ['rapporti|valore', 'commercio|consegnati', 'voci|risorse', 'commercio|usate'];
 // Unione automatica di due modifiche allo stesso campo. undefined = non so unire, decide l'utente.
 function unisciValori(tab, f, base, loro, mio) {
   // elenchi: tengo le righe del foglio, tolgo quelle che ho tolto io, aggiungo quelle che ho aggiunto io
@@ -1491,10 +1566,11 @@ function unisciValori(tab, f, base, loro, mio) {
   }
   // le note private sono un pacchetto cifrato: non si possono unire qui, decide l'utente (vedi apriConflitti)
   if (tab === 'voci' && f === 'privato') return undefined;
-  // risorse delle schede (punti stregoneria, ira, slot...): per ogni contatore sommo le due variazioni,
-  // come per i rapporti. Un punto usato sul telefono e uno sul PC fanno due punti usati, non uno; un riposo
-  // da una parte e un uso dall'altra lasciano l'uso dopo il riposo. Il massimo lo rimette la scheda.
-  if (tab === 'voci' && f === 'risorse' && loro && mio && typeof loro === 'object' && typeof mio === 'object') {
+  // risorse delle schede (punti stregoneria, ira, slot...) e cariche usate degli oggetti del bottino: per ogni
+  // contatore sommo le due variazioni, come per i rapporti. Un punto usato sul telefono e uno sul PC fanno due
+  // punti usati, non uno; un riposo (o l'alba) da una parte e un uso dall'altra lasciano l'uso dopo il riposo.
+  // Il massimo lo rimettono la scheda e il bottino quando mostrano i rombi.
+  if (((tab === 'voci' && f === 'risorse') || (tab === 'commercio' && f === 'usate')) && loro && mio && typeof loro === 'object' && typeof mio === 'object') {
     const b = base && typeof base === 'object' ? base : {};
     const out = Object.assign({}, loro);
     Object.keys(mio).forEach(c => { if (!uguali(mio[c], b[c])) out[c] = Math.max(0, (Number(loro[c]) || 0) + (Number(mio[c]) || 0) - (Number(b[c]) || 0)); });
@@ -2152,6 +2228,8 @@ function dopoRender(r) {
     }
   }
   if (r.vista === 'wiki' && r.q.get('q')) filtraWiki(r.q.get('q'));
+  // nella revisione dell'import le righe da scrivere (fatti, gesta, frasi di stasera) sono alte quanto il testo
+  if (r.vista === 'importa') document.querySelectorAll('#vista textarea.breve').forEach(altezzaTesto);
   if (r.vista === 'tavolo') {
     const sez = r.q.get('sez') || 'valle';
     // durante il combattimento i turni devono arrivare in fretta: sincronizzo spesso, solo con questa vista aperta
@@ -2167,6 +2245,7 @@ function dopoRender(r) {
   }
 }
 
+function altezzaTesto(t) { t.style.height = 'auto'; t.style.height = (t.scrollHeight + 2) + 'px'; }
 function nonTrovato(testo) {
   return `<div class="benvenuto"><h1 class="t2">Qui non c'è niente</h1><p class="lettura fioco">${esc(testo)}</p><div class="azioni"><a class="btn" href="#/home">Torna alla taverna</a></div></div>`;
 }
@@ -2503,6 +2582,8 @@ function vistaWiki(tipo, q) {
       <div class="tit tronca">${esc(v.nome)}${v.stato === 'morto' ? ' <span class="fioco piccolo">morto</span>' : ''}${v.segreto ? ' <span class="fioco piccolo">segreto</span>' : ''}${v.guida && !ult && v.tipo !== 'luogo' ? ' <span class="da-incontrare">da incontrare</span>' : ''}</div>
       <div class="sub tronca">${esc(sub)}</div></div>${ult ? `<span class="ultima" title="Ultima apparizione: sessione ${ult}">${ult}</span>` : ''}</a></li>`;
   }).join('') + '</ul><p class="vuoto" id="wiki-nessuno" hidden>Nessuna voce corrisponde alla ricerca.</p>';
+  // per un'altra AI (il controllo delle sessioni): nomi, alias, id, missioni e luoghi, senza le voci segrete
+  h += `<div class="azioni"><button class="btn btn--piccolo" data-a="imp-wiki-copia">${ico('copia')}Esporta il wiki per l'AI</button><button class="btn btn--testo btn--piccolo" data-a="imp-wiki-scarica">${ico('esporta')}Scarica come file</button></div>`;
   return h;
 }
 function filtraWiki(q) {
@@ -2561,6 +2642,7 @@ function vistaVoce(id) {
   }
   if (v.tipo === 'luogo') h += infoLuogoHTML(v);
   if (v.descrizione) h += `<section class="sezione"><div class="lettura">${testoRicco(v.descrizione)}</div></section>`;
+  if (v.tipo === 'pg' && v.background) h += `<section class="sezione"><h2>Background</h2><div class="lettura">${testoRicco(v.background)}</div></section>`;
 
   // Luoghi: chi ci trovi, luoghi interni, mappa
   if (v.tipo === 'luogo') {
@@ -2748,6 +2830,8 @@ const SCHEMI = {
     { k: 'ruolo', t: 'testo', l: 'Cos\'è, in poche parole', per: ['oggetto'] },
     { k: 'alias', t: 'lista', l: 'Altri nomi o soprannomi', ph: 'Separati da virgola' },
     { k: 'descrizione', t: 'ricco', l: 'Descrizione', ph: 'Scrivi @ per citare una persona e # per un luogo' },
+    // il background di un compagno: solo quello che il gruppo sa (i segreti stanno nelle note cifrate della scheda)
+    { k: 'background', t: 'ricco', l: 'Background, quello che il gruppo sa', ph: 'Da dove viene, cosa faceva prima…', per: ['pg'] },
     { k: 'stato', t: 'scelta', l: 'Stato', opz: STATI_PNG, per: ['png', 'pg'] },
     { k: 'atteggiamento', t: 'atteggiamento', l: 'Atteggiamento verso il gruppo', per: ['png', 'fazione'] },
     { k: 'luogo', t: 'rif', l: 'Dove si trova', per: ['png', 'fazione', 'oggetto', 'pg'] },
@@ -2858,8 +2942,18 @@ function apriEditor(tab, id, preset) {
       case 'ricco':
         campo = `<textarea name="${c.k}" data-menzioni class="${c.alto ? 'alto' : ''}"${ph}>${esc(v || '')}</textarea>`;
         break;
-      case 'scelta':
-        campo = `<select name="${c.k}">${c.k === 'stato' && tab === 'voci' ? '<option value="">Non indicato</option>' : ''}${Object.entries(c.opzFn ? c.opzFn() : c.opz).map(([k, l]) => `<option value="${esc(k)}" ${String(v === undefined ? '' : v) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+      case 'scelta': {
+        // c.a: il campo avvisa quando cambia (data-a); c.catalogo: bloccato se l'oggetto viene dal catalogo,
+        // con sotto quello che il catalogo chiede; c.nota: una riga sotto il campo per gli avvisi
+        const dalCatalogo = c.catalogo ? oggettoCatalogo(rec.catalogo) : null;
+        campo = `<select name="${c.k}"${c.a ? ` data-a="${c.a}" data-prima="${esc(v === undefined ? '' : v)}"` : ''}${dalCatalogo ? ' disabled' : ''}>${c.k === 'stato' && tab === 'voci' ? '<option value="">Non indicato</option>' : ''}${Object.entries(c.opzFn ? c.opzFn() : c.opz).map(([k, l]) => `<option value="${esc(k)}" ${String(v === undefined ? '' : v) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+        if (c.catalogo) campo += `<small class="req-catalogo"${dalCatalogo ? '' : ' hidden'}>${dalCatalogo ? esc(requisitiCatalogo(dalCatalogo)) : ''}</small>`;
+        if (c.nota) campo += '<small class="nota-campo" hidden></small>';
+        break;
+      }
+      case 'cariche':
+        gruppo = true;
+        campo = `<div class="cariche-editor">${campoCariche(oggettoCatalogo(rec.catalogo), rec)}</div>`;
         break;
       case 'regole': {
         // classe e sottoclasse delle regole incluse, razza, modificatori delle caratteristiche
@@ -2948,19 +3042,73 @@ function apriEditor(tab, id, preset) {
   apriFoglio(h);
 }
 
-// Scelto un oggetto del catalogo riempio nome, sintonia e descrizione. Li cambio solo se sono vuoti
-// o se contengono ancora quello che aveva messo l'oggetto scelto prima: quello scritto a mano resta.
+// Scelto un oggetto del catalogo riempio nome, sintonia e descrizione. Nome e descrizione li cambio solo se sono
+// vuoti o se contengono ancora quello che aveva messo l'oggetto scelto prima: quello scritto a mano resta.
+// Dalla 1.7 la sintonia richiesta si blocca (la decide il catalogo, con sotto i requisiti), le caselle delle
+// cariche diventano quelle dell'oggetto e, se qualcuno lo porta, lo segno in sintonia con lui (sintoniaEditor).
+// Se il nome non è più quello di un oggetto del catalogo, tutto torna libero come per un oggetto scritto a mano.
 function compilaDaCatalogo(el) {
   const f = el.form;
+  if (!f) return;
   const o = oggettoCatalogo(el.value.trim());
-  if (!f || !o) return;
+  if ((o ? o.id : '') === (el.dataset.prima || '')) return;   // stesso oggetto di prima: niente da rifare
   const prima = oggettoCatalogo(el.dataset.prima);
   const campo = n => f.querySelector(`[name="${n}"]`);
   const nome = campo('nome'), desc = campo('note'), rich = campo('richiede');
-  if (nome && (!nome.value.trim() || (prima && nome.value.trim() === prima.nome))) nome.value = o.nome;
-  if (desc && (!desc.value.trim() || (prima && desc.value.trim() === testoCatalogo(prima)))) desc.value = testoCatalogo(o);
-  if (rich) rich.value = o.sintonia ? '1' : '';
-  el.dataset.prima = o.id;
+  const req = f.querySelector('.req-catalogo'), cariche = f.querySelector('.cariche-editor');
+  if (o) {
+    if (nome && (!nome.value.trim() || (prima && nome.value.trim() === prima.nome))) nome.value = o.nome;
+    if (desc && (!desc.value.trim() || (prima && desc.value.trim() === testoCatalogo(prima)))) desc.value = testoCatalogo(o);
+    if (rich) rich.value = o.sintonia ? '1' : '';
+  }
+  if (rich) rich.disabled = !!o;
+  if (req) { req.textContent = o ? requisitiCatalogo(o) : ''; req.hidden = !o; }
+  if (cariche) cariche.innerHTML = campoCariche(o, {});
+  el.dataset.prima = o ? o.id : '';
+  sintoniaEditor(f, 'catalogo');
+}
+// La riga sotto "Richiede sintonia" quando l'oggetto viene dal catalogo
+function requisitiCatalogo(o) {
+  return [o.sintonia ? (typeof o.sintonia === 'string' ? 'Sintonia ' + o.sintonia : 'Richiede sintonia') : 'Non richiede sintonia',
+    o.requisiti ? 'Serve: ' + o.requisiti.charAt(0).toLowerCase() + o.requisiti.slice(1) : ''].filter(Boolean).join('. ') + '. Lo dice il catalogo.';
+}
+// Le caselle delle cariche nel modulo di un oggetto del bottino. Con il catalogo: una per scorta, già scritta se
+// il numero è fisso, vuota se si tira con i dadi (vuota al salvataggio la tira l'app). Senza: quante sono e come
+// tornano, scritto come nel catalogo ("1d6+1 all'alba", "tutte all'alba"), così il tasto Ricarica sa cosa fare.
+function campoCariche(cat, rec) {
+  const proprie = rec && rec.cariche && typeof rec.cariche === 'object' ? rec.cariche : {};
+  const casella = (k, val, fisso, ph) => `<input type="number" min="1" max="999" inputmode="numeric" data-scorta="${esc(k)}" data-fisso="${esc(fisso)}" value="${esc(val)}" placeholder="${esc(ph)}">`;
+  if (cat && cat.cariche) {
+    const def = typeof cat.cariche === 'object' ? cat.cariche : { Cariche: cat.cariche };
+    return Object.entries(def).map(([k, v]) => {
+      const fisso = /^\d+$/.test(String(v).trim()) ? String(v).trim() : '';
+      const ric = (cat.ricarica && typeof cat.ricarica === 'object' ? cat.ricarica[k] : cat.ricarica) || 'non tornano da sole';
+      return `<label class="cb-ed"><span>${esc(k)}${fisso ? '' : ' (' + esc(v) + ')'}</span>${casella(k, Number(proprie[k]) > 0 ? proprie[k] : fisso, fisso, fisso ? '' : 'Vuota: le tira l\'app')}<small>Tornano: ${esc(ric)}</small></label>`;
+    }).join('') + '<small class="fioco">Dal catalogo: cambia i numeri solo se il Master dice altro.</small>';
+  }
+  return `<label class="cb-ed"><span>Quante</span>${casella('Cariche', Number(proprie.Cariche) > 0 ? proprie.Cariche : '', '', 'Vuoto se non ne ha')}</label>
+    <label class="cb-ed"><span>Come tornano</span><input type="text" name="ricarica" value="${esc(rec && rec.ricarica || '')}" placeholder="Es. 1d6+1 all'alba, oppure tutte all'alba"></label>`;
+}
+// Nel modulo di un oggetto del bottino chi lo porta, "richiede sintonia" e "in sintonia con" vanno insieme:
+// se l'oggetto richiede sintonia e qualcuno lo porta lo segno in sintonia con lui (e se passa di mano la
+// sintonia lo segue), ma solo se può: massimo tre a testa e i requisiti del catalogo (motivoNoSintonia).
+// Sotto il campo dico perché no. Una sintonia scelta a mano la lascio, con l'avviso.
+function sintoniaEditor(form, cambiato) {
+  const q = n => form.querySelector(`[name="${n}"]`);
+  const port = q('portatore'), rich = q('richiede'), sint = q('sintonia');
+  if (!port || !rich || !sint) return;
+  const catEl = q('catalogo');
+  const cat = catEl ? oggettoCatalogo(catEl.value.trim()) : null;
+  const prima = port.dataset.prima || '';
+  let auto = false;
+  if (rich.value !== '1') sint.value = '';
+  else if (cambiato !== 'sintonia' && port.value && (!sint.value || sint.value === prima)) { auto = sint.value !== port.value; sint.value = port.value; }
+  else if (cambiato === 'portatore' && !port.value && sint.value === prima) sint.value = '';
+  port.dataset.prima = port.value;
+  const no = sint.value ? motivoNoSintonia(sint.value, cat, form.dataset.id || null) : null;
+  if (no && auto) sint.value = '';
+  const nota = sint.closest('.campo') && sint.closest('.campo').querySelector('.nota-campo');
+  if (nota) { nota.textContent = no ? (auto ? 'Non lo segno in sintonia. ' : 'Attenzione. ') + no.testo + '.' : ''; nota.hidden = !no; }
 }
 
 // Cambiando il tipo di voce mostro solo i campi che hanno senso per quel tipo
@@ -3000,6 +3148,15 @@ async function salvaEditor(form) {
         // salvo l'id dell'oggetto: il nome del catalogo può cambiare con una versione nuova del pacchetto
         const o = el ? oggettoCatalogo(el.value.trim()) : null;
         if (el) rec[c.k] = o ? o.id : '';
+        break;
+      }
+      case 'cariche': {
+        // le scorte scritte nel modulo; quelle uguali al numero fisso del catalogo non le salvo, così vale il catalogo
+        const car = {};
+        blocco.querySelectorAll('[data-scorta]').forEach(x => { const n = Math.round(Number(x.value)); if (n > 0 && String(n) !== x.dataset.fisso) car[x.dataset.scorta] = n; });
+        rec.cariche = Object.keys(car).length ? car : '';
+        const ric = blocco.querySelector('[name="ricarica"]');
+        rec.ricarica = ric ? ric.value.trim() : '';
         break;
       }
       case 'rif': {
@@ -3071,11 +3228,31 @@ async function salvaEditor(form) {
     const campo = form.querySelector(`[name="${obblig}"]`); if (campo) campo.focus();
     return;
   }
+  let note = [];
+  if (tab === 'commercio' && rec.tipo === 'bottino') {
+    // l'oggetto del catalogo decide se richiede sintonia e tira le cariche con i dadi lasciate vuote
+    const completo = Object.assign({}, prima || {}, rec);
+    note = completaDaCatalogo(completo, false);
+    // 1 o 0 come scrive l'import; se non è cambiato resta com'era (il menu dà '1' o '', il foglio 1 o 0)
+    rec.richiede = Number(completo.richiede) ? 1 : 0;
+    if (prima && (Number(prima.richiede) ? 1 : 0) === rec.richiede) rec.richiede = prima.richiede;
+    if (completo.cariche !== undefined) rec.cariche = completo.cariche;
+    if (!Number(rec.richiede)) rec.sintonia = '';
+    // una sintonia nuova: il massimo di tre la blocca; due copie o un requisito che manca li chiedo
+    if (rec.sintonia && (!prima || prima.sintonia !== rec.sintonia)) {
+      const no = motivoNoSintonia(rec.sintonia, oggettoCatalogo(rec.catalogo), id);
+      if (no && no.limite) { avviso(no.testo); const s = form.querySelector('[name="sintonia"]'); if (s) s.focus(); return; }
+      if (no) {
+        const scelta = await scegli('Sintonia', no.testo + '. Il Master può fare un\'eccezione.', [{ k: 'no', l: 'Salva senza sintonia', primario: true }, { k: 'si', l: 'Segna la sintonia lo stesso' }], true);
+        if (scelta !== 'si') rec.sintonia = '';
+      }
+    }
+  }
   if (tab === 'commercio') {
     if (!(await soloCampiToccati(tab, id, rec))) return;
     salva('commercio', rec);
     chiudiFoglio();
-    avviso('Salvato');
+    avviso('Salvato' + (note.length ? ': ' + note.join(', ') : ''));
     render();
     return;
   }
@@ -4262,7 +4439,8 @@ function mappaNeve() {
 //    la copia cresceva a ogni sessione, superava la cella del foglio e l'annullamento
 //    smetteva di funzionare senza dirlo.
 // =====================================================================
-function nuovoImport() { return { numero: null, data: null, segnalibri: true, risposta: '', proposte: null, errore: '', avvisi: [], pezzi: 1, pezzo: 1, minutiPezzo: 60, tutte: false }; }
+// correzioni ed esitoCorrezioni (1.7): il riquadro delle correzioni corte e cosa è successo all'ultimo "Applica"
+function nuovoImport() { return { numero: null, data: null, segnalibri: true, risposta: '', proposte: null, errore: '', avvisi: [], pezzi: 1, pezzo: 1, minutiPezzo: 60, tutte: false, correzioni: '', esitoCorrezioni: [] }; }
 let IMPORT = nuovoImport();
 
 // Scheletro della risposta che chiedo all'AI (i testi spiegano cosa mettere in ogni campo).
@@ -4697,6 +4875,21 @@ function revisioneHTML() {
   if (P.daControllare.length) h += `<div class="avviso-import"><p><strong>Da controllare in questa sessione</strong></p><ul>${P.daControllare.map(x => `<li>${testoRicco(x, 'riga')}</li>`).join('')}</ul></div>`;
   // il motivo per cui una riga va guardata (file preparati a mano), sotto la riga
   const motivo = x => x && x.motivo ? `<br><span class="motivo-dubbio">${ico('info')}${esc(x.motivo)}</span>` : '';
+  // fatti e gesta (1.7): righe numerate e modificabili. I numeri servono alle correzioni ("togli la gesta 2");
+  // la spunta tiene o lascia fuori la riga; il primo #[Luogo] scritto nella riga la lega a quel luogo
+  const righeRev = (gruppo, cosa) => `<ol class="righe-rev">${P[gruppo].map((x, i) => `<li class="${x.ok ? '' : 'fuori'}">
+      <input type="checkbox" data-a="rev-ok" data-gruppo="${gruppo}" data-i="${i}" ${x.ok ? 'checked' : ''} aria-label="Tieni ${cosa} ${i + 1}">
+      <div class="corpo"><span class="n-rev">${i + 1}</span><textarea class="breve" data-a="rev-testo" data-gruppo="${gruppo}" data-i="${i}" data-menzioni rows="2" aria-label="Testo del${cosa === 'la gesta' ? 'la gesta' : ' fatto'} ${i + 1}">${esc(x.t)}</textarea>
+      ${x.l && nomeDi(x.l) ? `<span class="fioco piccolo luogo-rev">a ${esc(nomeDi(x.l))}</span>` : ''}${motivo(x)}</div></li>`).join('')}</ol>`;
+  // le correzioni (1.7): da un'altra AI o scritte a mano, si applicano tutte insieme alla revisione aperta
+  const esiti = IMPORT.esitoCorrezioni || [];
+  h += `<details class="correzioni"${IMPORT.correzioni || esiti.length ? ' open' : ''}><summary>${ico('modifica')}Correzioni corte, da un'altra AI o a mano</summary>
+    <p class="fioco piccolo">Una per riga, per esempio <code>rinomina Gilda in Gilda Brinamoro</code>, <code>unisci Brakk con l'id voc-…</code>, <code>togli la gesta 2</code>. Per farle scrivere a un'altra AI (il progetto del controllo delle sessioni), dalle il wiki: <strong>Esporta il wiki per l'AI</strong> lo copia con tutti gli id, e in fondo ha l'elenco delle correzioni che l'app capisce.</p>
+    <div class="azioni azioni--strette"><button class="btn btn--piccolo" data-a="imp-wiki-copia">${ico('copia')}Esporta il wiki per l'AI</button><button class="btn btn--testo btn--piccolo" data-a="imp-wiki-scarica">${ico('esporta')}Scarica come file</button></div>
+    <textarea data-a="rev-correzioni" spellcheck="false" placeholder="rinomina … in …&#10;unisci … con l'id …&#10;togli la gesta …">${esc(IMPORT.correzioni || '')}</textarea>
+    <div class="azioni azioni--strette"><button class="btn btn--piccolo" data-a="rev-correzioni-incolla">${ico('importa')}Incolla dagli appunti</button><button class="btn btn--primario btn--piccolo" data-a="rev-correzioni-applica">${ico('check')}Applica le correzioni</button></div>
+    ${esiti.length ? `<ul class="esito-correzioni">${esiti.map(e => `<li class="${e.ok ? 'ok' : 'no'}">${ico(e.ok ? 'check' : 'info')}<span><strong>${esc(e.riga)}</strong><br>${esc(e.testo)}</span></li>`).join('')}</ul>` : ''}
+    <details class="formato-correzioni"><summary>Tutte le correzioni che l'app capisce</summary><pre>${esc(FORMATO_CORREZIONI)}</pre></details></details>`;
   h += `<article class="prop" style="--tc:var(--lanterna)">
     <div class="testa"><span class="num-grande" style="width:46px;height:46px;font-size:21px;box-shadow:none">${esc(s.numero)}</span>
       <div class="corpo"><strong>Sessione ${esc(s.numero)}</strong><small>${dataBella(s.data)}${s.luogo ? ', il gruppo finisce a ' + esc(nomeDi(s.luogo)) : ''}</small></div></div>
@@ -4705,10 +4898,8 @@ function revisioneHTML() {
     <label class="campo"><span>In breve, da leggere prima della prossima sessione</span><textarea data-a="rev-sessione" data-k="inBreve" data-menzioni>${esc(s.inBreve)}</textarea></label>
     <label class="campo"><span>Cose in sospeso (una per riga)</span><textarea data-a="rev-sospesi" data-menzioni>${esc(s.sospesi.join('\n'))}</textarea></label>
     <label class="campo"><span>Giorni passati nel gioco</span><input type="number" data-a="rev-sessione" data-k="giorni" value="${esc(s.giorni)}" min="0" inputmode="numeric">${s.notaGiorni ? `<small>${esc(s.notaGiorni)}</small>` : ''}</label>`;
-  if (P.eventi.length) {
-    h += `<div class="campo"><span class="etichetta">Fatti principali</span>` + P.eventi.map((e, i) =>
-      `<label class="spunta" style="padding:5px 0;align-items:flex-start"><input type="checkbox" data-a="rev-ok" data-gruppo="eventi" data-i="${i}" ${e.ok ? 'checked' : ''}><span>${testoRicco(e.t, 'riga')}${e.l ? ` <span class="fioco piccolo">a ${esc(nomeDi(e.l))}</span>` : ''}${motivo(e)}</span></label>`).join('') + '</div>';
-  }
+  h += `<div class="campo"><span class="etichetta">Fatti principali</span>${righeRev('eventi', 'il fatto')}
+    <button class="btn btn--testo btn--piccolo" data-a="rev-aggiungi" data-gruppo="eventi">${ico('piu')}Aggiungi un fatto</button></div>`;
   const extra = [];
   if (s.citazioni.length) extra.push(s.citazioni.length + (s.citazioni.length === 1 ? ' frase memorabile' : ' frasi memorabili'));
   if (s.presenti.length) extra.push('presenti: ' + s.presenti.map(p => esc(nomeDi(p))).join(', '));
@@ -4740,11 +4931,13 @@ function revisioneHTML() {
     } else if (p.azione === 'aggiorna') {
       dettagli = differenzeVoce(p).map(x => `<li><b>${x.campo}:</b> ${x.testo}</li>`).join('') || '<li>Solo una nuova riga nella cronologia</li>';
     }
-    return `<article class="prop t-${cl}${p.azione === 'salta' ? ' saltata' : ''}">
-      <div class="testa">${sigillo({ tipo: d.tipo, nome: d.nome, icona: d.icona })}<div class="corpo"><strong>${esc(d.nome)}</strong><small>${esc(d.ruolo || (TIPI_VOCE[d.tipo] || TIPI_VOCE.png).nome)}</small></div></div>
+    // il nome si corregge qui (le menzioni lo seguono, vedi rinominaProposta); la frase di stasera anche
+    return `<article class="prop t-${cl}${p.azione === 'salta' ? ' saltata' : ''}" id="rev-voci-${i}">
+      <div class="testa">${sigillo({ tipo: d.tipo, nome: d.nome, icona: d.icona })}<div class="corpo"><input type="text" class="nome-rev" value="${esc(d.nome)}" data-a="rev-nome" data-gruppo="voci" data-i="${i}" aria-label="Nome di ${esc(d.nome)}"><small>${esc(d.ruolo || (TIPI_VOCE[d.tipo] || TIPI_VOCE.png).nome)}</small></div></div>
       ${p.dubbio ? `<p class="motivo-dubbio">${ico('info')}${esc(p.dubbio)}</p>` : ''}
-      ${d.storia ? `<p class="nota">${testoRicco(d.storia, 'riga')}</p>` : ''}
-      <select data-a="rev-azione" data-gruppo="voci" data-i="${i}" aria-label="Cosa fare con ${esc(d.nome)}">${opz.join('')}</select>
+      <textarea class="breve" data-a="rev-dato" data-gruppo="voci" data-i="${i}" data-k="storia" data-menzioni rows="2" placeholder="Cosa ha fatto stasera" aria-label="Cosa ha fatto stasera">${esc(d.storia || '')}</textarea>
+      <div class="scelta-rev"><select data-a="rev-azione" data-gruppo="voci" data-i="${i}" aria-label="Cosa fare con ${esc(d.nome)}">${opz.join('')}</select>
+      <button class="btn btn--testo btn--piccolo" data-a="rev-stessa-apri" data-gruppo="voci" data-i="${i}">È la stessa voce di…</button></div>
       ${dettagli && p.azione !== 'salta' ? `<ul class="diff">${dettagli}</ul>` : ''}</article>`;
   };
   const cartaMissione = (p, i) => {
@@ -4765,15 +4958,16 @@ function revisioneHTML() {
       det.push(`<li>${parti.join(', ')}</li>`);
       if (d.ricompensa) det.push(`<li><b>Ricompensa:</b> ${esc(d.ricompensa)}</li>`);
     }
-    return `<article class="prop t-missione${p.azione === 'salta' ? ' saltata' : ''}">
-      <div class="testa"><span class="sigillo t-missione">${ico('missioni')}</span><div class="corpo"><strong>${esc(d.titolo)}</strong><small>${esc(STATI_MISSIONE[stato])}</small></div></div>
+    return `<article class="prop t-missione${p.azione === 'salta' ? ' saltata' : ''}" id="rev-missioni-${i}">
+      <div class="testa"><span class="sigillo t-missione">${ico('missioni')}</span><div class="corpo"><input type="text" class="nome-rev" value="${esc(d.titolo)}" data-a="rev-nome" data-gruppo="missioni" data-i="${i}" aria-label="Titolo della missione"><small>${esc(STATI_MISSIONE[stato])}</small></div></div>
       ${p.dubbio ? `<p class="motivo-dubbio">${ico('info')}${esc(p.dubbio)}</p>` : ''}
-      ${d.nota ? `<p class="nota">${testoRicco(d.nota, 'riga')}</p>` : ''}
-      <select data-a="rev-azione" data-gruppo="missioni" data-i="${i}" aria-label="Cosa fare con ${esc(d.titolo)}">${opz.join('')}</select>
+      <textarea class="breve" data-a="rev-dato" data-gruppo="missioni" data-i="${i}" data-k="nota" data-menzioni rows="2" placeholder="Cosa è cambiato stasera" aria-label="Cosa è cambiato stasera">${esc(d.nota || '')}</textarea>
+      <div class="scelta-rev"><select data-a="rev-azione" data-gruppo="missioni" data-i="${i}" aria-label="Cosa fare con ${esc(d.titolo)}">${opz.join('')}</select>
+      <button class="btn btn--testo btn--piccolo" data-a="rev-stessa-apri" data-gruppo="missioni" data-i="${i}">È la stessa missione di…</button></div>
       ${det.length && p.azione !== 'salta' ? `<ul class="diff">${det.join('')}</ul>` : ''}</article>`;
   };
   const cartaRapporto = (r, i) => `<article class="prop t-persona"><label class="spunta" style="align-items:flex-start"><input type="checkbox" data-a="rev-ok" data-gruppo="rapporti" data-i="${i}" ${r.ok ? 'checked' : ''}>
-      <span><strong>${esc(nomeDi(r.pg))} e ${esc(nomeDi(r.png))}</strong> <span style="color:${r.delta < 0 ? 'var(--cera)' : 'var(--c-luogo)'};font-weight:700">${r.delta > 0 ? '+' + r.delta : r.delta}</span>${r.nota ? `<br><span class="fioco piccolo">${esc(r.nota)}</span>` : ''}${motivo(r)}</span></label></article>`;
+      <span><span class="n-rev">${i + 1}</span><strong>${esc(nomeDi(r.pg))} e ${esc(nomeDi(r.png))}</strong> <span style="color:${r.delta < 0 ? 'var(--cera)' : 'var(--c-luogo)'};font-weight:700">${r.delta > 0 ? '+' + r.delta : r.delta}</span>${r.nota ? `<br><span class="fioco piccolo">${esc(r.nota)}</span>` : ''}${motivo(r)}</span></label></article>`;
 
   // prima quello che va guardato, poi (chiuso) quello che è sicuro ed è già accettato
   const dubbi = [], sicure = [];
@@ -4792,16 +4986,14 @@ function revisioneHTML() {
     h += `<h3 class="t3" style="margin:24px 0 10px">Bottino del gruppo</h3>`;
     if (P.monete) h += `<label class="campo"><span>Monete d'oro guadagnate insieme</span><input type="number" data-a="rev-monete" value="${esc(P.monete)}" inputmode="numeric"></label>`;
     h += P.oggetti.map((o, i) => `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="oggetti" data-i="${i}" ${o.ok ? 'checked' : ''}>
-      <span><strong>${o.quantita > 1 ? o.quantita + ' × ' : ''}${esc(o.nome)}</strong>${o.magico ? ' <span class="chip chip--mini">magico</span>' : ''}<br><span class="fioco piccolo">${[o.valore ? mo(o.valore) : '', o.peso ? o.peso + ' lb' : '', o.chi ? 'lo tiene ' + esc(nomeDi(o.chi)) : 'del gruppo'].filter(Boolean).join(', ')}</span>${motivo(o)}</span></label>`).join('');
+      <span><span class="n-rev">${i + 1}</span><strong>${o.quantita > 1 ? o.quantita + ' × ' : ''}${esc(o.nome)}</strong>${o.magico ? ' <span class="chip chip--mini">magico</span>' : ''}<br><span class="fioco piccolo">${[o.valore ? mo(o.valore) : '', o.peso ? o.peso + ' lb' : '', o.chi ? 'lo tiene ' + esc(nomeDi(o.chi)) : 'del gruppo'].filter(Boolean).join(', ')}</span>${motivo(o)}</span></label>`).join('');
   }
   if (P.dicerie.length) {
     h += `<h3 class="t3" style="margin:24px 0 10px">Voci di taverna <span class="fioco piccolo">${P.dicerie.length}</span></h3>` + P.dicerie.map((d, i) =>
-      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="dicerie" data-i="${i}" ${d.ok ? 'checked' : ''}><span>${testoRicco(d.testo, 'riga')}<br><span class="fioco piccolo">${[d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : ''].filter(Boolean).join(', ') || 'chi la racconta non si sa'}</span>${motivo(d)}</span></label>`).join('');
+      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="dicerie" data-i="${i}" ${d.ok ? 'checked' : ''}><span><span class="n-rev">${i + 1}</span>${testoRicco(d.testo, 'riga')}<br><span class="fioco piccolo">${[d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : ''].filter(Boolean).join(', ') || 'chi la racconta non si sa'}</span>${motivo(d)}</span></label>`).join('');
   }
-  if (P.gesta.length) {
-    h += `<h3 class="t3" style="margin:24px 0 10px">${ico('gesta', 'i-gesta')} Gesta del gruppo <span class="fioco piccolo">${P.gesta.length}</span></h3>` + P.gesta.map((g, i) =>
-      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="gesta" data-i="${i}" ${g.ok ? 'checked' : ''}><span>${testoRicco(g.t, 'riga')}${g.l ? `<br><span class="fioco piccolo">a ${esc(nomeDi(g.l))}</span>` : ''}${motivo(g)}</span></label>`).join('');
-  }
+  h += `<h3 class="t3" style="margin:24px 0 10px">${ico('gesta', 'i-gesta')} Gesta del gruppo <span class="fioco piccolo">${P.gesta.length}</span></h3>${righeRev('gesta', 'la gesta')}
+    <button class="btn btn--testo btn--piccolo" data-a="rev-aggiungi" data-gruppo="gesta">${ico('piu')}Aggiungi una gesta</button>`;
   h += `<div class="piede-fisso"><button class="btn" data-a="imp-annulla">Ricomincia</button>${giaQui ? `<a class="btn btn--primario" href="#/sessione/${encodeURIComponent(s.esistente)}">${ico('diario')}Apri la sessione ${esc(s.numero)}</a>` : `<button class="btn btn--primario" data-a="imp-salva">${ico('check')}Salva nel diario</button>`}</div>`;
   return h;
 }
@@ -4817,6 +5009,8 @@ function leggiRisposta() {
     if (senzaFine.length) IMPORT.avvisi.push((lista.length > 1 ? 'Nelle risposte ' + senzaFine.join(', ') : 'Nella risposta') + ' manca "fine": true. Se il riassunto si interrompe a metà, chiedi all\'AI di ripetere il JSON intero.');
     if (lista.length > 1) IMPORT.avvisi.push('Ho unito ' + lista.length + ' risposte, una per pezzo di audio.');
     IMPORT.proposte = preparaRevisione(unisciRisposte(lista));
+    IMPORT.correzioni = ''; IMPORT.esitoCorrezioni = [];
+    salvaBozzaRevisione();
   } catch (e) {
     IMPORT.errore = e.message;
     IMPORT.proposte = null;
@@ -4946,11 +5140,15 @@ function applicaImport() {
   // 5. bottino comune (righe del commercio di tipo "bottino" e "moneta", vedi 8-tavolo.js) e voci di taverna
   P.oggetti.filter(o => o.ok).forEach(o => {
     const chi = o.chi ? risolvi(o.chi) : '';
-    // se il nome è proprio quello di un oggetto del catalogo, lo lego al catalogo e ne prendo la descrizione
+    // se il nome è proprio quello di un oggetto del catalogo, lo lego al catalogo e ne prendo la descrizione.
+    // Dalla 1.7 il catalogo tira anche le cariche che vanno tirate e, se l'oggetto richiede sintonia e qualcuno
+    // lo porta, lo mette in sintonia con lui (se ha meno di tre oggetti e ha i requisiti: completaDaCatalogo)
     const cat = oggettoCatalogo(o.nome);
-    crea('commercio', { id: nuovoId('commercio'), tipo: 'bottino', nome: o.nome, quantita: o.quantita, valore: o.valore, peso: o.peso,
+    const rec = { id: nuovoId('commercio'), tipo: 'bottino', nome: o.nome, quantita: o.quantita, valore: o.valore, peso: o.peso,
       portatore: chi && DB.voci[chi] && DB.voci[chi].tipo === 'pg' ? chi : '', richiede: cat ? (cat.sintonia ? 1 : 0) : (o.magico ? 1 : 0), sessione: sid,
-      catalogo: cat ? cat.id : '', note: cat ? testoCatalogo(cat) : '' });
+      catalogo: cat ? cat.id : '', note: cat ? testoCatalogo(cat) : '' };
+    completaDaCatalogo(rec, true);
+    crea('commercio', rec);
   });
   if (Number(P.monete)) crea('commercio', { id: nuovoId('commercio'), tipo: 'moneta', importo: Number(P.monete), testo: 'Sessione ' + P.sessione.numero, data: P.sessione.data, sessione: sid });
   P.dicerie.filter(d => d.ok).forEach(d => {
@@ -4980,9 +5178,9 @@ function applicaImport() {
     id: sid, numero: s.numero, titolo: s.titolo, data: s.data, riassunto: s.riassunto,
     inBreve: s.inBreve, sospesi: s.sospesi, giorni: Math.max(0, Math.round(Number(s.giorni) || 0)),
     serata: ser ? { inizio: Number(ser.inizio) || 0, fine: Number(ser.fine) || Date.now() } : '',
-    eventi: P.eventi.filter(e => e.ok).map(e => ({ t: e.t, l: rif(e.l, 'luogo') })),
+    eventi: P.eventi.filter(e => e.ok && String(e.t || '').trim()).map(e => ({ t: e.t.trim(), l: rif(e.l, 'luogo') })),
     citazioni: s.citazioni, bottino: s.bottino,
-    gesta: P.gesta.filter(g => g.ok).map(g => {
+    gesta: P.gesta.filter(g => g.ok && String(g.t || '').trim()).map(g => {
       // il luogo dentro la frase come menzione, se l'AI non l'ha già citato
       const l = rif(g.l, 'luogo');
       return l && DB.voci[l] && !menzioniIn(g.t).includes(l) ? g.t + ' (#[' + DB.voci[l].nome + '])' : g.t;
@@ -4991,7 +5189,8 @@ function applicaImport() {
     luogo: lf, segnalibri: segn, _annulla: annulla
   });
   IMPORT = nuovoImport();
-  try { localStorage.removeItem('taverna.bozzaImport'); } catch (e) { /* niente */ }
+  clearTimeout(TIMER_BOZZA);
+  try { localStorage.removeItem('taverna.bozzaImport'); localStorage.removeItem('taverna.bozzaRevisione'); } catch (e) { /* niente */ }
   MAPPA.sporca = true;
   location.hash = '#/sessione/' + encodeURIComponent(sid);
   avviso('Sessione ' + s.numero + ' salvata nel diario');
@@ -5041,6 +5240,346 @@ async function annullaImport(sid) {
   MAPPA.sporca = true;
   location.hash = '#/diario';
   avviso('Import annullato');
+}
+
+// ---------------------------------------------------------------------
+// CORREGGERE LA REVISIONE APERTA (1.7)
+// La revisione si corregge tutta dentro l'app, senza rifare il JSON: testi, fatti e gesta si scrivono a mano,
+// una voce proposta si rinomina o si lega a una voce del wiki ("È la stessa voce di…"), e un elenco di
+// correzioni corte (scritte a mano o da un'altra AI, per esempio il progetto Claude del controllo) si applica
+// in un colpo. Rinominare sposta anche le menzioni (@[Vecchio] → @[Nuovo]) e i riferimenti scritti per nome
+// (dove si trova, chi l'ha affidata, chi lo tiene...). La revisione corretta resta nella memoria del telefono
+// (taverna.bozzaRevisione) finché non si salva o si ricomincia: un'app chiusa per sbaglio non perde il lavoro.
+// ---------------------------------------------------------------------
+let TIMER_BOZZA = 0;
+function firmaTesto(s) {
+  s = String(s || '');
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  return s.length + ':' + (h >>> 0).toString(36);
+}
+function salvaBozzaRevisione() {
+  clearTimeout(TIMER_BOZZA);
+  TIMER_BOZZA = setTimeout(() => {
+    try {
+      if (IMPORT.proposte) localStorage.setItem('taverna.bozzaRevisione', JSON.stringify({ firma: firmaTesto(IMPORT.risposta), numero: IMPORT.numero, data: IMPORT.data, proposte: IMPORT.proposte, correzioni: IMPORT.correzioni || '', esito: IMPORT.esitoCorrezioni || [] }));
+      else localStorage.removeItem('taverna.bozzaRevisione');
+    } catch (e) { /* memoria piena: la revisione resta solo aperta */ }
+  }, 300);
+}
+// all'avvio: la revisione salvata torna solo se la risposta nel riquadro è ancora la stessa
+function riprendiBozzaRevisione() {
+  try {
+    const r = JSON.parse(localStorage.getItem('taverna.bozzaRevisione') || 'null');
+    if (!r || !r.proposte || r.firma !== firmaTesto(IMPORT.risposta)) return;
+    Object.assign(IMPORT, { proposte: r.proposte, numero: r.numero, data: r.data, correzioni: r.correzioni || '', esitoCorrezioni: r.esito || [] });
+  } catch (e) { /* bozza rovinata: si rilegge la risposta */ }
+}
+
+// Passa tutti i testi della revisione aperta (fTesto) e tutti i riferimenti scritti per nome o per id (fRif).
+// La usano la rinomina, "È la stessa voce di…" e "sostituisci". Restituisce quanti campi sono cambiati.
+function cambiaRevisione(fTesto, fRif) {
+  const P = IMPORT.proposte;
+  let n = 0;
+  const t = (o, k) => { if (!fTesto || !o || typeof o[k] !== 'string' || !o[k]) return; const x = fTesto(o[k]); if (x !== o[k]) { o[k] = x; n++; } };
+  const r = (o, k) => { if (!fRif || !o || !o[k] || typeof o[k] !== 'string') return; const x = fRif(o[k]); if (x !== o[k]) { o[k] = x; n++; } };
+  const s = P.sessione;
+  ['titolo', 'riassunto', 'inBreve', 'bottino'].forEach(k => t(s, k));
+  s.sospesi = s.sospesi.map(x => { if (!fTesto || typeof x !== 'string') return x; const y = fTesto(x); if (y !== x) n++; return y; });
+  s.citazioni.forEach(c => t(c, 'testo'));
+  r(s, 'luogo');
+  P.eventi.forEach(e => { t(e, 't'); r(e, 'l'); });
+  P.gesta.forEach(g => { t(g, 't'); r(g, 'l'); });
+  P.dicerie.forEach(d => { t(d, 'testo'); r(d, 'chi'); r(d, 'dove'); });
+  P.voci.forEach(p => { ['storia', 'descrizione', 'ruolo'].forEach(k => t(p.dati, k)); r(p.dati, 'luogo'); });
+  P.missioni.forEach(p => { ['nota', 'descrizione', 'ricompensa'].forEach(k => t(p.dati, k)); r(p.dati, 'committente'); r(p.dati, 'luogo'); });
+  P.rapporti.forEach(x => { t(x, 'nota'); r(x, 'png'); });
+  P.oggetti.forEach(o => r(o, 'chi'));
+  return n;
+}
+// Le menzioni di un nome (@[Vecchio], @Vecchio, #[Vecchio]) diventano menzioni del nome nuovo, con lo stesso simbolo
+function rinominaMenzioni(testo, vecchio, nuovo) {
+  const nv = norm(vecchio);
+  const trovate = trovaMenzioni(testo).filter(m => norm(m.nome) === nv);
+  let out = String(testo);
+  trovate.reverse().forEach(m => { out = out.slice(0, m.pos) + m.sig + '[' + nuovo + ']' + out.slice(m.pos + m.len); });
+  return out;
+}
+// Un nome cambia in tutta la revisione: menzioni nei testi e riferimenti. id: la voce del wiki a cui ora
+// puntano i riferimenti (vuoto per una voce nuova: allora si scrive il nome, e al salvataggio si risolve).
+function rinominaInRevisione(vecchio, nuovo, id) {
+  const nv = norm(vecchio);
+  if (!nv) return 0;
+  return cambiaRevisione(x => rinominaMenzioni(x, vecchio, nuovo), x => norm(x) === nv ? (id || nuovo) : x);
+}
+// Rinomina una voce (o una missione) proposta. Se il nome nuovo è proprio quello di una voce del wiki, la
+// proposta diventa un aggiornamento di quella voce, come succede leggendo la risposta.
+// Il nome sbagliato non resta: per tenerlo come alias c'è "È la stessa voce di…" (stessaVoce).
+function rinominaProposta(gruppo, i, nuovo) {
+  const p = IMPORT.proposte[gruppo][i];
+  const campo = gruppo === 'voci' ? 'nome' : 'titolo';
+  nuovo = String(nuovo || '').trim().replace(/^[@#]\[?|\]$/g, '');
+  if (!p || !nuovo || nuovo === p.dati[campo]) return null;
+  const vecchio = p.dati[campo];
+  p.dati[campo] = nuovo;
+  if (gruppo === 'voci') p.dati.alias = (p.dati.alias || []).filter(a => norm(a) !== norm(nuovo));
+  const n = rinominaInRevisione(vecchio, nuovo, p.azione === 'aggiorna' ? p.bersaglio : '');
+  p.simili = trovaSimili(nuovo, gruppo, gruppo === 'voci' ? p.dati.tipo : undefined).slice(0, 6);
+  // un'altra proposta con lo stesso nome (l'AI ha sentito due volte la stessa persona, scritta in due modi):
+  // le unisco, così al salvataggio non nascono due voci uguali
+  const j = IMPORT.proposte[gruppo].findIndex((x, k) => k !== i && norm(x.dati[campo]) === norm(nuovo));
+  if (j >= 0) { unisciProposte(gruppo, i, j); return { vecchio, nuovo, menzioni: n, unita: '', doppia: true }; }
+  const uguale = p.simili.find(x => x.punti === 1);
+  let unita = '';
+  if (p.azione === 'crea' && uguale) {
+    p.azione = 'aggiorna'; p.bersaglio = uguale.id;
+    unita = gruppo === 'voci' ? DB.voci[uguale.id].nome : DB.missioni[uguale.id].titolo;
+    p.dubbio = 'Stesso nome di ' + unita + ' del wiki: la aggiorno';
+  }
+  return { vecchio, nuovo, menzioni: n, unita };
+}
+// Due proposte della stessa voce (o missione): quella in posizione i confluisce in quella in posizione j e sparisce.
+// Le frasi di stasera si sommano, gli alias si uniscono, i campi vuoti di j prendono quelli di i.
+function unisciProposte(gruppo, i, j) {
+  const lista = IMPORT.proposte[gruppo], a = lista[i], b = lista[j];
+  const campo = gruppo === 'voci' ? 'storia' : 'nota';
+  b.dati[campo] = [b.dati[campo], a.dati[campo]].filter(x => x && String(x).trim()).join(' ');
+  if (gruppo === 'voci') b.dati.alias = (b.dati.alias || []).concat(a.dati.alias || []).filter((n, k, t) => n && norm(n) !== norm(b.dati.nome) && t.findIndex(x => norm(x) === norm(n)) === k);
+  Object.keys(a.dati).forEach(k => { if ((b.dati[k] === undefined || b.dati[k] === '') && a.dati[k] !== '' && a.dati[k] !== undefined) b.dati[k] = a.dati[k]; });
+  if (a.dubbio && !b.dubbio) b.dubbio = a.dubbio;
+  lista.splice(i, 1);
+}
+// "È la stessa voce di…": la proposta aggiorna la voce (o la missione) scelta del wiki. Il nome sentito
+// dall'AI resta nella proposta e al salvataggio diventa un alias; le menzioni passano al nome giusto.
+function stessaVoce(gruppo, i, id) {
+  const p = IMPORT.proposte[gruppo][i];
+  const w = gruppo === 'voci' ? DB.voci[id] : DB.missioni[id];
+  if (!p || !w || !visibile(w)) return null;
+  p.azione = 'aggiorna'; p.bersaglio = id;
+  if (!p.simili.some(x => x.id === id)) p.simili.unshift({ id, punti: 1 });
+  const vecchio = gruppo === 'voci' ? p.dati.nome : p.dati.titolo;
+  const giusto = gruppo === 'voci' ? w.nome : w.titolo;
+  const n = gruppo === 'voci' ? rinominaInRevisione(vecchio, giusto, id) : cambiaRevisione(null, x => norm(x) === norm(vecchio) ? id : x);
+  return { vecchio, giusto, menzioni: n };
+}
+// La proposta con questo nome (o alias, o id dell'AI) tra le voci e le missioni: { gruppo, i } o null
+function trovaProposta(nome, soloGruppo) {
+  const P = IMPORT.proposte, n = norm(nome);
+  if (!n) return null;
+  for (const gruppo of soloGruppo ? [soloGruppo] : ['voci', 'missioni']) {
+    const i = P[gruppo].findIndex(p => gruppo === 'voci'
+      ? norm(p.dati.nome) === n || (p.dati.alias || []).some(a => norm(a) === n) || (p.dati.id && p.dati.id === nome)
+      : norm(p.dati.titolo) === n || (p.dati.id && p.dati.id === nome));
+    if (i >= 0) return { gruppo, i };
+  }
+  return null;
+}
+// Una voce o missione del wiki da un id o da un nome
+function trovaNelWiki(x) {
+  x = String(x || '').trim().replace(/^["'“«]|["'”»]$/g, '');
+  if (DB.voci[x] && visibile(DB.voci[x])) return { gruppo: 'voci', id: x };
+  if (DB.missioni[x] && visibile(DB.missioni[x])) return { gruppo: 'missioni', id: x };
+  const id = risolviNome(x);
+  if (id && DB.voci[id]) return { gruppo: 'voci', id };
+  if (id && DB.missioni[id]) return { gruppo: 'missioni', id };
+  return null;
+}
+
+// Il formato delle correzioni, da mostrare nell'app e da mettere in fondo al wiki esportato per l'AI
+const FORMATO_CORREZIONI = [
+  'Una correzione per riga. Dopo " — " (o " | ") si può scrivere il motivo e la pagina: l\'app li mostra e basta.',
+  '- rinomina VECCHIO in NUOVO: il nome di una voce o di una missione proposta, con le sue menzioni',
+  '- unisci NOME con l\'id ID: la voce proposta è quella del wiki con quell\'id (il nome sbagliato diventa un alias). Va bene anche "unisci NOME con NOME DEL WIKI"',
+  '- crea NOME: la voce proposta è davvero nuova, anche se somiglia a una del wiki',
+  '- togli la voce NOME, togli la missione TITOLO: non si importano',
+  '- togli il fatto N, togli la gesta N, togli la diceria N, togli l\'oggetto N, togli il rapporto N, togli la cosa in sospeso N (N conta da 1, nell\'ordine del JSON; più numeri: "togli le gesta 2 e 3")',
+  '- aggiungi il fatto TESTO, aggiungi la gesta TESTO (con @[Nome] e #[Luogo])',
+  '- sostituisci "TESTO" con "TESTO": in tutti i testi della sessione',
+  '- stato di NOME: morto | vivo | scomparso; stato della missione TITOLO: attiva | compiuta | fallita | abbandonata',
+  '- luogo finale NOME o ID: dove finisce la serata',
+  'I nomi con " in " o " con " dentro vanno tra virgolette: rinomina "Uomo in nero" in Brakk.'
+].join('\n');
+
+// Applica un elenco di correzioni alla revisione aperta. Restituisce una riga di esito per correzione:
+// { riga, ok, testo }. Le correzioni che non capisce le dice e le salta, le altre le fa tutte.
+function applicaCorrezioni(testo) {
+  const P = IMPORT.proposte;
+  const esiti = [];
+  const sospesiTolti = new Set();
+  const virgolette = s => String(s || '').trim().replace(/^["“«]\s*|\s*["”»]$/g, '').trim();
+  // "A in B" (o "A con B"): con le virgolette è chiaro; altrimenti provo ogni " in " e tengo il taglio
+  // la cui parte sinistra è il nome di una proposta (o, in mancanza, il primo)
+  const dividi = (s, sep, buono) => {
+    const q = s.match(new RegExp('^["“«](.+?)["”»]\\s+' + sep + '\\s+(.+)$', 'i'));
+    if (q) return [q[1], virgolette(q[2])];
+    const re = new RegExp('\\s+' + sep + '\\s+', 'gi');
+    const tagli = [];
+    let m;
+    while ((m = re.exec(s))) tagli.push([s.slice(0, m.index), s.slice(m.index + m[0].length)]);
+    return tagli.find(([a, b]) => buono(virgolette(a), virgolette(b))) || tagli[0] || null;
+  };
+  const numeri = s => (String(s).match(/\d+/g) || []).map(Number);
+  const nomeProposta = x => x.gruppo === 'voci' ? P.voci[x.i].dati.nome : P.missioni[x.i].dati.titolo;
+  String(testo || '').split('\n').forEach(grezza => {
+    let riga = grezza.trim();
+    if (!riga || /^(#|\/\/)/.test(riga)) return;
+    riga = riga.replace(/^(\d+[.)]|[-*•])\s+/, '');
+    const motivo = (riga.match(/\s+(?:—|–|--|\||\/\/)\s+(.*)$/) || [])[1] || '';
+    let c = motivo ? riga.slice(0, riga.length - motivo.length).replace(/\s+(?:—|–|--|\||\/\/)\s*$/, '') : riga;
+    c = c.replace(/[.;]+$/, '').replace(/[“”«»]/g, '"').trim();
+    const esito = (ok, t) => esiti.push({ riga: c, ok, testo: t + (motivo ? ' (' + motivo + ')' : ''), grezza });
+    let m;
+    if ((m = c.match(/^rinomina\s+(?:la\s+voce\s+|la\s+missione\s+|il\s+luogo\s+|il\s+png\s+)?(.+)$/i))) {
+      const d = dividi(m[1], 'in', a => !!trovaProposta(a));
+      if (!d) return esito(false, 'Manca "in": scrivi rinomina VECCHIO in NUOVO');
+      const [a, b] = [virgolette(d[0]), virgolette(d[1])];
+      const prop = trovaProposta(a);
+      if (prop) {
+        const r = rinominaProposta(prop.gruppo, prop.i, b);
+        return esito(true, r ? `${r.vecchio} si chiama ${r.nuovo}${r.menzioni ? ', ' + r.menzioni + (r.menzioni === 1 ? ' testo aggiornato' : ' testi aggiornati') : ''}${r.unita ? '; è già nel wiki, la aggiorno' : ''}${r.doppia ? '; era già proposta con questo nome: ora sono una' : ''}` : 'Il nome era già quello');
+      }
+      const n = rinominaInRevisione(a, b, '');
+      return n ? esito(true, `${a} → ${b} in ${n} ${n === 1 ? 'testo' : 'testi'}`) : esito(false, `Non trovo "${a}" tra le voci proposte né nei testi`);
+    }
+    if ((m = c.match(/^unisci\s+(?:la\s+voce\s+|la\s+missione\s+)?(.+)$/i)) || (m = c.match(/^(.+?)\s+è\s+la\s+stessa\s+(?:voce|missione)\s+di\s+(.+)$/i))) {
+      const d = m[2] !== undefined ? [m[1], m[2]] : dividi(m[1].replace(/\s+con\s+(?:l['’]\s*id|l['’]id|id|la\s+voce|la\s+missione)\s+/i, ' con '), 'con', (a, b) => !!trovaProposta(a) && (!!trovaNelWiki(b) || !!trovaProposta(b)));
+      if (!d) return esito(false, 'Manca "con": scrivi unisci NOME con l\'id ID');
+      const a = virgolette(d[0]), w = trovaNelWiki(d[1]);
+      if (!w) {
+        // B non è nel wiki ma è un'altra proposta: le due diventano una
+        const pa = trovaProposta(a), pb = trovaProposta(virgolette(d[1]));
+        if (pa && pb && pa.gruppo === pb.gruppo && pa.i !== pb.i) {
+          const giusto = nomeProposta(pb);
+          const n = rinominaInRevisione(nomeProposta(pa), giusto, '');
+          unisciProposte(pa.gruppo, pa.i, pb.i);
+          return esito(true, `${a} e ${giusto} sono la stessa: una proposta sola${n ? ', ' + n + (n === 1 ? ' testo aggiornato' : ' testi aggiornati') : ''}`);
+        }
+        return esito(false, `Nel wiki non trovo "${virgolette(d[1])}"`);
+      }
+      const prop = trovaProposta(a, w.gruppo);
+      if (!prop) return esito(false, `Tra le ${w.gruppo === 'voci' ? 'voci' : 'missioni'} proposte non trovo "${a}"`);
+      const r = stessaVoce(prop.gruppo, prop.i, w.id);
+      return esito(!!r, r ? `${r.vecchio} è ${r.giusto} del wiki${r.menzioni ? ', ' + r.menzioni + (r.menzioni === 1 ? ' testo aggiornato' : ' testi aggiornati') : ''}` : 'Non riesco a unirle');
+    }
+    if ((m = c.match(/^(?:crea|nuova\s+voce|nuova\s+missione)\s+(.+)$/i))) {
+      const prop = trovaProposta(virgolette(m[1]));
+      if (!prop) return esito(false, `Tra le proposte non trovo "${virgolette(m[1])}"`);
+      P[prop.gruppo][prop.i].azione = 'crea';
+      return esito(true, `${nomeProposta(prop)} diventa ${prop.gruppo === 'voci' ? 'una voce nuova' : 'una missione nuova'}`);
+    }
+    if ((m = c.match(/^togli\s+(?:il|la|lo|l['’]|le|i|gli)?\s*(fatt[oi]|event[oi]|gesta|dicerie|diceria|oggett[oi]|rapport[oi]|cos[ae]\s+in\s+sospeso|sospes[oi]|voce|missione)\s+(.+)$/i))) {
+      const cosa = m[1].toLowerCase(), resto = virgolette(m[2]);
+      if (/^(voce|missione)$/.test(cosa)) {
+        const prop = trovaProposta(resto, cosa === 'voce' ? 'voci' : 'missioni');
+        if (!prop) return esito(false, `Tra le proposte non trovo "${resto}"`);
+        P[prop.gruppo][prop.i].azione = 'salta';
+        return esito(true, `${nomeProposta(prop)} non si importa`);
+      }
+      const gruppo = /^fatt|^event/.test(cosa) ? 'eventi' : cosa === 'gesta' ? 'gesta' : /^dicer/.test(cosa) ? 'dicerie' : /^oggett/.test(cosa) ? 'oggetti' : /^rapport/.test(cosa) ? 'rapporti' : 'sospesi';
+      const lista = gruppo === 'sospesi' ? P.sessione.sospesi : P[gruppo];
+      let quali = numeri(resto);
+      // un oggetto si può togliere anche per nome
+      if (!quali.length && gruppo === 'oggetti') { const k = P.oggetti.findIndex(o => norm(o.nome) === norm(resto)); if (k >= 0) quali = [k + 1]; }
+      const fuori = quali.filter(n => n < 1 || n > lista.length);
+      if (!quali.length || fuori.length) return esito(false, quali.length ? `Non c'è il numero ${fuori.join(', ')} (sono ${lista.length})` : 'Manca il numero');
+      quali.forEach(n => { if (gruppo === 'sospesi') sospesiTolti.add(n - 1); else lista[n - 1].ok = false; });
+      return esito(true, `Tolt${quali.length > 1 ? 'i' : 'o'}: ${quali.join(', ')}`);
+    }
+    if ((m = c.match(/^aggiungi\s+(?:il|la|un|una|un['’])?\s*(fatto|gesta)\s*:?\s+(.+)$/i))) {
+      const gruppo = /^fatto/i.test(m[1]) ? 'eventi' : 'gesta';
+      const t = virgolette(m[2]);
+      const luogo = (trovaMenzioni(t).find(x => x.sig === '#') || {}).nome || '';
+      P[gruppo].push({ t, l: luogo, ok: true, motivo: '' });
+      return esito(true, `${gruppo === 'eventi' ? 'Fatto' : 'Gesta'} ${P[gruppo].length} aggiunt${gruppo === 'eventi' ? 'o' : 'a'}`);
+    }
+    if ((m = c.match(/^sostituisci\s+"(.+?)"\s+con\s+"(.*)"$/i))) {
+      const [a, b] = [m[1], m[2]];
+      const n = cambiaRevisione(x => x.split(a).join(b), null);
+      return n ? esito(true, `Sostituito in ${n} ${n === 1 ? 'testo' : 'testi'}`) : esito(false, `"${a}" non c'è nei testi`);
+    }
+    if ((m = c.match(/^stato\s+(?:di|del|della|dello)?\s*(missione\s+)?(.+?)\s*:?\s+(viv[oa]|mort[oa]|scompars[oa]|attiva|compiuta|completata|fallita|abbandonata)$/i))) {
+      const st = m[3].toLowerCase();
+      const missione = !!m[1] || /^(attiva|compiuta|completata|fallita|abbandonata)$/.test(st);
+      const prop = trovaProposta(virgolette(m[2]), missione ? 'missioni' : 'voci');
+      if (!prop) return esito(false, `Tra le proposte non trovo "${virgolette(m[2])}"`);
+      P[prop.gruppo][prop.i].dati.stato = missione ? (st === 'compiuta' ? 'completata' : st) : st.replace(/a$/, 'o');
+      return esito(true, `${nomeProposta(prop)}: ${(missione ? STATI_MISSIONE[P[prop.gruppo][prop.i].dati.stato] : STATI_PNG[P[prop.gruppo][prop.i].dati.stato]).toLowerCase()}`);
+    }
+    if ((m = c.match(/^luogo\s+finale\s*:?\s+(.+)$/i))) {
+      const x = virgolette(m[1]);
+      const w = trovaNelWiki(x);
+      P.sessione.luogo = w ? w.id : x;
+      return esito(true, 'La serata finisce a ' + (w ? nomeDi(w.id) : x));
+    }
+    esito(false, 'Non capisco questa correzione');
+  });
+  if (sospesiTolti.size) P.sessione.sospesi = P.sessione.sospesi.filter((x, k) => !sospesiTolti.has(k));
+  return esiti;
+}
+
+// Il wiki per l'AI: nomi, alias, id, missioni e luoghi già nel diario, in un testo che un'altra AI legge bene
+// (per esempio il progetto Claude del controllo delle sessioni). Mai le voci segrete: come nel prompt dell'import.
+// In fondo c'è il formato delle correzioni, così il file basta da solo.
+function wikiPerAI() {
+  const I = indice();
+  const sessioni = I.sessioni;
+  const numeri = id => (I.sessioniDi[id] || []).map(s => DB.sessioni[s] && DB.sessioni[s].numero).filter(Boolean).sort((a, b) => a - b);
+  const riga = v => {
+    const n = numeri(v.id);
+    return `- ${v.id} | ${v.nome}` + ((v.alias || []).length ? ' | detto anche: ' + v.alias.join(', ') : '') + (v.ruolo ? ' | ' + v.ruolo : '') +
+      (v.luogo && nomeDi(v.luogo) ? ' | a ' + nomeDi(v.luogo) : '') + (v.stato && v.stato !== 'vivo' && STATI_PNG[v.stato] ? ' | ' + STATI_PNG[v.stato].toLowerCase() : '') +
+      (n.length ? ' | nelle sessioni ' + n.join(', ') : v.guida ? ' | dalla guida, non ancora incontrato' : '');
+  };
+  const voci = elenco('voci', v => !v.segreto);
+  const perTipo = (tipo, titolo) => {
+    const l = voci.filter(v => v.tipo === tipo).sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'it'));
+    return l.length ? [titolo, ...l.map(riga), ''] : [];
+  };
+  const missioni = elenco('missioni', m => !m.segreto).sort((a, b) => String(a.titolo).localeCompare(String(b.titolo), 'it'));
+  const numSes = id => id && DB.sessioni[id] ? DB.sessioni[id].numero : '';
+  return [
+    `WIKI DI TAVERNA, campagna "${cfg('campagna', 'la nostra campagna')}", esportato il ${new Date().toLocaleDateString('it-IT')}`,
+    'Ogni riga: id | nome | altri nomi | chi è | dove si trova | sessioni in cui compare. Usa gli id così come sono.',
+    '',
+    'SESSIONI NEL DIARIO',
+    ...(sessioni.length ? sessioni.map(s => `- sessione ${s.numero}${s.data ? ' (' + s.data + ')' : ''}: ${s.titolo || ''}`) : ['- nessuna']),
+    '',
+    'PERSONAGGI GIOCANTI',
+    ...voci.filter(v => v.tipo === 'pg').map(p => `- ${p.id} | ${p.nome}${p.giocatore ? ' | giocato da ' + p.giocatore : ''}${p.classe ? ' | ' + p.classe : ''}`),
+    '',
+    ...perTipo('png', 'PNG'),
+    ...perTipo('luogo', 'LUOGHI'),
+    ...perTipo('fazione', 'FAZIONI'),
+    ...perTipo('oggetto', 'OGGETTI'),
+    'MISSIONI',
+    ...(missioni.length ? missioni.map(m => `- ${m.id} | ${m.titolo} | ${STATI_MISSIONE[m.stato || 'attiva'].toLowerCase()}` + (m.committente && nomeDi(m.committente) ? ' | affidata da ' + nomeDi(m.committente) : '') +
+      (m.luogo && nomeDi(m.luogo) ? ' | a ' + nomeDi(m.luogo) : '') + (numSes(m.apertaIn) ? ' | dalla sessione ' + numSes(m.apertaIn) : '') + (numSes(m.chiusaIn) ? ', chiusa nella ' + numSes(m.chiusaIn) : '')) : ['- nessuna']),
+    '',
+    'COME SCRIVERE LE CORREZIONI PER L\'APP',
+    FORMATO_CORREZIONI
+  ].join('\n');
+}
+// Il file dell'esportazione (per caricarlo nel progetto): stesso testo, scaricato
+function scaricaTesto(testo, nome) {
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(new Blob([testo], { type: 'text/plain;charset=utf-8' }));
+  link.download = nome;
+  document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(link.href), 3000);
+}
+// La scelta di "È la stessa voce di…": il wiki in un foglio, con la ricerca; in cima le voci simili
+function apriStessaVoce(gruppo, i) {
+  const p = IMPORT.proposte[gruppo][i];
+  if (!p) return;
+  const missioni = gruppo === 'missioni';
+  const nome = missioni ? p.dati.titolo : p.dati.nome;
+  const simili = p.simili.map(x => x.id);
+  const ord = r => simili.includes(r.id) ? 0 : !missioni && r.tipo === p.dati.tipo ? 1 : 2;
+  const righe = (missioni ? elenco('missioni') : elenco('voci')).sort((a, b) => ord(a) - ord(b) || String(a.nome || a.titolo).localeCompare(String(b.nome || b.titolo), 'it'));
+  apriFoglio(`<div class="foglio-testa"><h2 class="t2">«${esc(nome)}» è la stessa ${missioni ? 'missione' : 'voce'} di…</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+    <p class="fioco piccolo" style="margin-top:0">${missioni ? 'La missione del diario tiene il suo titolo: lo stato e la nota di stasera vanno lì.' : 'Il nome sentito dall\'AI diventa un alias della voce che scegli, e le menzioni nei testi passano al nome giusto.'}</p>
+    <div class="cerca">${ico('cerca')}<input type="search" data-a="rev-stessa-cerca" placeholder="Cerca nel wiki" autocomplete="off" aria-label="Cerca nel wiki"></div>
+    <ul class="lista scelta-wiki">${righe.map(r => `<li data-cerca="${esc(norm([r.nome || r.titolo, r.ruolo || ''].concat(r.alias || []).join(' ')))}"><button type="button" class="riga" data-a="rev-stessa" data-gruppo="${gruppo}" data-i="${i}" data-id="${esc(r.id)}">${missioni ? `<span class="sigillo t-missione">${ico('missioni')}</span>` : sigillo(r)}<span class="corpo"><span class="tit">${esc(r.nome || r.titolo)}</span><span class="sub">${esc([simili.includes(r.id) ? 'nome simile' : '', (r.alias || []).length ? 'detto anche ' + r.alias.join(', ') : '', r.ruolo || (missioni ? STATI_MISSIONE[r.stato || 'attiva'] : '')].filter(Boolean).join(' · '))}</span></span></button></li>`).join('')}</ul>`);
 }
 
 // ---------------------------------------------------------------------
@@ -6456,9 +6995,14 @@ const SCHEMI_COMMERCIO = {
     { k: 'quantita', t: 'numero', l: 'Quanti' },
     { k: 'valore', t: 'numero', l: "Valore di uno, in monete d'oro" },
     { k: 'peso', t: 'numero', l: 'Peso di uno, in libbre' },
-    { k: 'portatore', t: 'scelta', l: 'Chi lo porta', opzFn: () => opzioniPersonaggi('Nessuno, è del gruppo') },
-    { k: 'richiede', t: 'scelta', l: 'Richiede sintonia', opz: { '': 'No', 1: 'Sì' } },
-    { k: 'sintonia', t: 'scelta', l: 'In sintonia con', opzFn: () => opzioniPersonaggi('Nessuno') },
+    // a: chi lo porta, se richiede sintonia e con chi è in sintonia si tengono d'occhio a vicenda (sintoniaEditor)
+    { k: 'portatore', t: 'scelta', l: 'Chi lo porta', opzFn: () => opzioniPersonaggi('Nessuno, è del gruppo'), a: 'ed-sintonia' },
+    // catalogo: con un oggetto del catalogo la sintonia la decide il catalogo, e il campo è bloccato (1.7)
+    { k: 'richiede', t: 'scelta', l: 'Richiede sintonia', opz: { '': 'No', 1: 'Sì' }, a: 'ed-sintonia', catalogo: true },
+    { k: 'sintonia', t: 'scelta', l: 'In sintonia con', opzFn: () => opzioniPersonaggi('Nessuno'), a: 'ed-sintonia', nota: true },
+    // cariche (1.7): con il catalogo una casella per scorta, senza catalogo quante sono e come tornano
+    { k: 'cariche', t: 'cariche', l: 'Cariche' },
+    { k: 'variante', t: 'testo', l: "Segnato sull'oggetto", ph: 'Il colore, il tipo di danno, i risultati tirati: separati da ;' },
     // il campo resta "note" (compatibile con il foglio), ma ora è la descrizione: con il catalogo si riempie da sola
     { k: 'note', t: 'ricco', l: 'Descrizione', ph: "Cosa fa. Scegliendo un oggetto del catalogo si riempie da sola, e si può cambiare" }
   ],
@@ -7098,9 +7642,10 @@ function buferaAttiva(ore) {
 // Luce (Rime pag. 11): finché dura l'inverno di Auril non è mai più che fioca. Senza bufera c'è penombra
 // dalle 10 alle 14; il resto è buio, tranne quando in cielo ci sono l'aurora o la luna piena. L'aurora
 // (pag. 5) compare prima di mezzanotte e sparisce prima dell'alba. Le ore esatte di aurora e luna il
-// manuale non le dice: le ha scelte il tavolo (1.6.1). Aurora dalle 21, un po' prima di mezzanotte;
-// la luna fa luce dalle 18 nelle notti vicine alla luna piena (vedi calendario: due giorni prima e dopo).
-const LUCE = { giorno: [10, 14], aurora: [21, 6], luna: [18, 6] };
+// manuale non le dice: le ha scelte il tavolo (1.6.1). Aurora da mezzanotte alle 6, l'alba della valle;
+// prima, dalle 20 a mezzanotte, fa luce la luna, ma solo nelle notti vicine alla luna piena (vedi calendario:
+// la notte di luna piena e le due prima e dopo). Le due fasce non si sovrappongono.
+const LUCE = { giorno: [10, 14], aurora: [0, 6], luna: [20, 24] };
 function luceA(ore) {
   ore = ore === undefined ? oreCampagna() : ore;
   const h = ((ore % 24) + 24) % 24;
@@ -7189,6 +7734,7 @@ function sezioneValle() {
       <span class="${luce.tipo === 'fioca' ? 'lanterna' : 'fioco'}">${esc(luce.testo)}: ${esc(luce.perche)}</span>
       <span class="fioco">${cal.harptos ? esc(cal.harptos) + ' · ' : ''}${esc(cal.decade)}ª decade del mese</span>
       ${cal.luna ? `<span class="${cal.luna.tra <= 1 ? 'lanterna' : 'fioco'}">${esc(testoLuna(cal.luna))}</span>` : '<span class="fioco">Luna nuova: il Master non l\'ha ancora segnata</span>'}</div></div>
+    ${riquadroAlba()}
     <div class="azioni"><button class="btn btn--piccolo" data-a="tav-ora" data-d="-1">${ico('meno')}1 ora</button>
       <button class="btn btn--piccolo" data-a="tav-ora" data-d="1">${ico('piu')}1 ora</button>
       <button class="btn btn--piccolo" data-a="tav-ora-imposta">${ico('modifica')}Imposta l'ora</button></div>
@@ -7216,14 +7762,16 @@ function sezioneValle() {
 
   // Luce: le fasce del giorno sulla barra (penombra, aurora, luna piena se c'è) e il segno dell'ora di adesso
   const vedono = pgs.filter(p => capacitaDi(p).attuali.some(c => /scurovisione/i.test(c.nome)));
+  // "da mezzanotte", "alle 6": le ore 0 e 24 si leggono come mezzanotte
+  const daOra = n => n % 24 === 0 ? 'da mezzanotte' : 'dalle ' + n, aOra = n => n % 24 === 0 ? 'a mezzanotte' : 'alle ' + n;
   const fascia = ([a, b], cls) => (a < b ? [[a, b]] : [[a, 24], [0, b]]).map(([x, y]) => `<span class="${cls}" style="left:${x / 24 * 100}%;width:${(y - x) / 24 * 100}%"></span>`).join('');
   const oraGiorno = ((ore % 24) + 24) % 24;
   h += `<section class="sezione"><h2>La luce</h2>
     <p class="${luce.tipo === 'fioca' ? 'lanterna' : ''}" style="margin-top:0"><strong>Adesso, alle ${esc(testoOra(ore))}: ${esc(luce.testo.toLowerCase())}</strong> (${esc(luce.perche)}).</p>
-    <div class="barra-luce" role="img" aria-label="Luce fioca dalle ${LUCE.giorno[0]} alle ${LUCE.giorno[1]} e con l'aurora, dalle ${LUCE.aurora[0]} alle ${LUCE.aurora[1]}${cal.luna && cal.luna.piena ? ', e con la luna dalle ' + LUCE.luna[0] : ''}; buio il resto">${fascia(LUCE.giorno, '')}${fascia(LUCE.aurora, 'aurora')}${cal.luna && cal.luna.piena ? fascia([LUCE.luna[0], LUCE.aurora[0]], 'luna') : ''}
+    <div class="barra-luce" role="img" aria-label="Luce fioca ${daOra(LUCE.giorno[0])} ${aOra(LUCE.giorno[1])} e con l'aurora, ${daOra(LUCE.aurora[0])} ${aOra(LUCE.aurora[1])}${cal.luna && cal.luna.piena ? ', e con la luna ' + daOra(LUCE.luna[0]) + ' ' + aOra(LUCE.luna[1]) : ''}; buio il resto">${fascia(LUCE.giorno, '')}${fascia(LUCE.aurora, 'aurora')}${cal.luna && cal.luna.piena ? fascia(LUCE.luna, 'luna') : ''}
       <b class="ora-adesso" style="left:${oraGiorno / 24 * 100}%"></b>
-      <i style="left:0">0</i><i style="left:25%">6</i><i style="left:${10 / 24 * 100}%">10</i><i style="left:${14 / 24 * 100}%">14</i><i style="left:75%">18</i><i style="left:${LUCE.aurora[0] / 24 * 100}%">${LUCE.aurora[0]}</i></div>
-    <p class="piccolo">Finché dura l'inverno di Auril la luce non è mai piena: senza bufera c'è penombra (luce fioca) dalle 10 alle 14; il resto è buio, salvo quando in cielo ci sono l'aurora o la luna piena (Rime pag. 11). L'aurora compare prima di mezzanotte e sparisce prima dell'alba (pag. 5): qui va dalle ${LUCE.aurora[0]} alle ${LUCE.aurora[1]}. La luna fa luce dalle ${LUCE.luna[0]} nella notte di luna piena e nelle due prima e dopo.</p>
+      <i style="left:0">0</i><i style="left:25%">6</i><i style="left:${10 / 24 * 100}%">10</i><i style="left:${14 / 24 * 100}%">14</i><i style="left:${LUCE.luna[0] / 24 * 100}%">${LUCE.luna[0]}</i></div>
+    <p class="piccolo">Finché dura l'inverno di Auril la luce non è mai piena: senza bufera c'è penombra (luce fioca) dalle 10 alle 14; il resto è buio, salvo quando in cielo ci sono l'aurora o la luna piena (Rime pag. 11). L'aurora compare prima di mezzanotte e sparisce prima dell'alba (pag. 5): qui va ${daOra(LUCE.aurora[0])} ${aOra(LUCE.aurora[1])}. Prima fa luce la luna, ${daOra(LUCE.luna[0])} ${aOra(LUCE.luna[1])}, ma solo nella notte di luna piena e nelle due prima e dopo.</p>
     <p class="piccolo">${vedono.length ? 'Vedono al buio: ' + vedono.map(p => esc(p.nome)).join(', ') + '.' : 'Nessuno del gruppo vede al buio: servono torce o lanterne.'}${cal.luna && cal.luna.piena ? (cal.luna.daPiena === 0 ? ' Stanotte la luna è piena.' : ' Stanotte la luna è quasi piena e fa luce.') : ''}</p></section>`;
 
   // Freddo: abiti, indebolimento, acqua gelida, per ogni personaggio
@@ -7482,6 +8030,8 @@ function sezioneViaggio() {
 // Catalogo degli oggetti: righe config 'catalogo-N' scritte dall'import di un pacchetto privato
 // (riassunti con parole nostre e numero di pagina). Dentro index.html non c'è, apposta: senza catalogo
 // il bottino si scrive a mano come prima. La lista si ricalcola solo quando cambiano le righe.
+// Dalla 1.7 un oggetto può avere "ex": gli id che aveva prima di cambiare nome, così il bottino già
+// legato al vecchio id lo ritrova.
 let CATALOGO = { firma: null, lista: [], perNome: {}, perId: {} };
 function catalogoOggetti() {
   const righe = Object.values(DB.config).filter(r => /^catalogo-\d+$/.test(r.id) && !r.eliminato && r.valore && Array.isArray(r.valore.oggetti));
@@ -7490,6 +8040,7 @@ function catalogoOggetti() {
     const lista = [].concat(...righe.map(r => r.valore.oggetti)).filter(o => o && o.id && o.nome)
       .sort((x, y) => String(x.nome).localeCompare(String(y.nome), 'it'));
     CATALOGO = { firma, lista, perNome: {}, perId: {} };
+    lista.forEach(o => { (o.ex || []).forEach(x => { CATALOGO.perId[x] = o; }); });
     lista.forEach(o => { CATALOGO.perId[o.id] = o; CATALOGO.perNome[norm(o.nome)] = o; });
   }
   return CATALOGO.lista;
@@ -7508,6 +8059,256 @@ function testoCatalogo(o) {
   const dove = o.pag ? (o.libro || 'Guida del DM') + ' pag. ' + o.pag : '';
   const coda = [sottotitoloCatalogo(o), dove].filter(Boolean).join('; ');
   return (o.effetti || '') + (coda ? ' (' + coda + ')' : '');
+}
+
+// ---------------------------------------------------------------------
+// CARICHE, TABELLE E SINTONIA DEGLI OGGETTI (1.7)
+// Il catalogo dice quante cariche ha un oggetto e come tornano (cariche, ricarica), quali tabelle si tirano
+// (tabella) e cosa serve per usarlo (requisiti; la sintonia richiesta sta in "sintonia"). Sull'oggetto del
+// bottino (commercio, tipo 'bottino') restano:
+//   cariche   { scorta: massimo }: i massimi tirati con i dadi quando l'avete trovato, o scritti a mano
+//   usate     { scorta: cariche spese }: è un contatore (CONTATORI in 1-core.js), una carica spesa sul telefono
+//             e una sul PC fanno due; l'alba da una parte e un uso dall'altra lasciano l'uso dopo l'alba
+//   ricarica  come tornano le cariche, solo per gli oggetti scritti a mano (gli altri la prendono dal catalogo)
+//   variante  il colore della borsa dei trucchi, il tipo di danno dell'anello di resistenza, i grani della
+//             collana del rosario: quello che si sceglie o si tira una volta, quando lo trovate
+// Un oggetto con una scorta sola la chiama "Cariche"; quelli con più poteri al giorno (gli strumenti dei
+// bardi, il bastone dei tuoni e fulmini) hanno una scorta per potere. I tiri delle tabelle restano sul telefono
+// di chi tira: nel foglio finisce solo quello che si segna sull'oggetto.
+// ---------------------------------------------------------------------
+// L'ultimo tiro del bottino, mostrato sotto il suo oggetto finché non se ne fa un altro o si chiude:
+// { id, t: indice della tabella o null, riga: indice della riga uscita o -1, n, testo, dettaglio, avviso, ultima: tabella da proporre }
+let ULTIMO_TIRO = null;
+
+// Le scorte di cariche di un oggetto: [{ k, max, dado, ricarica, usate, sola }]. max = 0 vuol dire che il
+// massimo è ancora da tirare (dado). Le cariche usate non superano mai il massimo.
+function scorteDi(o) {
+  const cat = oggettoCatalogo(o.catalogo);
+  const proprie = o.cariche && typeof o.cariche === 'object' ? o.cariche : {};
+  const dalCatalogo = !!(cat && cat.cariche);
+  const def = dalCatalogo ? cat.cariche : (Object.keys(proprie).length ? proprie : null);
+  if (!def) return [];
+  const molte = typeof def === 'object';
+  const ric = dalCatalogo ? cat.ricarica : o.ricarica;
+  const usate = o.usate && typeof o.usate === 'object' ? o.usate : {};
+  return Object.entries(molte ? def : { Cariche: def }).map(([k, v]) => {
+    const fisso = /^\d+$/.test(String(v).trim());
+    const max = Number(proprie[k]) > 0 ? Math.round(Number(proprie[k])) : fisso ? Number(v) : 0;
+    return { k, max, dado: fisso ? '' : String(v), ricarica: String((ric && typeof ric === 'object' ? ric[k] : ric) || ''), usate: clamp(Number(usate[k]) || 0, 0, max), sola: !molte };
+  });
+}
+// Tira un'espressione di dadi: "2d4+2", "d100", "1d6-1", "3d6". Restituisce { n, dettaglio } o null.
+function tiraDadi(espr) {
+  const m = String(espr || '').replace(/\s+/g, '').toLowerCase().match(/^(\d*)d(\d+|%)([+-]\d+)?$/);
+  if (!m) return null;
+  const facce = m[2] === '%' ? 100 : Number(m[2]), agg = Number(m[3] || 0);
+  const dadi = Array.from({ length: clamp(Number(m[1] || 1), 1, 100) }, () => 1 + Math.floor(Math.random() * facce));
+  const somma = dadi.reduce((t, d) => t + d, 0);
+  return { n: somma + agg, dettaglio: dadi.length > 1 || agg ? dadi.join(' + ') + (agg ? (agg > 0 ? ' + ' : ' − ') + Math.abs(agg) : '') : '' };
+}
+// Quante cariche tornano con una ricarica: "1d6+1 all'alba" si tira, "2 ogni 12 ore" ne dà 2,
+// tutto il resto ("tutte all'alba", "dopo 7 giorni", "dopo un riposo lungo") le rimette tutte.
+function quanteTornano(ricarica, max) {
+  const t = String(ricarica || '').trim();
+  const d = t.match(/^(\d*d\d+(?:\s*[+-]\s*\d+)?)/i);
+  if (d) { const r = tiraDadi(d[1]); return { n: r ? r.n : max, come: d[1].replace(/\s+/g, '') + (r ? ' = ' + r.n : '') }; }
+  const f = t.match(/^(\d+)(?!\s*d)\b/);
+  if (f) return { n: Number(f[1]), come: '+' + f[1] };
+  return { n: max, come: 'tutte' };
+}
+
+// Perché un personaggio non può entrare in sintonia con un oggetto: null se può, altrimenti { testo, limite }.
+// Le regole sono della Guida del DM (pag. 136 e 138), riassunte: al massimo tre oggetti a testa (limite: true,
+// la sintonia fallisce e basta) e mai due copie dello stesso oggetto; alcuni oggetti chiedono una classe, una
+// razza o di saper lanciare incantesimi con le proprie capacità ("con un incantatore", "con un bardo",
+// "con un nano"). Le copie, la classe e la razza le dico ma non blocco: il Master può fare eccezioni, e due
+// oggetti dello stesso nome del catalogo possono essere diversi (un anello di resistenza al fuoco e uno al
+// freddo). Se della classe o della razza non so niente non dico niente. senzaId: l'oggetto che sto
+// modificando, che non conta tra i tre.
+function motivoNoSintonia(pgId, cat, senzaId) {
+  const pg = DB.voci[pgId];
+  if (!pg) return null;
+  const sue = comm('bottino', x => x.sintonia === pgId && x.id !== senzaId);
+  if (sue.length >= 3) return { limite: true, testo: pg.nome + ' è già in sintonia con 3 oggetti, il massimo: prima ne deve lasciare uno' };
+  if (cat && sue.some(x => oggettoCatalogo(x.catalogo) === cat)) return { testo: pg.nome + ' è già in sintonia con un altro ' + cat.nome + ': con due copie dello stesso oggetto non si può (se sono di due tipi diversi decide il Master)' };
+  const req = cat && typeof cat.sintonia === 'string' ? norm(cat.sintonia) : '';
+  if (!req) return null;
+  const classi = classiDi(pg);
+  // le classi: quelle delle regole incluse e quelle scritte a mano nella voce ("Guerriero, Campione")
+  const scritte = norm([pg.classe, pg.chiaveClasse, pg.chiaveClasse2].join(' '));
+  const ha = k => classi.some(c => c.chiave === k) || new RegExp('\\b' + k + '\\b').test(scritte);
+  if (/\bnano\b/.test(req)) {
+    const razza = norm([pg.razza, chiaveRazzaDi(pg)].join(' '));
+    return !razza || /\bnan[oaie]\b/.test(razza) ? null : { testo: 'Serve un nano: ' + pg.nome + ' non lo è' };
+  }
+  if (!classi.length && !scritte) return null;
+  if (/incantatore/.test(req)) {
+    // il barbaro totemico lancia incantesimi dal 3° livello: i rituali del Cercatore di spiriti
+    const totemico = classi.some(c => c.chiave === 'barbaro' && c.sc && c.sc === REGOLE.classi.barbaro.sottoclassi.totemico && c.liv >= 3);
+    const lancia = totemico || ['bardo', 'chierico', 'druido', 'mago', 'stregone', 'warlock', 'paladino', 'ranger'].some(ha) || /\b(cavaliere mistico|mistificatore arcano)\b/.test(scritte);
+    return lancia ? null : { testo: 'Serve un incantatore: ' + pg.nome + ' non lancia incantesimi' };
+  }
+  const chieste = ['barbaro', 'bardo', 'chierico', 'druido', 'guerriero', 'ladro', 'mago', 'monaco', 'paladino', 'ranger', 'stregone', 'warlock'].filter(k => new RegExp('\\b' + k + '\\b').test(req));
+  if (chieste.length && !chieste.some(ha)) return { testo: 'Serve ' + chieste.map(k => 'un ' + k).join(', ').replace(/, ([^,]*)$/, ' o $1') + ': ' + pg.nome + ' non lo è' };
+  return null;
+}
+
+// Un oggetto del bottino legato al catalogo, appena creato o salvato: richiede sintonia come dice il catalogo,
+// le cariche che si tirano con i dadi si tirano adesso (una volta sola: poi restano sull'oggetto) e, se
+// sintonia è vero, entra in sintonia con chi lo porta, se può. Restituisce le note da dire a chi l'ha aggiunto.
+function completaDaCatalogo(rec, sintonia) {
+  const cat = oggettoCatalogo(rec.catalogo);
+  const note = [];
+  if (!cat) return note;
+  rec.richiede = cat.sintonia ? 1 : 0;
+  if (!rec.richiede) rec.sintonia = '';
+  if (cat.cariche) {
+    const proprie = Object.assign({}, rec.cariche && typeof rec.cariche === 'object' ? rec.cariche : {});
+    Object.entries(typeof cat.cariche === 'object' ? cat.cariche : { Cariche: cat.cariche }).forEach(([k, v]) => {
+      if (Number(proprie[k]) > 0 || /^\d+$/.test(String(v).trim())) return;
+      const r = tiraDadi(v);
+      if (!r) return;
+      proprie[k] = Math.max(1, r.n);
+      note.push((k === 'Cariche' ? 'cariche' : k.toLowerCase()) + ' ' + v + ' = ' + proprie[k]);
+    });
+    if (Object.keys(proprie).length) rec.cariche = proprie;
+  }
+  if (sintonia && rec.richiede && rec.portatore && !rec.sintonia) {
+    const no = motivoNoSintonia(rec.portatore, cat, rec.id);
+    if (no) note.push(no.testo); else { rec.sintonia = rec.portatore; note.push('in sintonia con ' + nomeDi(rec.portatore)); }
+  }
+  return note;
+}
+
+// Le cose segnate sull'oggetto una volta per tutte (campo "variante"): il colore della borsa, il tipo di danno
+// dell'anello, i grani della collana, "Saggezza: 12". Stanno in un testo solo, separate da punto e virgola,
+// così nel foglio si leggono e nel modulo Modifica si correggono a mano.
+function partiVariante(o) { return String(o.variante || '').split(/\s*;\s*/).map(s => s.trim()).filter(Boolean); }
+// una parte appartiene a una tabella se è una delle sue righe o comincia con il suo titolo ("Carisma: 9").
+// Confronto senza maiuscole e accenti: nel modulo le cose segnate si possono anche scrivere a mano
+function dellaTabella(parte, t) { const p = norm(parte); return (t.righe || []).some(r => norm(r[r.length - 1]) === p) || (!!t.titolo && p.indexOf(norm(t.titolo) + ' ') === 0); }
+
+// Ricarica le scorte di un oggetto del bottino la cui ricarica passa il filtro ("alba", "riposo lungo", o tutte):
+// salva le cariche usate e restituisce cosa è tornato ("Bacchetta dei dardi: 1d6+1 = 5"), '' se non c'era niente.
+function ricaricaOggetto(o, filtro) {
+  const usate = Object.assign({}, o.usate || {});
+  const detti = [];
+  scorteDi(o).forEach(s => {
+    if (!s.usate || !s.ricarica || !filtro(s.ricarica)) return;
+    const r = quanteTornano(s.ricarica, s.max);
+    usate[s.k] = Math.max(0, s.usate - r.n);
+    detti.push((s.sola ? '' : s.k + ' ') + r.come);
+  });
+  if (!detti.length) return '';
+  salva('commercio', { id: o.id, usate });
+  return o.nome + ': ' + detti.join(', ');
+}
+
+// L'ALBA DALL'OROLOGIO (1.7): quando l'orologio del gruppo passa le 6 (la fine dell'aurora, vedi LUCE) e qualche
+// oggetto ha cariche che tornano all'alba, Al tavolo propone "È l'alba" (in La valle e nel Bottino). La riga config
+// 'alba' { k } ricorda l'ultima alba fatta o saltata con "Non serve": k è il numero dell'alba, 0 = quella del primo
+// giorno, che viene prima delle 8 di partenza e quindi conta come fatta. Le albe si contano dall'orologio: se
+// torna indietro (un viaggio annullato) un'alba già fatta non si ripropone.
+function albaNumero(ore) { return Math.floor(((ore === undefined ? oreCampagna() : ore) - LUCE.aurora[1]) / 24); }
+function albaFatta() { return Number((cfg('alba', null) || {}).k) || 0; }
+function caricheDaAlba() { return comm('bottino').some(o => scorteDi(o).some(s => s.usate && /alba/i.test(s.ricarica))); }
+function riquadroAlba() {
+  if (albaNumero() <= albaFatta() || !caricheDaAlba()) return '';
+  return `<div class="riquadro-alba" role="status">${ico('lanterna')}<div><strong>Sono passate le 6: è l'alba</strong><span class="fioco piccolo">Ci sono oggetti con cariche che tornano all'alba.</span>
+    <div class="azioni azioni--strette"><button class="btn btn--primario btn--piccolo" data-a="tav-alba">È l'alba: ricarica gli oggetti</button><button class="btn btn--testo btn--piccolo" data-a="tav-alba-no">Non serve</button></div></div></div>`;
+}
+
+// Cariche, varianti e tabelle sotto un oggetto del bottino. I rombi si toccano come quelli della scheda
+// (pieno = usa una carica, vuoto = la recupera); oltre le 12 cariche c'è il numero con i tasti.
+function extraBottino(o) {
+  const cat = oggettoCatalogo(o.catalogo);
+  const id = esc(o.id);
+  let h = '';
+  const scorte = scorteDi(o);
+  // la scorta "principale" è quella di cui conta l'ultima carica (il bastone dello charme ne ha due)
+  const principale = scorte.find(s => s.k === 'Cariche') || scorte[0];
+  const finite = !!(principale && principale.max && principale.usate >= principale.max);
+  if (scorte.length) {
+    h += '<div class="cariche-bottino">' + scorte.map(s => {
+      const nome = s.sola ? '' : `<span class="cb-nome">${esc(s.k)}</span>`;
+      const dati = `data-id="${id}" data-k="${esc(s.k)}"`;
+      const classe = 'cb' + (s.sola ? '' : ' cb--nome');   // con il nome della scorta: nome a sinistra, comandi a destra
+      if (!s.max) return `<div class="${classe}">${nome}<span class="cb-comandi"><button class="btn btn--piccolo" data-a="tav-cariche-tira" ${dati}>${ico('dado')}Tira ${esc(s.dado)}</button><span class="fioco piccolo">quante ${s.sola ? 'cariche ha' : 'ne ha'} quando lo trovate</span></span></div>`;
+      const rimaste = s.max - s.usate;
+      const comandi = s.max > 12
+        ? `<span class="pip-num">${rimaste}<small> su ${s.max}</small></span><input type="number" class="cb-quante" min="1" max="${s.max}" value="1" inputmode="numeric" aria-label="Quante">
+          <button class="btn btn--piccolo" data-a="tav-carica" ${dati} data-on="1">Usa</button><button class="btn btn--testo btn--piccolo" data-a="tav-carica" ${dati} data-on="0">Recupera</button>`
+        : '<span class="pips">' + Array.from({ length: s.max }, (_, i) => `<button class="pip ${i < rimaste ? 'on' : ''}" data-a="tav-carica" ${dati} data-on="${i < rimaste ? 1 : 0}" aria-label="${esc(s.k)}: ${i < rimaste ? 'usa una carica' : 'recupera una carica'}"></button>`).join('') + '</span>';
+      return `<div class="${classe}${rimaste <= 0 ? ' esaurita' : ''}">${nome}<span class="cb-comandi">${comandi}</span></div>`;
+    }).join('') + '</div>';
+    const ricariche = [...new Set(scorte.map(s => s.ricarica).filter(Boolean))];
+    if (ricariche.length) h += `<div class="cb-ricarica"><span class="fioco piccolo">Tornano: ${esc(ricariche.join('; '))}</span>${scorte.some(s => s.usate && s.ricarica) ? `<button class="btn btn--testo btn--piccolo" data-a="tav-ricarica" data-id="${id}">${ico('orologio')}Ricarica</button>` : ''}</div>`;
+    else if (scorte.some(s => s.max)) h += '<div class="cb-ricarica"><span class="fioco piccolo">Non tornano da sole</span></div>';
+  }
+
+  // le tabelle. Quelle con "variante" valgono solo per la loro (la borsa grigia ha la sua): finché non sapete
+  // qual è compare la scelta. Le tabelle "trovato" si tirano o si scelgono una volta e il risultato resta
+  // sull'oggetto; quelle "ultima" (il d20 dell'ultima carica) compaiono solo a cariche finite.
+  const tabelle = cat && cat.tabella ? [].concat(cat.tabella) : [];
+  const varianti = [...new Set(tabelle.map(t => t.variante).filter(Boolean))];
+  const parti = partiVariante(o);
+  const variante = varianti.find(v => parti.some(p => norm(p) === norm(v))) || '';   // il nome del catalogo
+  const parteVariante = parti.find(p => norm(p) === norm(variante)) || '';           // come è scritta sull'oggetto
+  const tasto = (testo, dati, primario) => `<button class="btn ${primario ? 'btn--primario' : 'btn--testo'} btn--piccolo" data-a="tav-variante" data-id="${id}" ${dati}>${testo}</button>`;
+  if (varianti.length) h += variante
+    ? `<div class="cb-segnato"><span>${esc(variante.charAt(0).toUpperCase() + variante.slice(1))}</span>${tasto('Cambia', `data-togli="${esc(parteVariante)}"`)}</div>`
+    : `<div class="cb-segnato"><span class="piccolo">Qual è?</span>${varianti.map(v => `<button class="chip chip--tasto" data-a="tav-variante" data-id="${id}" data-var="1" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>`;
+  const tiro = ULTIMO_TIRO && ULTIMO_TIRO.id === o.id ? ULTIMO_TIRO : null;
+  tabelle.forEach((t, i) => {
+    if (t.variante && t.variante !== variante) return;
+    if (t.quando === 'ultima' && !finite) return;
+    const titolo = t.titolo || 'Tabella';
+    const segnati = t.quando === 'trovato' ? parti.filter(p => dellaTabella(p, t)) : [];
+    if (segnati.length && !t.piu) {
+      // "Carisma: 16" si mostra come "Carisma: 16", una riga della tabella ("fuoco (granato)") dopo il titolo
+      const valore = /^[^:]*:/.test(segnati[0]) && dellaTabella(segnati[0], { titolo }) ? segnati[0].slice(segnati[0].indexOf(':') + 1).trim() : segnati[0];
+      h += `<div class="cb-segnato"><span>${esc(titolo)}: <strong>${esc(valore)}</strong></span>${tasto('Cambia', `data-togli="${esc(segnati[0])}"`)}</div>`;
+      return;
+    }
+    const righe = t.righe || [];
+    const uscita = tiro && tiro.t === i ? tiro.riga : -1;
+    const scegli = t.quando === 'trovato';   // quelle di quando lo trovate si possono anche scegliere, se il Master lo dice
+    // chiusa anche dopo un tiro: la riga uscita è già nel riquadro del risultato, e le tabelle d100 sono lunghe.
+    // Aperta solo quando bisogna scegliere una riga (le tabelle senza dado di quando lo trovate)
+    const lista = righe.length ? `<details${scegli && !t.dado ? ' open' : ''}><summary>${scegli ? (t.dado ? 'Tira o scegli' : 'Scegli') : 'Vedi la tabella'} (${righe.length} ${righe.length === 1 ? 'riga' : 'righe'})</summary><ol class="elenco-impulsi elenco-tabella">` +
+      righe.map((r, j) => {
+        const a = r[0], b = r.length > 2 ? r[1] : r[0], testo = r[r.length - 1];
+        const num = t.dado === 'carta' ? '' : a === b ? String(a) : a + '–' + b;
+        return `<li class="${j === uscita ? 'uscito' : ''}${num ? '' : ' senza-num'}">${num ? `<b>${esc(num)}</b>` : ''}<span>${esc(testo)}${scegli ? ' ' + tasto(t.piu ? 'Aggiungi' : 'È questo', `data-t="${i}" data-v="${esc(testo)}"`) : ''}</span></li>`;
+      }).join('') + '</ol></details>' : '';
+    const tira = t.dado ? `<button class="btn btn--piccolo" data-a="tav-tira" data-id="${id}" data-t="${i}">${ico('dado')}${t.dado === 'carta' ? 'Pesca una carta' : 'Tira ' + esc(t.dado)}</button>` : '';
+    const quando = scegli && !/quando l/i.test(titolo) ? ' <span class="fioco piccolo">quando lo trovate</span>' : '';
+    h += `<div class="tab-bottino${t.quando === 'ultima' ? ' tb-ultima' : ''}"><div class="tb-testa"><span class="tb-titolo">${esc(titolo)}${quando}</span>${tira}</div>
+      ${segnati.length ? `<div class="cb-segnati">${segnati.map(p => `<span class="chip chip--mini">${esc(p)}<button class="chip-x" data-a="tav-variante" data-id="${id}" data-togli="${esc(p)}" aria-label="Togli ${esc(p)}">×</button></span>`).join('')}</div>` : ''}${lista}</div>`;
+  });
+  // quello scritto a mano nel campo "Segnato sull'oggetto" che non appartiene a nessuna tabella
+  const altre = parti.filter(p => !varianti.some(v => norm(v) === norm(p)) && !tabelle.some(t => dellaTabella(p, t)));
+  if (altre.length) h += `<div class="cb-segnato fioco piccolo">Segnato: ${esc(altre.join('; '))}</div>`;
+
+  if (tiro) {
+    const t = tiro.t !== null ? tabelle[tiro.t] : null;
+    const riga = t && tiro.riga >= 0 ? t.righe[tiro.riga] : null;
+    const testo = riga ? riga[riga.length - 1] : tiro.testo || '';
+    let comandi = '';
+    if (t && t.quando === 'trovato') {
+      if (riga) comandi += tasto(ico('check') + (t.piu ? "Aggiungi all'oggetto" : "Segna sull'oggetto"), `data-t="${tiro.t}" data-v="${esc(testo)}"`, true);
+      else if (t.piene || t.vuote) comandi += tasto(ico('check') + 'Segna sui rombi', `data-t="${tiro.t}" data-n="${tiro.n}"`, true);
+      else if (!(t.righe || []).length) comandi += tasto(ico('check') + "Segna sull'oggetto", `data-t="${tiro.t}" data-v="${esc((t.titolo || 'Tiro') + ': ' + tiro.n)}"`, true);
+    }
+    if (tiro.ultima !== undefined) comandi += `<button class="btn btn--primario btn--piccolo" data-a="tav-tira" data-id="${id}" data-t="${tiro.ultima}">${ico('dado')}Tira il d20</button>`;
+    // il primo risultato del d20 dell'ultima carica è quello brutto (ULTIMA in lotto1.py): se l'oggetto è
+    // distrutto o perduto propongo di toglierlo, chiedendo conferma come sempre
+    if (t && t.quando === 'ultima' && tiro.riga === 0 && /distrutt|perdut/.test(testo)) comandi += `<button class="btn btn--piccolo" data-a="elimina" data-tab="commercio" data-id="${id}">${ico('elimina')}Toglilo dal bottino</button>`;
+    h += `<div class="esito-dado esito-bottino" role="status">${tiro.n !== null ? `<span class="n">${esc(tiro.n)}</span>` : ''}<div class="eb-testo">
+      ${tiro.avviso ? `<strong>${esc(tiro.avviso)}</strong>` : ''}${testo ? `<span>${esc(testo)}</span>` : ''}${tiro.dettaglio ? `<span class="fioco piccolo">${esc(tiro.dettaglio)}</span>` : ''}
+      <div class="azioni azioni--strette">${comandi}<button class="btn btn--testo btn--piccolo" data-a="tav-tiro-chiudi">Chiudi</button></div></div></div>`;
+  }
+  return h;
 }
 
 let BOTTINO_SCHEDA = null;   // la scheda aperta in "Chi porta cosa": '' = del gruppo, altrimenti l'id del personaggio
@@ -7532,20 +8333,25 @@ function sezioneBottino() {
   const qui = di(BOTTINO_SCHEDA);
   const sintonie = BOTTINO_SCHEDA ? oggetti.filter(o => o.sintonia === BOTTINO_SCHEDA).length : 0;
   const peso = qui.reduce((t, o) => t + (Number(o.peso) || 0) * (Number(o.quantita) || 1), 0);
-  h += `<section class="sezione"><h2>Chi porta cosa <span class="conta">${oggetti.length}</span></h2>
+  // l'alba ricarica insieme tutti gli oggetti che tornano all'alba (anche quelli nelle altre schede)
+  const allAlba = caricheDaAlba();
+  const alba = riquadroAlba();   // l'orologio ha passato le 6: la proposta sta in cima
+  h += `<section class="sezione"><h2>Chi porta cosa <span class="conta">${oggetti.length}</span></h2>${alba}
     <div class="schede-bottino" role="tablist">${schede.map(x => `<button class="chip chip--tasto ${x.id === BOTTINO_SCHEDA ? 'on' : ''}" role="tab" aria-selected="${x.id === BOTTINO_SCHEDA}" data-a="tav-bot-scheda" data-k="${esc(x.id)}">${esc(x.nome)} <span class="conta">${di(x.id).length}</span></button>`).join('')}</div>
     <p class="fioco piccolo">${[peso ? peso + ' lb in tutto' : '', BOTTINO_SCHEDA ? 'sintonie ' + sintonie + ' su 3' : 'le cose di tutti, non ancora assegnate'].filter(Boolean).join(', ')}</p>`;
   h += qui.length ? '<ul class="lista">' + qui.map(o => {
     const base = oggettoCatalogo(o.catalogo);
-    const sotto = [base && norm(base.nome) !== norm(o.nome) ? base.nome : '', base ? sottotitoloCatalogo(base) : '',
+    const extra = extraBottino(o);   // cariche e tabelle, sotto la riga, larghe quanto la pagina
+    const sotto = [base && norm(base.nome) !== norm(o.nome) ? base.nome : '', base ? sottotitoloCatalogo(base) : '', base && base.requisiti ? 'serve: ' + base.requisiti.charAt(0).toLowerCase() + base.requisiti.slice(1) : '',
       Number(o.valore) ? mo(o.valore) : '', Number(o.peso) ? o.peso + ' lb' : '', o.sessione && DB.sessioni[o.sessione] ? 'sessione ' + DB.sessioni[o.sessione].numero : ''].filter(Boolean);
-    return `<li class="riga riga-bottino"><div class="corpo"><div class="tit">${Number(o.quantita) > 1 ? esc(o.quantita) + ' × ' : ''}${esc(o.nome)}${o.richiede ? ' <span class="chip chip--mini">sintonia' + (o.sintonia ? ': ' + esc(nomeDi(o.sintonia)) : '') + '</span>' : ''}</div>
+    return `<li class="riga riga-bottino" id="bot-${esc(o.id)}"><div class="corpo"><div class="tit">${Number(o.quantita) > 1 ? esc(o.quantita) + ' × ' : ''}${esc(o.nome)}${o.richiede ? ' <span class="chip chip--mini">sintonia' + (o.sintonia ? ': ' + esc(nomeDi(o.sintonia)) : '') + '</span>' : ''}</div>
         <div class="sub">${sotto.map(esc).join(', ')}</div>${o.note ? `<div class="sub desc-bottino">${testoRicco(o.note, 'riga')}</div>` : ''}</div>
         <button class="btn btn--testo btn--piccolo" data-a="tav-vendi" data-id="${esc(o.id)}">Vendi</button>
-        <button class="btn-icona btn-icona--mini" data-a="modifica" data-tab="commercio" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button></li>`;
+        <button class="btn-icona btn-icona--mini" data-a="modifica" data-tab="commercio" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button>${extra ? `<div class="extra-bottino">${extra}</div>` : ''}</li>`;
   }).join('') + '</ul>' : `<p class="vuoto">${BOTTINO_SCHEDA ? esc(nomeDi(BOTTINO_SCHEDA)) + ' non porta niente del gruppo.' : 'Niente da dividere.'}</p>`;
-  h += `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-bot-nuovo" data-k="${esc(BOTTINO_SCHEDA)}">${ico('piu')}Aggiungi un oggetto${BOTTINO_SCHEDA ? ' a ' + esc(nomeDi(BOTTINO_SCHEDA)) : ''}</button></div>`;
-  return h + `<p class="fioco piccolo">L'import propone da solo il bottino della serata. ${catalogoOggetti().length ? `Il catalogo ha ${catalogoOggetti().length} oggetti: nell'oggetto scrivi per cercare.` : "Con il catalogo degli oggetti (un pacchetto da importare) l'oggetto si sceglie da un elenco."} Le monete divise vanno poi sulla scheda di ognuno su D&amp;D Beyond.</p></section>`;
+  h += `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-bot-nuovo" data-k="${esc(BOTTINO_SCHEDA)}">${ico('piu')}Aggiungi un oggetto${BOTTINO_SCHEDA ? ' a ' + esc(nomeDi(BOTTINO_SCHEDA)) : ''}</button>
+    ${allAlba && !alba ? `<button class="btn btn--piccolo" data-a="tav-alba">${ico('lanterna')}È l'alba: ricarica gli oggetti</button>` : ''}</div>`;
+  return h + `<p class="fioco piccolo">L'import propone da solo il bottino della serata. ${catalogoOggetti().length ? `Il catalogo ha ${catalogoOggetti().length} oggetti: nell'oggetto scrivi per cercare. Con il catalogo arrivano anche le cariche (i rombi: tocca un rombo pieno per usarne una) e le tabelle da tirare.` : "Con il catalogo degli oggetti (un pacchetto da importare) l'oggetto si sceglie da un elenco."} Le monete divise vanno poi sulla scheda di ognuno su D&amp;D Beyond.</p></section>`;
 }
 
 // ---------------------------------------------------------------------
@@ -7927,6 +8733,112 @@ async function azioneTavolo(a, el, form) {
       elimina('commercio', o.id);
       chiudiFoglio();
       avviso('Venduto: il ricavo è nel fondo comune');
+      break;
+    }
+
+    // --- cariche, tabelle e cose segnate degli oggetti del bottino (1.7) ---
+    case 'tav-carica': {
+      // rombo pieno = uso una carica, rombo vuoto = la recupero; oltre le 12 cariche vale il numero scritto accanto
+      const o = DB.commercio[el.dataset.id];
+      const scorte = o ? scorteDi(o) : [];
+      const s = scorte.find(x => x.k === el.dataset.k);
+      if (!s || !s.max) return;
+      const campo = el.closest('.cb') && el.closest('.cb').querySelector('.cb-quante');
+      const quante = campo ? clamp(Math.round(Number(campo.value) || 1), 1, s.max) : 1;
+      const usate = clamp(s.usate + (el.dataset.on === '1' ? quante : -quante), 0, s.max);
+      if (usate === s.usate) return;
+      // un'alba passata quando non c'era niente da ricaricare è già fatta: la segno, così questa carica,
+      // usata dopo, non torna con lei
+      if (usate > s.usate && albaNumero() > albaFatta() && !caricheDaAlba()) setCfg('alba', { k: albaNumero() });
+      salva('commercio', { id: o.id, usate: Object.assign({}, o.usate || {}, { [s.k]: usate }) });
+      ULTIMO_TIRO = null;
+      // l'ultima carica di bacchette e bastoni: propongo subito il d20 della loro tabella "ultima"
+      const ultima = [].concat((oggettoCatalogo(o.catalogo) || {}).tabella || []).findIndex(t => t.quando === 'ultima');
+      const principale = scorte.find(x => x.k === 'Cariche') || scorte[0];
+      if (ultima >= 0 && usate === s.max && principale.k === s.k) ULTIMO_TIRO = { id: o.id, t: null, riga: -1, n: null, avviso: "Hai usato l'ultima carica", testo: "Tira il d20 per vedere cosa succede all'oggetto.", ultima };
+      break;
+    }
+    case 'tav-ricarica': {
+      const o = DB.commercio[el.dataset.id];
+      if (!o) return;
+      const detto = ricaricaOggetto(o, () => true);
+      ULTIMO_TIRO = detto ? { id: o.id, t: null, riga: -1, n: null, avviso: 'Ricaricato', testo: detto.slice(o.nome.length + 2) } : null;
+      break;
+    }
+    case 'tav-alba': {
+      // all'alba tornano insieme le cariche di tutti gli oggetti che si ricaricano all'alba, di chiunque siano;
+      // l'alba dell'orologio è fatta (riquadroAlba)
+      const detti = comm('bottino').map(o => ricaricaOggetto(o, r => /alba/i.test(r))).filter(Boolean);
+      if (albaNumero() > albaFatta()) setCfg('alba', { k: albaNumero() });
+      ULTIMO_TIRO = null;
+      avviso(detti.length ? "All'alba: " + detti.join('; ') : "All'alba non c'era niente da ricaricare");
+      break;
+    }
+    case 'tav-alba-no': setCfg('alba', { k: albaNumero() }); break;
+    case 'tav-cariche-tira': {
+      // le cariche che l'oggetto ha quando lo trovate, se il catalogo le dà con i dadi e non sono ancora tirate
+      const o = DB.commercio[el.dataset.id];
+      const s = o && scorteDi(o).find(x => x.k === el.dataset.k);
+      const r = s && !s.max ? tiraDadi(s.dado) : null;
+      if (!r) return;
+      salva('commercio', { id: o.id, cariche: Object.assign({}, o.cariche || {}, { [s.k]: Math.max(1, r.n) }) });
+      ULTIMO_TIRO = { id: o.id, t: null, riga: -1, n: Math.max(1, r.n), avviso: (s.sola ? 'Cariche' : s.k) + ' quando lo trovate', testo: '', dettaglio: s.dado + (r.dettaglio ? ': ' + r.dettaglio : '') };
+      break;
+    }
+    case 'tav-tira': {
+      // una tabella dell'oggetto: il dado giusto, e la riga uscita evidenziata. Il tiro resta su questo telefono
+      const o = DB.commercio[el.dataset.id];
+      const i = Number(el.dataset.t);
+      const t = o ? [].concat((oggettoCatalogo(o.catalogo) || {}).tabella || [])[i] : null;
+      if (!t || !t.dado) return;
+      const righe = t.righe || [];
+      let n = null, dettaglio = '', riga = -1;
+      if (t.dado === 'carta') {
+        // una carta a caso del mazzo: quelle già usate l'app non le conosce, se ne esce una si pesca ancora
+        riga = Math.floor(Math.random() * righe.length);
+        dettaglio = 'pescata a caso tra ' + righe.length + ' carte';
+      } else {
+        const r = tiraDadi(t.dado);
+        if (!r) return;
+        n = r.n;
+        dettaglio = t.dado + (r.dettaglio ? ': ' + r.dettaglio : '');
+        riga = righe.findIndex(x => n >= x[0] && n <= x[x.length > 2 ? 1 : 0]);
+      }
+      ULTIMO_TIRO = { id: o.id, t: i, riga, n, avviso: t.titolo || '', testo: '', dettaglio };
+      break;
+    }
+    case 'tav-tiro-chiudi': ULTIMO_TIRO = null; break;
+    case 'tav-variante': {
+      // segno sull'oggetto quello che vale per sempre: la variante, il risultato di una tabella "trovato"
+      const o = DB.commercio[el.dataset.id];
+      if (!o) return;
+      const tabelle = [].concat((oggettoCatalogo(o.catalogo) || {}).tabella || []);
+      const t = el.dataset.t !== undefined ? tabelle[Number(el.dataset.t)] : null;
+      // il numero tirato riempie o svuota una scorta: lo segno sui rombi, non nel testo
+      if (t && el.dataset.n !== undefined && (t.piene || t.vuote)) {
+        const s = scorteDi(o).find(x => x.k === (t.piene || t.vuote));
+        if (!s || !s.max) { avviso('Prima tirate le cariche dell\'oggetto'); return; }
+        const n = clamp(Number(el.dataset.n) || 0, 0, s.max);
+        salva('commercio', { id: o.id, usate: Object.assign({}, o.usate || {}, { [s.k]: t.piene ? s.max - n : n }) });
+        ULTIMO_TIRO = null;
+        avviso((t.piene ? 'Ne restano ' + n : 'Ne restano ' + (s.max - n)) + ' su ' + s.max);
+        break;
+      }
+      let parti = partiVariante(o);
+      if (el.dataset.togli !== undefined) {
+        const j = parti.indexOf(el.dataset.togli);
+        if (j >= 0) parti.splice(j, 1);
+      } else if (el.dataset.v) {
+        // una variante nuova prende il posto della vecchia; un risultato prende il posto di quello della stessa
+        // tabella, tranne nelle tabelle "piu" (i grani della collana, le toppe della tunica), dove si aggiunge
+        if (el.dataset.var) { const varianti = tabelle.map(x => x.variante).filter(Boolean); parti = parti.filter(p => !varianti.some(v => norm(v) === norm(p))); }
+        else if (t && !t.piu) parti = parti.filter(p => !dellaTabella(p, t));
+        parti.push(el.dataset.v);
+      }
+      const testo = parti.join('; ');
+      if (testo.length > 1000) { avviso("Troppe cose segnate sull'oggetto: togline qualcuna da Modifica"); return; }
+      salva('commercio', { id: o.id, variante: testo });
+      if (ULTIMO_TIRO && ULTIMO_TIRO.id === o.id && el.dataset.v) ULTIMO_TIRO = null;
       break;
     }
 
@@ -8386,7 +9298,9 @@ document.addEventListener('click', async e => {
         dadi.forEach(r => { const presi = Math.min(r.usati, quanti); nuove[r.id] = r.usati - presi; quanti -= presi; });
       }
       salva('voci', { id: pg.id, risorse: nuove });
-      avviso(lungo ? 'Riposo lungo: risorse ricaricate' : 'Riposo breve: ricaricate le risorse del riposo breve');
+      // gli oggetti del bottino che porta e che tornano "dopo un riposo lungo" (la verga del patto) si ricaricano con lui
+      const oggetti = comm('bottino', o => o.portatore === pg.id).map(o => ricaricaOggetto(o, r => (lungo ? /riposo (lungo|breve)/i : /riposo breve/i).test(r))).filter(Boolean);
+      avviso((lungo ? 'Riposo lungo: risorse ricaricate' : 'Riposo breve: ricaricate le risorse del riposo breve') + (oggetti.length ? '. ' + oggetti.join('; ') : ''));
       render();
       break;
     }
@@ -8576,7 +9490,58 @@ document.addEventListener('click', async e => {
       leggiRisposta();
       break;
     }
-    case 'imp-annulla': IMPORT = nuovoImport(); try { localStorage.removeItem('taverna.bozzaImport'); } catch (x) { /* niente */ } render(); break;
+    case 'imp-annulla': IMPORT = nuovoImport(); clearTimeout(TIMER_BOZZA); try { localStorage.removeItem('taverna.bozzaImport'); localStorage.removeItem('taverna.bozzaRevisione'); } catch (x) { /* niente */ } render(); break;
+    // --- correggere la revisione (1.7, vedi 5-importa.js) ---
+    case 'rev-aggiungi': {
+      const g = el.dataset.gruppo;
+      IMPORT.proposte[g].push({ t: '', l: '', ok: true, motivo: '' });
+      salvaBozzaRevisione();
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+      const ta = document.querySelector(`[data-a="rev-testo"][data-gruppo="${g}"][data-i="${IMPORT.proposte[g].length - 1}"]`);
+      if (ta) ta.focus();
+      break;
+    }
+    case 'rev-stessa-apri': apriStessaVoce(el.dataset.gruppo, Number(el.dataset.i)); break;
+    case 'rev-stessa': {
+      const r = stessaVoce(el.dataset.gruppo, Number(el.dataset.i), el.dataset.id);
+      chiudiFoglio();
+      if (!r) break;
+      salvaBozzaRevisione();
+      render();
+      const carta = document.getElementById('rev-' + el.dataset.gruppo + '-' + el.dataset.i);
+      if (carta) carta.scrollIntoView({ block: 'center' });
+      avviso(`${r.vecchio} è ${r.giusto}${r.menzioni ? ': ' + r.menzioni + (r.menzioni === 1 ? ' testo aggiornato' : ' testi aggiornati') : ''}`);
+      break;
+    }
+    case 'rev-correzioni-incolla':
+      try {
+        const nuovo = await navigator.clipboard.readText();
+        IMPORT.correzioni = IMPORT.correzioni && IMPORT.correzioni.trim() ? IMPORT.correzioni.trim() + '\n' + nuovo : nuovo;
+        salvaBozzaRevisione();
+        const y = window.scrollY; render(); window.scrollTo(0, y);
+      } catch (x) { avviso('Il browser non mi lascia leggere gli appunti: incolla a mano nel riquadro'); }
+      break;
+    case 'rev-correzioni-applica': {
+      // fatte tutte in una volta; nel riquadro restano solo quelle che non ho capito, così un secondo tocco
+      // non le rifà (due "aggiungi la gesta" farebbero due gesta)
+      const ta = document.querySelector('[data-a="rev-correzioni"]');
+      if (ta) IMPORT.correzioni = ta.value;
+      const esiti = applicaCorrezioni(IMPORT.correzioni);
+      IMPORT.esitoCorrezioni = esiti;
+      IMPORT.correzioni = esiti.filter(e => !e.ok).map(e => e.grezza).join('\n');
+      salvaBozzaRevisione();
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+      const fatte = esiti.filter(e => e.ok).length;
+      avviso(!esiti.length ? 'Nessuna correzione nel riquadro' : fatte + (fatte === 1 ? ' correzione applicata' : ' correzioni applicate') + (esiti.length > fatte ? ', ' + (esiti.length - fatte) + ' da guardare' : ''));
+      break;
+    }
+    case 'imp-wiki-copia': {
+      const testo = wikiPerAI();
+      if (await copiaTesto(testo)) avviso("Wiki copiato: incollalo nella chat dell'AI, o scaricalo come file per il progetto");
+      else apriFoglio(`<div class="foglio-testa"><h2 class="t2">Il wiki per l'AI</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div><p class="fioco">Il browser non mi lascia copiare: seleziona tutto il testo e copialo a mano, oppure scaricalo.</p><textarea readonly style="min-height:50vh;font-size:13px">${esc(testo)}</textarea><div class="azioni"><button class="btn" data-a="imp-wiki-scarica">${ico('esporta')}Scarica come file</button></div>`);
+      break;
+    }
+    case 'imp-wiki-scarica': scaricaTesto(wikiPerAI(), 'taverna-wiki-per-ai-' + oggiISO() + '.txt'); break;
     case 'imp-salva': applicaImport(); break;
     case 'annulla-import': annullaImport(el.dataset.id); break;
 
@@ -8712,6 +9677,7 @@ document.addEventListener('change', async e => {
   if ((el.dataset.a || '').indexOf('tav-') === 0) { azioneTavolo(el.dataset.a, el, el.form); return; }
   switch (el.dataset.a) {
     case 'ed-tipo': editorCambiaTipo(el.form, el.value); break;
+    case 'ed-sintonia': sintoniaEditor(el.form, el.name); break;
     case 'talento-scegli': {
       // un talento scelto dal menu della scheda
       const pg = DB.voci[el.dataset.id];
@@ -8809,16 +9775,29 @@ document.addEventListener('change', async e => {
     case 'imp-fisse': IMPOST.aiIstruzioni = el.checked ? VERSIONE_SCHEMA_AI : 0; salvaLocale('impost'); render(); break;
     case 'imp-pezzi': IMPORT.pezzi = Number(el.value) || 1; IMPORT.pezzo = Math.min(Number(IMPORT.pezzo) || 1, IMPORT.pezzi); render(); break;
     case 'imp-pezzo': IMPORT.pezzo = Number(el.value) || 1; render(); break;
-    case 'rev-monete': IMPORT.proposte.monete = Math.round(Number(el.value) || 0); break;
+    case 'rev-monete': IMPORT.proposte.monete = Math.round(Number(el.value) || 0); salvaBozzaRevisione(); break;
     case 'rev-azione': {
       const p = IMPORT.proposte[el.dataset.gruppo][Number(el.dataset.i)];
       if (el.value === 'crea' || el.value === 'salta') p.azione = el.value;
       else { p.azione = 'aggiorna'; p.bersaglio = el.value.slice(2); }
+      salvaBozzaRevisione();
       render();
       break;
     }
     case 'rev-ok': {
       IMPORT.proposte[el.dataset.gruppo][Number(el.dataset.i)].ok = el.checked;
+      const li = el.closest('.righe-rev > li');
+      if (li) li.classList.toggle('fuori', !el.checked);
+      salvaBozzaRevisione();
+      break;
+    }
+    case 'rev-nome': {
+      // il nome (o il titolo) di una proposta: le menzioni e i riferimenti lo seguono (rinominaProposta)
+      const r = rinominaProposta(el.dataset.gruppo, Number(el.dataset.i), el.value);
+      if (!r) { el.value = IMPORT.proposte[el.dataset.gruppo][Number(el.dataset.i)].dati[el.dataset.gruppo === 'voci' ? 'nome' : 'titolo']; break; }
+      salvaBozzaRevisione();
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+      avviso(`${r.vecchio} → ${r.nuovo}${r.menzioni ? ': ' + r.menzioni + (r.menzioni === 1 ? ' testo aggiornato' : ' testi aggiornati') : ''}${r.unita ? '. È già nel wiki: la aggiorno' : ''}${r.doppia ? '. Era già proposta con questo nome: ora sono una' : ''}`);
       break;
     }
   }
@@ -8827,6 +9806,7 @@ document.addEventListener('change', async e => {
 document.addEventListener('input', e => {
   const el = e.target;
   if (el.matches && el.matches('[data-menzioni]')) suggerisci(el);
+  if (el.matches && el.matches('textarea.breve')) altezzaTesto(el);
   switch (el.dataset.a) {
     case 'slitta-calcola': aggiornaContoSlitta(); break;
     case 'ed-catalogo': compilaDaCatalogo(el); break;
@@ -8845,8 +9825,24 @@ document.addEventListener('input', e => {
       IMPORT.risposta = el.value;
       try { localStorage.setItem('taverna.bozzaImport', el.value); } catch (x) { /* niente */ }
       break;
-    case 'rev-sessione': IMPORT.proposte.sessione[el.dataset.k] = el.value; break;
-    case 'rev-sospesi': IMPORT.proposte.sessione.sospesi = el.value.split('\n').map(x => x.trim()).filter(Boolean); break;
+    case 'rev-sessione': IMPORT.proposte.sessione[el.dataset.k] = el.value; salvaBozzaRevisione(); break;
+    case 'rev-sospesi': IMPORT.proposte.sessione.sospesi = el.value.split('\n').map(x => x.trim()).filter(Boolean); salvaBozzaRevisione(); break;
+    case 'rev-testo': {
+      // un fatto o una gesta: il primo #[Luogo] della riga la lega a quel luogo, come nel modulo della sessione
+      const x = IMPORT.proposte[el.dataset.gruppo][Number(el.dataset.i)];
+      x.t = el.value;
+      const l = trovaMenzioni(el.value).find(m => m.sig === '#');
+      if (l) x.l = l.nome;
+      salvaBozzaRevisione();
+      break;
+    }
+    case 'rev-dato': IMPORT.proposte[el.dataset.gruppo][Number(el.dataset.i)].dati[el.dataset.k] = el.value; salvaBozzaRevisione(); break;
+    case 'rev-correzioni': IMPORT.correzioni = el.value; salvaBozzaRevisione(); break;
+    case 'rev-stessa-cerca': {
+      const n = norm(el.value);
+      document.querySelectorAll('.scelta-wiki > li').forEach(li => { li.hidden = !!n && !li.dataset.cerca.includes(n); });
+      break;
+    }
     case 'sp-calcola': aggiornaAnteprimaSpedizione(); break;
   }
 });
@@ -8913,6 +9909,7 @@ function costruisciShell() {
 function avvia() {
   caricaLocale();
   try { const bozza = localStorage.getItem('taverna.bozzaImport'); if (bozza) IMPORT.risposta = bozza; } catch (e) { /* niente */ }
+  riprendiBozzaRevisione();   // la revisione corretta a metà, se la risposta è ancora quella (1.7)
   costruisciShell();
   window.addEventListener('hashchange', () => {
     if (foglioAperto()) { document.querySelector('.foglio').classList.remove('aperto'); document.querySelector('.velo').classList.remove('aperto'); }
