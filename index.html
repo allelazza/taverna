@@ -1346,8 +1346,15 @@ function cfg(k, def) {
   const r = DB.config[k];
   return r && !r.eliminato && r.valore !== undefined && r.valore !== '' ? r.valore : def;
 }
-// demo = true solo per i dati di esempio (restano su questo dispositivo)
-function setCfg(k, v, demo) { salva('config', { id: k, valore: v, demo: demo ? 1 : 0 }, demo ? { locale: true } : {}); }
+// demo = true solo per i dati di esempio (restano su questo dispositivo).
+// Una riga cancellata torna viva quando la si riscrive (eliminato: 0). Senza, la serata nuova finiva nella riga
+// 'serata' che l'import (o "Chiudi senza importare") aveva cancellato, cfg non la vedeva e "Inizia la serata"
+// non apriva niente dalla seconda serata in poi (corretto nella 1.7).
+function setCfg(k, v, demo) {
+  const riga = { id: k, valore: v, demo: demo ? 1 : 0 };
+  if (DB.config[k] && DB.config[k].eliminato) riga.eliminato = 0;
+  salva('config', riga, demo ? { locale: true } : {});
+}
 
 // I valori che arrivano dal foglio sono testo: riporto a numero i campi numerici,
 // e a elenco o oggetto i campi che devono esserlo (una cella rovinata non deve far cadere le viste)
@@ -2238,6 +2245,8 @@ function dopoRender(r) {
     if (sez === 'valle' && document.querySelector('[data-acqua]')) TIMER_VISTA = setInterval(() => {
       document.querySelectorAll('[data-acqua]').forEach(el => {
         const min = Math.floor((Date.now() - Number(el.dataset.acqua)) / 60000), regge = Number(el.dataset.regge) || 0;
+        // data-resiste: un oggetto lo fa resistere al freddo (1.7), niente tiri e niente allarme
+        if (el.dataset.resiste) { el.textContent = 'In acqua da ' + min + ' min: resiste al freddo, niente tiri'; return; }
         el.textContent = 'In acqua da ' + min + ' min' + (regge ? ' su ' + regge : '');
         el.className = regge && min >= regge ? 'cera' : 'lanterna';
       });
@@ -7820,16 +7829,19 @@ function rigaFreddo(p) {
   const abiti = p.abiti || 'asciutti';
   const ind = clamp(Number(p.indebolimento) || 0, 0, 6);
   const adattato = razzaAdattataAlFreddo(p);
-  const sicuro = adattato || abiti === 'asciutti';
+  const oggetto = oggettoControFreddo(p);   // resiste al freddo grazie a un oggetto (1.7)
+  const sicuro = adattato || !!oggetto || abiti === 'asciutti';
   const acqua = Number(p.acqua) || 0;
   let timer = '';
   if (acqua) {
     const min = Math.floor((Date.now() - acqua) / 60000);
     const regge = Number(p.cosPunteggio) || 0;
-    timer = `<span class="${regge && min >= regge ? 'cera' : 'lanterna'}" data-acqua="${acqua}" data-regge="${regge}">In acqua da ${min} min${regge ? ' su ' + regge : ''}</span>`;
+    // chi resiste al freddo supera da solo anche i tiri dell'acqua gelida: il cronometro resta, senza allarme
+    timer = oggetto ? `<span class="fioco" data-acqua="${acqua}" data-regge="0" data-resiste="1">In acqua da ${min} min: resiste al freddo, niente tiri</span>`
+      : `<span class="${regge && min >= regge ? 'cera' : 'lanterna'}" data-acqua="${acqua}" data-regge="${regge}">In acqua da ${min} min${regge ? ' su ' + regge : ''}</span>`;
   }
   return `<div class="riga-freddo">
-    <div class="rf-nome">${sigillo(p, 'sigillo--piccolo')}<div><strong>${esc(p.nome)}</strong><span class="${sicuro ? 'fioco' : 'cera'} piccolo">${adattato ? 'adattato al freddo' : sicuro ? 'al sicuro dal freddo' : 'tiro ogni ora all\'aperto'}</span></div></div>
+    <div class="rf-nome">${sigillo(p, 'sigillo--piccolo')}<div><strong>${esc(p.nome)}</strong><span class="${sicuro ? 'fioco' : 'cera'} piccolo">${adattato ? 'adattato al freddo' : oggetto ? 'resiste al freddo: ' + esc(oggetto.nome) : sicuro ? 'al sicuro dal freddo' : 'tiro ogni ora all\'aperto'}</span></div></div>
     <div class="rf-abiti" role="group" aria-label="Abiti di ${esc(p.nome)}">${[['asciutti', 'Asciutti'], ['bagnati', 'Bagnati'], ['senza', 'Senza']].map(([k, l]) =>
       `<button class="chip chip--tasto${abiti === k ? ' on' : ''}" data-a="tav-abiti" data-id="${esc(p.id)}" data-v="${k}">${l}</button>`).join('')}</div>
     <div class="rf-ind"><button class="btn-icona btn-icona--mini" data-a="tav-ind" data-id="${esc(p.id)}" data-d="-1" aria-label="Togli un livello di indebolimento">${ico('meno')}</button>
@@ -7840,6 +7852,18 @@ function rigaFreddo(p) {
 function razzaAdattataAlFreddo(p) {
   const r = REGOLE.razze[chiaveRazzaDi(p)];
   return !!(r && r.freddo);
+}
+// L'oggetto del bottino che fa resistere al freddo un personaggio (1.7), o null. Nel catalogo: freddo = 1 (anello del
+// calore, stivali dell'inverno, bastone del gelo), oppure una parola che deve stare nella cosa segnata sull'oggetto
+// (l'anello di resistenza di tormalina: "freddo"). Conta se il personaggio è in sintonia con l'oggetto, o lo porta
+// quando l'oggetto non chiede sintonia. Chi resiste al freddo supera da solo i tiri del freddo estremo (Rime pag. 11
+// e 20) e quelli dell'acqua gelida.
+function oggettoControFreddo(p) {
+  return comm('bottino').find(o => {
+    const c = oggettoCatalogo(o.catalogo);
+    if (!c || !c.freddo || (c.sintonia ? o.sintonia !== p.id : o.portatore !== p.id)) return false;
+    return c.freddo === 1 || c.freddo === true || partiVariante(o).some(x => norm(x).includes(norm(String(c.freddo))));
+  }) || null;
 }
 
 // ---------------------------------------------------------------------
@@ -7973,8 +7997,8 @@ function calcolaViaggio(V) {
   if (V.meteo === 'bufera') out.note.push(`Bufera: ${oreAperto} prove del navigatore, Saggezza (Sopravvivenza) CD 15 a fine ora. Ogni prova fallita è un'ora senza avanzare; se fallisce di 5 o più e non siete legati, uno di voi si perde (Rime pag. 11).`);
   if (V.terreno === 'montagna') out.note.push(`Montagna: ${oreAperto} prove di chi guida, Saggezza (Sopravvivenza) CD 15 a fine ora. Se fallisce si torna indietro e si perde un'ora; di 5 o più arriva una valanga (Rime pag. 11).`);
   if (V.mezzo === 'piedi' && V.terreno !== 'strada') out.note.push('Senza racchette nella neve alta si va a metà velocità: costano 2 mo (Rime pag. 20).');
-  const esposti = personaggi().filter(p => !razzaAdattataAlFreddo(p) && (p.abiti || 'asciutti') !== 'asciutti');
-  out.note.push(esposti.length ? `Freddo: ${esposti.map(p => p.nome).join(', ')} ${esposti.length === 1 ? 'fa' : 'fanno'} il tiro su Costituzione CD 10 a ogni ora all'aperto (${oreAperto}).` : 'Freddo: con gli abiti pesanti asciutti nessuno tira.');
+  const esposti = personaggi().filter(p => !razzaAdattataAlFreddo(p) && !oggettoControFreddo(p) && (p.abiti || 'asciutti') !== 'asciutti');
+  out.note.push(esposti.length ? `Freddo: ${esposti.map(p => p.nome).join(', ')} ${esposti.length === 1 ? 'fa' : 'fanno'} il tiro su Costituzione CD 10 a ogni ora all'aperto (${oreAperto}).` : 'Freddo: nessuno tira, tra abiti pesanti asciutti, chi è adattato e chi resiste al freddo.');
   if (out.totale > 4) out.note.push('La penombra dura solo dalle 10 alle 14: il resto del viaggio è al buio.');
   return out;
 }
@@ -8520,8 +8544,9 @@ async function azioneTavolo(a, el, form) {
       if (!p) return;
       if (Number(p.acqua)) { salva('voci', { id: p.id, acqua: 0, abiti: (p.abiti || 'asciutti') === 'asciutti' ? 'bagnati' : p.abiti }); avviso(p.nome + ' è fuori dall\'acqua: abiti bagnati finché non li cambia'); break; }
       salva('voci', { id: p.id, acqua: Date.now(), abiti: 'bagnati' });
-      // per il conto dei minuti serve il punteggio di Costituzione (sulla voce c'è solo il modificatore)
-      if (!Number(p.cosPunteggio)) {
+      // per il conto dei minuti serve il punteggio di Costituzione (sulla voce c'è solo il modificatore);
+      // a chi resiste al freddo grazie a un oggetto non serve: non tira
+      if (!Number(p.cosPunteggio) && !oggettoControFreddo(p)) {
         apriFoglio(`<div class="foglio-testa"><h2 class="t2">${esc(p.nome)} in acqua gelida</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
           <form data-a="tav-cos-salva" data-id="${esc(p.id)}"><label class="campo"><span>Punteggio di Costituzione (il numero, non il modificatore)</span><input type="number" name="cos" min="1" max="30" inputmode="numeric" required></label>
           <p class="fioco piccolo">Si resiste senza danni per tanti minuti quanto questo punteggio. Lo chiedo una volta sola.</p>
