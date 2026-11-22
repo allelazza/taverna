@@ -473,7 +473,8 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .pin--minore .pin-med { left: -13px; top: -13px; width: 26px; height: 26px; }
 .pin--minore .pin-med .i { width: 15px; height: 15px; }
 .pin--noto .pin-med { background: rgba(16, 24, 32, .62); border-style: dashed; color: var(--avorio-2); }
-.pin--segreto .pin-med { border-color: var(--c-fazione); color: var(--c-fazione); opacity: .75; }
+.pin--segreto .pin-med { border: 2px solid #A98BFF; color: #DCCFFF; background: rgba(36, 22, 66, .94); opacity: 1;
+  box-shadow: 0 0 0 2px #0D0A18, 0 0 0 4px rgba(226, 214, 255, .85), 0 3px 10px rgba(0, 0, 0, .6); }
 .pin-nome {
   position: absolute; top: 20px; left: 0; transform: translateX(-50%); pointer-events: none;
   font: 400 15px/1.05 var(--f-carta); letter-spacing: .03em; white-space: nowrap; color: var(--avorio);
@@ -488,6 +489,11 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .pin--stampato:not(.sel):not(.trascinato) .pin-med { left: -12px; top: -12px; width: 24px; height: 24px; background: rgba(232, 163, 61, .14); border: 2px solid var(--lanterna); box-shadow: 0 0 0 2px rgba(16, 24, 32, .5), 0 0 14px rgba(232, 163, 61, .45); }
 .pin--stampato.pin--minore:not(.sel):not(.trascinato) .pin-med { left: -9px; top: -9px; width: 18px; height: 18px; }
 .pin--stampato.pin--noto:not(.sel):not(.trascinato) .pin-med { border-style: dashed; background: rgba(16, 24, 32, .18); }
+/* segreti del Master: viola acceso con doppio bordo, scuro dentro e chiaro fuori, così si legge sia sulle
+   mappe scure sia su quelle chiare del manuale; il nome resta in viola chiaro con il suo alone scuro */
+.pin--stampato.pin--segreto:not(.sel):not(.trascinato) .pin-med { background: rgba(169, 139, 255, .3); border: 2px solid #A98BFF;
+  box-shadow: 0 0 0 2px #0D0A18, 0 0 0 4px rgba(226, 214, 255, .9), 0 0 14px rgba(169, 139, 255, .6); }
+.pin--segreto .pin-nome { color: #E6DCFF; }
 .pin--stampato:not(.sel):not(.trascinato) .pin-med .i { display: none; }
 .pin--stampato .pin-med::before { content: ""; position: absolute; inset: -11px; border-radius: 50%; }
 .pin--stampato .badge { left: -22px; top: -22px; }
@@ -747,7 +753,7 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
   background: rgba(16, 24, 32, .92); border: 1.5px solid var(--avorio); box-shadow: inset 0 0 0 2px rgba(16, 24, 32, .9); }
 .leg-med .i { width: 19px; height: 19px; }
 .leg-med.noto { border-style: dashed; color: var(--avorio-2); background: rgba(16, 24, 32, .62); }
-.leg-med.segreto { border-color: var(--c-fazione); color: var(--c-fazione); opacity: .8; }
+.leg-med.segreto { border: 2px solid #A98BFF; color: #DCCFFF; background: rgba(36, 22, 66, .94); box-shadow: 0 0 0 2px #0D0A18, 0 0 0 4px rgba(226, 214, 255, .85); }
 .leg-med--piccolo { width: 30px; height: 30px; }
 .leg-med--piccolo .i { width: 16px; height: 16px; }
 .leg-anello { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--lanterna); background: rgba(232, 163, 61, .14); box-shadow: 0 0 0 2px rgba(16, 24, 32, .5), 0 0 14px rgba(232, 163, 61, .45); }
@@ -809,6 +815,21 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .seg-tipo .i { width: 15px; height: 15px; color: var(--lanterna); }
 .taccuino .seg-testo { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .taccuino .seg-segreto .seg-tipo, .taccuino .seg-segreto .seg-tipo .i { color: var(--c-fazione); }
+/* gesta: le imprese del gruppo, ognuna con il suo stendardo color lanterna */
+/* viaggio a tappe: Targos 2 h → Bryn Shander 7,5 h → Easthaven */
+.tappe-viaggio { margin: 12px 0 0; line-height: 1.7; font-size: 15.5px; }
+.tappe-viaggio strong { font-weight: 600; color: var(--avorio); }
+/* bottino: le schede di chi porta cosa e la descrizione sotto l'oggetto */
+.schede-bottino { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 6px; }
+.schede-bottino .conta { font: 500 12.5px var(--f-testo); color: var(--brina); margin-left: 4px; }
+.schede-bottino .on .conta { color: inherit; }
+.desc-bottino { margin-top: 4px; color: var(--avorio-2); font-size: 14.5px; line-height: 1.4; }
+ul.gesta { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 10px; }
+ul.gesta li { position: relative; padding: 2px 0 2px 30px; line-height: 1.45; }
+ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; width: 16px; height: 16px; background: var(--lanterna);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 21V3.5 M6 4.5h12l-3.2 4.2L18 13H6'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 21V3.5 M6 4.5h12l-3.2 4.2L18 13H6'/%3E%3C/svg%3E") center / contain no-repeat; }
+.i.i-gesta { width: 20px; height: 20px; color: var(--lanterna); align-self: center; flex: none; }
 
 /* import: preparazione di AI Studio, avvisi, motivi dei dubbi */
 .prima-volta { margin-top: 22px; padding: 12px 16px; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.08); }
@@ -818,6 +839,12 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .avviso-import p { margin: 4px 0; display: flex; gap: 8px; font-size: 15px; }
 .avviso-import .i, .motivo-dubbio .i { width: 17px; height: 17px; flex: none; color: var(--lanterna); margin-top: 2px; }
 .motivo-dubbio { display: flex; gap: 6px; margin: -4px 0 8px; font-size: 14.5px; color: var(--lanterna-2); }
+/* 1.6.1: note "da controllare" dei file preparati a mano e avviso di sessione già nel diario */
+.spunta .motivo-dubbio { margin: 4px 0 0; }
+.avviso-import ul { margin: 4px 0 6px 20px; padding: 0; font-size: 15px; line-height: 1.45; }
+.avviso-import ul li { margin: 3px 0; }
+.avviso-import.doppione { border-color: rgba(208, 88, 63, .6); background: rgba(208, 88, 63, .12); }
+.avviso-import.doppione p { display: block; }
 .prop-riga { padding: 10px 12px; margin: 0 0 8px; border-radius: 12px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.07); align-items: flex-start; }
 
 /* home: in breve, cose in sospeso, hub Al tavolo */
@@ -850,6 +877,18 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .barra-luce span { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, rgba(140,159,174,.25), rgba(191,184,167,.55), rgba(140,159,174,.25)); border-radius: 6px; }
 .barra-luce i { position: absolute; top: 28px; font-style: normal; font-size: 12px; color: var(--brina); transform: translateX(-50%); }
 .barra-luce i:first-of-type { transform: none; }
+.barra-luce span.aurora { background: linear-gradient(90deg, rgba(122, 214, 186, .18), rgba(150, 120, 230, .42), rgba(122, 214, 186, .18)); }
+.barra-luce span.luna { background: rgba(232, 226, 205, .22); }
+.barra-luce .ora-adesso { position: absolute; top: -5px; bottom: -5px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--lanterna); box-shadow: 0 0 0 2px #0B1117, 0 0 10px rgba(232, 163, 61, .7); }
+/* l'ora del gruppo: nella Home, in Al tavolo e sulla mappa */
+.pillola-ora { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--brina-2); color: var(--avorio-2); text-decoration: none; font-size: 14.5px; background: rgba(16, 24, 32, .55); }
+.pillola-ora strong { font: 600 16px var(--f-testo); color: var(--avorio); font-variant-numeric: tabular-nums; }
+.pillola-ora .i { width: 17px; height: 17px; color: var(--brina); }
+.pillola-ora.luce-fioca { border-color: rgba(232, 163, 61, .45); }
+.pillola-ora.luce-fioca .i { color: var(--lanterna); }
+.ora-mappa { position: absolute; top: 62px; right: 10px; pointer-events: none; }
+.ora-mappa .pillola-ora { pointer-events: auto; margin: 0; background: rgba(13, 20, 27, .78); max-width: calc(100vw - 20px); }
+.cambi-ora .annullato .corpo { text-decoration: line-through; opacity: .55; }
 .freddo { display: flex; flex-direction: column; gap: 10px; }
 .riga-freddo { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.07); }
 .rf-nome { display: flex; align-items: center; gap: 10px; }
@@ -934,7 +973,7 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 // ---------------------------------------------------------------------
 // COSTANTI
 // ---------------------------------------------------------------------
-const VERSIONE = '1.5.0';
+const VERSIONE = '1.6.1';
 const VERSIONE_SCRIPT = 2;   // versione minima di Code.gs che serve a questa app
 const SCRIPT_CONSIGLIATO = 3; // con la 3 il foglio rifiuta i campi troppo lunghi invece di tagliarli ed è più veloce
 const TABELLE = ['sessioni', 'voci', 'missioni', 'rapporti', 'mappe', 'config', 'commercio'];
@@ -949,7 +988,7 @@ const CAMPI_NUMERICI = ['numero', 'x', 'y', 'w', 'h', 'cx', 'cy', 'nomiStampati'
   'livello2', 'peso', 'miglia', 'indebolimento', 'sintonia', 'forza', 'effetti', 'previsto', 'giorni', 'richiede', 'ore', 'round', 'turno'];
 // Campi che devono essere elenchi o oggetti. Se dal foglio arrivano come testo (cella rovinata o scritta a mano)
 // li riporto alla forma giusta: una sola cella sbagliata non deve bloccare l'app su tutti i telefoni.
-const CAMPI_ELENCO = ['alias', 'storia', 'eventi', 'citazioni', 'presenti', 'segnalibri', 'favori', 'extra', 'metamagie', 'etichette', 'sospesi', 'opzionali', 'talenti', 'condizioni'];
+const CAMPI_ELENCO = ['alias', 'storia', 'eventi', 'citazioni', 'presenti', 'segnalibri', 'favori', 'extra', 'metamagie', 'etichette', 'sospesi', 'opzionali', 'talenti', 'condizioni', 'gesta'];
 const CAMPI_OGGETTO = ['car', 'risorse', 'fiocchi', 'esito', 'equip', '_annulla', 'privato', 'totem', 'serata'];
 // testi scritti da voi: lo script vecchio (versione 2) leggeva come elenco anche un nome che inizia con [ o {
 const CAMPI_TESTO = ['nome', 'titolo', 'ruolo', 'descrizione', 'riassunto', 'inBreve', 'testo', 'note', 'ricompensa', 'bottino', 'trascrizione', 'giocatore', 'classe', 'razza', 'link'];
@@ -1024,6 +1063,7 @@ const ICONE = {
   check: 'M5 12.5l4.5 4.5L19 7.5',
   segnaposto: 'M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
   segna: 'M7 3.5h10v17l-5-3.5-5 3.5z',
+  gesta: 'M6 21V3.5 M6 4.5h12l-3.2 4.2L18 13H6',
   importa: 'M12 4v11 M7.5 10.5L12 15l4.5-4.5 M4 15.5V19a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3.5',
   esporta: 'M12 15V4 M7.5 8.5L12 4l4.5 4.5 M4 15.5V19a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3.5',
   link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
@@ -1073,6 +1113,7 @@ let DB = vuotoDB();
 let OUTBOX = {};
 // BASI: per ogni campo in coda, il valore che c'era prima della mia modifica (stessa chiave di OUTBOX).
 // Serve a capire se nel frattempo qualcun altro ha cambiato lo stesso campo sul foglio.
+// BASI[k]._inviato: l'ultima spedizione rimasta senza risposta (firma e campi), vedi sincronizza.
 let BASI = {};
 // CONFLITTI: campi cambiati sia da me sia da un altro telefono, da far scegliere a chi usa l'app
 let CONFLITTI = [];
@@ -1362,6 +1403,11 @@ async function sincronizza(manuale) {
     const vecchio = (IMPOST.versioneScript || 1) < VERSIONE_SCRIPT;
     const chiavi = Object.keys(inviate).filter(k => !(vecchio && k.indexOf('commercio|') === 0));
     if (chiavi.length) {
+      // se la risposta si perde (rete che cade a metà, telefono bloccato subito dopo un tocco) non so se il
+      // foglio ha scritto: mi segno cosa ho mandato e con quale firma (agg). Al prossimo giro, se il foglio
+      // porta la mia firma, lo riconosco come mio e non lo conto due volte (vedi confrontaConCoda)
+      chiavi.forEach(k => { if (BASI[k]) BASI[k]._inviato = { agg: inviate[k].agg, campi: inviate[k] }; });
+      try { localStorage.setItem('taverna.basi', JSON.stringify(BASI)); } catch (e) { /* lo salva il giro dopo */ }
       const risp = await chiamaServer({ azione: 'push', modifiche: chiavi.map(k => ({ tab: k.split('|')[0], patch: inviate[k] })) });
       // tolgo dalla coda solo quello che ho inviato e che nel frattempo non è stato modificato di nuovo;
       // se è stato modificato, il valore appena inviato diventa la nuova base di quei campi
@@ -1370,6 +1416,7 @@ async function sincronizza(manuale) {
       const scartati = risp.scartati || [];
       const daRiprovare = new Set(scartati.filter(x => x.riprova).map(x => x.tab + '|' + x.id));
       chiavi.forEach(k => {
+        if (BASI[k]) delete BASI[k]._inviato;
         if (daRiprovare.has(k)) return;
         if (OUTBOX[k] === inviate[k]) { delete OUTBOX[k]; delete BASI[k]; return; }
         if (BASI[k]) Object.keys(inviate[k]).forEach(f => { if (f in BASI[k]) BASI[k][f] = inviate[k][f]; });
@@ -1402,11 +1449,21 @@ async function sincronizza(manuale) {
  */
 function confrontaConCoda(tab, k, riga) {
   const patch = OUTBOX[k], basi = BASI[k] || {};
+  // la mia ultima spedizione di questo record era rimasta senza risposta: se il foglio porta la mia firma,
+  // l'aveva scritta. Quei valori sono già del foglio e diventano la base: così un +1 non diventa +2
+  if (basi._inviato) {
+    if (riga.agg && riga.agg === basi._inviato.agg) Object.keys(basi._inviato.campi).forEach(f => { if (f in basi) basi[f] = basi._inviato.campi[f]; });
+    delete basi._inviato;
+  }
   let n = 0;
   Object.keys(patch).forEach(f => {
     if (f === 'id' || f === 'agg' || f === 'autore' || !(f in basi)) return;
     const base = basi[f], loro = riga[f] === undefined ? '' : riga[f], mio = patch[f];
-    if (uguali(loro, base) || uguali(loro, mio)) return;   // sul foglio non l'ha toccato nessuno, oppure abbiamo scritto la stessa cosa
+    // sul foglio non l'ha toccato nessuno: resta la mia
+    if (uguali(loro, base)) return;
+    // abbiamo scritto la stessa cosa: va bene così, tranne per i contatori. Lì due «1» partiti da 0 sono
+    // un +1 dal telefono e un +1 dal PC: fanno 2 (la mia eco senza risposta l'ho già riconosciuta sopra)
+    if (uguali(loro, mio) && CONTATORI.indexOf(tab + '|' + f) < 0) return;
     const unito = unisciValori(tab, f, base, loro, mio);
     if (unito !== undefined) { patch[f] = unito; basi[f] = loro; return; }
     // testo o valore semplice cambiato da entrambi: per ora vale quello del foglio, la scelta passa all'utente
@@ -1419,6 +1476,8 @@ function confrontaConCoda(tab, k, riga) {
   return n;
 }
 
+// I campi che contano qualcosa: le variazioni di due dispositivi si sommano (vedi unisciValori)
+const CONTATORI = ['rapporti|valore', 'commercio|consegnati', 'voci|risorse'];
 // Unione automatica di due modifiche allo stesso campo. undefined = non so unire, decide l'utente.
 function unisciValori(tab, f, base, loro, mio) {
   // elenchi: tengo le righe del foglio, tolgo quelle che ho tolto io, aggiungo quelle che ho aggiunto io
@@ -1428,6 +1487,17 @@ function unisciValori(tab, f, base, loro, mio) {
     const out = loro.filter(x => !(b.has(canonico(x)) && !m.has(canonico(x))));
     const presenti = new Set(out.map(canonico));
     mio.forEach(x => { const c = canonico(x); if (!b.has(c) && !presenti.has(c)) { out.push(x); presenti.add(c); } });
+    return out;
+  }
+  // le note private sono un pacchetto cifrato: non si possono unire qui, decide l'utente (vedi apriConflitti)
+  if (tab === 'voci' && f === 'privato') return undefined;
+  // risorse delle schede (punti stregoneria, ira, slot...): per ogni contatore sommo le due variazioni,
+  // come per i rapporti. Un punto usato sul telefono e uno sul PC fanno due punti usati, non uno; un riposo
+  // da una parte e un uso dall'altra lasciano l'uso dopo il riposo. Il massimo lo rimette la scheda.
+  if (tab === 'voci' && f === 'risorse' && loro && mio && typeof loro === 'object' && typeof mio === 'object') {
+    const b = base && typeof base === 'object' ? base : {};
+    const out = Object.assign({}, loro);
+    Object.keys(mio).forEach(c => { if (!uguali(mio[c], b[c])) out[c] = Math.max(0, (Number(loro[c]) || 0) + (Number(mio[c]) || 0) - (Number(b[c]) || 0)); });
     return out;
   }
   // oggetti (risorse, fiocchi, caratteristiche...): chiave per chiave vince chi l'ha cambiata
@@ -1493,16 +1563,18 @@ function aggiornaStatoSync() {
 function apriConflitti() {
   if (!CONFLITTI.length) { sincronizza(true); return; }
   const breve = v => { const t = typeof v === 'object' ? JSON.stringify(v) : String(v === undefined ? '' : v); return t.length > 400 ? t.slice(0, 400) + '…' : t; };
+  // le note private sono cifrate: invece del testo dico quando è stata salvata ogni versione
+  const leggibile = (c, v) => c.tab === 'voci' && c.campo === 'privato' && typeof descriviNote === 'function' ? descriviNote(v) : breve(v);
   apriFoglio(`<div class="foglio-testa"><h2 class="t2">Modifiche in conflitto</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
     <p class="fioco piccolo">Lo stesso campo è stato cambiato qui e su un altro telefono mentre non eravate in pari. Per ora vale quello del foglio: scegli cosa tenere.</p>
     ${CONFLITTI.map((c, i) => `<article class="riquadro conflitto">
       <h3 class="t3">${esc(c.nome)} · ${esc(etichettaCampo(c.tab, c.campo, DB[c.tab] && DB[c.tab][c.id]))}</h3>
-      <p class="piccolo"><strong>Sul foglio${c.autore ? ' (' + esc(c.autore) + ')' : ''}:</strong> ${esc(breve(c.loro)) || '<em>vuoto</em>'}</p>
-      <p class="piccolo"><strong>La tua:</strong> ${esc(breve(c.mio)) || '<em>vuoto</em>'}</p>
+      <p class="piccolo"><strong>Sul foglio${c.autore ? ' (' + esc(c.autore) + ')' : ''}:</strong> ${esc(leggibile(c, c.loro)) || '<em>vuoto</em>'}</p>
+      <p class="piccolo"><strong>La tua:</strong> ${esc(leggibile(c, c.mio)) || '<em>vuoto</em>'}</p>
       <div class="azioni">
         <button class="btn btn--piccolo" data-a="conflitto" data-i="${i}" data-scelta="loro">Tieni quella del foglio</button>
         <button class="btn btn--piccolo btn--primario" data-a="conflitto" data-i="${i}" data-scelta="mio">Tieni la mia</button>
-        ${typeof c.mio === 'string' && typeof c.loro === 'string' ? `<button class="btn btn--piccolo" data-a="conflitto" data-i="${i}" data-scelta="unisci">Unisci i due testi</button>` : ''}
+        ${(typeof c.mio === 'string' && typeof c.loro === 'string') || (c.campo === 'privato' && typeof NOTE_APERTE !== 'undefined' && NOTE_APERTE[c.id]) ? `<button class="btn btn--piccolo" data-a="conflitto" data-i="${i}" data-scelta="unisci">Unisci i due testi</button>` : ''}
       </div></article>`).join('')}`);
 }
 // nome leggibile di un campo ("descrizione" → "Descrizione", "ruolo" → "Ruolo o mestiere"), preso dall'editor
@@ -1516,7 +1588,9 @@ function risolviConflitto(i, scelta) {
   if (!c) return;
   CONFLITTI.splice(i, 1);
   if (scelta === 'mio') salva(c.tab, { id: c.id, [c.campo]: c.mio });
-  if (scelta === 'unisci') salva(c.tab, { id: c.id, [c.campo]: c.loro + '\n\n' + c.mio });
+  // note private: per unirle serve la chiave, cioè le note aperte su questo dispositivo (8-tavolo.js)
+  if (scelta === 'unisci' && c.campo === 'privato') { unisciNotePrivate(c.id, c.mio, c.loro).then(() => render()); }
+  else if (scelta === 'unisci') salva(c.tab, { id: c.id, [c.campo]: c.loro + '\n\n' + c.mio });
   salvaLocaleSubito();
   aggiornaStatoSync();
   if (CONFLITTI.length) apriConflitti(); else { chiudiFoglio(); render(); }
@@ -1574,7 +1648,16 @@ function nomeDi(rif) {
   const id = risolvi(rif);
   if (id && DB.voci[id]) return DB.voci[id].nome;
   if (id && DB.missioni[id]) return DB.missioni[id].titolo;
+  // un id che non si risolve è una voce segreta (ai giocatori ne arriva solo il segnaposto) o cancellata:
+  // niente id grezzo a schermo, che direbbe ai giocatori che lì c'è qualcosa
+  if (/^(voc|mis|ses|rap|map|cfg|com|idr)-[a-z0-9-]+$/i.test(String(rif || ''))) return '';
   return rif || '';
+}
+// Voci segrete citate in un testo (con @[Nome] o #[Nome]): serve al Master per non svelarle per sbaglio
+function segretiCitati(testi) {
+  const out = [];
+  testi.forEach(t => menzioniIn(String(t || '')).forEach(id => { const v = DB.voci[id]; if (v && v.segreto && !out.includes(v.nome)) out.push(v.nome); }));
+  return out;
 }
 function classeDi(v) {
   if (!v) return 'persona';
@@ -1718,6 +1801,41 @@ function percorsoGruppo() {
   });
   return seq;
 }
+// Il percorso della sessione in corso, o dell'ultima giocata: è quello che si vede sulla mappa e riparte
+// da capo a ogni serata. Le tappe le scrivono "Viaggio fatto" e "Il gruppo è qui" nella riga config
+// 'percorso' = { dal, tappe }. La riga vale per la serata aperta (se è nata dopo il suo inizio), oppure,
+// senza serata, se è più recente del giorno in cui è stata giocata l'ultima sessione del diario.
+// Altrimenti il percorso sono i luoghi toccati nell'ultima sessione.
+function rigaPercorso() {
+  const p = cfg('percorso', null);
+  if (!p || typeof p !== 'object' || !Array.isArray(p.tappe) || !Number(p.dal)) return null;
+  const ser = cfg('serata', null);
+  if (ser && ser.inizio) return Number(p.dal) >= Number(ser.inizio) - 6 * 3600000 ? p : null;
+  const ultima = indice().sessioni.slice(-1)[0];
+  const giocata = ultima && ultima.data ? new Date(ultima.data + 'T00:00:00').getTime() : 0;
+  return Number(p.dal) >= giocata ? p : null;
+}
+function percorsoSessione() {
+  const p = rigaPercorso();
+  if (p) return p.tappe.filter(id => DB.voci[id] && visibile(DB.voci[id]));
+  const ultima = indice().sessioni.slice(-1)[0];
+  const seq = [];
+  if (ultima) {
+    (ultima.eventi || []).forEach(e => { const l = risolvi(e.l, 'luogo'); if (l) seq.push(l); });
+    const lf = risolvi(ultima.luogo, 'luogo');
+    if (lf) seq.push(lf);
+  }
+  return seq;
+}
+// Aggiunge tappe al percorso della sessione. Se la riga è di un'altra sessione riparto da queste tappe,
+// così il percorso non si porta dietro le serate vecchie. Tengo al massimo 60 tappe.
+function aggiungiTappe(tappe) {
+  const p = rigaPercorso();
+  const tutte = (p ? p.tappe : []).concat(tappe.filter(Boolean));
+  const pulite = tutte.filter((id, i) => i === 0 || id !== tutte[i - 1]);
+  setCfg('percorso', { dal: p ? Number(p.dal) : Date.now(), tappe: pulite.slice(-60) });
+}
+function azzeraPercorso() { const qui = posizioneGruppo(); setCfg('percorso', { dal: Date.now(), tappe: qui ? [qui] : [] }); }
 // Dove si trova il gruppo adesso: impostato a mano, oppure l'ultimo luogo del percorso
 function posizioneGruppo() {
   const p = risolvi(cfg('posizione'), 'luogo');
@@ -1727,6 +1845,11 @@ function posizioneGruppo() {
 }
 function prossimoNumero() {
   return elenco('sessioni').reduce((m, s) => Math.max(m, Number(s.numero) || 0), 0) + 1;
+}
+// la sessione (non cancellata) con quel numero, se c'è: l'import non ne crea una seconda
+function sessioneConNumero(n) {
+  const s = elenco('sessioni', x => Number(x.numero) === Number(n))[0];
+  return s ? s.id : '';
 }
 
 // ---------------------------------------------------------------------
@@ -1954,7 +2077,7 @@ function rotta() {
   return { vista: parti[0] || 'home', a: parti[1], b: parti[2], q: new URLSearchParams(query || '') };
 }
 function sezioneDi(vista) {
-  return { home: 'home', tavolo: 'home', diario: 'diario', sessione: 'diario', importa: 'diario', mappa: 'mappa', missioni: 'missioni', missione: 'missioni', wiki: 'wiki', voce: 'wiki', scheda: 'wiki', commercio: 'commercio' }[vista] || '';
+  return { home: 'home', tavolo: 'home', diario: 'diario', sessione: 'diario', importa: 'diario', gesta: 'diario', mappa: 'mappa', missioni: 'missioni', missione: 'missioni', wiki: 'wiki', voce: 'wiki', scheda: 'wiki', commercio: 'commercio' }[vista] || '';
 }
 
 function render() {
@@ -1965,7 +2088,7 @@ function render() {
   document.body.classList.toggle('in-mappa', inMappa);
   const sez = sezioneDi(r.vista);
   document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('attivo', a.dataset.sez === sez));
-  document.querySelector('.barra-top .indietro').hidden = !['sessione', 'voce', 'missione', 'importa', 'impostazioni', 'scheda', 'tavolo'].includes(r.vista);
+  document.querySelector('.barra-top .indietro').hidden = !['sessione', 'voce', 'missione', 'importa', 'impostazioni', 'scheda', 'tavolo', 'gesta'].includes(r.vista);
   // in alto a destra il sigillo del mio personaggio porta alla sua scheda
   const mio = IMPOST.pg && DB.voci[IMPOST.pg] && visibile(DB.voci[IMPOST.pg]) ? DB.voci[IMPOST.pg] : null;
   const linkScheda = document.getElementById('link-scheda');
@@ -1981,6 +2104,7 @@ function render() {
   switch (r.vista) {
     case 'diario': html = vistaDiario(); break;
     case 'sessione': html = vistaSessione(r.a); break;
+    case 'gesta': html = vistaGesta(); break;
     case 'missioni': html = vistaMissioni(r.q.get('stato') === 'concluse' ? 'concluse' : 'attive'); break;
     case 'missione': html = vistaMissione(r.a); break;
     case 'wiki': html = vistaWiki(r.q.get('tipo') || '', r.q.get('q') || ''); break;
@@ -2110,7 +2234,7 @@ function vistaHome() {
   // Favori in sospeso del mio personaggio
   if (IMPOST.pg && DB.voci[IMPOST.pg]) {
     const favori = [];
-    elenco('rapporti', r => r.pg === IMPOST.pg).forEach(r => (r.favori || []).forEach(f => {
+    elenco('rapporti', r => r.pg === IMPOST.pg && DB.voci[r.png] && visibile(DB.voci[r.png])).forEach(r => (r.favori || []).forEach(f => {
       if (!f.ok && f.tipo !== 'nota') favori.push({ r, f });
     }));
     if (favori.length) {
@@ -2207,7 +2331,8 @@ function vistaDiario() {
   const sessioni = indice().sessioni.slice().reverse();
   let h = `<div class="testa-vista"><h1 class="t1">Diario</h1><div class="azioni">
     <a class="btn btn--primario btn--piccolo" href="#/importa">${ico('importa')}Importa</a>
-    <button class="btn btn--piccolo" data-a="nuovo" data-tab="sessioni">${ico('modifica')}Scrivi a mano</button></div></div>`;
+    <button class="btn btn--piccolo" data-a="nuovo" data-tab="sessioni">${ico('modifica')}Scrivi a mano</button>
+    <a class="btn btn--piccolo" href="#/gesta">${ico('gesta')}Le gesta del gruppo</a></div></div>`;
   if (!sessioni.length) return h + '<p class="vuoto">Nessuna sessione. Importala dalla registrazione con AI Studio oppure scrivila a mano.</p>';
   h += '<ol class="cronaca">' + sessioni.map(s => {
     // luoghi e persone della sessione, per i chip sotto l'estratto
@@ -2244,6 +2369,8 @@ function vistaSessione(id) {
   if (s.inBreve) h += `<section class="sezione in-breve"><h2>In breve</h2><div class="lettura">${testoRicco(s.inBreve)}</div></section>`;
   h += `<section class="sezione"><div class="lettura">${testoRicco(s.riassunto) || '<p class="fioco">Nessun riassunto.</p>'}</div></section>`;
   if ((s.sospesi || []).length) h += `<section class="sezione"><h2>Rimasto in sospeso</h2><ul class="cambi">${s.sospesi.map(x => `<li>${testoRicco(x, 'riga')}</li>`).join('')}</ul></section>`;
+  if ((s.gesta || []).length) h += `<section class="sezione"><h2>${ico('gesta', 'i-gesta')}Gesta</h2><ul class="gesta">${s.gesta.map(x => `<li>${testoRicco(x, 'riga')}</li>`).join('')}</ul>
+    <a class="btn btn--testo btn--piccolo" href="#/gesta">Tutte le gesta del gruppo</a></section>`;
   if ((s.eventi || []).length) {
     h += `<section class="sezione"><h2>Fatti principali</h2><ol class="eventi">` + s.eventi.map(e => {
       const l = e.l ? nomeDi(e.l) : '';
@@ -2279,6 +2406,24 @@ function vistaSessione(id) {
   h += `<div class="azioni" style="justify-content:space-between;margin-top:28px">
     ${prec ? `<a class="btn btn--testo" href="#/sessione/${encodeURIComponent(prec.id)}">${ico('indietro')}Sessione ${esc(prec.numero)}</a>` : '<span></span>'}
     ${succ ? `<a class="btn btn--testo" href="#/sessione/${encodeURIComponent(succ.id)}">Sessione ${esc(succ.numero)}${ico('avanti')}</a>` : ''}</div>`;
+  return h;
+}
+
+// Le gesta del gruppo: le imprese di tutte le sessioni (campo gesta, dall'import o scritte a mano),
+// dalla sessione più recente, più quelle segnate stasera e non ancora importate
+function vistaGesta() {
+  const sessioni = indice().sessioni.filter(s => (s.gesta || []).length).reverse();
+  const stasera = serata() ? segnalibriSerata().filter(n => n.tipo === 'gesta') : [];
+  const quante = sessioni.reduce((t, s) => t + s.gesta.length, 0) + stasera.length;
+  let h = `<div class="testa-vista"><h1 class="t1">Le gesta del gruppo</h1></div>
+    <p class="fioco" style="margin-top:0">Le imprese di cui si parlerà nella valle, sessione dopo sessione. Arrivano dai segnalibri <b>Gesta</b> della serata e dall'import; si correggono da Modifica nella pagina della sessione.</p>`;
+  if (!quante) return h + '<p class="vuoto">Nessuna impresa, per ora. Durante la serata tocca Gesta quando il gruppo fa qualcosa di cui si parlerà.</p>';
+  if (stasera.length) {
+    h += `<section class="sezione"><h2>Stasera <span class="conta">${stasera.length}</span></h2><ul class="gesta">${stasera.map(n =>
+      `<li>${esc(n.testo || '')}${n.chi ? ` <span class="fioco piccolo">${esc(n.chi)}</span>` : ''}</li>`).join('')}</ul></section>`;
+  }
+  h += sessioni.map(s => `<section class="sezione"><h2><a href="#/sessione/${encodeURIComponent(s.id)}">Sessione ${esc(s.numero)}</a> <span class="fioco piccolo">${esc(s.titolo || '')}</span></h2>
+    <ul class="gesta">${s.gesta.map(g => `<li>${testoRicco(g, 'riga')}</li>`).join('')}</ul></section>`).join('');
   return h;
 }
 
@@ -2634,6 +2779,7 @@ const SCHEMI = {
     { k: 'riassunto', t: 'ricco', l: 'Riassunto', ph: 'Scrivi @ per citare un personaggio e # per un luogo', alto: true },
     { k: 'inBreve', t: 'ricco', l: 'In breve, da leggere a inizio serata', ph: '3-5 frasi: la Home le mostra al posto del riassunto lungo' },
     { k: 'sospesi', t: 'righe', l: 'Rimasto in sospeso (una cosa per riga)', ph: 'Debiti, promesse, appuntamenti' },
+    { k: 'gesta', t: 'righe', l: 'Gesta del gruppo (una per riga)', ph: 'Le imprese di cui si parlerà nella valle, con @ e #' },
     { k: 'giorni', t: 'numero', l: 'Giorni passati nel gioco' },
     { k: 'eventi', t: 'eventi', l: 'Fatti principali', ph: 'Uno per riga. Il primo #[Luogo] della riga lega il fatto a quel luogo sulla mappa' },
     { k: 'luogo', t: 'rif', l: 'Dove si trova il gruppo alla fine' },
@@ -2672,7 +2818,7 @@ function apriEditor(tab, id, preset) {
 
   let h = `<div class="foglio-testa"><h2 class="t2">${titoli[tab]}</h2><button type="button" class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
     <form class="editor" data-tab="${tab}" data-id="${esc(id || '')}" data-tipo="${esc(tab === 'commercio' ? rec.tipo : '')}" novalidate>
-    <datalist id="dl-voci">${nomiVoci}</datalist>`;
+    <datalist id="dl-voci">${nomiVoci}</datalist><datalist id="dl-luoghi-ed">${elenco('voci', v => v.tipo === 'luogo').map(v => `<option value="${esc(v.nome)}">`).join('')}</datalist>`;
   schema.forEach((c, i) => {
     if (c.t === 'segreto' && !puoSegreti) return;
     const per = c.per ? ` data-per="${c.per.join(' ')}"` : '';
@@ -2686,11 +2832,23 @@ function apriEditor(tab, id, preset) {
         campo = `<input type="text" name="${c.k}" value="${esc(v || '')}"${ph}${c.obblig ? ' required' : ''}>`;
         break;
       case 'numero':
-        campo = `<input type="number" name="${c.k}" value="${esc(v === undefined ? '' : v)}" inputmode="numeric" min="0">`;
+        // dec: anche mezze ore (7,5), con la tastiera che ha la virgola
+        campo = `<input type="number" name="${c.k}" value="${esc(v === undefined ? '' : v)}" ${c.dec ? 'inputmode="decimal" step="0.5"' : 'inputmode="numeric"'} min="0">`;
         break;
       case 'data':
         campo = `<input type="date" name="${c.k}" value="${esc(v || '')}">`;
         break;
+      case 'catalogo': {
+        // oggetto del catalogo privato: si cerca scrivendo (l'elenco del browser filtra mentre scrivi).
+        // Senza catalogo importato il campo non serve: l'oggetto si scrive a mano nel nome.
+        const cat = catalogoOggetti();
+        const scelto = oggettoCatalogo(v);
+        if (!cat.length) { gruppo = true; campo = '<p class="fioco piccolo" style="margin:0">Il catalogo degli oggetti non è ancora importato: scrivi l\'oggetto a mano qui sotto.</p>'; break; }
+        campo = `<input type="text" name="${c.k}" value="${esc(scelto ? scelto.nome : '')}" list="dl-catalogo" autocomplete="off" data-a="ed-catalogo" data-prima="${esc(scelto ? scelto.id : '')}" placeholder="Pozione, anello, spada…">
+          <datalist id="dl-catalogo">${cat.map(o => `<option value="${esc(o.nome)}" label="${esc(sottotitoloCatalogo(o))}"></option>`).join('')}</datalist>
+          <small>Oppure lascialo vuoto e scrivi l'oggetto nel nome.</small>`;
+        break;
+      }
       case 'lista':
         campo = `<input type="text" name="${c.k}" value="${esc((v || []).join(', '))}"${ph}>`;
         break;
@@ -2730,7 +2888,9 @@ function apriEditor(tab, id, preset) {
         break;
       }
       case 'rif':
-        campo = `<input type="text" name="${c.k}" value="${esc(v ? nomeDi(v) : '')}" list="dl-voci" autocomplete="off" placeholder="Nome di una voce del wiki">`;
+        // per "Dove" (luogo, da, a) l'elenco propone solo luoghi; per gli altri tutte le voci
+        // si può anche scrivere @ o # come nei testi: compare lo stesso elenco delle menzioni
+        campo = `<input type="text" name="${c.k}" value="${esc(v ? nomeDi(v) : '')}" list="${['luogo', 'da', 'a'].includes(c.k) ? 'dl-luoghi-ed' : 'dl-voci'}" autocomplete="off" data-menzioni data-rif placeholder="${['luogo', 'da', 'a'].includes(c.k) ? 'Nome di un luogo, o # per cercare' : 'Nome di una voce, o @ per cercare'}">`;
         break;
       case 'tipo':
         gruppo = true;
@@ -2788,6 +2948,21 @@ function apriEditor(tab, id, preset) {
   apriFoglio(h);
 }
 
+// Scelto un oggetto del catalogo riempio nome, sintonia e descrizione. Li cambio solo se sono vuoti
+// o se contengono ancora quello che aveva messo l'oggetto scelto prima: quello scritto a mano resta.
+function compilaDaCatalogo(el) {
+  const f = el.form;
+  const o = oggettoCatalogo(el.value.trim());
+  if (!f || !o) return;
+  const prima = oggettoCatalogo(el.dataset.prima);
+  const campo = n => f.querySelector(`[name="${n}"]`);
+  const nome = campo('nome'), desc = campo('note'), rich = campo('richiede');
+  if (nome && (!nome.value.trim() || (prima && nome.value.trim() === prima.nome))) nome.value = o.nome;
+  if (desc && (!desc.value.trim() || (prima && desc.value.trim() === testoCatalogo(prima)))) desc.value = testoCatalogo(o);
+  if (rich) rich.value = o.sintonia ? '1' : '';
+  el.dataset.prima = o.id;
+}
+
 // Cambiando il tipo di voce mostro solo i campi che hanno senso per quel tipo
 function editorCambiaTipo(form, tipo) {
   form.querySelectorAll('[data-per]').forEach(b => { b.hidden = !b.dataset.per.split(' ').includes(tipo); });
@@ -2821,9 +2996,15 @@ async function salvaEditor(form) {
       case 'righe':
         rec[c.k] = el.value.split('\n').map(s => s.trim()).filter(Boolean);
         break;
+      case 'catalogo': {
+        // salvo l'id dell'oggetto: il nome del catalogo può cambiare con una versione nuova del pacchetto
+        const o = el ? oggettoCatalogo(el.value.trim()) : null;
+        if (el) rec[c.k] = o ? o.id : '';
+        break;
+      }
       case 'rif': {
-        // salvo l'id se il nome corrisponde a una voce, altrimenti il nome così com'è
-        const n = el.value.trim();
+        // salvo l'id se il nome corrisponde a una voce, altrimenti il nome così com'è (senza @ o # davanti)
+        const n = el.value.trim().replace(/^[@#]\[?([^\]]*)\]?$/, '$1').trim();
         rec[c.k] = n ? (risolviNome(n, c.k === 'luogo' ? 'luogo' : null) || n) : '';
         break;
       }
@@ -2911,10 +3092,14 @@ async function salvaEditor(form) {
   }
   if (tab === 'missioni' && !id) rec.apertaIn = ultimaSessioneId() || '';
   if (tab === 'voci' && rec.link && !/^https?:\/\//i.test(rec.link)) { avviso('Il link deve iniziare con https://'); return; }
+  // il Master che cita una voce segreta in un testo che vedono tutti ne svela il nome: lo avviso
+  const pubblico = !(rec.segreto !== undefined ? Number(rec.segreto) : prima && Number(prima.segreto));
+  const citati = IMPOST.master && pubblico ? segretiCitati([rec.riassunto, rec.inBreve, rec.descrizione, rec.note, rec.ricompensa]
+    .concat(rec.sospesi || [], rec.gesta || [], (rec.eventi || []).map(e => e.t), (rec.citazioni || []).map(c => c.testo))) : [];
   if (!(await soloCampiToccati(tab, id, rec))) return;
   const salvato = salva(tab, rec);
   chiudiFoglio();
-  avviso('Salvato');
+  avviso(citati.length ? `Salvato. Attenzione: citi ${citati.join(', ')}, che ${citati.length === 1 ? 'è segreta' : 'sono segrete'}: i giocatori ne vedranno il nome` : 'Salvato');
   const dest = { voci: '#/voce/', missioni: '#/missione/', sessioni: '#/sessione/' }[tab] + encodeURIComponent(salvato.id);
   if (location.hash !== dest) location.hash = dest; else render();
   if (MAPPA.montata) MAPPA.sporca = true;
@@ -2961,7 +3146,8 @@ function suggerisci(ta) {
     .sort((a, b) => (norm(a.nome).startsWith(q) ? 0 : 1) - (norm(b.nome).startsWith(q) ? 0 : 1) || a.nome.localeCompare(b.nome, 'it'))
     .slice(0, 6);
   if (!cand.length) { box.hidden = true; return; }
-  box.innerHTML = cand.map(v => `<button type="button" data-a="sugg" data-nome="${esc(v.nome)}" class="t-${classeDi(v)}">${ico(iconaVoce(v))}<span>${esc(v.nome)}</span><small>${esc(v.ruolo || TIPI_VOCE[v.tipo].nome)}</small></button>`).join('');
+  // al Master le voci segrete compaiono con l'occhio barrato: citarle in un testo pubblico ne svela il nome
+  box.innerHTML = cand.map(v => `<button type="button" data-a="sugg" data-nome="${esc(v.nome)}" class="t-${classeDi(v)}">${ico(v.segreto ? 'nascosto' : iconaVoce(v))}<span>${esc(v.nome)}</span><small>${v.segreto ? 'segreta · ' : ''}${esc(v.ruolo || TIPI_VOCE[v.tipo].nome)}</small></button>`).join('');
   box.dataset.inizio = String(pos - (1 + m[2].length + m[3].length));
   box.dataset.fine = String(pos);
   box.dataset.sig = sig;
@@ -2980,7 +3166,9 @@ function inserisciSuggerimento(nome) {
   const ta = box._ta;
   if (!ta) return;
   const inizio = Number(box.dataset.inizio), fine = Number(box.dataset.fine);
-  const testo = (box.dataset.sig || '@') + (/\s/.test(nome) ? '[' + nome + ']' : nome) + ' ';
+  // in un campo "Chi" o "Dove" (data-rif) il suggerimento diventa il nome e basta, senza @ o #
+  const testo = ta.dataset.rif !== undefined ? nome : (box.dataset.sig || '@') + (/\s/.test(nome) ? '[' + nome + ']' : nome) + ' ';
+  if (ta.dataset.rif !== undefined) { ta.value = nome; ta.focus(); box.hidden = true; return; }
   ta.value = ta.value.slice(0, inizio) + testo + ta.value.slice(fine);
   const caret = inizio + testo.length;
   ta.focus();
@@ -3065,6 +3253,7 @@ function mappaMonta() {
         <div class="mappa-cerca">${ico('cerca')}<input type="search" id="mappa-cerca" placeholder="Cerca luogo o PNG" autocomplete="off" aria-label="Cerca sulla mappa"><div class="risultati vetro" id="risultati" hidden></div></div>
         <button class="btn-icona vetro" data-a="mappa-menu" aria-label="Mappe e opzioni" style="width:44px;height:44px;border-radius:14px">${ico('livelli')}</button>
       </div>
+      <div class="ora-mappa" id="ora-mappa"></div>
       <div class="menu-mappa vetro" id="menu-mappa" hidden></div>
       <div class="banner-carto vetro" id="banner-carto" hidden></div>
       <div class="mappa-vuota" id="mappa-vuota" hidden></div>
@@ -3153,10 +3342,6 @@ function missioniQui(id) {
 // ---------------------------------------------------------------------
 async function urlImmagineMappa(m) {
   if (!m) return null;
-  if (m.demo) {
-    if (!URL_MAPPE.demo) URL_MAPPE.demo = await immagineDemo();
-    return URL_MAPPE.demo;
-  }
   const chiavi = [];
   if (m.fileId) chiavi.push('file:' + m.fileId);
   chiavi.push('locale:' + m.id);
@@ -3166,6 +3351,13 @@ async function urlImmagineMappa(m) {
       const b = await idb('get', k);
       if (b) { URL_MAPPE[k] = URL.createObjectURL(b); return URL_MAPPE[k]; }
     } catch (e) { /* IndexedDB non disponibile: provo il server */ }
+  }
+  // le mappe di esempio senza un'immagine loro usano quella disegnata dall'app. Prima questa immagine
+  // era una sola per tutte, e caricare la mappa interna di un luogo di esempio la sostituiva: lo sfondo
+  // di Icewind Dale diventava la mappa nuova. Adesso ogni mappa cerca prima la sua (locale:<id>)
+  if (m.demo) {
+    if (!URL_MAPPE.demo) URL_MAPPE.demo = await immagineDemo();
+    return URL_MAPPE.demo;
   }
   if (m.fileId && IMPOST.url && IMPOST.chiave) {
     try {
@@ -3258,9 +3450,7 @@ async function caricaImmagineMappa(mapId, file, pronta) {
   } else if (!muto) {
     avviso('Mappa salvata su questo dispositivo');
   }
-  if (m && m.demo) { // una mappa di esempio con un'immagine vera non è più "di esempio" solo per l'immagine
-    URL_MAPPE.demo = URL.createObjectURL(blob);
-  }
+  // l'immagine resta solo di questa mappa (locale:<id>): quella delle altre non si tocca mai
   MAPPA.sporca = true;
   MAPPA.caricata = false;
   return sulDrive;
@@ -3281,6 +3471,9 @@ async function mappaApri(mapId, luogoFocus) {
   if (cambiata) { MAPPA.caricata = false; mappaSeleziona(null); document.getElementById('menu-mappa').hidden = true; }
   MAPPA.id = mapId;
   mappaBriciole();
+  // in alto a destra l'ora del gruppo e la luce di adesso (si tocca per andare alla valle)
+  const ora = document.getElementById('ora-mappa');
+  if (ora) ora.innerHTML = pillolaOra('vetro');
   const m = mapId ? DB.mappe[mapId] : null;
   if (!m) { mappaVuota('nessuna'); mappaNeve(); return; }
 
@@ -3439,15 +3632,22 @@ function mappaCostruisciPin() {
   // misuro i nomi una volta sola, servono per evitare sovrapposizioni
   MAPPA.pins.forEach(p => { p.lw = p.el.querySelector('.pin-nome').offsetWidth || p.v.nome.length * 8; });
   MAPPA.ordinati = MAPPA.pins.slice().sort((a, b) => a.ordine - b.ordine);
-  // percorso: sequenza dei segnaposto toccati, senza ripetere due volte di fila lo stesso
+  // percorso: solo quello della sessione (percorsoSessione), e ogni coppia di luoghi una volta sola,
+  // in qualunque verso: andata e ritorno o la stessa tratta due volte non riempiono la mappa di giallo
   MAPPA.traccia = [];
+  MAPPA.tratti = [];
   if (IMPOST.percorso) {
-    seq.forEach(p => {
-      const a = antenatoSuMappa(p.id, MAPPA.id);
-      if (!a) return;
-      const pin = MAPPA.pins.find(x => x.v.id === a.id);
+    percorsoSessione().forEach(id => {
+      const a = antenatoSuMappa(id, MAPPA.id);
+      const pin = a ? MAPPA.pins.find(x => x.v.id === a.id) : null;
       if (pin && MAPPA.traccia[MAPPA.traccia.length - 1] !== pin) MAPPA.traccia.push(pin);
     });
+    const visti = new Set();
+    for (let i = 1; i < MAPPA.traccia.length; i++) {
+      const a = MAPPA.traccia[i - 1], b = MAPPA.traccia[i];
+      const k = [a.v.id, b.v.id].sort().join('|');
+      if (!visti.has(k)) { visti.add(k); MAPPA.tratti.push([a, b]); }
+    }
   }
   MAPPA.sporca = false;
 }
@@ -3522,13 +3722,18 @@ function mappaDisegna() {
   if (MAPPA.gruppoEl && MAPPA.gruppoPin) {
     MAPPA.gruppoEl.style.transform = `translate(${MAPPA.gruppoPin.px.toFixed(1)}px,${MAPPA.gruppoPin.py.toFixed(1)}px)`;
   }
-  // percorso del gruppo: curva morbida e tratteggiata tra i luoghi toccati
+  // percorso della sessione: un arco leggero per ogni coppia di luoghi, sempre piegato dallo stesso lato
+  // (così andata e ritorno coincidono), e un puntino su ogni tappa
   const svg = document.getElementById('tracce');
-  const pts = MAPPA.traccia.map(p => [p.px, p.py]);
-  const d = pts.length > 1 ? curvaMorbida(pts, false) : '';
+  const d = (MAPPA.tratti || []).map(([a, b]) => {
+    const [p, q] = a.v.id < b.v.id ? [a, b] : [b, a];
+    const mx = (p.px + q.px) / 2, my = (p.py + q.py) / 2, dx = q.px - p.px, dy = q.py - p.py;
+    return `M${p.px.toFixed(1)},${p.py.toFixed(1)}Q${(mx - dy * .12).toFixed(1)},${(my + dx * .12).toFixed(1)} ${q.px.toFixed(1)},${q.py.toFixed(1)}`;
+  }).join('');
   svg.querySelector('.via').setAttribute('d', d);
   svg.querySelector('.via-ombra').setAttribute('d', d);
-  svg.querySelector('g').innerHTML = pts.length > 1 ? pts.map(q => `<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="3.2"/>`).join('') : '';
+  const tappe = [...new Set(MAPPA.traccia)];
+  svg.querySelector('g').innerHTML = tappe.length > 1 ? tappe.map(p => `<circle cx="${p.px.toFixed(1)}" cy="${p.py.toFixed(1)}" r="3.2"/>`).join('') : '';
 }
 
 // Curva che passa per tutti i punti (Catmull-Rom convertita in Bézier)
@@ -3769,7 +3974,7 @@ function apriLegendaMappa() {
     ['<span class="leg-segno"><span class="leg-anello"></span></span>', 'Luogo già disegnato', 'Sulle mappe del manuale città e locande sono già disegnate e scritte: l\'anello è il punto da toccare.'],
     ['<span class="leg-segno"><span class="leg-badge">2</span></span>', 'Missioni in corso', 'Il numero conta le missioni ancora aperte in quel luogo.'],
     [`<span class="leg-segno leg-lanterna">${ico('lanterna')}</span>`, 'Il gruppo', 'Dove vi trovate adesso. Si sposta con l\'import della sessione o con "Il gruppo è qui".'],
-    ['<span class="leg-segno"><svg class="leg-via" viewBox="0 0 40 10" aria-hidden="true"><path d="M2 7 C 12 1, 26 1, 38 6"/></svg></span>', 'Il vostro percorso', 'Il tratteggio ambra segue i luoghi visitati, sessione dopo sessione.'],
+    ['<span class="leg-segno"><svg class="leg-via" viewBox="0 0 40 10" aria-hidden="true"><path d="M2 7 C 12 1, 26 1, 38 6"/></svg></span>', 'Il vostro percorso', 'Il tratteggio ambra è il percorso della sessione: riparte da capo a ogni serata, e una strada fatta due volte si disegna una volta sola.'],
     [med('punto', 'segreto'), 'Segreto', 'Visibile solo al Master finché non lo rivela.'],
   ];
   const simboli = Object.entries(ICONE_LUOGO).map(([k, l]) => `<div><span class="leg-med leg-med--piccolo">${ico(k)}</span>${esc(l)}</div>`).join('');
@@ -3884,7 +4089,8 @@ function mappaMenu() {
     <button class="voce-menu" data-a="mappa-rinomina">${ico('modifica')}<span>Rinomina questa mappa</span></button>` : ''}
     <hr>
     <button class="voce-menu ${IMPOST.neve ? 'on' : ''}" data-a="mappa-neve">${ico('neve')}<span>Neve</span></button>
-    <button class="voce-menu ${IMPOST.percorso ? 'on' : ''}" data-a="mappa-percorso">${ico('lanterna')}<span>Percorso del gruppo</span></button>`;
+    <button class="voce-menu ${IMPOST.percorso ? 'on' : ''}" data-a="mappa-percorso">${ico('lanterna')}<span>Percorso della sessione</span></button>
+    <button class="voce-menu" data-a="mappa-percorso-azzera">${ico('sync')}<span>Azzera il percorso</span></button>`;
   menu.hidden = false;
 }
 
@@ -4091,8 +4297,14 @@ const SCHELETRO = {
   oggetti: [{ nome: 'oggetto ottenuto', quantita: 1, valore_mo: 0, peso_lb: 0, chi: 'id o nome di chi lo tiene, vuoto se del gruppo', magico: false }],
   monete: 0,
   dicerie: [{ testo: 'una voce o una diceria sentita in gioco', chi: 'id o nome di chi la racconta', dove: 'id o nome del luogo' }],
+  gesta: [{ testo: "un'impresa del gruppo che fa parlare la valle, una frase al passato con @[menzioni]", luogo: 'id o nome del luogo', minuto: 'minuto della registrazione' }],
   fine: true
 };
+
+// Versione di schema e istruzioni: sale quando cambiano (2 = la 1.6 con le gesta). Chi le aveva già
+// salvate in AI Studio con una versione vecchia deve ricopiarle: l'app lo dice e intanto manda il prompt intero.
+const VERSIONE_SCHEMA_AI = 2;
+function istruzioniSalvate() { return Number(IMPOST.aiIstruzioni === true ? 1 : IMPOST.aiIstruzioni) || 0; }
 
 // Schema per l'output strutturato di AI Studio (si incolla una volta sola, vedi la guida).
 // Solo tipi semplici, enum di testo e descrizioni brevi: AI Studio rifiuta gli schemi troppo lunghi.
@@ -4133,6 +4345,7 @@ function schemaAI() {
     oggetti: L(O({ nome: T('oggetto ottenuto'), quantita: N('quanti'), valore_mo: N('valore in mo, 0 se non detto'), peso_lb: N('peso in libbre, 0 se non detto'), chi: T('chi lo tiene, vuoto se del gruppo'), magico: { type: 'boolean' } }, ['nome'])),
     monete: N("monete d'oro guadagnate dal gruppo stasera, 0 se niente"),
     dicerie: L(O({ testo: T('voce o diceria sentita'), chi: T('chi la racconta'), dove: T('dove') }, ['testo'])),
+    gesta: L(O({ testo: T("impresa del gruppo, una frase al passato con @[menzioni]"), luogo: T('id o nome del luogo'), minuto: T('minuto della registrazione') }, ['testo']), 'azioni importanti del gruppo'),
     fine: { type: 'boolean', description: 'sempre true, alla fine' }
   }, ['sessione', 'eventi', 'voci', 'missioni', 'rapporti', 'fine']);
 }
@@ -4156,8 +4369,9 @@ function istruzioniAI() {
     '- "citazioni": al massimo 5 frasi memorabili dette in personaggio, il più possibile parola per parola.',
     '- "in_breve": 3-5 frasi per ricordare la serata a voce alta prima della prossima sessione. "in_sospeso": debiti, promesse, appuntamenti e missioni lasciate a metà.',
     '- "oggetti" e "monete": solo quello che il gruppo ottiene davvero. "dicerie": voci e pettegolezzi sentiti in gioco, così come vengono raccontati.',
+    '- "gesta": le azioni importanti del gruppo, quelle di cui si parlerà nella valle: uccidere un personaggio famoso, svaligiare la casa di un capovillaggio, un gesto molto generoso verso un villaggio, un patto che cambia le cose. Una frase al passato ciascuna, con @[menzioni]. I segnalibri di tipo Gesta sono sempre gesta.',
     '- "giorni_passati": quanti giorni passano nel gioco durante la serata (0 se è la stessa giornata).',
-    '- I segnalibri presi al tavolo hanno il minuto della registrazione: in quei punti c\'è qualcosa da non perdere, e il tipo dice cosa (PNG, luogo, missione, bottino, citazione, dubbio).',
+    '- I segnalibri presi al tavolo hanno il minuto della registrazione: in quei punti c\'è qualcosa da non perdere, e il tipo dice cosa (gesta, PNG, luogo, missione, bottino, citazione, dubbio).',
     '- Lascia "numero" e "data" della sessione come sono nel prompt. Chiudi sempre con "fine": true.'
   ].join('\n');
 }
@@ -4194,7 +4408,8 @@ function promptImport() {
     ((v.alias || []).length ? ' | detto anche: ' + v.alias.join(', ') : '') +
     (v.ruolo ? ' | ' + v.ruolo : '') + (v.luogo ? ' | a ' + nomeDi(v.luogo) : '') +
     (v.guida && v.tipo !== 'luogo' && !(I.sessioniDi[v.id] || []).length ? ' | dalla guida, non ancora incontrato' : '');
-  const fisse = !!IMPOST.aiIstruzioni;
+  // con istruzioni salvate di una versione vecchia rimando tutte le regole: almeno quelle sono aggiornate
+  const fisse = istruzioniSalvate() >= VERSIONE_SCHEMA_AI;
   return [
     fisse ? 'Segui le istruzioni di sistema e lo schema già impostati.' : istruzioniAI(),
     '',
@@ -4252,7 +4467,7 @@ function leggiJSON(testo) { return leggiRisposte(testo)[0]; }
 // voci e missioni con lo stesso id o nome unite (la storia si somma, lo stato vale quello dell'ultimo pezzo)
 function unisciRisposte(lista) {
   if (lista.length === 1) return lista[0];
-  const fuori = { sessione: {}, eventi: [], voci: [], missioni: [], rapporti: [], oggetti: [], monete: 0, dicerie: [], fine: lista.every(j => j && j.fine === true) };
+  const fuori = { sessione: {}, eventi: [], voci: [], missioni: [], rapporti: [], oggetti: [], monete: 0, dicerie: [], gesta: [], fine: lista.every(j => j && j.fine === true) };
   const unisciTesto = (a, b, sep) => [a, b].filter(x => x && String(x).trim()).join(sep);
   lista.forEach((j, i) => {
     const s = j.sessione || {}, f = fuori.sessione;
@@ -4266,7 +4481,7 @@ function unisciRisposte(lista) {
       ['presenti', 'in_sospeso', 'citazioni'].forEach(k => { f[k] = (Array.isArray(f[k]) ? f[k] : []).concat(Array.isArray(s[k]) ? s[k] : []); });
       f.presenti = f.presenti.filter((x, k) => f.presenti.indexOf(x) === k);
     }
-    ['eventi', 'rapporti', 'oggetti', 'dicerie'].forEach(k => { if (Array.isArray(j[k])) fuori[k] = fuori[k].concat(j[k]); });
+    ['eventi', 'rapporti', 'oggetti', 'dicerie', 'gesta'].forEach(k => { if (Array.isArray(j[k])) fuori[k] = fuori[k].concat(j[k]); });
     fuori.monete += Number(j.monete) || 0;
     // voci e missioni: la stessa entità in due pezzi diventa una proposta sola
     [['voci', 'nome'], ['missioni', 'titolo']].forEach(([k, campo]) => (Array.isArray(j[k]) ? j[k] : []).forEach(x => {
@@ -4338,10 +4553,26 @@ function preparaRevisione(j) {
       bottino: testo(s.bottino),
       citazioni: (Array.isArray(s.citazioni) ? s.citazioni : []).filter(c => c && c.testo).map(c => ({ chi: testo(c.chi), testo: testo(c.testo) }))
     },
-    eventi: (Array.isArray(j.eventi) ? j.eventi : []).filter(e => e && e.testo).map(e => ({ t: testo(e.testo), l: e.luogo || '', ok: true })),
+    // "da_controllare" e "motivo" non li chiede all'AI nessuno: servono ai file preparati a mano (per esempio le
+    // sessioni giocate prima dell'app), per dire in revisione cosa guardare e perché
+    daControllare: (Array.isArray(s.da_controllare) ? s.da_controllare : []).map(testo).filter(Boolean),
+    eventi: (Array.isArray(j.eventi) ? j.eventi : []).filter(e => e && e.testo).map(e => ({ t: testo(e.testo), l: e.luogo || '', ok: true, motivo: testo(e.motivo) })),
     voci: [], missioni: [], rapporti: [], oggetti: [], dicerie: [],
+    // gesta: una frase con il luogo dentro come menzione, così nel diario si legge e si collega da sola
+    gesta: (Array.isArray(j.gesta) ? j.gesta : []).filter(g => g && testo(typeof g === 'string' ? g : g.testo)).map(g => ({ t: testo(typeof g === 'string' ? g : g.testo), l: typeof g === 'string' ? '' : testo(g.luogo), ok: true, motivo: typeof g === 'string' ? '' : testo(g.motivo) })),
     monete: Math.round(Number(j.monete) || 0)
   };
+  // la stessa sessione importata due volte farebbe doppioni ovunque (sessione, bottino, monete, rapporti):
+  // se il numero c'è già lo dico subito e non salvo (vedi applicaImport)
+  P.sessione.esistente = sessioneConNumero(P.sessione.numero);
+  // giorni passati: se durante la serata l'orologio del gruppo è andato avanti, i giorni li ha già
+  // contati lui (il calendario somma anche quelli): propongo 0 e dico quanti ne proponeva l'AI
+  const ser = serata();
+  if (ser && ser.oraInizio !== undefined && ser.oraInizio !== '' && Math.abs(oreCampagna() - Number(ser.oraInizio)) > 0.01) {
+    const daAI = P.sessione.giorni;
+    P.sessione.giorni = 0;
+    P.sessione.notaGiorni = `Durante la serata l'orologio del gruppo è andato avanti (${testoDurata(oreCampagna() - Number(ser.oraInizio))}) e i giorni li conta già lui: per questo qui c'è 0${daAI ? `; l'AI ne proponeva ${daAI}` : ''}.`;
+  }
   (Array.isArray(j.voci) ? j.voci : []).forEach(v => {
     if (!v || !v.nome) return;
     const tipo = TIPI_VOCE[v.tipo] && v.tipo !== 'pg' ? v.tipo : 'png';
@@ -4355,6 +4586,7 @@ function preparaRevisione(j) {
     if (!dubbio && (v.stato === 'morto' || v.stato === 'scomparso') && (!vecchio || (vecchio.stato || 'vivo') !== v.stato)) dubbio = v.stato === 'morto' ? 'Risulta morto' : 'Risulta scomparso';
     if (!dubbio && azione === 'aggiorna' && !esiste && simili[0] && simili[0].punti < 1) dubbio = 'Unito per somiglianza a ' + vecchio.nome;
     if (!dubbio && v.fiducia === 'bassa') dubbio = "L'AI non ne è sicura";
+    if (testo(v.motivo)) dubbio = testo(v.motivo) + (dubbio ? ' · ' + dubbio : '');
     P.voci.push({ dati: Object.assign({}, v, { tipo, nome: testo(v.nome), alias: Array.isArray(v.alias) ? v.alias.filter(Boolean) : [] }), azione, bersaglio, simili: simili.slice(0, 6), dubbio });
   });
   (Array.isArray(j.missioni) ? j.missioni : []).forEach(m => {
@@ -4368,21 +4600,22 @@ function preparaRevisione(j) {
     const stato = STATI_MISSIONE[m.stato] ? m.stato : 'attiva';
     if (!dubbio && stato !== 'attiva') dubbio = 'Risulta ' + STATI_MISSIONE[stato].toLowerCase();
     if (!dubbio && m.fiducia === 'bassa') dubbio = "L'AI non ne è sicura";
+    if (testo(m.motivo)) dubbio = testo(m.motivo) + (dubbio ? ' · ' + dubbio : '');
     P.missioni.push({ dati: Object.assign({}, m, { titolo: testo(m.titolo) }), azione, bersaglio, simili: simili.slice(0, 6), dubbio });
   });
   (Array.isArray(j.rapporti) ? j.rapporti : []).forEach(r => {
     if (!r || !r.pg || !r.png) return;
     const delta = clamp(Math.round(Number(r.delta) || 0), -2, 2);
     // i rapporti cambiano i numeri di tutti: li faccio sempre guardare
-    P.rapporti.push({ pg: r.pg, png: r.png, delta, nota: testo(r.nota), ok: true, dubbio: 'Rapporto' });
+    P.rapporti.push({ pg: r.pg, png: r.png, delta, nota: testo(r.nota), ok: true, dubbio: 'Rapporto', motivo: testo(r.motivo) });
   });
   (Array.isArray(j.oggetti) ? j.oggetti : []).forEach(o => {
     if (!o || !testo(o.nome)) return;
-    P.oggetti.push({ nome: testo(o.nome), quantita: Math.max(1, Math.round(Number(o.quantita) || 1)), valore: Math.max(0, Number(o.valore_mo) || 0), peso: Math.max(0, Number(o.peso_lb) || 0), chi: testo(o.chi), magico: o.magico === true || o.magico === 'true', ok: true });
+    P.oggetti.push({ nome: testo(o.nome), quantita: Math.max(1, Math.round(Number(o.quantita) || 1)), valore: Math.max(0, Number(o.valore_mo) || 0), peso: Math.max(0, Number(o.peso_lb) || 0), chi: testo(o.chi), magico: o.magico === true || o.magico === 'true', ok: true, motivo: testo(o.motivo) });
   });
   (Array.isArray(j.dicerie) ? j.dicerie : []).forEach(d => {
     if (!d || !testo(d.testo)) return;
-    P.dicerie.push({ testo: testo(d.testo), chi: testo(d.chi), dove: testo(d.dove), ok: true });
+    P.dicerie.push({ testo: testo(d.testo), chi: testo(d.chi), dove: testo(d.dove), ok: true, motivo: testo(d.motivo) });
   });
   return P;
 }
@@ -4411,10 +4644,12 @@ function vistaImporta() {
   // la data è quella di inizio serata: si importa spesso il giorno dopo, o dopo mezzanotte
   if (!IMPORT.data) IMPORT.data = ser && ser.data ? ser.data : oggiISO();
   const nSeg = segnalibriSerata().filter(n => n.tipo !== 'segreto').length;
-  const fisse = !!IMPOST.aiIstruzioni;
+  const fisse = istruzioniSalvate() >= VERSIONE_SCHEMA_AI;
+  const vecchie = !fisse && istruzioniSalvate() > 0;
   const pezzi = clamp(Number(IMPORT.pezzi) || 1, 1, 8);
   return `<h1 class="t1">Importa una sessione</h1>
   <div class="lettura fioco" style="margin-top:10px"><p>Dalla registrazione al diario in tre passaggi. Il lavoro pesante lo fa Google AI Studio: tu controlli e salvi.</p></div>
+  ${vecchie ? `<div class="avviso-import"><strong>Schema e istruzioni sono cambiati</strong> (con la 1.6 ci sono le gesta del gruppo). Ricopiali in AI Studio dal riquadro qui sotto, poi riaccendi "già in AI Studio". Fino ad allora il prompt contiene di nuovo tutte le regole.</div>` : ''}
   <details class="prima-volta"${fisse ? '' : ' open'}><summary>${ico('info')}Prima volta in AI Studio? Preparalo una volta sola</summary>
     <ol class="passi-legenda">
       <li><strong>Schema:</strong> nel pannello a destra attiva <em>Structured output</em>, tocca <em>Edit</em> e incolla lo schema. Da lì l'AI risponde sempre con un JSON valido.</li>
@@ -4422,7 +4657,7 @@ function vistaImporta() {
       <li>Poi spunta qui sotto "già pronte": il prompt di ogni sessione diventa molto più corto.</li>
     </ol>
     <div class="azioni"><button class="btn btn--piccolo" data-a="imp-schema">${ico('copia')}Copia lo schema</button><button class="btn btn--piccolo" data-a="imp-istruzioni">${ico('copia')}Copia le istruzioni</button></div>
-    <label class="interruttore" style="margin-top:12px"><span>Istruzioni e schema sono già in AI Studio</span><input type="checkbox" data-a="imp-fisse" ${fisse ? 'checked' : ''}></label>
+    <label class="interruttore" style="margin-top:12px"><span>Istruzioni e schema di questa versione sono già in AI Studio</span><input type="checkbox" data-a="imp-fisse" ${fisse ? 'checked' : ''}></label>
     <p class="fioco piccolo">La guida passo passo è GUIDA-AI-STUDIO.md, nello zip di Taverna accanto a GUIDA.md. Per trascrivere sul PC invece di mandare l'audio c'è GUIDA-WHISPER.md.</p>
   </details>
   <ol class="passi" style="margin-top:28px">
@@ -4439,7 +4674,10 @@ function vistaImporta() {
     </li>
     <li><h2>Incolla la risposta</h2>
       <textarea data-a="imp-risposta" placeholder="Incolla qui il JSON restituito da AI Studio. Con l'audio diviso in pezzi, incolla le risposte una sotto l'altra." spellcheck="false" style="font-size:14px;min-height:140px">${esc(IMPORT.risposta)}</textarea>
-      <div class="azioni"><button class="btn" data-a="imp-incolla">${ico('importa')}${IMPORT.risposta ? 'Aggiungi dagli appunti' : 'Incolla dagli appunti'}</button><button class="btn btn--primario" data-a="imp-leggi">Leggi la risposta</button></div>
+      <div class="azioni"><button class="btn" data-a="imp-incolla">${ico('importa')}${IMPORT.risposta ? 'Aggiungi dagli appunti' : 'Incolla dagli appunti'}</button>
+        <label class="btn">${ico('importa')}Apri un file<input type="file" data-a="imp-file" accept=".json,.txt,application/json,text/plain" hidden></label>
+        <button class="btn btn--primario" data-a="imp-leggi">Leggi la risposta</button></div>
+      <p class="fioco piccolo" style="margin-top:0">"Apri un file" serve per una risposta salvata in un file (per esempio le sessioni giocate prima dell'app, preparate a mano).</p>
       ${IMPORT.errore ? `<p class="errore" id="errore-import">${esc(IMPORT.errore)}</p>` : ''}
     </li>
     <li id="passo-revisione"><h2>Controlla e salva</h2>
@@ -4452,22 +4690,29 @@ function revisioneHTML() {
   const P = IMPORT.proposte;
   const s = P.sessione;
   let h = IMPORT.avvisi.length ? `<div class="avviso-import">${IMPORT.avvisi.map(a => `<p>${ico('info')}${esc(a)}</p>`).join('')}</div>` : '';
+  const giaQui = s.esistente && DB.sessioni[s.esistente];
+  if (giaQui) h += `<div class="avviso-import doppione"><p><strong>La sessione ${esc(s.numero)} è già nel diario</strong>${giaQui.titolo ? ' (' + esc(giaQui.titolo) + ')' : ''}. Salvarla di nuovo creerebbe doppioni: sessione, bottino, monete e rapporti contati due volte.</p>
+    <p>Se vuoi rifarla, apri quella sessione e premi <em>Annulla l'import</em> (oppure correggila a mano), poi torna qui.</p>
+    <div class="azioni"><a class="btn btn--piccolo" href="#/sessione/${encodeURIComponent(s.esistente)}">${ico('diario')}Apri la sessione ${esc(s.numero)}</a></div></div>`;
+  if (P.daControllare.length) h += `<div class="avviso-import"><p><strong>Da controllare in questa sessione</strong></p><ul>${P.daControllare.map(x => `<li>${testoRicco(x, 'riga')}</li>`).join('')}</ul></div>`;
+  // il motivo per cui una riga va guardata (file preparati a mano), sotto la riga
+  const motivo = x => x && x.motivo ? `<br><span class="motivo-dubbio">${ico('info')}${esc(x.motivo)}</span>` : '';
   h += `<article class="prop" style="--tc:var(--lanterna)">
     <div class="testa"><span class="num-grande" style="width:46px;height:46px;font-size:21px;box-shadow:none">${esc(s.numero)}</span>
       <div class="corpo"><strong>Sessione ${esc(s.numero)}</strong><small>${dataBella(s.data)}${s.luogo ? ', il gruppo finisce a ' + esc(nomeDi(s.luogo)) : ''}</small></div></div>
     <label class="campo"><span>Titolo</span><input type="text" data-a="rev-sessione" data-k="titolo" value="${esc(s.titolo)}"></label>
     <label class="campo"><span>Riassunto</span><textarea data-a="rev-sessione" data-k="riassunto" data-menzioni class="alto">${esc(s.riassunto)}</textarea></label>
     <label class="campo"><span>In breve, da leggere prima della prossima sessione</span><textarea data-a="rev-sessione" data-k="inBreve" data-menzioni>${esc(s.inBreve)}</textarea></label>
-    <label class="campo"><span>Cose in sospeso (una per riga)</span><textarea data-a="rev-sospesi" data-menzioni>${esc(s.sospesi.join('\n'))}</textarea></label>`;
+    <label class="campo"><span>Cose in sospeso (una per riga)</span><textarea data-a="rev-sospesi" data-menzioni>${esc(s.sospesi.join('\n'))}</textarea></label>
+    <label class="campo"><span>Giorni passati nel gioco</span><input type="number" data-a="rev-sessione" data-k="giorni" value="${esc(s.giorni)}" min="0" inputmode="numeric">${s.notaGiorni ? `<small>${esc(s.notaGiorni)}</small>` : ''}</label>`;
   if (P.eventi.length) {
     h += `<div class="campo"><span class="etichetta">Fatti principali</span>` + P.eventi.map((e, i) =>
-      `<label class="spunta" style="padding:5px 0;align-items:flex-start"><input type="checkbox" data-a="rev-ok" data-gruppo="eventi" data-i="${i}" ${e.ok ? 'checked' : ''}><span>${testoRicco(e.t, 'riga')}${e.l ? ` <span class="fioco piccolo">a ${esc(nomeDi(e.l))}</span>` : ''}</span></label>`).join('') + '</div>';
+      `<label class="spunta" style="padding:5px 0;align-items:flex-start"><input type="checkbox" data-a="rev-ok" data-gruppo="eventi" data-i="${i}" ${e.ok ? 'checked' : ''}><span>${testoRicco(e.t, 'riga')}${e.l ? ` <span class="fioco piccolo">a ${esc(nomeDi(e.l))}</span>` : ''}${motivo(e)}</span></label>`).join('') + '</div>';
   }
   const extra = [];
   if (s.citazioni.length) extra.push(s.citazioni.length + (s.citazioni.length === 1 ? ' frase memorabile' : ' frasi memorabili'));
   if (s.presenti.length) extra.push('presenti: ' + s.presenti.map(p => esc(nomeDi(p))).join(', '));
   if (s.bottino) extra.push('bottino: ' + esc(s.bottino));
-  if (s.giorni) extra.push(s.giorni === 1 ? 'passa un giorno' : 'passano ' + s.giorni + ' giorni');
   if (extra.length) h += `<p class="nota" style="margin:0">${extra.join('; ')}</p>`;
   h += '</article>';
 
@@ -4528,7 +4773,7 @@ function revisioneHTML() {
       ${det.length && p.azione !== 'salta' ? `<ul class="diff">${det.join('')}</ul>` : ''}</article>`;
   };
   const cartaRapporto = (r, i) => `<article class="prop t-persona"><label class="spunta" style="align-items:flex-start"><input type="checkbox" data-a="rev-ok" data-gruppo="rapporti" data-i="${i}" ${r.ok ? 'checked' : ''}>
-      <span><strong>${esc(nomeDi(r.pg))} e ${esc(nomeDi(r.png))}</strong> <span style="color:${r.delta < 0 ? 'var(--cera)' : 'var(--c-luogo)'};font-weight:700">${r.delta > 0 ? '+' + r.delta : r.delta}</span>${r.nota ? `<br><span class="fioco piccolo">${esc(r.nota)}</span>` : ''}</span></label></article>`;
+      <span><strong>${esc(nomeDi(r.pg))} e ${esc(nomeDi(r.png))}</strong> <span style="color:${r.delta < 0 ? 'var(--cera)' : 'var(--c-luogo)'};font-weight:700">${r.delta > 0 ? '+' + r.delta : r.delta}</span>${r.nota ? `<br><span class="fioco piccolo">${esc(r.nota)}</span>` : ''}${motivo(r)}</span></label></article>`;
 
   // prima quello che va guardato, poi (chiuso) quello che è sicuro ed è già accettato
   const dubbi = [], sicure = [];
@@ -4547,13 +4792,17 @@ function revisioneHTML() {
     h += `<h3 class="t3" style="margin:24px 0 10px">Bottino del gruppo</h3>`;
     if (P.monete) h += `<label class="campo"><span>Monete d'oro guadagnate insieme</span><input type="number" data-a="rev-monete" value="${esc(P.monete)}" inputmode="numeric"></label>`;
     h += P.oggetti.map((o, i) => `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="oggetti" data-i="${i}" ${o.ok ? 'checked' : ''}>
-      <span><strong>${o.quantita > 1 ? o.quantita + ' × ' : ''}${esc(o.nome)}</strong>${o.magico ? ' <span class="chip chip--mini">magico</span>' : ''}<br><span class="fioco piccolo">${[o.valore ? mo(o.valore) : '', o.peso ? o.peso + ' lb' : '', o.chi ? 'lo tiene ' + esc(nomeDi(o.chi)) : 'del gruppo'].filter(Boolean).join(', ')}</span></span></label>`).join('');
+      <span><strong>${o.quantita > 1 ? o.quantita + ' × ' : ''}${esc(o.nome)}</strong>${o.magico ? ' <span class="chip chip--mini">magico</span>' : ''}<br><span class="fioco piccolo">${[o.valore ? mo(o.valore) : '', o.peso ? o.peso + ' lb' : '', o.chi ? 'lo tiene ' + esc(nomeDi(o.chi)) : 'del gruppo'].filter(Boolean).join(', ')}</span>${motivo(o)}</span></label>`).join('');
   }
   if (P.dicerie.length) {
     h += `<h3 class="t3" style="margin:24px 0 10px">Voci di taverna <span class="fioco piccolo">${P.dicerie.length}</span></h3>` + P.dicerie.map((d, i) =>
-      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="dicerie" data-i="${i}" ${d.ok ? 'checked' : ''}><span>${testoRicco(d.testo, 'riga')}<br><span class="fioco piccolo">${[d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : ''].filter(Boolean).join(', ') || 'chi la racconta non si sa'}</span></span></label>`).join('');
+      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="dicerie" data-i="${i}" ${d.ok ? 'checked' : ''}><span>${testoRicco(d.testo, 'riga')}<br><span class="fioco piccolo">${[d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : ''].filter(Boolean).join(', ') || 'chi la racconta non si sa'}</span>${motivo(d)}</span></label>`).join('');
   }
-  h += `<div class="piede-fisso"><button class="btn" data-a="imp-annulla">Ricomincia</button><button class="btn btn--primario" data-a="imp-salva">${ico('check')}Salva nel diario</button></div>`;
+  if (P.gesta.length) {
+    h += `<h3 class="t3" style="margin:24px 0 10px">${ico('gesta', 'i-gesta')} Gesta del gruppo <span class="fioco piccolo">${P.gesta.length}</span></h3>` + P.gesta.map((g, i) =>
+      `<label class="spunta prop-riga"><input type="checkbox" data-a="rev-ok" data-gruppo="gesta" data-i="${i}" ${g.ok ? 'checked' : ''}><span>${testoRicco(g.t, 'riga')}${g.l ? `<br><span class="fioco piccolo">a ${esc(nomeDi(g.l))}</span>` : ''}${motivo(g)}</span></label>`).join('');
+  }
+  h += `<div class="piede-fisso"><button class="btn" data-a="imp-annulla">Ricomincia</button>${giaQui ? `<a class="btn btn--primario" href="#/sessione/${encodeURIComponent(s.esistente)}">${ico('diario')}Apri la sessione ${esc(s.numero)}</a>` : `<button class="btn btn--primario" data-a="imp-salva">${ico('check')}Salva nel diario</button>`}</div>`;
   return h;
 }
 
@@ -4580,6 +4829,7 @@ function leggiRisposta() {
 function applicaImport() {
   const P = IMPORT.proposte;
   if (!P) return;
+  if (sessioneConNumero(P.sessione.numero)) { avviso('La sessione ' + P.sessione.numero + " è già nel diario: annulla il suo import prima di rifarla"); render(); return; }
   const sid = nuovoId('sessioni');
   // v: 2 = formato a differenze (vedi annullaImport)
   const annulla = { v: 2, creati: [], valori: [], righe: [], alias: [], rapporti: [], ripristina: [] };
@@ -4696,8 +4946,11 @@ function applicaImport() {
   // 5. bottino comune (righe del commercio di tipo "bottino" e "moneta", vedi 8-tavolo.js) e voci di taverna
   P.oggetti.filter(o => o.ok).forEach(o => {
     const chi = o.chi ? risolvi(o.chi) : '';
+    // se il nome è proprio quello di un oggetto del catalogo, lo lego al catalogo e ne prendo la descrizione
+    const cat = oggettoCatalogo(o.nome);
     crea('commercio', { id: nuovoId('commercio'), tipo: 'bottino', nome: o.nome, quantita: o.quantita, valore: o.valore, peso: o.peso,
-      portatore: chi && DB.voci[chi] && DB.voci[chi].tipo === 'pg' ? chi : '', richiede: o.magico ? 1 : 0, sessione: sid });
+      portatore: chi && DB.voci[chi] && DB.voci[chi].tipo === 'pg' ? chi : '', richiede: cat ? (cat.sintonia ? 1 : 0) : (o.magico ? 1 : 0), sessione: sid,
+      catalogo: cat ? cat.id : '', note: cat ? testoCatalogo(cat) : '' });
   });
   if (Number(P.monete)) crea('commercio', { id: nuovoId('commercio'), tipo: 'moneta', importo: Number(P.monete), testo: 'Sessione ' + P.sessione.numero, data: P.sessione.data, sessione: sid });
   P.dicerie.filter(d => d.ok).forEach(d => {
@@ -4725,10 +4978,15 @@ function applicaImport() {
   if (ser) { elimina('config', 'serata'); annulla.ripristina.push({ tab: 'config', id: 'serata' }); }
   salva('sessioni', {
     id: sid, numero: s.numero, titolo: s.titolo, data: s.data, riassunto: s.riassunto,
-    inBreve: s.inBreve, sospesi: s.sospesi, giorni: s.giorni,
+    inBreve: s.inBreve, sospesi: s.sospesi, giorni: Math.max(0, Math.round(Number(s.giorni) || 0)),
     serata: ser ? { inizio: Number(ser.inizio) || 0, fine: Number(ser.fine) || Date.now() } : '',
     eventi: P.eventi.filter(e => e.ok).map(e => ({ t: e.t, l: rif(e.l, 'luogo') })),
     citazioni: s.citazioni, bottino: s.bottino,
+    gesta: P.gesta.filter(g => g.ok).map(g => {
+      // il luogo dentro la frase come menzione, se l'AI non l'ha già citato
+      const l = rif(g.l, 'luogo');
+      return l && DB.voci[l] && !menzioniIn(g.t).includes(l) ? g.t + ' (#[' + DB.voci[l].nome + '])' : g.t;
+    }),
     presenti: s.presenti.map(x => risolvi(x)).filter(id => id && DB.voci[id] && DB.voci[id].tipo === 'pg'),
     luogo: lf, segnalibri: segn, _annulla: annulla
   });
@@ -4797,6 +5055,8 @@ async function annullaImport(sid) {
 // ---------------------------------------------------------------------
 const TIPI_SEGNALIBRO = {
   nota: { nome: 'Nota', ico: 'segna' },
+  // le imprese del gruppo che fanno parlare la valle: finiscono nelle gesta della sessione (#/gesta)
+  gesta: { nome: 'Gesta', ico: 'gesta' },
   png: { nome: 'PNG', ico: 'png' },
   luogo: { nome: 'Luogo', ico: 'segnaposto' },
   missione: { nome: 'Missione', ico: 'missioni' },
@@ -4839,7 +5099,10 @@ async function azioneSerata(azione, el) {
   const ser = serata();
   switch (azione) {
     case 'inizia':
-      setCfg('serata', { inizio: Date.now(), registrazione: Date.now(), data: oggiISO(), chi: chiSono() });
+      // oraInizio: l'ora del gruppo quando si comincia, per sapere poi se l'orologio ha già contato i giorni
+      setCfg('serata', { inizio: Date.now(), registrazione: Date.now(), data: oggiISO(), chi: chiSono(), oraInizio: oreCampagna() });
+      // il percorso sulla mappa riparte da dove si trova il gruppo
+      azzeraPercorso();
       avviso('Serata iniziata: il cronometro parte per tutti');
       break;
     case 'registra':
@@ -4902,7 +5165,7 @@ async function leggiPacchetto(file) {
     avviso('Il file non è leggibile: serve il file .json del pacchetto');
     return;
   }
-  if (!p || p.formato !== 'taverna-pacchetto' || !Array.isArray(p.voci)) {
+  if (!p || p.formato !== 'taverna-pacchetto' || !(Array.isArray(p.voci) || Array.isArray(p.catalogo))) {
     avviso(p && p.db ? 'Questo è un backup: usa "Ripristina un backup"' : 'Questo file non è un pacchetto di Taverna');
     return;
   }
@@ -4920,7 +5183,8 @@ async function leggiPacchetto(file) {
     [pgs.length, 'personaggi del gruppo'],
     [voci.filter(v => v.immagine).length, 'ritratti e stemmi'],
     [comm.filter(c => c.tipo === 'tratta').length, 'tratte per il commercio'],
-    [p.config && p.config.tabellaImpulsi ? 1 : 0, 'tabella degli impulsi']
+    [p.config && p.config.tabellaImpulsi ? 1 : 0, 'tabella degli impulsi'],
+    [Array.isArray(p.catalogo) ? p.catalogo.length : 0, 'oggetti nel catalogo']
   ].filter(r => r[0]);
   apriFoglio(`<div class="foglio-testa"><h2 class="t2">${esc(p.nome || 'Pacchetto')}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
     <form data-a="pacchetto-importa">
@@ -5006,6 +5270,22 @@ async function importaPacchetto(form) {
   });
   if (pgScelto && DB.voci[rif(pgScelto)]) { IMPOST.pg = rif(pgScelto); salvaLocale('impost'); }
 
+  // 4b) catalogo degli oggetti: righe config 'catalogo-1', 'catalogo-2'... da meno di 40.000 caratteri
+  //     ciascuna (una cella del foglio ne tiene 50.000). Reimportarlo riscrive le stesse righe e
+  //     cancella quelle avanzate: niente doppioni, e gli oggetti del bottino tengono il loro id.
+  let nCatalogo = 0;
+  if (Array.isArray(p.catalogo)) {
+    const lotti = [[]];
+    let peso = 0;
+    p.catalogo.filter(o => o && o.id && o.nome).forEach(o => {
+      const n = JSON.stringify(o).length + 1;
+      if (peso + n > 38000 && lotti[lotti.length - 1].length) { lotti.push([]); peso = 0; }
+      lotti[lotti.length - 1].push(o); peso += n; nCatalogo++;
+    });
+    lotti.forEach((oggetti, i) => salva('config', { id: 'catalogo-' + (i + 1), valore: { pacchetto: p.id || '', oggetti }, eliminato: 0 }));
+    Object.values(DB.config).filter(r => /^catalogo-\d+$/.test(r.id) && Number(r.id.slice(9)) > lotti.length && !r.eliminato).forEach(r => elimina('config', r.id));
+  }
+
   // 5) mappe: il record subito, l'immagine solo se non è già sul Drive
   let caricate = 0, soloQui = 0;
   for (let i = 0; i < mappe.length; i++) {
@@ -5041,8 +5321,10 @@ async function importaPacchetto(form) {
   if (completate) parti.push(completate + (completate === 1 ? ' completata' : ' completate'));
   if (caricate) parti.push(caricate + (caricate === 1 ? ' mappa sul Drive' : ' mappe sul Drive'));
   if (soloQui) parti.push(soloQui + (soloQui === 1 ? ' mappa solo qui' : ' mappe solo qui'));
+  if (nCatalogo) parti.push(nCatalogo + ' oggetti nel catalogo');
   avviso('Pacchetto importato' + (parti.length ? ': ' + parti.join(', ') : ''));
-  location.hash = '#/mappa';
+  // un pacchetto con solo il catalogo non ha niente da far vedere sulla mappa
+  location.hash = mappe.length || (p.voci || []).length ? '#/mappa' : '#/tavolo?sez=bottino';
   render();
 }
 
@@ -6126,7 +6408,9 @@ const SCHEMI_COMMERCIO = {
   tratta: [
     { k: 'da', t: 'rif', l: 'Partenza', obblig: true },
     { k: 'a', t: 'rif', l: 'Arrivo', obblig: true },
-    { k: 'giorni', t: 'numero', l: 'Giorni di viaggio' },
+    { k: 'giorni', t: 'numero', l: 'Giorni di viaggio (per il commercio)' },
+    // le ore servono al viaggio di Al tavolo: con le tratte collegate si va da una città all'altra a tappe
+    { k: 'ore', t: 'numero', dec: true, l: 'Ore di viaggio a piedi (per il viaggio)' },
     { k: 'pericolo', t: 'scelta', l: 'Pericolo', opz: { 1: '1, tranquilla', 2: '2, qualche rischio', 3: '3, rischiosa', 4: '4, pericolosa', 5: '5, quasi suicida' } },
     { k: 'note', t: 'ricco', l: 'Note' }
   ],
@@ -6166,14 +6450,17 @@ const SCHEMI_COMMERCIO = {
   ],
   // bottino comune del gruppo (vista Al tavolo → Bottino, 8-tavolo.js): non c'entra con la cassa della compagnia
   bottino: [
-    { k: 'nome', t: 'testo', l: 'Oggetto', obblig: true, ph: 'Es. Pozione di guarigione' },
+    // dal catalogo (se importato) oppure a mano: il nome può essere quello del catalogo o uno vostro
+    { k: 'catalogo', t: 'catalogo', l: 'Dal catalogo: scrivi per cercare' },
+    { k: 'nome', t: 'testo', l: 'Nome', obblig: true, ph: 'Es. Pozione di guarigione, o un nome vostro' },
     { k: 'quantita', t: 'numero', l: 'Quanti' },
     { k: 'valore', t: 'numero', l: "Valore di uno, in monete d'oro" },
     { k: 'peso', t: 'numero', l: 'Peso di uno, in libbre' },
     { k: 'portatore', t: 'scelta', l: 'Chi lo porta', opzFn: () => opzioniPersonaggi('Nessuno, è del gruppo') },
     { k: 'richiede', t: 'scelta', l: 'Richiede sintonia', opz: { '': 'No', 1: 'Sì' } },
     { k: 'sintonia', t: 'scelta', l: 'In sintonia con', opzFn: () => opzioniPersonaggi('Nessuno') },
-    { k: 'note', t: 'ricco', l: 'Note' }
+    // il campo resta "note" (compatibile con il foglio), ma ora è la descrizione: con il catalogo si riempie da sola
+    { k: 'note', t: 'ricco', l: 'Descrizione', ph: "Cosa fa. Scegliendo un oggetto del catalogo si riempie da sola, e si può cambiare" }
   ],
   moneta: [
     { k: 'testo', t: 'testo', l: 'Per cosa', obblig: true, ph: 'Es. Ricompensa di Duvessa' },
@@ -6741,11 +7028,13 @@ function nuovoIdConfig(prefisso) { return prefisso + Date.now().toString(36) + M
 function dataOra(ms) { return new Date(ms).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }); }
 
 // Il giorno della campagna: giorno di partenza + giorni passati in ogni sessione + spostamenti a mano
-function calendario() {
+function calendario(ore) {
   const c = cfg('calendario', null) || {};
   const sessioni = elenco('sessioni');
   const passati = sessioni.reduce((s, x) => s + (Number(x.giorni) || 0), 0);
-  const giorno = (Number(c.inizio) || 1) + passati + (Number(c.extra) || 0);
+  // i giorni interi dell'orologio del gruppo (vedi più sotto) si sommano a quelli delle sessioni
+  const giorniOrologio = Math.floor((ore === undefined ? oreCampagna() : ore) / 24);
+  const giorno = (Number(c.inizio) || 1) + passati + (Number(c.extra) || 0) + giorniOrologio;
   const ciclo = Number(c.ciclo) || 30;
   const out = { c, giorno, ciclo, passati, decade: Math.floor((giorno - 1) % 30 / 10) + 1, harptos: '' };
   // data di Harptos, se il Master ha detto da che giorno dell'anno si parte
@@ -6756,13 +7045,80 @@ function calendario() {
     while (g < 0) { anno--; g += lungo(anno); }
     out.harptos = dataHarptos(g, anno) + ', ' + anno + ' DR';
   }
-  // luna: giorni alla prossima luna nuova (0 = stanotte)
+  // luna: giorni alla prossima luna nuova (0 = stanotte). La piena cade a metà del ciclo; la luna fa luce
+  // anche nelle due notti prima e nelle due dopo (piena = true), perché è quasi tonda (scelta del tavolo, 1.6.1)
   if (c.luna !== undefined && c.luna !== '') {
     const tra = ((Number(c.luna) - giorno) % ciclo + ciclo) % ciclo;
-    out.luna = { tra, piena: Math.abs(tra - Math.round(ciclo / 2)) <= 1 };
+    const daPiena = Math.abs(tra - Math.round(ciclo / 2));
+    out.luna = { tra, daPiena, piena: daPiena <= 2 };
   }
   return out;
 }
+// ---------------------------------------------------------------------
+// OROLOGIO DEL GRUPPO
+// Il tempo di gioco in ore dalla mezzanotte del primo giorno: l'ora è il resto diviso 24, i giorni interi
+// fanno avanzare il calendario. Ogni cambio è una riga config 'ora-…' a sé, { d: ore in più o in meno }
+// oppure { s: ore esatte messe a mano }, con quando, perché e chi. Così due telefoni che cambiano l'ora
+// insieme non si pestano i piedi: due "+1 ora" fanno due ore, e tra due ore messe a mano vale l'ultima.
+// Annullare un cambio (per esempio un viaggio) lo segna annullato e il conto si rifà da solo.
+// I tasti dei riposi muovono solo l'orologio: le risorse delle schede hanno i loro tasti.
+// ---------------------------------------------------------------------
+const ORA_INIZIO = 8;   // senza cambi la campagna è alle 8 del mattino del primo giorno
+function cambiOrario() {
+  return Object.values(DB.config).filter(r => /^ora-/.test(r.id) && !r.eliminato && r.valore && typeof r.valore === 'object')
+    .map(r => Object.assign({}, r.valore, { id: r.id }))
+    .sort((a, b) => (Number(a.quando) || 0) - (Number(b.quando) || 0) || String(a.id).localeCompare(String(b.id)));
+}
+function oreCampagna() {
+  let ore = ORA_INIZIO;
+  cambiOrario().forEach(c => {
+    if (c.annullato) return;
+    if (c.s !== undefined && c.s !== '') ore = Number(c.s) || 0; else ore += Number(c.d) || 0;
+  });
+  return Math.max(0, Math.round(ore * 60) / 60);
+}
+function testoOra(ore) {
+  const minuti = Math.round((((ore % 24) + 24) % 24) * 60) % 1440;
+  return String(Math.floor(minuti / 60)).padStart(2, '0') + ':' + String(minuti % 60).padStart(2, '0');
+}
+function testoDurata(d) {
+  const ass = Math.abs(Number(d) || 0), h = Math.floor(ass), m = Math.round((ass - h) * 60);
+  return (Number(d) < 0 ? '−' : '+') + (h ? h + (h === 1 ? ' ora' : ' ore') : '') + (h && m ? ' e ' : '') + (m ? m + ' minuti' : '') + (!h && !m ? '0 ore' : '');
+}
+function cambiaOrario(valore, perche) {
+  salva('config', { id: 'ora-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), valore: Object.assign({ quando: Date.now(), perche: perche || '', chi: chiSono() }, valore) });
+}
+// Bufera in corso: da quando comincia finché il Master la chiude, o finché l'orologio supera la sua durata
+function buferaAttiva(ore) {
+  const b = cfg('bufera', null);
+  if (!b || !b.inizio || b.fine) return false;
+  if (b.oraInizio !== undefined && b.oraInizio !== '' && Number(b.ore)) return (ore === undefined ? oreCampagna() : ore) < Number(b.oraInizio) + Number(b.ore);
+  return true;
+}
+// Luce (Rime pag. 11): finché dura l'inverno di Auril non è mai più che fioca. Senza bufera c'è penombra
+// dalle 10 alle 14; il resto è buio, tranne quando in cielo ci sono l'aurora o la luna piena. L'aurora
+// (pag. 5) compare prima di mezzanotte e sparisce prima dell'alba. Le ore esatte di aurora e luna il
+// manuale non le dice: le ha scelte il tavolo (1.6.1). Aurora dalle 21, un po' prima di mezzanotte;
+// la luna fa luce dalle 18 nelle notti vicine alla luna piena (vedi calendario: due giorni prima e dopo).
+const LUCE = { giorno: [10, 14], aurora: [21, 6], luna: [18, 6] };
+function luceA(ore) {
+  ore = ore === undefined ? oreCampagna() : ore;
+  const h = ((ore % 24) + 24) % 24;
+  const dentro = ([a, b]) => a < b ? h >= a && h < b : h >= a || h < b;
+  if (buferaAttiva(ore)) return { tipo: 'buio', causa: 'bufera', testo: 'Buio', perche: "c'è la bufera" };
+  if (dentro(LUCE.giorno)) return { tipo: 'fioca', causa: 'giorno', testo: 'Luce fioca', perche: 'la penombra di mezzogiorno' };
+  if (dentro(LUCE.aurora)) return { tipo: 'fioca', causa: 'aurora', testo: 'Luce fioca', perche: "l'aurora di Auril" };
+  const cal = calendario(ore);
+  if (cal.luna && cal.luna.piena && dentro(LUCE.luna)) return { tipo: 'fioca', causa: 'luna', testo: 'Luce fioca', perche: cal.luna.daPiena === 0 ? 'la luna piena' : 'la luna quasi piena' };
+  return { tipo: 'buio', causa: 'notte', testo: 'Buio', perche: h < LUCE.giorno[0] ? 'prima della penombra' : 'dopo la penombra' };
+}
+// La pillola con ora e luce: in Al tavolo, nella Home e sulla mappa. La causa c'è sempre (anche "dopo la
+// penombra"): al tavolo la domanda è proprio perché si vede o non si vede
+function pillolaOra(cls) {
+  const ore = oreCampagna(), l = luceA(ore);
+  return `<a class="pillola-ora luce-${l.tipo} ${cls || ''}" href="#/tavolo?sez=valle" aria-label="Sono le ${testoOra(ore)}, ${esc(l.testo.toLowerCase())}: ${esc(l.perche)}">${ico('orologio')}<strong>${testoOra(ore)}</strong><span>${esc(l.testo)} · ${esc(l.perche)}</span></a>`;
+}
+
 // giorno dell'anno (0-364/365) → "12 Kythorn" o il nome della festa
 function dataHarptos(g, anno) {
   for (let m = 0; m < 12; m++) {
@@ -6780,7 +7136,7 @@ function testoLuna(l) {
   if (!l) return '';
   if (l.tra === 0) return 'Stanotte c\'è la luna nuova';
   if (l.tra === 1) return 'Domani notte c\'è la luna nuova';
-  return 'Luna nuova tra ' + l.tra + ' giorni' + (l.piena ? ' (adesso la luna è piena)' : '');
+  return 'Luna nuova tra ' + l.tra + ' giorni' + (l.daPiena === 0 ? ' (stanotte la luna è piena)' : l.piena ? ' (la luna è quasi piena e fa luce)' : '');
 }
 
 // Hub nella Home: un tocco per arrivare agli strumenti, con quello che sta succedendo adesso
@@ -6793,11 +7149,11 @@ function bloccoAlTavolo() {
     const att = ini.ordine[clamp(Number(ini.turno) || 0, 0, ini.ordine.length - 1)];
     righe.push(`<a class="stato-tavolo forte" href="#/tavolo?sez=turni">${ico('arma')}Combattimento, round ${esc(ini.round || 1)}: tocca a ${esc(att ? att.nome : '?')}</a>`);
   }
-  if (bufera && bufera.inizio && !bufera.fine) righe.push(`<a class="stato-tavolo" href="#/tavolo?sez=valle">${ico('neve')}Bufera in corso</a>`);
+  if (buferaAttiva()) righe.push(`<a class="stato-tavolo" href="#/tavolo?sez=valle">${ico('neve')}Bufera in corso</a>`);
   if (cal.luna && cal.luna.tra <= 1) righe.push(`<a class="stato-tavolo forte" href="#/tavolo?sez=valle">${ico('lanterna')}${esc(testoLuna(cal.luna))}: sacrifici ad Auril</a>`);
   const sotto = ['Giorno ' + cal.giorno + (cal.harptos ? ', ' + cal.harptos : ''), cal.luna ? testoLuna(cal.luna).toLowerCase() : ''].filter(Boolean).join(' · ');
   return `<section class="al-tavolo"><h2 class="t3">Al tavolo</h2>
-    <p class="fioco piccolo" style="margin:4px 0 0">${esc(sotto)}</p>
+    <p class="fioco piccolo" style="margin:4px 0 0">${esc(sotto)}</p>${pillolaOra()}
     ${righe.join('')}
     <nav class="tasti-tavolo">${Object.entries(SEZIONI_TAVOLO).map(([k, s]) => `<a href="#/tavolo?sez=${k}">${ico(s.ico)}<span>${esc(s.nome)}</span></a>`).join('')}</nav></section>`;
 }
@@ -6822,17 +7178,29 @@ function vistaTavolo(sez) {
 // LA VALLE: tempo, luna, luce, freddo, reputazione
 // ---------------------------------------------------------------------
 function sezioneValle() {
-  const cal = calendario();
+  const ore = oreCampagna();
+  const cal = calendario(ore);
+  const luce = luceA(ore);
   const pgs = personaggi();
+  const cambi = cambiOrario().slice(-5).reverse();
   let h = `<section class="sezione"><h2>Il tempo che passa</h2>
-    <div class="giorno-campagna"><span class="num-grande">${esc(cal.giorno)}</span><div>
+    <div class="giorno-campagna"><span class="num-grande">${esc(testoOra(ore))}</span><div>
       <strong>Giorno ${esc(cal.giorno)} della campagna</strong>
+      <span class="${luce.tipo === 'fioca' ? 'lanterna' : 'fioco'}">${esc(luce.testo)}: ${esc(luce.perche)}</span>
       <span class="fioco">${cal.harptos ? esc(cal.harptos) + ' · ' : ''}${esc(cal.decade)}ª decade del mese</span>
       ${cal.luna ? `<span class="${cal.luna.tra <= 1 ? 'lanterna' : 'fioco'}">${esc(testoLuna(cal.luna))}</span>` : '<span class="fioco">Luna nuova: il Master non l\'ha ancora segnata</span>'}</div></div>
-    <div class="azioni"><button class="btn btn--piccolo" data-a="tav-giorno" data-d="-1">${ico('meno')}Un giorno indietro</button>
-      <button class="btn btn--piccolo" data-a="tav-giorno" data-d="1">${ico('piu')}Passa un giorno</button>
+    <div class="azioni"><button class="btn btn--piccolo" data-a="tav-ora" data-d="-1">${ico('meno')}1 ora</button>
+      <button class="btn btn--piccolo" data-a="tav-ora" data-d="1">${ico('piu')}1 ora</button>
+      <button class="btn btn--piccolo" data-a="tav-ora-imposta">${ico('modifica')}Imposta l'ora</button></div>
+    <div class="azioni"><button class="btn btn--piccolo" data-a="tav-ora" data-d="1" data-perche="Riposo breve">${ico('orologio')}Riposo breve, +1 ora</button>
+      <button class="btn btn--piccolo" data-a="tav-ora" data-d="8" data-perche="Riposo lungo">${ico('lanterna')}Riposo lungo, +8 ore</button>
+      <button class="btn btn--piccolo" data-a="tav-ora-persi">Ci siamo persi</button></div>
+    <div class="azioni"><button class="btn btn--testo btn--piccolo" data-a="tav-ora" data-d="-24" data-perche="Un giorno indietro">${ico('meno')}Un giorno indietro</button>
+      <button class="btn btn--testo btn--piccolo" data-a="tav-ora" data-d="24" data-perche="Passa un giorno">${ico('piu')}Passa un giorno</button>
       <button class="btn btn--testo btn--piccolo" data-a="tav-calendario">Imposta il calendario</button></div>
-    <p class="fioco piccolo">I giorni avanzano con le sessioni (campo "giorni passati", lo propone anche l'import) e con questi tasti per il tempo tra una sessione e l'altra. Una settimana nei Forgotten Realms è una decade di dieci giorni (Rime pag. 5).</p></section>`;
+    ${cambi.length ? `<h3 class="t3" style="margin:16px 0 6px">Ultimi cambi dell'orologio</h3><ul class="lista lista--corta cambi-ora">${cambi.map(c => `<li class="riga${c.annullato ? ' annullato' : ''}"><div class="corpo"><strong>${c.s !== undefined && c.s !== '' ? 'alle ' + esc(testoOra(c.s)) : esc(testoDurata(c.d))}</strong> ${esc(c.perche || '')}${c.chi ? ` <span class="fioco piccolo">${esc(c.chi)}</span>` : ''}</div>
+      ${c.annullato ? '<span class="fioco piccolo">annullato</span>' : `<button class="btn btn--testo btn--piccolo" data-a="tav-ora-annulla" data-id="${esc(c.id)}">Annulla</button>`}</li>`).join('')}</ul>` : ''}
+    <p class="fioco piccolo">L'orologio è di tutto il gruppo: ogni tasto aggiunge un cambio, e i cambi di due telefoni si sommano. I tasti dei riposi muovono solo l'ora, le risorse delle schede hanno i loro. Viaggi e bufere fanno passare le ore da soli. I giorni avanzano anche con le sessioni (campo "giorni passati"). Una settimana nei Forgotten Realms è una decade di dieci giorni (Rime pag. 5).</p></section>`;
 
   // Sacrifici: in evidenza il giorno prima e la notte della luna nuova
   const citta = elenco('voci', v => v.tipo === 'luogo' && SACRIFICI[v.sacrificio]);
@@ -6846,13 +7214,17 @@ function sezioneValle() {
       }).join('') + '</section>';
   }
 
-  // Luce: penombra solo dalle 10 alle 14
+  // Luce: le fasce del giorno sulla barra (penombra, aurora, luna piena se c'è) e il segno dell'ora di adesso
   const vedono = pgs.filter(p => capacitaDi(p).attuali.some(c => /scurovisione/i.test(c.nome)));
+  const fascia = ([a, b], cls) => (a < b ? [[a, b]] : [[a, 24], [0, b]]).map(([x, y]) => `<span class="${cls}" style="left:${x / 24 * 100}%;width:${(y - x) / 24 * 100}%"></span>`).join('');
+  const oraGiorno = ((ore % 24) + 24) % 24;
   h += `<section class="sezione"><h2>La luce</h2>
-    <div class="barra-luce" role="img" aria-label="Luce fioca dalle 10 alle 14, buio il resto del giorno"><span style="left:${10 / 24 * 100}%;width:${4 / 24 * 100}%"></span>
-      <i style="left:0">0</i><i style="left:25%">6</i><i style="left:${10 / 24 * 100}%">10</i><i style="left:${14 / 24 * 100}%">14</i><i style="left:75%">18</i></div>
-    <p class="piccolo">Finché dura l'inverno di Auril la luce non è mai piena: c'è penombra (luce fioca) dalle 10 alle 14, il resto è buio, salvo quando in cielo c'è l'aurora o la luna piena (Rime pag. 11).</p>
-    <p class="piccolo">${vedono.length ? 'Vedono al buio: ' + vedono.map(p => esc(p.nome)).join(', ') + '.' : 'Nessuno del gruppo vede al buio: servono torce o lanterne.'}${cal.luna && cal.luna.piena ? ' Stanotte la luna è piena.' : ''}</p></section>`;
+    <p class="${luce.tipo === 'fioca' ? 'lanterna' : ''}" style="margin-top:0"><strong>Adesso, alle ${esc(testoOra(ore))}: ${esc(luce.testo.toLowerCase())}</strong> (${esc(luce.perche)}).</p>
+    <div class="barra-luce" role="img" aria-label="Luce fioca dalle ${LUCE.giorno[0]} alle ${LUCE.giorno[1]} e con l'aurora, dalle ${LUCE.aurora[0]} alle ${LUCE.aurora[1]}${cal.luna && cal.luna.piena ? ', e con la luna dalle ' + LUCE.luna[0] : ''}; buio il resto">${fascia(LUCE.giorno, '')}${fascia(LUCE.aurora, 'aurora')}${cal.luna && cal.luna.piena ? fascia([LUCE.luna[0], LUCE.aurora[0]], 'luna') : ''}
+      <b class="ora-adesso" style="left:${oraGiorno / 24 * 100}%"></b>
+      <i style="left:0">0</i><i style="left:25%">6</i><i style="left:${10 / 24 * 100}%">10</i><i style="left:${14 / 24 * 100}%">14</i><i style="left:75%">18</i><i style="left:${LUCE.aurora[0] / 24 * 100}%">${LUCE.aurora[0]}</i></div>
+    <p class="piccolo">Finché dura l'inverno di Auril la luce non è mai piena: senza bufera c'è penombra (luce fioca) dalle 10 alle 14; il resto è buio, salvo quando in cielo ci sono l'aurora o la luna piena (Rime pag. 11). L'aurora compare prima di mezzanotte e sparisce prima dell'alba (pag. 5): qui va dalle ${LUCE.aurora[0]} alle ${LUCE.aurora[1]}. La luna fa luce dalle ${LUCE.luna[0]} nella notte di luna piena e nelle due prima e dopo.</p>
+    <p class="piccolo">${vedono.length ? 'Vedono al buio: ' + vedono.map(p => esc(p.nome)).join(', ') + '.' : 'Nessuno del gruppo vede al buio: servono torce o lanterne.'}${cal.luna && cal.luna.piena ? (cal.luna.daPiena === 0 ? ' Stanotte la luna è piena.' : ' Stanotte la luna è quasi piena e fa luce.') : ''}</p></section>`;
 
   // Freddo: abiti, indebolimento, acqua gelida, per ogni personaggio
   const bufera = cfg('bufera', null);
@@ -6861,8 +7233,11 @@ function sezioneValle() {
     <div class="freddo">${pgs.map(p => rigaFreddo(p)).join('') || '<p class="vuoto">Aggiungete i personaggi nel wiki per seguirne il freddo.</p>'}</div>
     <p class="fioco piccolo">Acqua gelida: si resiste tanti minuti quanto il punteggio di Costituzione, poi ogni minuto tiro salvezza su Costituzione CD 10 o un livello di indebolimento (Rime pag. 11). Indebolimento: Manuale pag. 291, un riposo lungo con cibo e acqua toglie un livello.</p></section>`;
   h += `<section class="sezione"><h2>Bufera</h2>`;
-  if (bufera && bufera.inizio && !bufera.fine) {
-    h += `<p class="lanterna"><strong>Bufera in corso</strong>${bufera.ore ? ': dura ' + esc(bufera.ore) + ' ore di gioco' : ''}.</p>`;
+  const inBufera = buferaAttiva(ore);
+  if (inBufera) {
+    const fine = bufera.oraInizio !== undefined && bufera.oraInizio !== '' ? Number(bufera.oraInizio) + Number(bufera.ore) : null;
+    h += `<p class="lanterna"><strong>Bufera in corso</strong>${bufera.ore ? ': dura ' + esc(bufera.ore) + ' ore di gioco' : ''}${fine !== null ? ', finisce alle ' + esc(testoOra(fine)) : ''}.</p>
+      <p class="fioco piccolo">"La bufera è finita" porta l'orologio alla fine della bufera, se non c'è già: il tempo passa anche al riparo.</p>`;
   } else {
     h += `<p class="fioco piccolo" style="margin-top:0">Una bufera dura di solito 2d4 ore (Rime pag. 10).</p>`;
   }
@@ -6872,7 +7247,7 @@ function sezioneValle() {
       <li>Chi mantiene la concentrazione all'aperto fa un TS su Costituzione CD 10 a fine turno, o la perde.</li>
       <li>Si spengono le fiamme libere, spariscono le tracce, non si vola senza magia.</li>
       <li>In viaggio: ogni ora il navigatore fa Saggezza (Sopravvivenza) CD 15; se fallisce, il gruppo non avanza (Rime pag. 10-11).</li></ul>
-    <div class="azioni">${bufera && bufera.inizio && !bufera.fine
+    <div class="azioni">${inBufera
       ? '<button class="btn btn--piccolo" data-a="tav-bufera" data-fine="1">La bufera è finita</button>'
       : '<button class="btn btn--piccolo" data-a="tav-bufera">' + ico('neve') + 'Inizia una bufera (2d4 ore)</button>'}</div></section>`;
 
@@ -6995,15 +7370,48 @@ function orePiedi(tr) {
   return (Number(m[2] || m[1].replace(',', '.')) || 0) + (m[3] ? .5 : 0);
 }
 function trattaTra(da, a) { return comm('tratta', t => (t.da === da && t.a === a) || (t.da === a && t.a === da))[0] || null; }
+// La strada da un luogo a un altro passando per le tratte: ogni tratta con le ore è un pezzo di strada
+// che si fa nei due sensi. Cerco il giro più corto in ore (Dijkstra); il pericolo pesa come due ore in più
+// per ogni punto oltre l'1, così tra due giri quasi uguali vince quello sicuro (Targos, Bryn Shander, Easthaven).
+function stradaTra(da, a) {
+  if (!da || !a || da === a) return null;
+  const vicini = {};
+  comm('tratta').forEach(t => {
+    const ore = orePiedi(t);
+    if (!ore || !t.da || !t.a) return;
+    const costo = ore + 2 * Math.max(0, (Number(t.pericolo) || 1) - 1);
+    (vicini[t.da] = vicini[t.da] || []).push({ verso: t.a, ore, costo, t });
+    (vicini[t.a] = vicini[t.a] || []).push({ verso: t.da, ore, costo, t });
+  });
+  const dist = { [da]: 0 }, prima = {}, fatti = new Set();
+  for (;;) {
+    let u = null;
+    Object.keys(dist).forEach(k => { if (!fatti.has(k) && (u === null || dist[k] < dist[u])) u = k; });
+    if (u === null || u === a) break;
+    fatti.add(u);
+    (vicini[u] || []).forEach(e => {
+      const d = dist[u] + e.costo;
+      if (dist[e.verso] === undefined || d < dist[e.verso]) { dist[e.verso] = d; prima[e.verso] = { da: u, e }; }
+    });
+  }
+  if (dist[a] === undefined) return null;
+  const tappe = [a], pezzi = [];
+  for (let x = a; x !== da; x = prima[x].da) { pezzi.unshift(prima[x].e); tappe.unshift(prima[x].da); }
+  return { tappe, pezzi, ore: Math.round(pezzi.reduce((t, e) => t + e.ore, 0) * 10) / 10 };
+}
 function calcolaViaggio(V) {
   const m = MEZZI_VIAGGIO[V.mezzo] || MEZZI_VIAGGIO.racchette;
   const out = { note: [] };
   if (V.terreno === 'strada') {
-    const tr = trattaTra(V.da, V.a);
-    const ore = orePiedi(tr);
-    if (!ore) return { errore: tr ? 'La tratta non ha le ore di viaggio: aggiungile nella tratta (Commercio, Tratte) oppure scegli tundra e miglia.' : 'Tra questi due luoghi non c\'è una tratta: scegli tundra o montagna e scrivi le miglia.' };
-    out.marcia = ore * m.strada;
-    out.base = ore;
+    const strada = stradaTra(V.da, V.a);
+    if (!strada) {
+      const tr = trattaTra(V.da, V.a);
+      return { errore: tr ? 'La tratta tra questi due luoghi non ha le ore di viaggio: aggiungile nella tratta, oppure scegli tundra e scrivi le miglia.' : 'Non trovo una strada tra questi due luoghi, nemmeno passando per altre città: crea la tratta (partenza, arrivo e ore a piedi), oppure scegli tundra o montagna e scrivi le miglia.', manca: !tr };
+    }
+    out.marcia = strada.ore * m.strada;
+    out.base = strada.ore;
+    out.tappe = strada.tappe;
+    out.pezzi = strada.pezzi.map(e => e.ore);
   } else {
     const miglia = Math.max(0, Number(V.miglia) || 0);
     if (!miglia) return { errore: 'Scrivi quante miglia ci sono' };
@@ -7038,16 +7446,19 @@ function sezioneViaggio() {
       <div class="riga-campi"><label class="campo"><span>Come</span><select name="mezzo" data-a="tav-v">${Object.entries(MEZZI_VIAGGIO).map(([k, m]) => `<option value="${k}" ${V.mezzo === k ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select></label>
       <label class="campo"><span>Tempo</span><select name="meteo" data-a="tav-v">${[['sereno', 'Niente bufera'], ['bufera', 'Bufera']].map(([k, l]) => `<option value="${k}" ${V.meteo === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div>
     </form>`;
-  if (r && r.errore) h += `<p class="errore">${esc(r.errore)}</p>`;
-  else if (r) {
+  if (r && r.errore) {
+    h += `<p class="errore">${esc(r.errore)}</p>`;
+    if (r.manca || /ore di viaggio/.test(r.errore)) h += `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-nuova-tratta">${ico('piu')}${r.manca ? 'Crea la tratta' : 'Apri la tratta'}</button></div>`;
+  } else if (r) {
+    if (r.tappe && r.tappe.length > 2) h += `<p class="tappe-viaggio">${r.tappe.map((id, i) => `<strong>${esc(nomeDi(id))}</strong>${i < r.pezzi.length ? ` <span class="fioco">${esc(String(r.pezzi[i]).replace('.', ','))} h →</span>` : ''}`).join(' ')}</p>`;
     h += `<div class="esito-viaggio"><div class="ev-num"><span class="num-grande">${esc(String(r.totale).replace('.', ','))}</span><span>ore in tutto</span></div>
-      <ul class="cambi"><li>${esc(String(r.marcia).replace('.', ','))} ore di marcia${r.base ? ' (a piedi sono ' + esc(String(r.base).replace('.', ',')) + ')' : ''}</li>
+      <ul class="cambi"><li>${esc(String(r.marcia).replace('.', ','))} ore di marcia${r.base ? ' (a piedi sono ' + esc(String(r.base).replace('.', ',')) + ')' : ''}${r.tappe && r.tappe.length > 2 ? ', in ' + (r.tappe.length - 1) + ' tappe' : ''}</li>
       ${r.soste ? `<li>${r.soste} ${r.soste === 1 ? 'ora' : 'ore'} di sosta per i cani: dopo ogni ora di traino si fermano un'ora, altrimenti si sfiniscono (Rime pag. 20)</li>` : ''}
       ${r.note.map(n => `<li>${esc(n)}</li>`).join('')}</ul>
       <div class="azioni"><button class="btn btn--primario btn--piccolo" data-a="tav-viaggio-fatto">${ico('check')}Viaggio fatto: il gruppo arriva</button></div>
-      <p class="fioco piccolo">"Viaggio fatto" sposta il gruppo sulla mappa e lo segna nel taccuino della serata (o, senza serata, nei fatti dell'ultima sessione).</p></div>`;
+      <p class="fioco piccolo">"Viaggio fatto" sposta il gruppo sulla mappa, aggiunge le tappe al percorso della sessione, fa passare le ore sull'orologio del gruppo (si annulla da La valle) e lo segna nel taccuino della serata (o, senza serata, nei fatti dell'ultima sessione).</p></div>`;
   }
-  h += `<p class="fioco piccolo">Sulla tundra: in slitta un miglio all'ora, con le racchette mezzo, senza un quarto; in montagna la metà (Rime pag. 11-12). Sulle strade tra le città valgono le ore a piedi delle tratte, in slitta circa la metà.</p></section>`;
+  h += `<p class="fioco piccolo">Sulla tundra: in slitta un miglio all'ora, con le racchette mezzo, senza un quarto; in montagna la metà (Rime pag. 11-12). Sulle strade tra le città valgono le ore a piedi delle tratte, in slitta circa la metà. Le tratte sono in Commercio, Mercato: ognuna è un pezzo di strada tra due luoghi con le sue ore, e il viaggio le mette in fila da solo.</p></section>`;
   // gli incontri casuali li tiene il Master, in una riga segreta: ai giocatori non arrivano
   if (IMPOST.master) {
     const inc = cfg('incontri', '');
@@ -7064,7 +7475,42 @@ function sezioneViaggio() {
 // BOTTINO COMUNE: oggetti (commercio, tipo 'bottino') e fondo comune di monete (tipo 'moneta').
 // La borsa personale di ognuno resta su D&D Beyond: qui c'è quello che il gruppo deve ancora dividersi
 // e chi porta le cose di tutti. Le sintonie massime sono tre a testa (Guida del Dungeon Master).
+// Dalla 1.6 un oggetto può venire dal catalogo (campo catalogo = id dell'oggetto) con un nome vostro,
+// e "Chi porta cosa" è diviso in schede: il gruppo (comune) e un personaggio per scheda.
 // ---------------------------------------------------------------------
+
+// Catalogo degli oggetti: righe config 'catalogo-N' scritte dall'import di un pacchetto privato
+// (riassunti con parole nostre e numero di pagina). Dentro index.html non c'è, apposta: senza catalogo
+// il bottino si scrive a mano come prima. La lista si ricalcola solo quando cambiano le righe.
+let CATALOGO = { firma: null, lista: [], perNome: {}, perId: {} };
+function catalogoOggetti() {
+  const righe = Object.values(DB.config).filter(r => /^catalogo-\d+$/.test(r.id) && !r.eliminato && r.valore && Array.isArray(r.valore.oggetti));
+  const firma = righe.map(r => r.id + ':' + (r._ts || '') + ':' + r.valore.oggetti.length).sort().join('|');
+  if (firma !== CATALOGO.firma) {
+    const lista = [].concat(...righe.map(r => r.valore.oggetti)).filter(o => o && o.id && o.nome)
+      .sort((x, y) => String(x.nome).localeCompare(String(y.nome), 'it'));
+    CATALOGO = { firma, lista, perNome: {}, perId: {} };
+    lista.forEach(o => { CATALOGO.perId[o.id] = o; CATALOGO.perNome[norm(o.nome)] = o; });
+  }
+  return CATALOGO.lista;
+}
+function oggettoCatalogo(chiave) {
+  if (!chiave) return null;
+  catalogoOggetti();
+  return CATALOGO.perId[chiave] || CATALOGO.perNome[norm(chiave)] || null;
+}
+// la riga sotto il nome: categoria, rarità, sintonia (testo del catalogo, già in italiano)
+function sottotitoloCatalogo(o) {
+  return [o.categoria, o.rarita, o.sintonia ? (typeof o.sintonia === 'string' ? 'sintonia ' + o.sintonia : 'richiede sintonia') : ''].filter(Boolean).join(', ');
+}
+// la descrizione proposta quando si sceglie un oggetto: il riassunto degli effetti e da dove viene
+function testoCatalogo(o) {
+  const dove = o.pag ? (o.libro || 'Guida del DM') + ' pag. ' + o.pag : '';
+  const coda = [sottotitoloCatalogo(o), dove].filter(Boolean).join('; ');
+  return (o.effetti || '') + (coda ? ' (' + coda + ')' : '');
+}
+
+let BOTTINO_SCHEDA = null;   // la scheda aperta in "Chi porta cosa": '' = del gruppo, altrimenti l'id del personaggio
 function sezioneBottino() {
   const pgs = personaggi();
   const fondo = comm('moneta').reduce((t, m) => t + (Number(m.importo) || 0), 0);
@@ -7076,23 +7522,30 @@ function sezioneBottino() {
   const ultimi = comm('moneta').sort((a, b) => String(b.agg || '').localeCompare(String(a.agg || ''))).slice(0, 6);
   if (ultimi.length) h += '<ul class="lista lista--corta">' + ultimi.map(m => `<li class="riga"><div class="corpo">${esc(m.testo || 'Movimento')}</div><strong class="${Number(m.importo) < 0 ? 'cera' : ''}">${Number(m.importo) > 0 ? '+' : ''}${esc(mo(m.importo))}</strong></li>`).join('') + '</ul>';
   h += '</section>';
-  // chi porta cosa: un gruppo per personaggio più le cose del gruppo
+
+  // chi porta cosa: una scheda per il gruppo e una per personaggio, con quanti oggetti ha ciascuno.
+  // Un portatore che non è (più) un personaggio del gruppo conta come "del gruppo".
+  const di = id => oggetti.filter(o => id ? o.portatore === id : !pgs.some(p => p.id === o.portatore));
+  const schede = [{ id: '', nome: 'Del gruppo' }].concat(pgs.map(p => ({ id: p.id, nome: p.nome })));
+  // si parte sempre dalla scheda del gruppo: lì arriva il bottino dell'import, da dividere
+  if (BOTTINO_SCHEDA === null || !schede.some(x => x.id === BOTTINO_SCHEDA)) BOTTINO_SCHEDA = '';
+  const qui = di(BOTTINO_SCHEDA);
+  const sintonie = BOTTINO_SCHEDA ? oggetti.filter(o => o.sintonia === BOTTINO_SCHEDA).length : 0;
+  const peso = qui.reduce((t, o) => t + (Number(o.peso) || 0) * (Number(o.quantita) || 1), 0);
   h += `<section class="sezione"><h2>Chi porta cosa <span class="conta">${oggetti.length}</span></h2>
-    <div class="azioni" style="margin-top:0"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="bottino">${ico('piu')}Aggiungi un oggetto</button></div>`;
-  const gruppi = [{ id: '', nome: 'Del gruppo, non assegnati' }].concat(pgs.map(p => ({ id: p.id, nome: p.nome })));
-  gruppi.forEach(g => {
-    const suoi = oggetti.filter(o => (o.portatore || '') === g.id && (g.id || !pgs.some(p => p.id === o.portatore)));
-    const sintonie = g.id ? oggetti.filter(o => o.sintonia === g.id).length : 0;
-    if (!suoi.length && !sintonie && !g.id) return;
-    const peso = suoi.reduce((t, o) => t + (Number(o.peso) || 0) * (Number(o.quantita) || 1), 0);
-    h += `<h3 class="t3 gruppo-bottino">${esc(g.nome)}<span class="fioco piccolo">${peso ? ' ' + peso + ' lb' : ''}${g.id ? ', sintonie ' + sintonie + ' su 3' : ''}</span></h3>`;
-    h += suoi.length ? '<ul class="lista">' + suoi.map(o => `<li class="riga riga-bottino"><div class="corpo"><div class="tit">${Number(o.quantita) > 1 ? esc(o.quantita) + ' × ' : ''}${esc(o.nome)}${o.richiede ? ' <span class="chip chip--mini">sintonia' + (o.sintonia ? ': ' + esc(nomeDi(o.sintonia)) : '') + '</span>' : ''}</div>
-        <div class="sub">${[Number(o.valore) ? mo(o.valore) : '', Number(o.peso) ? o.peso + ' lb' : '', o.sessione && DB.sessioni[o.sessione] ? 'sessione ' + DB.sessioni[o.sessione].numero : ''].filter(Boolean).map(esc).join(', ')}</div></div>
+    <div class="schede-bottino" role="tablist">${schede.map(x => `<button class="chip chip--tasto ${x.id === BOTTINO_SCHEDA ? 'on' : ''}" role="tab" aria-selected="${x.id === BOTTINO_SCHEDA}" data-a="tav-bot-scheda" data-k="${esc(x.id)}">${esc(x.nome)} <span class="conta">${di(x.id).length}</span></button>`).join('')}</div>
+    <p class="fioco piccolo">${[peso ? peso + ' lb in tutto' : '', BOTTINO_SCHEDA ? 'sintonie ' + sintonie + ' su 3' : 'le cose di tutti, non ancora assegnate'].filter(Boolean).join(', ')}</p>`;
+  h += qui.length ? '<ul class="lista">' + qui.map(o => {
+    const base = oggettoCatalogo(o.catalogo);
+    const sotto = [base && norm(base.nome) !== norm(o.nome) ? base.nome : '', base ? sottotitoloCatalogo(base) : '',
+      Number(o.valore) ? mo(o.valore) : '', Number(o.peso) ? o.peso + ' lb' : '', o.sessione && DB.sessioni[o.sessione] ? 'sessione ' + DB.sessioni[o.sessione].numero : ''].filter(Boolean);
+    return `<li class="riga riga-bottino"><div class="corpo"><div class="tit">${Number(o.quantita) > 1 ? esc(o.quantita) + ' × ' : ''}${esc(o.nome)}${o.richiede ? ' <span class="chip chip--mini">sintonia' + (o.sintonia ? ': ' + esc(nomeDi(o.sintonia)) : '') + '</span>' : ''}</div>
+        <div class="sub">${sotto.map(esc).join(', ')}</div>${o.note ? `<div class="sub desc-bottino">${testoRicco(o.note, 'riga')}</div>` : ''}</div>
         <button class="btn btn--testo btn--piccolo" data-a="tav-vendi" data-id="${esc(o.id)}">Vendi</button>
-        <button class="btn-icona btn-icona--mini" data-a="modifica" data-tab="commercio" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button></li>`).join('') + '</ul>'
-      : '<p class="vuoto">Niente.</p>';
-  });
-  return h + '<p class="fioco piccolo">L\'import propone da solo il bottino della serata. Le monete divise vanno poi sulla scheda di ognuno su D&amp;D Beyond.</p></section>';
+        <button class="btn-icona btn-icona--mini" data-a="modifica" data-tab="commercio" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button></li>`;
+  }).join('') + '</ul>' : `<p class="vuoto">${BOTTINO_SCHEDA ? esc(nomeDi(BOTTINO_SCHEDA)) + ' non porta niente del gruppo.' : 'Niente da dividere.'}</p>`;
+  h += `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-bot-nuovo" data-k="${esc(BOTTINO_SCHEDA)}">${ico('piu')}Aggiungi un oggetto${BOTTINO_SCHEDA ? ' a ' + esc(nomeDi(BOTTINO_SCHEDA)) : ''}</button></div>`;
+  return h + `<p class="fioco piccolo">L'import propone da solo il bottino della serata. ${catalogoOggetti().length ? `Il catalogo ha ${catalogoOggetti().length} oggetti: nell'oggetto scrivi per cercare.` : "Con il catalogo degli oggetti (un pacchetto da importare) l'oggetto si sceglie da un elenco."} Le monete divise vanno poi sulla scheda di ognuno su D&amp;D Beyond.</p></section>`;
 }
 
 // ---------------------------------------------------------------------
@@ -7173,8 +7626,49 @@ async function azioneTavolo(a, el, form) {
   switch (a) {
     // --- la valle ---
     case 'tav-giorno': {
-      const c = cfg('calendario', null) || {};
-      setCfg('calendario', Object.assign({}, c, { extra: (Number(c.extra) || 0) + Number(el.dataset.d) }));
+      // i tasti vecchi del giorno ora passano dall'orologio: due telefoni insieme fanno due giorni
+      cambiaOrario({ d: 24 * Number(el.dataset.d) }, Number(el.dataset.d) > 0 ? 'Passa un giorno' : 'Un giorno indietro');
+      break;
+    }
+    case 'tav-ora': {
+      const d = Number(el.dataset.d) || 0;
+      if (d < 0 && oreCampagna() + d < 0) { avviso("L'orologio è già all'inizio della campagna"); return; }
+      cambiaOrario({ d }, el.dataset.perche || (d > 0 ? 'Un\'ora in più' : 'Un\'ora in meno'));
+      avviso((el.dataset.perche ? el.dataset.perche + ': ' : '') + 'sono le ' + testoOra(oreCampagna()));
+      break;
+    }
+    case 'tav-ora-imposta':
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">Che ore sono?</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <form data-a="tav-ora-imposta-salva"><p class="fioco" style="margin-top:0">L'ora del giorno ${esc(calendario().giorno)}: per cambiare giorno usa "Passa un giorno".</p>
+          <label class="campo"><span>Ora</span><input type="time" name="ora" value="${esc(testoOra(oreCampagna()))}" required></label>
+          <div class="foglio-piede"><button type="button" class="btn" data-a="chiudi">Annulla</button><button class="btn btn--primario" type="submit">${ico('check')}Imposta</button></div></form>`);
+      return;
+    case 'tav-ora-imposta-salva': {
+      const m = /^(\d{1,2}):(\d{2})/.exec(val('ora'));
+      if (!m) return;
+      const giorno = Math.floor(oreCampagna() / 24);
+      cambiaOrario({ s: giorno * 24 + clamp(Number(m[1]), 0, 23) + clamp(Number(m[2]), 0, 59) / 60 }, 'Ora messa a mano');
+      chiudiFoglio();
+      break;
+    }
+    case 'tav-ora-persi':
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">Ci siamo persi</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <form data-a="tav-ora-persi-salva"><p class="fioco" style="margin-top:0">Ogni prova del navigatore fallita è un'ora senza avanzare (Rime pag. 11).</p>
+          <label class="campo"><span>Ore perse</span><input type="number" name="ore" value="1" min="0.5" max="48" step="0.5" inputmode="decimal" required></label>
+          <div class="foglio-piede"><button type="button" class="btn" data-a="chiudi">Annulla</button><button class="btn btn--primario" type="submit">${ico('check')}Aggiungi</button></div></form>`);
+      return;
+    case 'tav-ora-persi-salva': {
+      const n = clamp(Number(String(val('ore')).replace(',', '.')) || 0, 0, 48);
+      if (n) cambiaOrario({ d: n }, 'Ci siamo persi');
+      chiudiFoglio();
+      break;
+    }
+    case 'tav-ora-annulla': {
+      // annullare un cambio (un viaggio segnato per sbaglio, un'ora di troppo): resta nella lista, barrato
+      const r = DB.config[el.dataset.id];
+      if (!r || !r.valore) return;
+      salva('config', { id: r.id, valore: Object.assign({}, r.valore, { annullato: 1 }) });
+      avviso('Cambio annullato: sono le ' + testoOra(oreCampagna()));
       break;
     }
     case 'tav-calendario': {
@@ -7232,10 +7726,19 @@ async function azioneTavolo(a, el, form) {
     }
     case 'tav-cos-salva': salva('voci', { id: form.dataset.id, cosPunteggio: clamp(Number(val('cos')) || 0, 1, 30) }); chiudiFoglio(); break;
     case 'tav-bufera': {
-      if (el.dataset.fine) { setCfg('bufera', Object.assign({}, cfg('bufera', {}), { fine: Date.now() })); break; }
+      const b = cfg('bufera', {}) || {};
+      if (el.dataset.fine) {
+        // finita: se l'orologio non è ancora arrivato alla fine della bufera, il tempo passato al riparo si conta
+        if (b.oraInizio !== undefined && b.oraInizio !== '' && Number(b.ore)) {
+          const resto = Number(b.oraInizio) + Number(b.ore) - oreCampagna();
+          if (resto > 0) cambiaOrario({ d: Math.round(resto * 60) / 60 }, 'Bufera, al riparo finché passa');
+        }
+        setCfg('bufera', Object.assign({}, b, { fine: Date.now() }));
+        break;
+      }
       const ore = (1 + Math.floor(Math.random() * 4)) + (1 + Math.floor(Math.random() * 4));   // 2d4
-      setCfg('bufera', { inizio: Date.now(), ore });
-      avviso('Bufera: durerà ' + ore + ' ore di gioco');
+      setCfg('bufera', { inizio: Date.now(), ore, oraInizio: oreCampagna() });
+      avviso('Bufera: durerà ' + ore + ' ore di gioco, fino alle ' + testoOra(oreCampagna() + ore));
       break;
     }
 
@@ -7351,7 +7854,9 @@ async function azioneTavolo(a, el, form) {
     case 'tav-viaggio-fatto': {
       const r = calcolaViaggio(VIAGGIO);
       if (r.errore || !VIAGGIO.a) return;
-      const testo = `Viaggio da #[${nomeDi(VIAGGIO.da)}] a #[${nomeDi(VIAGGIO.a)}]: ${String(r.totale).replace('.', ',')} ore, ${MEZZI_VIAGGIO[VIAGGIO.mezzo].nome.toLowerCase()}${VIAGGIO.meteo === 'bufera' ? ', nella bufera' : ''}.`;
+      const via = (r.tappe || []).slice(1, -1);
+      const testo = `Viaggio da #[${nomeDi(VIAGGIO.da)}] a #[${nomeDi(VIAGGIO.a)}]${via.length ? ' passando per ' + via.map(id => '#[' + nomeDi(id) + ']').join(', ') : ''}: ${String(r.totale).replace('.', ',')} ore, ${MEZZI_VIAGGIO[VIAGGIO.mezzo].nome.toLowerCase()}${VIAGGIO.meteo === 'bufera' ? ', nella bufera' : ''}.`;
+      aggiungiTappe(r.tappe || [VIAGGIO.da, VIAGGIO.a]);
       const ser = serata();
       if (ser) salva('config', { id: 'seg-' + Date.now().toString(36) + 'v', valore: { quando: Date.now(), tipo: 'luogo', testo: testo.replace(/#\[([^\]]+)\]/g, '$1'), chi: chiSono() } });
       else {
@@ -7359,10 +7864,18 @@ async function azioneTavolo(a, el, form) {
         if (s) salva('sessioni', { id: s.id, eventi: (s.eventi || []).concat([{ t: testo, l: VIAGGIO.a }]) });
       }
       setCfg('posizione', VIAGGIO.a);
+      // le ore del viaggio passano sull'orologio; se era uno sbaglio, "Annulla" nella lista dei cambi
+      cambiaOrario({ d: r.totale }, 'Viaggio da ' + nomeDi(VIAGGIO.da) + ' a ' + nomeDi(VIAGGIO.a));
       MAPPA.sporca = true;
-      avviso(ser ? 'Viaggio segnato nel taccuino, il gruppo è a ' + nomeDi(VIAGGIO.a) : 'Viaggio aggiunto all\'ultima sessione, il gruppo è a ' + nomeDi(VIAGGIO.a));
+      avviso((ser ? 'Viaggio segnato nel taccuino' : 'Viaggio aggiunto all\'ultima sessione') + ', il gruppo è a ' + nomeDi(VIAGGIO.a) + ' alle ' + testoOra(oreCampagna()) + '. Si annulla da La valle');
       VIAGGIO.da = VIAGGIO.a; VIAGGIO.a = '';
       break;
+    }
+    case 'tav-nuova-tratta': {
+      // la tratta che manca (o quella senza ore), con partenza e arrivo già scelti
+      const tr = trattaTra(VIAGGIO.da, VIAGGIO.a);
+      if (tr) apriEditor('commercio', tr.id); else apriEditor('commercio', null, { tipo: 'tratta', da: VIAGGIO.da, a: VIAGGIO.a, pericolo: 1 });
+      return;
     }
     case 'tav-incontri': salva('config', { id: 'incontri', valore: val('tabella'), segreto: 1 }); avviso('Tabella salvata: la vedi solo tu'); break;
     case 'tav-incontro': {
@@ -7396,6 +7909,8 @@ async function azioneTavolo(a, el, form) {
       salva('commercio', { id: nuovoId('commercio'), tipo: 'moneta', importo: -quota * pgs.length, testo: `Divise in ${pgs.length}: ${mo(quota)} a testa`, data: oggiISO() });
       break;
     }
+    case 'tav-bot-scheda': BOTTINO_SCHEDA = el.dataset.k || ''; break;
+    case 'tav-bot-nuovo': apriEditor('commercio', null, { tipo: 'bottino', portatore: el.dataset.k || '' }); return;
     case 'tav-vendi': {
       const o = DB.commercio[el.dataset.id];
       if (!o) return;
@@ -7517,6 +8032,31 @@ async function perIlMaster(grezza, chiaveM) {
   const pub = await crypto.subtle.importKey('spki', daBase64(chiaveM.pub), { name: 'RSA-OAEP', hash: 'SHA-256' }, false, ['encrypt']);
   return { km: inBase64(await crypto.subtle.encrypt({ name: 'RSA-OAEP' }, pub, grezza)), mk: chiaveM.id };
 }
+// Per il foglio dei conflitti: di una versione delle note dico solo quando è stata salvata
+function descriviNote(v) {
+  try {
+    const p = v && v.c ? JSON.parse(v.c) : null;
+    if (!p) return 'nessuna nota';
+    return 'note cifrate' + (p.agg ? ', salvate il ' + new Date(p.agg).toLocaleString('it-IT', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) : '');
+  } catch (x) { return 'note cifrate'; }
+}
+// Due dispositivi hanno salvato le note insieme: con le note aperte (la chiave in memoria) metto
+// i due testi uno dopo l'altro, quello del foglio prima, e salvo. Senza chiave si sceglie una versione.
+async function unisciNotePrivate(id, mio, loro) {
+  const aperte = NOTE_APERTE[id];
+  try {
+    const pm = JSON.parse(mio.c), pl = JSON.parse(loro.c);
+    if (!aperte || pm.kg !== pl.kg || pl.kg !== aperte.kg) { avviso('Per unirle apri le note con la tua frase, poi riprova'); return false; }
+    const dec = async q => new TextDecoder().decode(await decifraAes(aperte.k, q.iv, q.dati));
+    const tl = await dec(pl), tm = await dec(pm);
+    const testo = tl === tm ? tl : tl + '\n\n— da questo dispositivo —\n' + tm;
+    const corpo = await cifraAes(aperte.k, new TextEncoder().encode(testo));
+    if (!salvaPacco(id, Object.assign({}, pl, { iv: corpo.iv, dati: corpo.dati, agg: Date.now() }))) return false;
+    aperte.testo = aperte.bozza = testo; aperte.agg = Date.now();
+    avviso('Note unite: controlla il testo');
+    return true;
+  } catch (x) { avviso('Non riesco a unirle: scegli una delle due versioni'); return false; }
+}
 function salvaPacco(pgId, pacco) {
   const c = JSON.stringify(pacco);
   if (c.length > LIMITE_CAMPO - 500) { avviso("Le note sono troppo lunghe per una cella del foglio: accorciale un po'"); return false; }
@@ -7580,7 +8120,7 @@ async function azioneNotePrivate(a, el, form) {
     const grezza = new Uint8Array(await crypto.subtle.decrypt({ name: 'RSA-OAEP' }, CHIAVE_MASTER_APERTA, daBase64(pacco.km)));
     const k = await crypto.subtle.importKey('raw', grezza, 'AES-GCM', false, ['encrypt', 'decrypt']);
     const testo = new TextDecoder().decode(await decifraAes(k, pacco.iv, pacco.dati));
-    NOTE_APERTE[id] = { k, grezza, kg: pacco.kg, testo, bozza: testo, master: true };
+    NOTE_APERTE[id] = { k, grezza, kg: pacco.kg, testo, bozza: testo, master: true, agg: pacco.agg };
   };
   if (!cifraturaPossibile()) { avviso('Le note cifrate funzionano solo dall\'indirizzo https dell\'app'); return; }
   switch (a) {
@@ -7607,7 +8147,7 @@ async function azioneNotePrivate(a, el, form) {
       const box = form.querySelector('[name=master]');
       if (box && box.checked && chiaveM) Object.assign(nuovo, await perIlMaster(grezza, chiaveM));
       if (!salvaPacco(id, nuovo)) return;
-      NOTE_APERTE[id] = { k, grezza, kg: nuovo.kg, testo: '', bozza: '' };
+      NOTE_APERTE[id] = { k, grezza, kg: nuovo.kg, testo: '', bozza: '', agg: nuovo.agg };
       chiudiFoglio();
       avviso('Note private pronte: scrivi e salva');
       break;
@@ -7622,7 +8162,7 @@ async function azioneNotePrivate(a, el, form) {
       catch (x) { avviso('Frase sbagliata'); return; }
       const k = await crypto.subtle.importKey('raw', grezza, 'AES-GCM', false, ['encrypt', 'decrypt']);
       const testo = new TextDecoder().decode(await decifraAes(k, pacco.iv, pacco.dati));
-      NOTE_APERTE[id] = { k, grezza, kg: pacco.kg, testo, bozza: testo };
+      NOTE_APERTE[id] = { k, grezza, kg: pacco.kg, testo, bozza: testo, agg: pacco.agg };
       chiudiFoglio();
       break;
     }
@@ -7632,12 +8172,23 @@ async function azioneNotePrivate(a, el, form) {
       // ricreate su un altro telefono (frase nuova): la chiave che ho in mano non vale più
       if (pacco.kg !== aperte.kg) { delete NOTE_APERTE[id]; avviso('Le note sono state ricreate su un altro telefono: riaprile'); break; }
       const area = [...document.querySelectorAll('[data-a="tav-priv-testo"]')].find(t => t.dataset.id === id);
-      const testo = area ? area.value : (aperte.bozza || '');
+      let testo = area ? area.value : (aperte.bozza || '');
+      // nel frattempo un altro dispositivo le ha salvate: non butto via le sue righe. Se ho solo aggiunto
+      // in fondo, aggiungo in fondo alle sue; altrimenti metto le due versioni una dopo l'altra
+      let unite = false;
+      if (pacco.agg && aperte.agg && Number(pacco.agg) !== Number(aperte.agg)) {
+        const suo = new TextDecoder().decode(await decifraAes(aperte.k, pacco.iv, pacco.dati));
+        if (suo !== aperte.testo && suo !== testo) {
+          testo = testo.indexOf(aperte.testo) === 0 ? suo + testo.slice(aperte.testo.length) : suo + '\n\n— da questo dispositivo —\n' + testo;
+          unite = true;
+        }
+      }
       if (testo.length > MAX_NOTE) { avviso(`Al massimo ${MAX_NOTE} caratteri`); return; }
       const corpo = await cifraAes(aperte.k, new TextEncoder().encode(testo));
-      if (!salvaPacco(id, Object.assign({}, pacco, { iv: corpo.iv, dati: corpo.dati, agg: Date.now() }))) return;
-      aperte.testo = aperte.bozza = testo;
-      avviso('Note salvate, cifrate');
+      const agg = Date.now();
+      if (!salvaPacco(id, Object.assign({}, pacco, { iv: corpo.iv, dati: corpo.dati, agg }))) return;
+      aperte.testo = aperte.bozza = testo; aperte.agg = agg;
+      avviso(unite ? 'Le note erano cambiate su un altro dispositivo: le ho unite alle tue, controlla' : 'Note salvate, cifrate');
       break;
     }
     case 'tav-priv-chiudi': delete NOTE_APERTE[id]; break;
@@ -7783,7 +8334,9 @@ document.addEventListener('click', async e => {
     }
     case 'siamo-qui': {
       const id = el.dataset.id;
+      const da = posizioneGruppo();
       setCfg('posizione', id, DB.voci[id] && DB.voci[id].demo);
+      if (!(DB.voci[id] && DB.voci[id].demo)) aggiungiTappe([da, id]);
       avviso('Il gruppo ora è a ' + nomeDi(id));
       MAPPA.sporca = true;
       if (rotta().vista === 'mappa') { await mappaApri(MAPPA.id); mappaSeleziona(id, false); } else render();
@@ -8057,6 +8610,7 @@ document.addEventListener('click', async e => {
       mappaSeleziona(el.dataset.id, true);
       break;
     case 'mappa-neve': IMPOST.neve = !IMPOST.neve; salvaLocale('impost'); el.classList.toggle('on', IMPOST.neve); mappaNeve(); break;
+    case 'mappa-percorso-azzera': azzeraPercorso(); avviso('Il percorso riparte da qui'); MAPPA.sporca = true; mappaCostruisciPin(); mappaDisegna(); document.getElementById('menu-mappa').hidden = true; break;
     case 'mappa-percorso': IMPOST.percorso = !IMPOST.percorso; salvaLocale('impost'); el.classList.toggle('on', IMPOST.percorso); mappaCostruisciPin(); mappaDisegna(); break;
     case 'carto': impostaCartografo(MAPPA.cartografo === true ? false : true); break;
     case 'carto-uno': impostaCartografo(MAPPA.cartografo === 'uno' ? false : 'uno'); break;
@@ -8174,6 +8728,19 @@ document.addEventListener('change', async e => {
       break;
     }
     case 'sp-calcola': aggiornaAnteprimaSpedizione(); break;
+    case 'imp-file': {
+      // una risposta salvata in un file: va nel riquadro come se l'avessi incollata (anche più file, uno dopo l'altro)
+      const file = el.files[0];
+      if (!file) return;
+      try {
+        const nuovo = await file.text();
+        IMPORT.risposta = IMPORT.risposta && IMPORT.risposta.trim() ? IMPORT.risposta.trim() + '\n\n' + nuovo : nuovo;
+        try { localStorage.setItem('taverna.bozzaImport', IMPORT.risposta); } catch (x) { /* niente */ }
+        render();
+        avviso('File aperto: adesso premi "Leggi la risposta"');
+      } catch (x) { avviso('Non riesco a leggere questo file'); }
+      break;
+    }
     case 'ed-immagine': {
       const file = el.files[0];
       if (!file) return;
@@ -8239,7 +8806,7 @@ document.addEventListener('change', async e => {
     case 'imp-numero': IMPORT.numero = Number(el.value) || prossimoNumero(); break;
     case 'imp-data': IMPORT.data = el.value; break;
     case 'imp-seg': IMPORT.segnalibri = el.checked; break;
-    case 'imp-fisse': IMPOST.aiIstruzioni = el.checked; salvaLocale('impost'); render(); break;
+    case 'imp-fisse': IMPOST.aiIstruzioni = el.checked ? VERSIONE_SCHEMA_AI : 0; salvaLocale('impost'); render(); break;
     case 'imp-pezzi': IMPORT.pezzi = Number(el.value) || 1; IMPORT.pezzo = Math.min(Number(IMPORT.pezzo) || 1, IMPORT.pezzi); render(); break;
     case 'imp-pezzo': IMPORT.pezzo = Number(el.value) || 1; render(); break;
     case 'rev-monete': IMPORT.proposte.monete = Math.round(Number(el.value) || 0); break;
@@ -8262,6 +8829,7 @@ document.addEventListener('input', e => {
   if (el.matches && el.matches('[data-menzioni]')) suggerisci(el);
   switch (el.dataset.a) {
     case 'slitta-calcola': aggiornaContoSlitta(); break;
+    case 'ed-catalogo': compilaDaCatalogo(el); break;
     case 'tav-priv-testo': if (NOTE_APERTE[el.dataset.id]) NOTE_APERTE[el.dataset.id].bozza = el.value; break;
     case 'wiki-cerca': {
       filtraWiki(el.value);
