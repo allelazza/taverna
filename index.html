@@ -98,7 +98,11 @@ h1, h2, h3 { font-family: var(--f-titolo); font-weight: 400; margin: 0; letter-s
   flex: 1; min-width: 0; font: 400 22px/1 var(--f-titolo);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   color: var(--avorio); text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
 }
+/* 1.8: la Home non è più nella barra in basso: il boccale accanto al nome dice che lì si torna alla Taverna */
+.barra-top .marchio .i { width: 22px; height: 22px; color: var(--lanterna); }
+.barra-top .marchio span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .barra-top .indietro { margin-left: -8px; }
 .stato-sync { position: relative; }
 .stato-sync::after {
@@ -120,7 +124,7 @@ h1, h2, h3 { font-family: var(--f-titolo); font-weight: 400; margin: 0; letter-s
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
   height: calc(var(--nav-h) + var(--safe-b)); padding-bottom: var(--safe-b);
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(5, 1fr);
   background: rgba(19, 27, 35, .95);
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   border-top: 1px solid rgba(236, 230, 214, .07);
@@ -886,6 +890,112 @@ canvas.neve { position: absolute; inset: 0; width: 100%; height: 100%; pointer-e
 .esito-bottino .n { font-size: 38px; min-width: 48px; }
 .eb-testo { display: grid; gap: 3px; min-width: 0; }
 .azioni--strette { margin: 6px 0 0; gap: 8px; }
+
+/* =====================================================================
+   1.8 — barra a cinque voci, schede delle sezioni, cruscotto della serata, Prima di cominciare
+   ===================================================================== */
+/* in cima a Stasera, Storia e Gruppo: il nome della sezione e le sue schede, che vanno a capo (sul telefono
+   devono vedersi tutte: i turni stanno in fondo, tratteggiati e in brina) */
+.testa-sezione { margin-bottom: 12px; align-items: center; }
+.schede-hub { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; }
+.schede-hub a { display: inline-flex; align-items: center; gap: 5px; padding: 7px 10px 7px 9px; border-radius: 999px; border: 1px solid var(--brina-2); color: var(--avorio-2); text-decoration: none; font-size: 14.5px; }
+.schede-hub a .i { width: 16px; height: 16px; }
+.schede-hub a.attivo { border-color: var(--lanterna); color: var(--lanterna-2); background: var(--lanterna-ombra); }
+.schede-hub a.minore { border-style: dashed; color: var(--brina); }
+.schede-hub a.minore.attivo { color: var(--lanterna-2); border-style: solid; }
+.schede-hub + .sezione { margin-top: 8px; }
+.testa-commercio { margin-bottom: 14px; }
+
+/* cruscotto della serata: tutto in un solo schermo del telefono, quindi riquadri stretti e righe basse */
+.cruscotto .taccuino { margin-top: 0; padding: 10px 14px 8px; }
+.cruscotto .cronometro { font-size: 26px; }
+.tac-zero { margin: 4px 0 0; line-height: 1.4; }
+/* un tasto che va a capo come il testo che lo precede ("La registrazione parte adesso") */
+.btn--in-riga { display: inline; min-height: 0; padding: 0; border: 0; border-radius: 0; font: inherit; font-weight: 700; color: var(--lanterna-2); vertical-align: baseline; }
+.cruscotto .taccuino form { margin-top: 8px; }
+.cruscotto .tipi-seg { gap: 6px; margin-top: 8px; }
+.cruscotto .tipi-seg .chip { min-height: 29px; padding: 0 10px 0 8px; font-size: 13.5px; }
+.cruscotto .taccuino ol { margin-top: 8px; font-size: 14.5px; }
+.cruscotto .taccuino li { padding: 3px 0; }
+.tac-tutti { margin-top: 2px; min-height: 28px; padding-left: 0; }
+.cruscotto .al-tavolo, .cr-blocco { margin-top: 10px; padding: 9px 14px; border-radius: 16px; background: var(--ardesia); border: 1px solid rgba(236,230,214,.08); }
+.cr-ora { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; }
+.cr-ora .pillola-ora { margin-top: 0; }
+.cr-riga { display: flex; align-items: center; gap: 8px; margin-top: 7px; color: var(--avorio); text-decoration: none; font-size: 15px; line-height: 1.3; }
+.cr-riga .i { width: 17px; height: 17px; flex: none; color: var(--brina); }
+.cr-riga.lanterna .i { color: var(--lanterna); }
+.cr-riga.cera .i { color: var(--cera); }
+.cr-riga.fioco { color: var(--brina); }
+.cr-testa { display: flex; align-items: center; gap: 10px; }
+.cr-testa strong { flex: 1; min-width: 0; font: 400 19px/1.2 var(--f-titolo); }
+.cr-testa .btn { min-height: 30px; }
+.cr-ris { display: flex; flex-wrap: wrap; gap: 0 18px; margin-top: 4px; }
+.cr-r { display: flex; align-items: center; gap: 8px; min-height: 29px; }
+.cr-r-nome { font-size: 13.5px; color: var(--avorio-2); }
+.cr-r.esaurita .cr-r-nome { color: var(--brina); }
+.cr-r .pips { gap: 9px; margin: 0 4px; }
+.cr-r .pip { width: 17px; height: 17px; border-radius: 4px; }
+.cr-r .pip-num { font-size: 21px; }
+.cr-r .pip-num small { font: 400 13px var(--f-testo); color: var(--brina); }
+.cr-link { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 10px; margin-top: 6px; }
+.cr-link .btn { min-height: 32px; }
+.cr-nota { margin: 10px 0 0; }
+
+/* Prima di cominciare: si legge ad alta voce, il testo è grande e la pagina è quieta */
+.riepilogo-testa .occhiello { font: italic 400 19px/1.2 var(--f-titolo); color: var(--lanterna-2); margin: 0 0 10px; }
+.riepilogo-testa .meta { color: var(--brina); font-size: 15px; margin: 10px 0 0; }
+.riepilogo { margin-top: 30px; }
+.riepilogo > h2 { font-size: 22px; margin: 0 0 10px; display: flex; align-items: baseline; gap: 10px; color: var(--lanterna-2); }
+.riepilogo > h2 .conta { font: 500 14px var(--f-testo); color: var(--brina); }
+.lettura--alta { font-size: 20px; line-height: 1.6; }
+.riepilogo-elenco { margin: 0; padding-left: 22px; }
+.riepilogo-elenco li { margin: 6px 0; }
+.riepilogo-elenco a { color: var(--avorio); text-decoration-color: var(--c-missione); text-underline-offset: 3px; }
+.riepilogo-elenco .fioco { font-size: 17px; }
+.riepilogo-azioni { margin-top: 34px; }
+
+/* Gruppo → Compagni: la riga apre la scheda, sotto D&D Beyond e la pagina del compagno */
+.compagni .compagno { padding: 2px 0 12px; border-bottom: 1px solid rgba(236, 230, 214, .07); }
+.compagni .compagno .riga { border-bottom: 0; padding-bottom: 6px; }
+.compagni .compagno .azioni { margin-left: 60px; }
+
+/* 1.8, passo 2 — un numero dentro un chip (filtri, schede): in brina, e con il colore del chip quando è acceso */
+.chip .conta { font: 500 12.5px var(--f-testo); color: var(--brina); margin-left: 1px; }
+.chip.on .conta { color: inherit; }
+.chip--tasto .i { width: 15px; height: 15px; margin-right: 3px; }
+
+/* dicerie: i filtri per stato sopra l'elenco; sotto ogni diceria le quattro scelte (da verificare) oppure lo stato
+   con chi l'ha segnato. Il colore dello stato è quello del filetto a sinistra */
+.filtri-dicerie { margin: 12px 0 2px; gap: 6px; }
+.dic-scelte { gap: 6px; margin-top: 2px; }
+.dic-scelte .chip { min-height: 30px; padding: 0 10px; font-size: 13.5px; }
+.diceria .corpo p.dic-stato { margin: 2px 0 0; line-height: 1.5; }
+.stato-dic { font-weight: 700; font-size: 14.5px; color: var(--brina); margin-right: 4px; }
+.v-si .stato-dic { color: var(--c-luogo); }
+.v-parte .stato-dic { color: var(--lanterna-2); }
+.v-no .stato-dic { color: var(--cera); }
+/* "Cambia" è secondario e non deve confondersi con "Vera in parte", che è in lanterna: brina sottolineato */
+.dic-stato .btn--in-riga { margin-left: 6px; font-size: 14px; font-weight: 600; color: var(--brina); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(131, 150, 165, .5); }
+
+/* bottino compatto: i filtri dentro la scheda aperta, la descrizione chiusa su una riga (un tocco la apre) */
+.filtri-bottino { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 6px; }
+.filtri-bottino > .fioco { margin-right: 2px; }
+.filtri-bottino .chip { min-height: 30px; padding: 0 10px; font-size: 13.5px; }
+.desc-bottino { cursor: pointer; border-radius: 6px; }
+.desc-bottino.chiusa { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; line-clamp: 1; overflow: hidden; }
+.desc-bottino:focus-visible { outline: 2px solid var(--lanterna); outline-offset: 2px; }
+
+/* Mercato a fisarmonica: il titolo è la riga da toccare, con la freccia che gira e, chiusa, cosa c'è dentro */
+.mercato-sez { margin-top: 14px; border-top: 1px solid rgba(236, 230, 214, .08); padding-top: 12px; }
+.mercato-sez > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; }
+.mercato-sez > summary::-webkit-details-marker { display: none; }
+.mercato-sez > summary h2 { font-size: 22px; margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.mercato-sez > summary h2 .conta { font: 500 14px var(--f-testo); color: var(--brina); }
+.mercato-sez > summary > .i { width: 20px; height: 20px; color: var(--brina); transition: transform .15s; }
+.mercato-sez[open] > summary > .i { transform: rotate(90deg); color: var(--lanterna); }
+.ms-riassunto { grid-column: 1 / -1; margin-top: 4px; font-size: 14px; color: var(--brina); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mercato-sez[open] .ms-riassunto { display: none; }
+.ms-corpo { margin-top: 10px; }
 /* nel modulo dell'oggetto */
 .cariche-editor { display: grid; gap: 10px; }
 .cb-ed { display: grid; gap: 4px; }
@@ -928,8 +1038,9 @@ ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; widt
 .stato-tavolo { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 12px; border-radius: 10px; background: rgba(236,230,214,.04); color: var(--avorio); text-decoration: none; font-size: 15px; }
 .stato-tavolo.forte { background: var(--lanterna-ombra); color: var(--lanterna-2); }
 .stato-tavolo .i { width: 18px; height: 18px; flex: none; }
-.tasti-tavolo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-.tasti-tavolo a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; border-radius: 12px; border: 1px solid var(--brina-2); color: var(--avorio-2); text-decoration: none; font-size: 13.5px; }
+/* 1.8: cinque tasti in fila (i turni stanno solo nella loro scheda di Stasera) */
+.tasti-tavolo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 12px; }
+.tasti-tavolo a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 2px; border-radius: 12px; border: 1px solid var(--brina-2); color: var(--avorio-2); text-decoration: none; font-size: 13px; white-space: nowrap; }
 .tasti-tavolo a .i { width: 22px; height: 22px; color: var(--lanterna); }
 
 /* vista Al tavolo */
@@ -1005,6 +1116,96 @@ ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; widt
 .azioni-riga { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 .azioni--master { margin-top: 12px; }
 
+/* =====================================================================
+   1.8, passo 3 — la Regia del Master e le tabelle casuali
+   ===================================================================== */
+.regia-nota { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 4px; }
+.regia-nota .i { width: 17px; height: 17px; flex: none; margin-top: 1px; color: var(--c-fazione); }
+/* una tabella della Regia è il riquadro delle tabelle del bottino, un po' più arioso perché è il pezzo principale */
+.tab-regia { margin-top: 10px; padding: 10px 12px; }
+.tab-regia .tb-titolo { font: 400 19px/1.2 var(--f-titolo); }
+.tab-regia .tb-titolo .fioco { font-family: var(--f-testo); margin-left: 4px; }
+.tab-regia .azioni--strette { margin-top: 4px; }
+.tab-regia .btn--testo { padding-left: 0; }
+.tabelle-vuote { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; }
+.tabelle-vuote > .fioco { margin-right: 2px; }
+.tabelle-vuote .chip { min-height: 32px; border-style: dashed; color: var(--avorio-2); }
+/* cosa non torna in una tabella: in lanterna, come gli avvisi, non in cera (non è un errore, si può tirare lo stesso) */
+.avviso-tabella { display: flex; gap: 6px; align-items: flex-start; margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--lanterna-2); }
+.avviso-tabella .i { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+#anteprima-tabella { min-height: 22px; margin: -4px 0 10px; }
+#anteprima-tabella .fioco { margin: 0; }
+.campo--dado { flex: 0 0 108px !important; }
+/* voci segrete: la riga porta alla voce, accanto "Stasera" (prevista) e "Rivela" */
+.lista.segrete li.riga-segreta { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid rgba(236, 230, 214, .07); }
+.lista.segrete li.riga-segreta > .riga { flex: 1; min-width: 0; border-bottom: 0; }
+.riga-segreta .chip { min-height: 30px; padding: 0 9px; font-size: 13px; }
+.riga-segreta .btn--testo { padding: 0 4px; }
+details.altre-segrete > summary { cursor: pointer; font-size: 14.5px; color: var(--brina); margin: 8px 0 4px; }
+
+/* =====================================================================
+   1.8, passo 4 — orologi narrativi ed eventi programmati
+   ===================================================================== */
+/* il cerchio a spicchi: vuoti appena accennati, pieni in lanterna; tutto pieno, un alone */
+.cerchio-orologio { flex: none; display: block; }
+.cerchio-orologio path { fill: rgba(236, 230, 214, .06); stroke: var(--brina); stroke-width: .9; stroke-linejoin: round; }
+.cerchio-orologio path.pieno { fill: var(--lanterna); stroke: var(--lanterna-2); }
+.cerchio-orologio.tutto { filter: drop-shadow(0 0 4px rgba(232, 163, 61, .55)); }
+.orologio.privato .cerchio-orologio path.pieno, .cr-orologio.privato .cerchio-orologio path.pieno { fill: #A98BFF; stroke: #C9B8FF; }
+/* una riga di orologio: cerchio, nome e spicchi, e al Master − e + a destra */
+.lista.orologi li.orologio { display: flex; align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid rgba(236, 230, 214, .07); }
+.lista.orologi li.orologio:last-child { border-bottom: 0; }
+.orologio .corpo { flex: 1; min-width: 0; }
+/* l'occhio barrato dei privati segue il nome anche quando il nome va a capo */
+.orologio .tit, .evento-riga .tit { font-size: 16.5px; font-weight: 500; line-height: 1.3; }
+.orologio .tit .i, .evento-riga .tit .i { display: inline-block; width: 15px; height: 15px; margin-left: 6px; vertical-align: -2px; color: #A98BFF; }
+.orologio .sub, .evento-riga .sub { font-size: 14px; color: var(--brina); line-height: 1.4; margin-top: 2px; }
+.orologio.tutto .sub:first-of-type { color: var(--lanterna-2); }
+.oro-tasti { display: flex; gap: 4px; flex: none; }
+.oro-tasti .btn-icona[disabled] { opacity: .35; }
+.orologi--corti li.orologio { padding: 6px 0; }
+/* le note del Master sotto un orologio o un evento: in viola, come tutto quello che vedono solo i suoi occhi */
+.nota-master { color: #C9B8FF !important; }
+.nota-master b { font-weight: 700; }
+/* una riga di evento: la campanella, cosa, quando e dove */
+.lista.eventi-prog li.evento-riga { display: flex; align-items: flex-start; gap: 12px; padding: 10px 2px; border-bottom: 1px solid rgba(236, 230, 214, .07); }
+.lista.eventi-prog li.evento-riga:last-child { border-bottom: 0; }
+.evento-riga > .i { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--lanterna); }
+.evento-riga.privato > .i { color: #A98BFF; }
+.evento-riga.passato { opacity: .7; }
+.evento-riga .corpo { flex: 1; min-width: 0; }
+/* gli avvisi del Master: il riquadro dell'alba, con la campanella o il cerchio pieno */
+.riquadro-evento > .i { width: 22px; height: 22px; }
+.riquadro-orologio > .cerchio-orologio { margin-top: 1px; }
+.riquadro-alba .nota-master { display: block; }
+.riquadro-alba .azioni--strette { flex-wrap: wrap; }
+.cruscotto .riquadro-alba { margin: 10px 0 0; }
+/* nel cruscotto: chip piccoli, due per riga */
+.cr-orologi { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.cr-orologio { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 30px; padding: 3px 10px 3px 5px; border-radius: 999px; border: 1px solid var(--brina-2); color: var(--avorio); text-decoration: none; font-size: 13.5px; }
+.cr-orologio .nome { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 150px; }
+.cr-orologio b { font-weight: 700; color: var(--lanterna-2); }
+.cr-orologio .i { width: 13px; height: 13px; color: #A98BFF; }
+.cr-orologio.altri { color: var(--brina); padding-left: 10px; }
+/* sulla mappa: il cerchio in alto a destra del segnaposto, la campanella in basso a destra */
+.pin-orologio { position: absolute; left: 9px; top: -27px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: rgba(16, 24, 32, .92); box-shadow: 0 2px 6px rgba(0, 0, 0, .5); pointer-events: none; }
+.pin-evento { position: absolute; left: 10px; top: 6px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--lanterna); color: #22170A; box-shadow: 0 2px 6px rgba(0, 0, 0, .5); pointer-events: none; }
+.pin-evento .i { width: 13px; height: 13px; }
+.pin-evento .i path { stroke-width: 2.2; }
+.pin-evento.segreto { background: #A98BFF; }
+.pin--minore .pin-orologio { left: 5px; top: -24px; }
+.pin--minore .pin-evento { left: 6px; top: 3px; }
+.lontano .pin:not(.sel) .pin-orologio, .lontano .pin:not(.sel) .pin-evento { display: none; }
+/* il modulo dell'orologio: gli spicchi come chip da scegliere */
+.scelta-spicchi .chip { min-width: 52px; justify-content: center; }
+.scelta-spicchi .chip input { position: absolute; opacity: 0; pointer-events: none; }
+.scelta-spicchi .chip:has(input:checked) { border-color: var(--lanterna); color: var(--lanterna-2); background: var(--lanterna-ombra); }
+.rinvia-tasti { flex-direction: column; align-items: stretch; }
+.rinvia-tasti .btn { justify-content: space-between; }
+/* un pallino sulla voce Stasera quando il Master ha un avviso da guardare */
+.nav a.con-avviso { position: relative; }
+.nav a.con-avviso::after { content: ''; position: absolute; top: 8px; left: calc(50% + 9px); width: 9px; height: 9px; border-radius: 50%; background: var(--lanterna); box-shadow: 0 0 0 2px rgba(19, 27, 35, .95); }
+
 </style>
 </head>
 <body>
@@ -1033,20 +1234,22 @@ ul.gesta li::before { content: ''; position: absolute; left: 4px; top: 5px; widt
 
    Parti del codice:
      1-core.js     costanti, icone, dati, sincronizzazione, testo, indice
-     2-viste.js    le schermate (home, diario, missioni, wiki, voce...)
+     2-viste.js    le schermate (home e cruscotto della serata, riepilogo, Storia, Gruppo, wiki, voce...)
+                   e la barra in basso a cinque voci (SEZIONI, sezioneDi, testaSezione)
      3-editor.js   modulo di modifica unico per voci, missioni, sessioni
      4-mappa.js    mappa interattiva (zoom, segnaposto, percorso, neve)
      5-importa.js  import della sessione dalla risposta di AI Studio
      6-demo.js     dati e mappa di esempio
      7-schede.js   schede dei personaggi (capacità, risorse, riposi)
      8-commercio.js compagnia commerciale (slitte, conducenti, tratte, spedizioni)
+     8-tavolo.js   Stasera: orologio e luce, freddo, viaggio, bottino, date, dicerie, turni
      9-avvio.js    gestione dei clic e avvio dell'app
    ===================================================================== */
 
 // ---------------------------------------------------------------------
 // COSTANTI
 // ---------------------------------------------------------------------
-const VERSIONE = '1.7';
+const VERSIONE = '1.8';
 const VERSIONE_SCRIPT = 2;   // versione minima di Code.gs che serve a questa app
 const SCRIPT_CONSIGLIATO = 3; // con la 3 il foglio rifiuta i campi troppo lunghi invece di tagliarli ed è più veloce
 const TABELLE = ['sessioni', 'voci', 'missioni', 'rapporti', 'mappe', 'config', 'commercio'];
@@ -1172,7 +1375,15 @@ const ICONE = {
   oggetto: 'M7 4h10l4 5-9 11L3 9z M3 9h18 M9.5 4L12 9l2.5-5 M12 9v11',
   slitta: 'M2.5 18.5h15.5a3.5 3.5 0 0 0 3.5-3.5 M6.5 18.5v-3 M15 18.5v-3 M4.5 15.5h13L16 8.5H6z M8.5 8.5V6 M13.5 8.5V6',
   scheda: 'M6 3.5h12v17H6z M9 8h6 M9 11.5h6 M9 15h3.5',
-  dado: 'M12 2.5l8.5 5v9l-8.5 5-8.5-5v-9z M12 2.5v9.5 M3.5 7.5l8.5 4.5 8.5-4.5 M12 12v9.5'
+  dado: 'M12 2.5l8.5 5v9l-8.5 5-8.5-5v-9z M12 2.5v9.5 M3.5 7.5l8.5 4.5 8.5-4.5 M12 12v9.5',
+  // 1.8: Stasera nella barra (un d20), le dicerie (un fumetto, le voci che girano), i rapporti (due cerchi che si
+  // toccano) e la Regia (un ciak: lo schermo del Master a tre ante si confondeva con la mappa)
+  regia: 'M4 10h16v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z M3.6 9.6l15.5-4.4.8 2.8L4.4 12.4z M7.8 8.4l2.2 2.9 M12.6 7l2.2 2.9',
+  // gli eventi programmati (1.8): una campanella, quella che suona all'ora giusta
+  evento: 'M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 2h-14z M10 20.5a2 2 0 0 0 4 0 M12 3.5v2',
+  d20: 'M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z M12 7l4.8 8.3H7.2z M12 2.5V7 M3.5 16.75l3.7-1.45 M20.5 16.75l-3.7-1.45',
+  diceria: 'M5 4.5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-7.5L7 19.5v-4H5a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z M8 8.5h8 M8 11.5h5',
+  rapporti: 'M9 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z M15 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z'
 };
 function ico(nome, classe) {
   return `<svg class="i ${classe || ''}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONE[nome] || ICONE.punto}"/></svg>`;
@@ -2159,8 +2370,58 @@ function rotta() {
   const parti = percorso.split('/').map(p => { try { return decodeURIComponent(p); } catch (e) { return p; } });
   return { vista: parti[0] || 'home', a: parti[1], b: parti[2], q: new URLSearchParams(query || '') };
 }
+// ---------------------------------------------------------------------
+// LA BARRA IN BASSO (1.8): cinque voci al posto di sei.
+//   Stasera  gli strumenti del tavolo (la valle, viaggio, bottino, date, dicerie; i turni in fondo, in tono minore)
+//   Storia   diario, missioni, gesta, dicerie
+//   Mappa e Wiki come prima
+//   Gruppo   bottino, compagni, rapporti, commercio, date
+// Stasera, Storia e Gruppo hanno in cima le loro schede (testaSezione). Bottino, Date e Dicerie stanno in due
+// sezioni: è la stessa pagina con due indirizzi (#/stasera?sez=bottino e #/gruppo?sez=bottino), così la barra
+// accende la sezione da cui ci si arriva. La Home resta il riepilogo e si apre da "Taverna" in alto.
+// I link di prima continuano a funzionare: #/tavolo è Stasera; #/commercio e #/scheda stanno in Gruppo;
+// #/diario, #/missioni, #/gesta in Storia (sono anche gli indirizzi delle loro schede).
+// ---------------------------------------------------------------------
+const SEZIONI = {
+  stasera: { nome: 'Stasera', ico: 'd20', href: '#/stasera' },
+  storia: { nome: 'Storia', ico: 'diario', href: '#/diario' },
+  mappa: { nome: 'Mappa', ico: 'mappa', href: '#/mappa' },
+  wiki: { nome: 'Wiki', ico: 'wiki', href: '#/wiki' },
+  gruppo: { nome: 'Gruppo', ico: 'lanterna', href: '#/gruppo' }
+};
+// la voce della barra accesa per ogni vista (la Home e le impostazioni non ne accendono nessuna)
 function sezioneDi(vista) {
-  return { home: 'home', tavolo: 'home', diario: 'diario', sessione: 'diario', importa: 'diario', gesta: 'diario', mappa: 'mappa', missioni: 'missioni', missione: 'missioni', wiki: 'wiki', voce: 'wiki', scheda: 'wiki', commercio: 'commercio' }[vista] || '';
+  return {
+    stasera: 'stasera', tavolo: 'stasera', riepilogo: 'stasera',
+    storia: 'storia', diario: 'storia', sessione: 'storia', importa: 'storia', gesta: 'storia', missioni: 'storia', missione: 'storia', dicerie: 'storia',
+    mappa: 'mappa', wiki: 'wiki', voce: 'wiki',
+    gruppo: 'gruppo', commercio: 'gruppo', scheda: 'gruppo'
+  }[vista] || '';
+}
+// Le schede di una sezione: { k, nome, ico, href, minore }. Quelle di Stasera vengono da SEZIONI_TAVOLO
+// (8-tavolo.js), che decide anche l'ordine e quali stanno in tono minore (i turni).
+function schedeDi(sezione) {
+  // la Regia (master: true) solo con la chiave del Master, come dice la sua scheda (1.8)
+  if (sezione === 'stasera') return Object.entries(SEZIONI_TAVOLO).filter(([k, s]) => !s.master || IMPOST.master)
+    .map(([k, s]) => ({ k, nome: s.nome, ico: s.ico, href: '#/stasera?sez=' + k, minore: s.minore }));
+  if (sezione === 'storia') return [
+    { k: 'diario', nome: 'Diario', ico: 'diario', href: '#/diario' },
+    { k: 'missioni', nome: 'Missioni', ico: 'missioni', href: '#/missioni' },
+    { k: 'gesta', nome: 'Gesta', ico: 'gesta', href: '#/gesta' },
+    { k: 'dicerie', nome: 'Dicerie', ico: 'diceria', href: '#/dicerie' }];
+  if (sezione === 'gruppo') return [
+    { k: 'bottino', nome: 'Bottino', ico: 'oggetto', href: '#/gruppo?sez=bottino' },
+    { k: 'compagni', nome: 'Compagni', ico: 'pg', href: '#/gruppo?sez=compagni' },
+    { k: 'rapporti', nome: 'Rapporti', ico: 'rapporti', href: '#/gruppo?sez=rapporti' },
+    { k: 'commercio', nome: 'Commercio', ico: 'slitta', href: '#/commercio' },
+    { k: 'date', nome: 'Date', ico: 'orologio', href: '#/gruppo?sez=date' }];
+  return [];
+}
+// In cima a ogni pagina di una sezione: il nome della sezione (con eventuali tasti a destra) e le sue schede
+function testaSezione(sezione, attiva, destra) {
+  const s = SEZIONI[sezione];
+  return `<div class="testa-vista testa-sezione"><h1 class="t1">${esc(s.nome)}</h1>${destra ? `<div class="azioni">${destra}</div>` : ''}</div>
+    <nav class="schede-hub" aria-label="${esc(s.nome)}">${schedeDi(sezione).map(x => `<a href="${x.href}" class="${x.k === attiva ? 'attivo' : ''}${x.minore ? ' minore' : ''}"${x.k === attiva ? ' aria-current="page"' : ''}>${ico(x.ico)}${esc(x.nome)}</a>`).join('')}</nav>`;
 }
 
 function render() {
@@ -2170,14 +2431,20 @@ function render() {
   document.getElementById('vista').hidden = inMappa;
   document.body.classList.toggle('in-mappa', inMappa);
   const sez = sezioneDi(r.vista);
-  document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('attivo', a.dataset.sez === sez));
-  document.querySelector('.barra-top .indietro').hidden = !['sessione', 'voce', 'missione', 'importa', 'impostazioni', 'scheda', 'tavolo', 'gesta'].includes(r.vista);
+  document.querySelectorAll('.nav a').forEach(a => { a.classList.toggle('attivo', a.dataset.sez === sez); if (a.dataset.sez === sez) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  // 1.8: un pallino su Stasera quando il Master ha un avviso da guardare (un evento scaduto, un orologio pieno),
+  // anche se in quel momento è sulla mappa o nel diario
+  const navStasera = document.querySelector('.nav a[data-sez="stasera"]');
+  if (navStasera) navStasera.classList.toggle('con-avviso', !!IMPOST.master && avvisiMaster() !== '');
+  // la freccia indietro solo nelle pagine di dettaglio: le sezioni della barra sono già a un tocco
+  document.querySelector('.barra-top .indietro').hidden = !['sessione', 'voce', 'missione', 'importa', 'impostazioni', 'scheda', 'riepilogo'].includes(r.vista);
   // in alto a destra il sigillo del mio personaggio porta alla sua scheda
   const mio = IMPOST.pg && DB.voci[IMPOST.pg] && visibile(DB.voci[IMPOST.pg]) ? DB.voci[IMPOST.pg] : null;
   const linkScheda = document.getElementById('link-scheda');
   linkScheda.hidden = !mio;
   if (mio) { linkScheda.href = '#/scheda/' + encodeURIComponent(mio.id); linkScheda.innerHTML = sigillo(mio, 'sigillo--mini'); linkScheda.setAttribute('aria-label', 'Scheda di ' + mio.nome); }
-  document.querySelector('.barra-top .marchio').textContent = cfg('campagna', 'Taverna');
+  // il nome in alto porta alla Home (dalla 1.8 non è più nella barra in basso): il boccale lo ricorda
+  document.querySelector('.barra-top .marchio').innerHTML = ico('taverna') + '<span>' + esc(cfg('campagna', 'Taverna')) + '</span>';
   document.title = cfg('campagna', 'Taverna');
   clearInterval(TIMER_VISTA);
   if (inMappa) { mappaApri(r.a || null, r.q.get('luogo')); return; }
@@ -2185,18 +2452,22 @@ function render() {
 
   let html;
   switch (r.vista) {
-    case 'diario': html = vistaDiario(); break;
+    case 'diario': case 'storia': html = vistaDiario(); break;
     case 'sessione': html = vistaSessione(r.a); break;
     case 'gesta': html = vistaGesta(); break;
     case 'missioni': html = vistaMissioni(r.q.get('stato') === 'concluse' ? 'concluse' : 'attive'); break;
     case 'missione': html = vistaMissione(r.a); break;
+    case 'dicerie': html = testaSezione('storia', 'dicerie') + sezioneDicerie(); break;
     case 'wiki': html = vistaWiki(r.q.get('tipo') || '', r.q.get('q') || ''); break;
     case 'voce': html = vistaVoce(r.a); break;
     case 'importa': html = vistaImporta(); break;
     case 'impostazioni': html = vistaImpostazioni(); break;
     case 'scheda': html = vistaScheda(r.a); break;
     case 'commercio': html = vistaCommercio(r.q.get('sez') || 'spedizioni'); break;
-    case 'tavolo': html = vistaTavolo(r.q.get('sez') || 'valle'); break;
+    // #/tavolo è l'indirizzo di prima di Stasera: i link salvati e quelli nei testi continuano a funzionare
+    case 'stasera': case 'tavolo': html = vistaTavolo(r.q.get('sez') || 'valle'); break;
+    case 'gruppo': html = vistaGruppo(r.q.get('sez') || 'bottino'); break;
+    case 'riepilogo': html = vistaRiepilogo(); break;
     case 'nuova-voce':
       // ci si arriva da un link a una menzione sconosciuta aperto da fuori (di solito lo gestisce il clic)
       history.replaceState(null, '', '#/wiki');
@@ -2227,31 +2498,38 @@ function dopoRender(r) {
     const mm = document.getElementById('miniMappa');
     if (mm) riempiMiniMappa(mm);
     const ser = serata();
+    // il cruscotto della serata: il cronometro ogni secondo, i minuti in acqua gelida quando cambiano
     if (ser && !ser.fine) {
       TIMER_VISTA = setInterval(() => {
         const c = document.querySelector('.cronometro');
         if (c) c.textContent = durata(Date.now() - (Number(ser.registrazione) || Number(ser.inizio)));
+        aggiornaAcqua();
       }, 1000);
     }
   }
   if (r.vista === 'wiki' && r.q.get('q')) filtraWiki(r.q.get('q'));
   // nella revisione dell'import le righe da scrivere (fatti, gesta, frasi di stasera) sono alte quanto il testo
   if (r.vista === 'importa') document.querySelectorAll('#vista textarea.breve').forEach(altezzaTesto);
-  if (r.vista === 'tavolo') {
+  if (r.vista === 'tavolo' || r.vista === 'stasera') {
     const sez = r.q.get('sez') || 'valle';
     // durante il combattimento i turni devono arrivare in fretta: sincronizzo spesso, solo con questa vista aperta
     if (sez === 'turni' && iniziativa().attiva) TIMER_VISTA = setInterval(() => { if (!document.hidden && !SYNC.inCorso) sincronizza(); }, 12000);
     // i minuti in acqua gelida avanzano da soli
-    if (sez === 'valle' && document.querySelector('[data-acqua]')) TIMER_VISTA = setInterval(() => {
-      document.querySelectorAll('[data-acqua]').forEach(el => {
-        const min = Math.floor((Date.now() - Number(el.dataset.acqua)) / 60000), regge = Number(el.dataset.regge) || 0;
-        // data-resiste: un oggetto lo fa resistere al freddo (1.7), niente tiri e niente allarme
-        if (el.dataset.resiste) { el.textContent = 'In acqua da ' + min + ' min: resiste al freddo, niente tiri'; return; }
-        el.textContent = 'In acqua da ' + min + ' min' + (regge ? ' su ' + regge : '');
-        el.className = regge && min >= regge ? 'cera' : 'lanterna';
-      });
-    }, 10000);
+    if (sez === 'valle' && document.querySelector('[data-acqua]')) TIMER_VISTA = setInterval(aggiornaAcqua, 10000);
   }
+}
+// I minuti in acqua gelida scritti nella pagina (data-acqua = quando è entrato, data-regge = i minuti che regge,
+// cioè il punteggio di Costituzione). Li usano la Valle e il cruscotto della serata.
+function aggiornaAcqua() {
+  document.querySelectorAll('[data-acqua]').forEach(el => {
+    const min = Math.floor((Date.now() - Number(el.dataset.acqua)) / 60000), regge = Number(el.dataset.regge) || 0;
+    // data-chi: nel cruscotto la riga dice anche chi è in acqua. data-resiste: un oggetto lo fa resistere
+    // al freddo (1.7), niente tiri e niente allarme
+    const testo = (el.dataset.chi ? el.dataset.chi + ' è in acqua da ' : 'In acqua da ') + min + ' min' +
+      (el.dataset.resiste ? ': resiste al freddo' + (el.dataset.chi ? '' : ', niente tiri') : regge ? ' su ' + regge : '');
+    if (el.textContent !== testo) el.textContent = testo;
+    if (!el.dataset.resiste) el.className = regge && min >= regge ? 'cera' : 'lanterna';
+  });
 }
 
 function altezzaTesto(t) { t.style.height = 'auto'; t.style.height = (t.scrollHeight + 2) + 'px'; }
@@ -2277,10 +2555,10 @@ function vistaHome() {
       </div>
     </section>`;
   }
-  let h = '';
+  // con la serata in corso la Home diventa il cruscotto della serata (1.8), tutto in un solo schermo
   const ser = serata();
-  const inCorso = ser && !ser.fine;
-  if (inCorso) h += bloccoTaccuino() + bloccoAlTavolo();
+  if (ser && !ser.fine) return cruscottoSerata();
+  let h = '';
 
   // Nelle puntate precedenti: l'ultima sessione, in grande. Con il riassunto breve dell'AI
   // (da leggere a voce alta a inizio serata) mostro quello e le cose in sospeso.
@@ -2311,7 +2589,7 @@ function vistaHome() {
       <div class="dove-testo"><span class="fioco">Il gruppo è a</span><strong class="t2">${esc(DB.voci[pos].nome)}</strong><span class="fioco piccolo">Apri la mappa</span></div>
     </a>`;
   }
-  if (!inCorso) h += bloccoTaccuino() + bloccoAlTavolo();
+  h += bloccoTaccuino() + bloccoAlTavolo();
 
   // Missioni accettate
   const attive = elenco('missioni', m => (m.stato || 'attiva') === 'attiva')
@@ -2358,42 +2636,154 @@ function vistaHome() {
 }
 
 // Taccuino della serata (condiviso, vedi "LA SERATA" in 5-importa.js): cronometro, tasti dei tipi
-// di segnalibro e l'elenco di quelli presi da tutto il tavolo
+// di segnalibro e l'elenco di quelli presi da tutto il tavolo.
+// Con la serata in corso sta in cima al cruscotto (1.8): per stare in un solo schermo mostra gli ultimi
+// SEGNALIBRI_IN_VISTA segnalibri, e gli altri con un tocco (SEGNALIBRI_TUTTI resta finché l'app è aperta).
+const SEGNALIBRI_IN_VISTA = 3;
+let SEGNALIBRI_TUTTI = false;
 function bloccoTaccuino() {
   const ser = serata();
   const note = segnalibriSerata();
   const inCorso = ser && !ser.fine;
   if (!ser && !note.length) {
+    // prima si legge il riepilogo ad alta voce, poi si avvia la serata quando parte la registrazione
     return `<section class="taccuino"><h2 class="t3">Si gioca stasera?</h2>
-      <p class="fioco piccolo" style="margin:6px 0 0">Avvia la serata quando parte la registrazione: il cronometro parte per tutto il tavolo, ognuno può segnare dal suo telefono e i segnalibri finiscono nel prompt dell'import.</p>
-      <div class="azioni"><button class="btn btn--primario" data-a="tac-inizia">${ico('orologio')}Inizia la serata</button></div></section>`;
+      <p class="fioco piccolo" style="margin:6px 0 0">Prima leggete ad alta voce il riepilogo, poi avviate la serata quando parte la registrazione: il cronometro parte per tutto il tavolo, ognuno può segnare dal suo telefono e i segnalibri finiscono nel prompt dell'import.</p>
+      <div class="azioni"><a class="btn" href="#/riepilogo">${ico('diario')}Prima di cominciare</a><button class="btn btn--primario" data-a="tac-inizia">${ico('orologio')}Inizia la serata</button></div></section>`;
   }
   const zero = ser ? (Number(ser.registrazione) || Number(ser.inizio)) : 0;
   const io = chiSono();
-  const lista = note.length ? '<ol class="segnalibri">' + note.slice().reverse().map(n => {
+  const riga = n => {
     const t = TIPI_SEGNALIBRO[n.tipo] || TIPI_SEGNALIBRO.nota;
     const mio = !n.chi || n.chi === io || IMPOST.master;
     return `<li class="seg-${esc(n.tipo || 'nota')}"><time>${durata(minutoSegnalibro(n, ser))}</time>
       <span class="seg-tipo">${ico(t.ico)}${esc(t.nome)}</span><span class="seg-testo">${esc(n.testo || '')}${n.chi ? ` <span class="fioco piccolo">${esc(n.chi)}</span>` : ''}</span>
       ${mio ? `<button class="btn-icona btn-icona--mini" data-a="tac-togli" data-id="${esc(n.id)}" aria-label="Togli il segnalibro">${ico('chiudi')}</button>` : ''}</li>`;
-  }).join('') + '</ol>' : '';
+  };
+  // dal più recente: durante la serata contano gli ultimi
+  const recenti = note.slice().reverse();
   if (inCorso) {
     const tasti = Object.keys(TIPI_SEGNALIBRO).filter(k => k !== 'nota' && (!TIPI_SEGNALIBRO[k].master || IMPOST.master));
     const ora = d => new Date(d).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    const quanti = SEGNALIBRI_TUTTI ? recenti.length : SEGNALIBRI_IN_VISTA;
+    const altri = recenti.length - SEGNALIBRI_IN_VISTA;
+    // il cruscotto deve stare in un solo schermo: il cronometro accanto a Termina, e chi l'ha aperta, da quando
+    // contano i minuti e "La registrazione parte adesso" in una riga di testo piccolo sotto (il tasto va a capo come testo)
     return `<section class="taccuino">
-      <div class="testa"><div><span class="fioco piccolo">Serata in corso${ser.chi ? ', aperta da ' + esc(ser.chi) : ''}</span><div class="cronometro">${durata(Date.now() - zero)}</div></div>
+      <div class="testa"><div class="cronometro" aria-label="Serata in corso">${durata(Date.now() - zero)}</div>
       <button class="btn btn--piccolo" data-a="tac-termina">Termina</button></div>
-      <p class="fioco piccolo" style="margin:4px 0 10px">Minuti contati dalle ${ora(zero)}. <button class="btn btn--testo btn--piccolo" data-a="tac-registra">La registrazione parte adesso</button></p>
-      <form data-a="tac-segna"><input type="text" name="testo" placeholder="Cosa è successo? Es. il capo villaggio ci offre un lavoro" autocomplete="off" aria-label="Segnalibro"><button class="btn btn--primario" type="submit">${ico('segna')}Segna</button></form>
+      <p class="fioco piccolo tac-zero">Serata${ser.chi ? ' aperta da ' + esc(ser.chi) : ' in corso'}, minuti contati dalle ${ora(zero)}. <button class="btn btn--testo btn--in-riga" data-a="tac-registra">La registrazione parte adesso</button></p>
+      <form data-a="tac-segna"><input type="text" name="testo" placeholder="Cosa è successo?" autocomplete="off" aria-label="Segnalibro"><button class="btn btn--primario" type="submit">${ico('segna')}Segna</button></form>
       <div class="tipi-seg" role="group" aria-label="Segna con un tocco">${tasti.map(k => `<button class="chip chip--tasto" data-a="tac-tipo" data-tipo="${k}">${ico(TIPI_SEGNALIBRO[k].ico)}${esc(TIPI_SEGNALIBRO[k].nome)}</button>`).join('')}</div>
-      <p class="fioco piccolo" style="margin:8px 0 0">Un tocco su un tipo segna il minuto subito; se hai scritto qualcosa nel campo, va insieme.</p>
-      ${lista}</section>`;
+      ${recenti.length ? `<ol class="segnalibri">${recenti.slice(0, quanti).map(riga).join('')}</ol>` : ''}
+      ${altri > 0 ? `<button class="btn btn--testo btn--piccolo tac-tutti" data-a="tac-tutti">${SEGNALIBRI_TUTTI ? 'Solo gli ultimi ' + SEGNALIBRI_IN_VISTA : (altri === 1 ? 'Un altro segnalibro' : 'Altri ' + altri + ' segnalibri')}</button>` : ''}</section>`;
   }
+  const lista = recenti.length ? `<ol class="segnalibri">${recenti.map(riga).join('')}</ol>` : '';
   return `<section class="taccuino"><div class="testa"><h2 class="t3">Segnalibri pronti per l'import</h2><span class="fioco piccolo">${note.length}</span></div>
     ${ser && ser.data ? `<p class="fioco piccolo" style="margin:4px 0 0">Serata del ${dataBella(ser.data)}.</p>` : ''}
     ${lista}
     <div class="azioni"><a class="btn btn--primario btn--piccolo" href="#/importa">${ico('importa')}Importa la sessione</a>
     ${ser ? '<button class="btn btn--piccolo" data-a="tac-riprendi">Riprendi</button>' : ''}<button class="btn btn--piccolo" data-a="tac-svuota">Chiudi senza importare</button></div></section>`;
+}
+
+// ---------------------------------------------------------------------
+// IL CRUSCOTTO DELLA SERATA (1.8): con la serata in corso la Home sta in un solo schermo del telefono.
+//   - il taccuino: cronometro, Segna con i tipi, gli ultimi segnalibri;
+//   - ora e luce, chi tira per il freddo (con chi è in acqua gelida e chi ha già livelli di indebolimento);
+//   - le risorse del mio personaggio, con gli stessi rombi della scheda (data-a="ris", come lì);
+//   - dal passo 4 gli orologi pubblici.
+// Niente turni di combattimento: si fanno su D&D Beyond. Il riepilogo da leggere ad alta voce e gli
+// strumenti di Stasera sono in fondo, a un tocco.
+// ---------------------------------------------------------------------
+function cruscottoSerata() {
+  let h = bloccoTaccuino();
+  // il Master vede subito gli avvisi (eventi scaduti, orologi pieni, 1.8), con le scelte già pronte
+  h += avvisiMaster();
+
+  // ora, luce e freddo in un riquadro solo (la classe al-tavolo è quella del riquadro di prima nella Home)
+  const ore = oreCampagna(), cal = calendario(ore);
+  const righe = [];
+  const bufera = cfg('bufera', null);
+  if (buferaAttiva(ore)) {
+    const fine = bufera && bufera.oraInizio !== undefined && bufera.oraInizio !== '' && Number(bufera.ore) ? Number(bufera.oraInizio) + Number(bufera.ore) : null;
+    righe.push(`<a class="cr-riga lanterna" href="#/stasera?sez=valle">${ico('neve')}Bufera in corso${fine !== null ? ', finisce alle ' + esc(testoOra(fine)) : ''}</a>`);
+  }
+  if (cal.luna && cal.luna.tra <= 1) righe.push(`<a class="cr-riga lanterna" href="#/stasera?sez=valle">${ico('lanterna')}${esc(testoLuna(cal.luna))}: sacrifici ad Auril</a>`);
+  // il freddo: chi tira a ogni ora all'aperto (lo stesso conto del viaggio), chi è in acqua, chi è già indebolito
+  const pgs = personaggi();
+  const tirano = espostiAlFreddo();
+  righe.push(`<a class="cr-riga${tirano.length ? '' : ' fioco'}" href="#/stasera?sez=valle">${ico('fiocco')}${pgs.length
+    ? (tirano.length ? 'All\'aperto tirano ogni ora: ' + esc(tirano.map(p => p.nome).join(', ')) : 'Freddo: nessuno tira, sono tutti al sicuro')
+    : 'Freddo: aggiungete i personaggi nel wiki'}</a>`);
+  pgs.filter(p => Number(p.acqua)).forEach(p => {
+    const min = Math.floor((Date.now() - Number(p.acqua)) / 60000), regge = Number(p.cosPunteggio) || 0;
+    const resiste = !!oggettoControFreddo(p);
+    righe.push(`<a class="cr-riga" href="#/stasera?sez=valle">${ico('orologio')}<span class="${resiste ? 'fioco' : regge && min >= regge ? 'cera' : 'lanterna'}" data-acqua="${Number(p.acqua)}" data-regge="${resiste ? 0 : regge}" data-chi="${esc(p.nome)}"${resiste ? ' data-resiste="1"' : ''}>${esc(p.nome)} è in acqua da ${min} min${resiste ? ': resiste al freddo' : regge ? ' su ' + regge : ''}</span></a>`);
+  });
+  const indeboliti = pgs.filter(p => Number(p.indebolimento) > 0);
+  if (indeboliti.length) righe.push(`<a class="cr-riga cera" href="#/stasera?sez=valle">${ico('teschio')}Indebolimento: ${esc(indeboliti.map(p => p.nome + ' ' + clamp(Number(p.indebolimento), 1, 6)).join(', '))}</a>`);
+  // gli orologi narrativi (1.8): ai giocatori i pubblici, al Master tutti; chip piccoli, perché il cruscotto sta in uno schermo
+  h += `<section class="al-tavolo cr-blocco"><div class="cr-ora">${pillolaOra()}<span class="fioco piccolo">Giorno ${esc(cal.giorno)}${cal.harptos ? ', ' + esc(cal.harptos) : ''}</span></div>${righe.join('')}${bloccoOrologiEventi('cruscotto')}</section>`;
+
+  // le mie risorse: i rombi della scheda. Senza un personaggio scelto (il Master, di solito) non ci sono
+  const pg = IMPOST.pg && DB.voci[IMPOST.pg] && visibile(DB.voci[IMPOST.pg]) && DB.voci[IMPOST.pg].tipo === 'pg' ? DB.voci[IMPOST.pg] : null;
+  if (pg) {
+    const ris = risorseDi(pg);
+    const id = esc(pg.id);
+    h += `<section class="cr-blocco cr-risorse"><div class="cr-testa">${sigillo(pg, 'sigillo--mini')}<strong>${esc(pg.nome)}</strong><a class="btn btn--testo btn--piccolo" href="#/scheda/${encodeURIComponent(pg.id)}">La scheda</a></div>` +
+      (ris.length ? '<div class="cr-ris">' + ris.map(r => {
+        const rimasti = r.max - r.usati;
+        const pip = r.max > 12
+          ? `<span class="pip-num">${rimasti}<small> su ${r.max}</small></span><button class="btn btn--testo btn--piccolo" data-a="ris" data-id="${id}" data-r="${esc(r.id)}" data-on="1">Usa</button><button class="btn btn--testo btn--piccolo" data-a="ris" data-id="${id}" data-r="${esc(r.id)}" data-on="0">Recupera</button>`
+          : Array.from({ length: r.max }, (_, i) => `<button class="pip ${i < rimasti ? 'on' : ''}" data-a="ris" data-id="${id}" data-r="${esc(r.id)}" data-on="${i < rimasti ? 1 : 0}" aria-label="${esc(r.nome)}: ${i < rimasti ? 'usa' : 'recupera'}"></button>`).join('');
+        return `<div class="cr-r${rimasti <= 0 ? ' esaurita' : ''}"><span class="cr-r-nome">${esc(r.nome)}</span><span class="pips">${pip}</span></div>`;
+      }).join('') + '</div>' : '<p class="fioco piccolo" style="margin:6px 0 0">Le risorse compaiono quando la scheda ha la classe: impostala da Modifica.</p>') + '</section>';
+  } else if (!IMPOST.master) {
+    h += `<p class="fioco piccolo cr-nota">Scegli il tuo personaggio nelle <a href="#/impostazioni">impostazioni</a>: qui compariranno le sue risorse.</p>`;
+  }
+  // il Master, che non ha il riquadro delle risorse, ha anche la sua Regia a un tocco
+  h += `<nav class="cr-link"><a class="btn btn--testo btn--piccolo" href="#/riepilogo">${ico('diario')}Prima di cominciare</a><a class="btn btn--testo btn--piccolo" href="#/stasera">${ico('d20')}Strumenti di Stasera</a>${IMPOST.master ? `<a class="btn btn--testo btn--piccolo" href="#/stasera?sez=regia">${ico('regia')}Regia</a>` : ''}</nav>`;
+  return `<div class="cruscotto">${h}</div>`;
+}
+
+// ---------------------------------------------------------------------
+// PRIMA DI COMINCIARE (1.8): la pagina da leggere ad alta voce a inizio serata, con il testo grande.
+// In breve dell'ultima sessione (o il riassunto, se manca), le cose rimaste in sospeso, dove siete (con il
+// giorno, l'ora e la luce dell'orologio del gruppo) e le missioni in corso. In fondo "Inizia la serata",
+// oppure, a serata aperta, il ritorno al cruscotto.
+// ---------------------------------------------------------------------
+function vistaRiepilogo() {
+  const I = indice();
+  const ultima = I.sessioni[I.sessioni.length - 1];
+  const ser = serata();
+  const inCorso = ser && !ser.fine;
+  let h = `<header class="riepilogo-testa"><p class="occhiello">Prima di cominciare, da leggere ad alta voce</p>
+    <h1 class="t1">Nelle puntate precedenti</h1>
+    ${ultima ? `<p class="meta">Sessione ${esc(ultima.numero)}${ultima.titolo ? ', «' + esc(ultima.titolo) + '»' : ''}${ultima.data ? ', giocata il ' + dataBella(ultima.data) : ''}</p>` : ''}</header>`;
+  if (ultima) {
+    const breve = (ultima.inBreve || '').trim();
+    h += `<section class="riepilogo"><h2>La volta scorsa</h2><div class="lettura lettura--alta">${testoRicco(breve || ultima.riassunto) || '<p class="fioco">Nessun riassunto per questa sessione.</p>'}</div></section>`;
+    const sospesi = (ultima.sospesi || []).filter(Boolean);
+    if (sospesi.length) h += `<section class="riepilogo"><h2>Rimasto in sospeso</h2><ul class="lettura lettura--alta riepilogo-elenco">${sospesi.map(x => `<li>${testoRicco(x, 'riga')}</li>`).join('')}</ul></section>`;
+  } else {
+    h += '<p class="vuoto">Il diario non ha ancora sessioni: dopo la prima serata qui ci sarà il suo riassunto breve.</p>';
+  }
+  // dove siete e quando: il luogo, il giorno della campagna e l'ora del gruppo con la sua luce
+  const pos = posizioneGruppo();
+  const ore = oreCampagna(), cal = calendario(ore), luce = luceA(ore);
+  h += `<section class="riepilogo"><h2>Dove siete</h2><p class="lettura lettura--alta">${pos && DB.voci[pos] ? `Il gruppo è a <a class="m m--luogo" href="#/voce/${encodeURIComponent(pos)}">${esc(DB.voci[pos].nome)}</a>. ` : ''}È il giorno ${esc(cal.giorno)} della campagna${cal.harptos ? ' (' + esc(cal.harptos) + ')' : ''} e sono le ${esc(testoOra(ore))}: ${esc(luce.testo.toLowerCase())}, ${esc(luce.perche)}.${buferaAttiva(ore) ? ' Fuori c\'è la bufera.' : ''}</p></section>`;
+  const attive = elenco('missioni', m => (m.stato || 'attiva') === 'attiva')
+    .sort((a, b) => ((DB.sessioni[b.apertaIn] || {}).numero || 0) - ((DB.sessioni[a.apertaIn] || {}).numero || 0));
+  h += `<section class="riepilogo"><h2>Le missioni in corso <span class="conta">${attive.length}</span></h2>${attive.length ? `<ul class="lettura lettura--alta riepilogo-elenco">${attive.map(m => {
+    const comm = m.committente ? nomeDi(m.committente) : '', luogo = m.luogo ? nomeDi(m.luogo) : '';
+    const sub = [comm ? 'affidata da ' + esc(comm) : '', luogo ? 'a ' + esc(luogo) : ''].filter(Boolean).join(' ');
+    return `<li><a href="#/missione/${encodeURIComponent(m.id)}">${esc(m.titolo)}</a>${sub ? `<span class="fioco">, ${sub}</span>` : ''}</li>`;
+  }).join('')}</ul>` : '<p class="vuoto">Nessuna missione in corso.</p>'}</section>`;
+  h += `<div class="azioni riepilogo-azioni">${inCorso
+    ? `<a class="btn btn--primario" href="#/home">${ico('orologio')}Torna al cruscotto della serata</a>`
+    : `<button class="btn btn--primario" data-a="tac-inizia" data-poi="home">${ico('orologio')}Inizia la serata</button>`}
+    ${ultima ? `<a class="btn btn--testo" href="#/sessione/${encodeURIComponent(ultima.id)}">Leggi tutta la sessione ${esc(ultima.numero)}</a>` : ''}</div>`;
+  return h;
 }
 
 // Riga di una missione (home e quest log)
@@ -2417,10 +2807,9 @@ function rigaMissione(m) {
 // ---------------------------------------------------------------------
 function vistaDiario() {
   const sessioni = indice().sessioni.slice().reverse();
-  let h = `<div class="testa-vista"><h1 class="t1">Diario</h1><div class="azioni">
-    <a class="btn btn--primario btn--piccolo" href="#/importa">${ico('importa')}Importa</a>
-    <button class="btn btn--piccolo" data-a="nuovo" data-tab="sessioni">${ico('modifica')}Scrivi a mano</button>
-    <a class="btn btn--piccolo" href="#/gesta">${ico('gesta')}Le gesta del gruppo</a></div></div>`;
+  // in Storia (1.8): le gesta hanno la loro scheda, il tasto di prima non serve più
+  let h = testaSezione('storia', 'diario', `<a class="btn btn--primario btn--piccolo" href="#/importa">${ico('importa')}Importa</a>
+    <button class="btn btn--piccolo" data-a="nuovo" data-tab="sessioni">${ico('modifica')}Scrivi a mano</button>`);
   if (!sessioni.length) return h + '<p class="vuoto">Nessuna sessione. Importala dalla registrazione con AI Studio oppure scrivila a mano.</p>';
   h += '<ol class="cronaca">' + sessioni.map(s => {
     // luoghi e persone della sessione, per i chip sotto l'estratto
@@ -2503,8 +2892,7 @@ function vistaGesta() {
   const sessioni = indice().sessioni.filter(s => (s.gesta || []).length).reverse();
   const stasera = serata() ? segnalibriSerata().filter(n => n.tipo === 'gesta') : [];
   const quante = sessioni.reduce((t, s) => t + s.gesta.length, 0) + stasera.length;
-  let h = `<div class="testa-vista"><h1 class="t1">Le gesta del gruppo</h1></div>
-    <p class="fioco" style="margin-top:0">Le imprese di cui si parlerà nella valle, sessione dopo sessione. Arrivano dai segnalibri <b>Gesta</b> della serata e dall'import; si correggono da Modifica nella pagina della sessione.</p>`;
+  let h = testaSezione('storia', 'gesta') + `<p class="fioco">Le imprese del gruppo di cui si parlerà nella valle, sessione dopo sessione. Arrivano dai segnalibri <b>Gesta</b> della serata e dall'import; si correggono da Modifica nella pagina della sessione.</p>`;
   if (!quante) return h + '<p class="vuoto">Nessuna impresa, per ora. Durante la serata tocca Gesta quando il gruppo fa qualcosa di cui si parlerà.</p>';
   if (stasera.length) {
     h += `<section class="sezione"><h2>Stasera <span class="conta">${stasera.length}</span></h2><ul class="gesta">${stasera.map(n =>
@@ -2523,8 +2911,7 @@ function vistaMissioni(quali) {
   const attive = elenco('missioni', m => (m.stato || 'attiva') === 'attiva').sort((a, b) => num(b.apertaIn) - num(a.apertaIn));
   const concluse = elenco('missioni', m => m.stato && m.stato !== 'attiva').sort((a, b) => num(b.chiusaIn) - num(a.chiusaIn));
   const lista = quali === 'concluse' ? concluse : attive;
-  let h = `<div class="testa-vista"><h1 class="t1">Missioni</h1><div class="azioni">
-    <button class="btn btn--primario btn--piccolo" data-a="nuovo" data-tab="missioni">${ico('piu')}Nuova missione</button></div></div>
+  let h = testaSezione('storia', 'missioni', `<button class="btn btn--primario btn--piccolo" data-a="nuovo" data-tab="missioni">${ico('piu')}Nuova missione</button>`) + `
     <nav class="segmenti"><a href="#/missioni" class="${quali === 'attive' ? 'attivo' : ''}">In corso ${attive.length}</a><a href="#/missioni?stato=concluse" class="${quali === 'concluse' ? 'attivo' : ''}">Concluse ${concluse.length}</a></nav>`;
   if (!lista.length) {
     return h + `<p class="vuoto">${quali === 'concluse' ? 'Nessuna missione conclusa.' : 'Nessuna missione in corso. Le missioni arrivano dall\'import delle sessioni, oppure aggiungile a mano.'}</p>`;
@@ -2664,6 +3051,8 @@ function vistaVoce(id) {
     if (v.mappaInterna && DB.mappe[v.mappaInterna] && visibile(DB.mappe[v.mappaInterna])) azioni.push(`<a class="btn btn--piccolo" href="#/mappa/${encodeURIComponent(v.mappaInterna)}">${ico('entra')}Apri la mappa interna</a>`);
     if (posizioneGruppo() !== id) azioni.push(`<button class="btn btn--piccolo" data-a="siamo-qui" data-id="${esc(id)}">${ico('lanterna')}Il gruppo è qui</button>`);
     if (azioni.length) h += `<div class="azioni">${azioni.join('')}</div>`;
+    // orologi ed eventi legati al luogo o ai luoghi che contiene (1.8): i pubblici per tutti, anche i privati per il Master
+    h += bloccoOrologiEventi('luogo', id);
     const incontrati = abitanti.filter(a => !a.guida || (I.sessioniDi[a.id] || []).length);
     const daIncontrare = abitanti.filter(a => a.guida && !(I.sessioniDi[a.id] || []).length);
     if (incontrati.length) h += `<section class="sezione"><h2>Chi trovi qui <span class="conta">${incontrati.length}</span></h2><ul class="lista">${incontrati.map(rigaVoce).join('')}</ul></section>`;
@@ -2701,13 +3090,9 @@ function vistaVoce(id) {
   }
   // Scheda di un compagno: i suoi rapporti
   if (v.tipo === 'pg') {
-    const rap = elenco('rapporti', r => r.pg === id && DB.voci[r.png] && visibile(DB.voci[r.png])).sort((a, b) => Math.abs(b.valore || 0) - Math.abs(a.valore || 0));
+    const rap = rapportiDi(id);
     h += `<section class="sezione"><h2>I suoi rapporti</h2>`;
-    h += rap.length ? '<ul class="lista">' + rap.map(r => {
-      const png = DB.voci[r.png];
-      const aperti = (r.favori || []).filter(f => !f.ok && f.tipo !== 'nota').length;
-      return `<li><a class="riga" href="#/voce/${encodeURIComponent(png.id)}">${sigillo(png, 'sigillo--piccolo')}<div class="corpo"><div class="tit">${esc(png.nome)}</div><div class="sub">${esc(RAPPORTI[Number(r.valore) || 0])}${aperti ? ', ' + aperti + (aperti === 1 ? ' favore in sospeso' : ' favori in sospeso') : ''}</div></div>${scala(r.valore, 3)}</a></li>`;
-    }).join('') + '</ul>' : '<p class="vuoto">Nessun rapporto registrato. Si aggiornano dalla scheda dei PNG o dall\'import.</p>';
+    h += rap.length ? '<ul class="lista">' + rap.map(rigaRapporto).join('') + '</ul>' : '<p class="vuoto">Nessun rapporto registrato. Si aggiornano dalla scheda dei PNG o dall\'import.</p>';
     h += '</section>';
   }
 
@@ -2736,6 +3121,61 @@ function vistaVoce(id) {
 }
 function rigaVoce(v) {
   return `<li><a class="riga" href="#/voce/${encodeURIComponent(v.id)}">${sigillo(v)}<div class="corpo"><div class="tit tronca">${esc(v.nome)}</div><div class="sub tronca">${esc(v.ruolo || (TIPI_VOCE[v.tipo] || TIPI_VOCE.png).nome)}</div></div></a></li>`;
+}
+// I rapporti di un compagno con i PNG che vede chi guarda (una voce segreta resta fuori), i più forti prima.
+// Li usano la sua pagina ("I suoi rapporti") e Gruppo → Rapporti.
+function rapportiDi(pgId) {
+  return elenco('rapporti', r => r.pg === pgId && DB.voci[r.png] && visibile(DB.voci[r.png])).sort((a, b) => Math.abs(b.valore || 0) - Math.abs(a.valore || 0));
+}
+function rigaRapporto(r) {
+  const png = DB.voci[r.png];
+  const aperti = (r.favori || []).filter(f => !f.ok && f.tipo !== 'nota').length;
+  return `<li><a class="riga" href="#/voce/${encodeURIComponent(png.id)}">${sigillo(png, 'sigillo--piccolo')}<div class="corpo"><div class="tit">${esc(png.nome)}</div><div class="sub">${esc(RAPPORTI[Number(r.valore) || 0])}${aperti ? ', ' + aperti + (aperti === 1 ? ' favore in sospeso' : ' favori in sospeso') : ''}</div></div>${scala(r.valore, 3)}</a></li>`;
+}
+
+// ---------------------------------------------------------------------
+// GRUPPO (1.8): bottino, compagni, rapporti, commercio e date in una sezione della barra.
+// Bottino e Date sono le stesse pagine di Stasera (8-tavolo.js); Commercio ha il suo indirizzo (#/commercio).
+// ---------------------------------------------------------------------
+function vistaGruppo(sez) {
+  if (sez === 'commercio') return vistaCommercio('spedizioni');
+  if (!['bottino', 'compagni', 'rapporti', 'date'].includes(sez)) sez = 'bottino';
+  let h = testaSezione('gruppo', sez);
+  if (sez === 'bottino') h += sezioneBottino();
+  if (sez === 'date') h += sezioneDate();
+  if (sez === 'compagni') {
+    // i personaggi del gruppo con classe e livello: la scheda è la riga, la pagina e D&D Beyond sotto
+    const pgs = personaggi();
+    h += pgs.length ? '<ul class="lista compagni">' + pgs.map(p => {
+      const sintonie = comm('bottino', o => o.sintonia === p.id).length;
+      const sotto = [p.giocatore ? 'giocato da ' + p.giocatore : '', sintonie ? 'sintonie ' + sintonie + ' su 3' : '',
+        Number(p.indebolimento) ? 'indebolimento ' + clamp(Number(p.indebolimento), 1, 6) : '', (p.condizioni || []).join(', ')].filter(Boolean);
+      return `<li class="compagno"><a class="riga" href="#/scheda/${encodeURIComponent(p.id)}">${sigillo(p)}<div class="corpo">
+        <div class="tit">${esc(p.nome)}${IMPOST.pg === p.id ? ' <span class="chip chip--mini">tu</span>' : ''}</div>
+        <div class="sub">${esc(descrizioneClasse(p) || 'Classe non indicata')}, livello ${livelloTotale(p)}</div>
+        ${sotto.length ? `<div class="sub">${esc(sotto.join(' · '))}</div>` : ''}</div><span class="fioco piccolo">Scheda</span></a>
+        <div class="azioni azioni--strette">${bottoneBeyond(p.link)}<a class="btn btn--testo btn--piccolo" href="#/voce/${encodeURIComponent(p.id)}">Rapporti e cronologia</a></div></li>`;
+    }).join('') + '</ul>' : '<p class="vuoto">Nessun compagno: aggiungeteli nel wiki con il tipo "Compagno", oppure importate il pacchetto.</p>';
+  }
+  if (sez === 'rapporti') {
+    // elenchi, non una tabella (la tabella dei rapporti è stata scartata apposta): i favori ancora aperti di tutto
+    // il gruppo, poi i rapporti di ogni compagno, poi la reputazione del gruppo con città e fazioni
+    const pgs = personaggi();
+    const favori = [];
+    pgs.forEach(pg => rapportiDi(pg.id).forEach(r => (r.favori || []).forEach(f => { if (!f.ok && f.tipo !== 'nota') favori.push({ r, f, pg }); })));
+    h += `<section class="sezione"><h2>Favori in sospeso <span class="conta">${favori.length}</span></h2>` + (favori.length ? '<ul class="lista">' + favori.map(({ r, f, pg }) => {
+      const png = DB.voci[r.png];
+      return `<li><a class="riga" href="#/voce/${encodeURIComponent(r.png)}">${sigillo(png, 'sigillo--piccolo')}<div class="corpo"><div class="tit">${esc(png.nome)} <span class="fioco piccolo">con ${esc(pg.nome)}</span></div><div class="sub">${esc(TIPI_FAVORE[f.tipo] || '')}: ${testoRicco(f.t, 'riga')}</div></div></a></li>`;
+    }).join('') + '</ul>' : '<p class="vuoto">Nessun favore in sospeso.</p>') + '</section>';
+    pgs.forEach(pg => {
+      const rap = rapportiDi(pg.id);
+      h += `<section class="sezione"><h2>${esc(pg.nome)} <span class="conta">${rap.length}</span></h2>` +
+        (rap.length ? '<ul class="lista">' + rap.map(rigaRapporto).join('') + '</ul>' : '<p class="vuoto">Nessun rapporto registrato: si cambiano dalla pagina di un PNG, sotto "Con la compagnia", o con l\'import.</p>') + '</section>';
+    });
+    if (!pgs.length) h += '<p class="vuoto">Aggiungete i compagni nel wiki (tipo "Compagno") per seguire i loro rapporti.</p>';
+    h += bloccoReputazione();
+  }
+  return h;
 }
 function listaFavori(r, rid) {
   const fav = r.favori || [];
@@ -3541,8 +3981,10 @@ async function urlImmagineMappa(m) {
   // le mappe di esempio senza un'immagine loro usano quella disegnata dall'app. Prima questa immagine
   // era una sola per tutte, e caricare la mappa interna di un luogo di esempio la sostituiva: lo sfondo
   // di Icewind Dale diventava la mappa nuova. Adesso ogni mappa cerca prima la sua (locale:<id>)
+  // Tengo la promessa, non il risultato (1.8): disegnare l'immagine di esempio richiede tempo, e due aperture
+  // insieme (la mappa e il ritaglio della Home) ne facevano due copie con indirizzi diversi
   if (m.demo) {
-    if (!URL_MAPPE.demo) URL_MAPPE.demo = await immagineDemo();
+    if (!URL_MAPPE.demo) URL_MAPPE.demo = immagineDemo();
     return URL_MAPPE.demo;
   }
   if (m.fileId && IMPOST.url && IMPOST.chiave) {
@@ -3794,17 +4236,25 @@ function mappaCostruisciPin() {
   // il loro segnaposto diventa un anello attorno al punto stampato e il nome compare solo se lo tocchi.
   // I luoghi aggiunti da voi restano medaglioni con il nome, come sulle altre mappe.
   const mappaStampata = !!(DB.mappe[MAPPA.id] && DB.mappe[MAPPA.id].nomiStampati);
+  // 1.8: orologi narrativi ed eventi rivelati legati a un luogo (o a un luogo che contiene) stanno sul segnaposto:
+  // il cerchio a spicchi del più pieno in alto a destra, la campanella in basso. Il Master vede anche i suoi segreti
+  const tuttiOro = orologi().filter(o => o.luogo), tuttiEvt = eventiProgrammati().filter(e => e.luogo && eventoInVista(e));
   MAPPA.pins = luoghi.map(v => {
     const imp = IMPORTANZA[v.icona] || 2;
     const stampato = mappaStampata && !!v.pacchetto;
     const nMissioni = missioniQui(v.id).length;
     const visitato = visitati.has(v.id) || v.scoperta === 'visitato';
+    const dentro = tuttiOro.length || tuttiEvt.length ? [v.id].concat(discendenti(v.id)) : [];
+    const oroQui = tuttiOro.filter(o => dentro.includes(o.luogo)).sort((a, b) => b.pieni / b.spicchi - a.pieni / a.spicchi);
+    const evtQui = tuttiEvt.filter(e => dentro.includes(e.luogo));
     const el = document.createElement('button');
     el.type = 'button';
     el.className = ['pin', imp === 3 ? 'pin--minore' : '', stampato ? 'pin--stampato' : '', visitato ? '' : 'pin--noto', v.segreto ? 'pin--segreto' : '', MAPPA.sel === v.id ? 'sel' : ''].join(' ').replace(/\s+/g, ' ').trim();
     el.dataset.id = v.id;
-    el.setAttribute('aria-label', v.nome + (nMissioni ? ', ' + nMissioni + ' missioni in corso' : ''));
-    el.innerHTML = `<span class="pin-med">${ico(iconaVoce(v))}</span><span class="pin-nome">${esc(v.nome)}</span>${nMissioni ? `<span class="badge">${nMissioni}</span>` : ''}`;
+    el.setAttribute('aria-label', v.nome + (nMissioni ? ', ' + nMissioni + ' missioni in corso' : '') + (oroQui.length ? ', ' + (oroQui.length === 1 ? 'un orologio' : oroQui.length + ' orologi') : '') + (evtQui.length ? ', ' + (evtQui.length === 1 ? 'un evento' : evtQui.length + ' eventi') : ''));
+    el.innerHTML = `<span class="pin-med">${ico(iconaVoce(v))}</span><span class="pin-nome">${esc(v.nome)}</span>${nMissioni ? `<span class="badge">${nMissioni}</span>` : ''}` +
+      (oroQui.length ? `<span class="pin-orologio${oroQui.every(o => o.segreto) ? ' segreto' : ''}">${cerchioOrologio(oroQui[0], 18)}</span>` : '') +
+      (evtQui.length ? `<span class="pin-evento${evtQui.every(e => e.segreto) ? ' segreto' : ''}">${ico('evento')}</span>` : '');
     return { v, el, x: Number(v.x), y: Number(v.y), imp, stampato, lw: 0, ordine: (MAPPA.sel === v.id ? 0 : imp) * 10 - Math.min(9, (I.sessioniDi[v.id] || []).length) };
   });
   // il gruppo: segnalino a forma di lanterna sopra il segnaposto del luogo in cui si trova
@@ -4200,6 +4650,7 @@ function mappaSchedaHTML(id) {
   if (daIncontrare.length) h += `<h3>Chi potreste incontrare</h3><div class="chips chips-guida">${daIncontrare.map(a => chipVoce(a.id)).join('')}</div>`;
   if (figli.length) h += `<h3>Luoghi interni</h3><div class="chips">${figli.map(f => chipVoce(f.id)).join('')}</div>`;
   if (missioni.length) h += `<h3>Missioni in corso</h3><div class="chips">${missioni.map(m => chipVoce(m.id)).join('')}</div>`;
+  h += bloccoOrologiEventi('mappa', id);   // orologi ed eventi del luogo (1.8)
   if (eventi.length) {
     h += `<h3>Cosa abbiamo fatto qui</h3>` + eventi.slice(0, 5).map(e =>
       `<div class="ev"><a class="n" href="#/sessione/${encodeURIComponent(e.s)}" title="Sessione ${esc(e.n)}">${esc(e.n)}</a><span>${testoRicco(e.t, 'riga')}</span></div>`).join('');
@@ -5872,7 +6323,7 @@ async function importaPacchetto(form) {
   if (nCatalogo) parti.push(nCatalogo + ' oggetti nel catalogo');
   avviso('Pacchetto importato' + (parti.length ? ': ' + parti.join(', ') : ''));
   // un pacchetto con solo il catalogo non ha niente da far vedere sulla mappa
-  location.hash = mappe.length || (p.voci || []).length ? '#/mappa' : '#/tavolo?sez=bottino';
+  location.hash = mappe.length || (p.voci || []).length ? '#/mappa' : '#/gruppo?sez=bottino';
   render();
 }
 
@@ -7243,7 +7694,8 @@ function apriLegendaCommercio() {
 function vistaCommercio(sez) {
   const saldo = saldoCassa();
   const pronta = comm('evento').length > 0;
-  let h = `<div class="testa-vista"><div><h1 class="t1">Compagnia commerciale</h1></div>
+  // dalla 1.8 il Commercio è una scheda di Gruppo: in cima le schede della sezione, poi il nome della compagnia e la cassa
+  let h = testaSezione('gruppo', 'commercio') + `<div class="testa-vista testa-commercio"><h2 class="t2">Compagnia commerciale</h2>
     <div class="cassa"><span>Cassa</span><strong class="${saldo < 0 ? 'neg' : ''}">${mo(saldo)}</strong></div></div>`;
   if (!pronta) {
     return h + `<section class="benvenuto" style="padding-top:10px"><div class="lettura fioco"><p>Slitte, conducenti, tratte e contratti. Ogni spedizione si risolve con un d100 sulla tabella degli eventi: l'equipaggiamento dei conducenti, la scorta e il meteo spostano il tiro.</p>
@@ -7281,10 +7733,24 @@ function vistaCommercio(sez) {
   }
 
   if (sez === 'mercato') {
+    // 1.8: merci, contratti e tratte sono una fisarmonica. Se ne apre una alla volta e il telefono si ricorda l'ultima
+    // (IMPOST.mercato: la chiave della sezione aperta, '' se le ha chiuse tutte; la prima volta le merci).
+    // Chiusa, ogni sezione dice in una riga cosa c'è dentro. Mezzi e conducenti restano in Flotta.
+    const aperta = IMPOST.mercato === undefined ? 'merci' : IMPOST.mercato;
     const contratti = comm('contratto').sort((a, b) => (a.stato === 'chiuso' ? 1 : 0) - (b.stato === 'chiuso' ? 1 : 0));
-    const merci = comm('merce');
-    const tratte = comm('tratta');
-    h += `<section class="sezione" style="margin-top:6px"><h2>Contratti <span class="conta">${contratti.filter(c => c.stato !== 'chiuso').length} aperti</span></h2>` +
+    const aperti = contratti.filter(c => c.stato !== 'chiuso');
+    const merci = comm('merce').sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'it'));
+    const tratte = comm('tratta').sort((a, b) => nomeTratta(a).localeCompare(nomeTratta(b), 'it'));
+    const fisarmonica = (k, titolo, conta, riassunto, corpo) => `<details class="sezione mercato-sez" data-k="${k}"${aperta === k ? ' open' : ''}>
+      <summary data-a="comm-mercato" data-k="${k}"><h2>${titolo} <span class="conta">${conta}</span></h2>${ico('avanti')}${riassunto ? `<span class="ms-riassunto">${riassunto}</span>` : ''}</summary>
+      <div class="ms-corpo">${corpo}</div></details>`;
+    h += fisarmonica('merci', 'Merci', merci.length, esc(merci.map(m => m.nome + ' ' + mo(m.prezzo)).join(' · ')),
+      (merci.length ? '<ul class="lista">' + merci.map(m =>
+        `<li><button class="riga riga-btn" data-a="modifica" data-tab="commercio" data-id="${esc(m.id)}"><span class="sigillo t-oggetto">${ico('oggetto')}</span><div class="corpo"><div class="tit">${esc(m.nome)}</div><div class="sub">${mo(m.prezzo)} a carico</div></div></button></li>`).join('') + '</ul>' : '<p class="vuoto">Nessuna merce.</p>') +
+      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="merce">${ico('piu')}Nuova merce</button>
+      ${DB.commercio['mer-olio'] ? '' : `<button class="btn btn--testo btn--piccolo" data-a="comm-olio">Aggiungi l'olio di balena</button>`}</div>`);
+    h += fisarmonica('contratti', 'Contratti', aperti.length === 1 ? '1 aperto' : aperti.length + ' aperti',
+      esc(aperti.map(c => { const m = DB.commercio[c.merce]; const q = Number(c.quantita) || 0; return (m ? m.nome : 'Merce') + ' per ' + nomeDi(c.luogo) + (q ? ', ' + (Number(c.consegnati) || 0) + ' di ' + q : ''); }).join(' · ')),
       (contratti.length ? contratti.map(c => {
         const merce = DB.commercio[c.merce];
         const q = Number(c.quantita) || 0, fatti = Number(c.consegnati) || 0;
@@ -7294,15 +7760,12 @@ function vistaCommercio(sez) {
           ${q ? `<div class="barra"><span style="width:${Math.min(100, fatti / q * 100)}%"></span></div><div class="sub">${fatti} di ${q} carichi consegnati</div>` : ''}</div>
           ${c.stato === 'chiuso' ? '<span class="timbro">Chiuso</span>' : ''}</button>`;
       }).join('') : '<p class="vuoto">Nessun contratto. Quando una città vi chiede una merce, segnatela qui.</p>') +
-      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="contratto">${ico('piu')}Nuovo contratto</button></div></section>`;
-    h += `<section class="sezione"><h2>Tratte <span class="conta">${tratte.length}</span></h2>` + (tratte.length ? '<ul class="lista">' + tratte.map(t =>
-      `<li><button class="riga riga-btn" data-a="modifica" data-tab="commercio" data-id="${esc(t.id)}"><span class="sigillo t-luogo">${ico('mappa')}</span><div class="corpo"><div class="tit">${esc(nomeTratta(t))}</div>
-      <div class="sub">${esc(t.giorni || 1)} ${Number(t.giorni) === 1 ? 'giorno' : 'giorni'}, pericolo ${esc(t.pericolo || 1)} su 5</div></div></button></li>`).join('') + '</ul>' : '<p class="vuoto">Nessuna tratta.</p>') +
-      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="tratta">${ico('piu')}Nuova tratta</button></div></section>`;
-    h += `<section class="sezione"><h2>Merci <span class="conta">${merci.length}</span></h2>` + (merci.length ? '<ul class="lista">' + merci.map(m =>
-      `<li><button class="riga riga-btn" data-a="modifica" data-tab="commercio" data-id="${esc(m.id)}"><span class="sigillo t-oggetto">${ico('oggetto')}</span><div class="corpo"><div class="tit">${esc(m.nome)}</div><div class="sub">${mo(m.prezzo)} a carico</div></div></button></li>`).join('') + '</ul>' : '<p class="vuoto">Nessuna merce.</p>') +
-      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="merce">${ico('piu')}Nuova merce</button>
-      ${DB.commercio['mer-olio'] ? '' : `<button class="btn btn--testo btn--piccolo" data-a="comm-olio">Aggiungi l'olio di balena</button>`}</div></section>`;
+      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="contratto">${ico('piu')}Nuovo contratto</button></div>`);
+    h += fisarmonica('tratte', 'Tratte', tratte.length, '',
+      (tratte.length ? '<ul class="lista">' + tratte.map(t =>
+        `<li><button class="riga riga-btn" data-a="modifica" data-tab="commercio" data-id="${esc(t.id)}"><span class="sigillo t-luogo">${ico('mappa')}</span><div class="corpo"><div class="tit">${esc(nomeTratta(t))}</div>
+        <div class="sub">${esc(t.giorni || 1)} ${Number(t.giorni) === 1 ? 'giorno' : 'giorni'}, pericolo ${esc(t.pericolo || 1)} su 5</div></div></button></li>`).join('') + '</ul>' : '<p class="vuoto">Nessuna tratta.</p>') +
+      `<div class="azioni"><button class="btn btn--piccolo" data-a="nuovo" data-tab="commercio" data-tipo="tratta">${ico('piu')}Nuova tratta</button></div>`);
     return h;
   }
 
@@ -7529,20 +7992,25 @@ function salvaConducente(f) {
 }
 
 // =====================================================================
-// 8. AL TAVOLO E NELLA VALLE
+// 8. STASERA (AL TAVOLO) E NELLA VALLE
 // ---------------------------------------------------------------------
-// Strumenti per la serata e per Icewind Dale, tutti nella vista #/tavolo:
+// Strumenti per la serata e per Icewind Dale, tutti nella vista #/stasera (prima #/tavolo, che funziona ancora):
 //   valle     il tempo che passa (giorno della campagna, luna nuova e sacrifici), la luce,
 //             il freddo (abiti, indebolimento, acqua gelida, bufera) e la reputazione con le città
-//   turni     iniziativa e condizioni: le gestisce il Master, i giocatori vedono turno e condizioni
 //   viaggio   quanto ci vuole tra due luoghi, soste dei cani, prove del navigatore
-//   bottino   il bottino comune: monete, chi porta cosa, sintonie
-//   date      le date delle prossime sessioni e chi c'è
-//   dicerie   le voci di taverna sentite in gioco
+//   bottino   il bottino comune: monete, chi porta cosa, sintonie (anche in Gruppo, #/gruppo?sez=bottino)
+//   date      le date delle prossime sessioni e chi c'è (anche in Gruppo)
+//   dicerie   le voci di taverna sentite in gioco (anche in Storia, #/dicerie)
+//   regia     solo con la chiave del Master (1.8): orologi, eventi programmati, tabelle casuali, dicerie
+//             preparate, voci segrete; gli avvisi del Master (eventi scaduti, orologi pieni) anche in La valle
+//   turni     iniziativa e condizioni: le gestisce il Master, i giocatori vedono turno e condizioni.
+//             Restano, ma in fondo e in tono minore: il gruppo combatte su D&D Beyond (1.8)
 //
 // Niente tabelle nuove nel foglio (Code.gs resta com'è): tutto sta in tabelle che ci sono già.
 //   config     'calendario', 'bufera', 'iniziativa' (+ 'iniziativa-pf' segreta con i punti ferita),
-//              'incontri' (segreta, del Master), una riga per diceria ('dic-'), per data proposta
+//              'incontri' (segreta, la tabella degli incontri fino alla 1.7), una riga segreta per tabella
+//              casuale della Regia ('tab-', 1.8), per orologio narrativo ('oro-', con le note segrete in 'orn-')
+//              e per evento programmato ('evt-', nota segreta in 'evn-'), una riga per diceria ('dic-'), per data proposta
 //              ('data-') e per disponibilità ('disp-'): ogni telefono scrive righe sue, niente conflitti
 //   voci       sul personaggio: abiti, indebolimento, acqua (ora in cui è entrato in acqua gelida),
 //              cosPunteggio, condizioni, iniziativa
@@ -7551,15 +8019,18 @@ function salvaConducente(f) {
 // In fondo al file: le note private cifrate dei personaggi (sezione della scheda), con le chiavi
 // del Master in config 'chiaveNote' (pubblica) e 'chiaveNote-privata' (segreta).
 // Le regole sono riassunti scritti per l'app con il numero di pagina (Rime of the Frostmaiden
-// e Manuale del Giocatore): le tabelle del Master (incontri) le incolla lui e restano segrete.
+// e Manuale del Giocatore): le tabelle del Master (incontri, meteo…) le scrive lui in Regia e restano segrete.
 // =====================================================================
+// Le schede di Stasera, in quest'ordine (testaSezione in 2-viste.js). minore: in fondo e in grigio;
+// master: solo con la chiave del Master (né nella barra delle schede né nei tasti della Home per gli altri)
 const SEZIONI_TAVOLO = {
   valle: { nome: 'La valle', ico: 'neve' },
-  turni: { nome: 'Turni', ico: 'arma' },
   viaggio: { nome: 'Viaggio', ico: 'slitta' },
   bottino: { nome: 'Bottino', ico: 'oggetto' },
   date: { nome: 'Date', ico: 'orologio' },
-  dicerie: { nome: 'Dicerie', ico: 'diario' }
+  dicerie: { nome: 'Dicerie', ico: 'diceria' },
+  regia: { nome: 'Regia', ico: 'regia', master: true },
+  turni: { nome: 'Turni', ico: 'arma', minore: true }
 };
 const CONDIZIONI = ['accecato', 'affascinato', 'afferrato', 'assordato', 'avvelenato', 'incapacitato', 'invisibile', 'paralizzato', 'pietrificato', 'privo di sensi', 'prono', 'spaventato', 'stordito', 'trattenuto'];
 // Indebolimento, Manuale del Giocatore pag. 291 (riassunto)
@@ -7670,7 +8141,7 @@ function luceA(ore) {
 // penombra"): al tavolo la domanda è proprio perché si vede o non si vede
 function pillolaOra(cls) {
   const ore = oreCampagna(), l = luceA(ore);
-  return `<a class="pillola-ora luce-${l.tipo} ${cls || ''}" href="#/tavolo?sez=valle" aria-label="Sono le ${testoOra(ore)}, ${esc(l.testo.toLowerCase())}: ${esc(l.perche)}">${ico('orologio')}<strong>${testoOra(ore)}</strong><span>${esc(l.testo)} · ${esc(l.perche)}</span></a>`;
+  return `<a class="pillola-ora luce-${l.tipo} ${cls || ''}" href="#/stasera?sez=valle" aria-label="Sono le ${testoOra(ore)}, ${esc(l.testo.toLowerCase())}: ${esc(l.perche)}">${ico('orologio')}<strong>${testoOra(ore)}</strong><span>${esc(l.testo)} · ${esc(l.perche)}</span></a>`;
 }
 
 // giorno dell'anno (0-364/365) → "12 Kythorn" o il nome della festa
@@ -7693,30 +8164,29 @@ function testoLuna(l) {
   return 'Luna nuova tra ' + l.tra + ' giorni' + (l.daPiena === 0 ? ' (stanotte la luna è piena)' : l.piena ? ' (la luna è quasi piena e fa luce)' : '');
 }
 
-// Hub nella Home: un tocco per arrivare agli strumenti, con quello che sta succedendo adesso
+// Riquadro nella Home (fuori dalla serata): giorno, ora e luce, quello che sta succedendo adesso, e un tocco per
+// arrivare agli strumenti di Stasera. I turni non ci sono: restano nella loro scheda, in tono minore (1.8)
 function bloccoAlTavolo() {
   const cal = calendario();
   const ini = cfg('iniziativa', null);
-  const bufera = cfg('bufera', null);
   const righe = [];
   if (ini && ini.attiva && (ini.ordine || []).length) {
     const att = ini.ordine[clamp(Number(ini.turno) || 0, 0, ini.ordine.length - 1)];
-    righe.push(`<a class="stato-tavolo forte" href="#/tavolo?sez=turni">${ico('arma')}Combattimento, round ${esc(ini.round || 1)}: tocca a ${esc(att ? att.nome : '?')}</a>`);
+    righe.push(`<a class="stato-tavolo forte" href="#/stasera?sez=turni">${ico('arma')}Combattimento, round ${esc(ini.round || 1)}: tocca a ${esc(att ? att.nome : '?')}</a>`);
   }
-  if (buferaAttiva()) righe.push(`<a class="stato-tavolo" href="#/tavolo?sez=valle">${ico('neve')}Bufera in corso</a>`);
-  if (cal.luna && cal.luna.tra <= 1) righe.push(`<a class="stato-tavolo forte" href="#/tavolo?sez=valle">${ico('lanterna')}${esc(testoLuna(cal.luna))}: sacrifici ad Auril</a>`);
+  if (buferaAttiva()) righe.push(`<a class="stato-tavolo" href="#/stasera?sez=valle">${ico('neve')}Bufera in corso</a>`);
+  if (cal.luna && cal.luna.tra <= 1) righe.push(`<a class="stato-tavolo forte" href="#/stasera?sez=valle">${ico('lanterna')}${esc(testoLuna(cal.luna))}: sacrifici ad Auril</a>`);
   const sotto = ['Giorno ' + cal.giorno + (cal.harptos ? ', ' + cal.harptos : ''), cal.luna ? testoLuna(cal.luna).toLowerCase() : ''].filter(Boolean).join(' · ');
-  return `<section class="al-tavolo"><h2 class="t3">Al tavolo</h2>
+  return `<section class="al-tavolo"><h2 class="t3">Stasera</h2>
     <p class="fioco piccolo" style="margin:4px 0 0">${esc(sotto)}</p>${pillolaOra()}
     ${righe.join('')}
-    <nav class="tasti-tavolo">${Object.entries(SEZIONI_TAVOLO).map(([k, s]) => `<a href="#/tavolo?sez=${k}">${ico(s.ico)}<span>${esc(s.nome)}</span></a>`).join('')}</nav></section>`;
+    <nav class="tasti-tavolo">${Object.entries(SEZIONI_TAVOLO).filter(([k, s]) => !s.minore && !s.master).map(([k, s]) => `<a href="#/stasera?sez=${k}">${ico(s.ico)}<span>${esc(s.nome)}</span></a>`).join('')}</nav></section>`;
 }
 
 function vistaTavolo(sez) {
-  if (!SEZIONI_TAVOLO[sez]) sez = 'valle';
-  let h = `<h1 class="t1">Al tavolo</h1>
-    <nav class="schede-tavolo" aria-label="Sezioni">${Object.entries(SEZIONI_TAVOLO).map(([k, s]) =>
-      `<a href="#/tavolo?sez=${k}" class="${k === sez ? 'attivo' : ''}">${ico(s.ico)}${esc(s.nome)}</a>`).join('')}</nav>`;
+  // la Regia solo con la chiave del Master: a chi non ce l'ha (anche senza foglio) l'indirizzo apre la valle
+  if (!SEZIONI_TAVOLO[sez] || (SEZIONI_TAVOLO[sez].master && !IMPOST.master)) sez = 'valle';
+  let h = testaSezione('stasera', sez, `<a class="btn btn--testo btn--piccolo" href="#/riepilogo">${ico('diario')}Prima di cominciare</a>`);
   switch (sez) {
     case 'valle': h += sezioneValle(); break;
     case 'turni': h += sezioneTurni(); break;
@@ -7724,6 +8194,7 @@ function vistaTavolo(sez) {
     case 'bottino': h += sezioneBottino(); break;
     case 'date': h += sezioneDate(); break;
     case 'dicerie': h += sezioneDicerie(); break;
+    case 'regia': h += sezioneRegia(); break;
   }
   return h;
 }
@@ -7743,7 +8214,7 @@ function sezioneValle() {
       <span class="${luce.tipo === 'fioca' ? 'lanterna' : 'fioco'}">${esc(luce.testo)}: ${esc(luce.perche)}</span>
       <span class="fioco">${cal.harptos ? esc(cal.harptos) + ' · ' : ''}${esc(cal.decade)}ª decade del mese</span>
       ${cal.luna ? `<span class="${cal.luna.tra <= 1 ? 'lanterna' : 'fioco'}">${esc(testoLuna(cal.luna))}</span>` : '<span class="fioco">Luna nuova: il Master non l\'ha ancora segnata</span>'}</div></div>
-    ${riquadroAlba()}
+    ${riquadroAlba()}${avvisiMaster()}
     <div class="azioni"><button class="btn btn--piccolo" data-a="tav-ora" data-d="-1">${ico('meno')}1 ora</button>
       <button class="btn btn--piccolo" data-a="tav-ora" data-d="1">${ico('piu')}1 ora</button>
       <button class="btn btn--piccolo" data-a="tav-ora-imposta">${ico('modifica')}Imposta l'ora</button></div>
@@ -7775,6 +8246,8 @@ function sezioneValle() {
   const daOra = n => n % 24 === 0 ? 'da mezzanotte' : 'dalle ' + n, aOra = n => n % 24 === 0 ? 'a mezzanotte' : 'alle ' + n;
   const fascia = ([a, b], cls) => (a < b ? [[a, b]] : [[a, 24], [0, b]]).map(([x, y]) => `<span class="${cls}" style="left:${x / 24 * 100}%;width:${(y - x) / 24 * 100}%"></span>`).join('');
   const oraGiorno = ((ore % 24) + 24) % 24;
+  // orologi ed eventi annunciati (1.8): subito dopo il tempo, perché è lì che si guarda cosa sta per succedere
+  h += bloccoOrologiEventi('valle');
   h += `<section class="sezione"><h2>La luce</h2>
     <p class="${luce.tipo === 'fioca' ? 'lanterna' : ''}" style="margin-top:0"><strong>Adesso, alle ${esc(testoOra(ore))}: ${esc(luce.testo.toLowerCase())}</strong> (${esc(luce.perche)}).</p>
     <div class="barra-luce" role="img" aria-label="Luce fioca ${daOra(LUCE.giorno[0])} ${aOra(LUCE.giorno[1])} e con l'aurora, ${daOra(LUCE.aurora[0])} ${aOra(LUCE.aurora[1])}${cal.luna && cal.luna.piena ? ', e con la luna ' + daOra(LUCE.luna[0]) + ' ' + aOra(LUCE.luna[1]) : ''}; buio il resto">${fascia(LUCE.giorno, '')}${fascia(LUCE.aurora, 'aurora')}${cal.luna && cal.luna.piena ? fascia(LUCE.luna, 'luna') : ''}
@@ -7808,20 +8281,23 @@ function sezioneValle() {
       ? '<button class="btn btn--piccolo" data-a="tav-bufera" data-fine="1">La bufera è finita</button>'
       : '<button class="btn btn--piccolo" data-a="tav-bufera">' + ico('neve') + 'Inizia una bufera (2d4 ore)</button>'}</div></section>`;
 
-  // Reputazione del gruppo con le città e le fazioni
+  // Reputazione del gruppo con le città e le fazioni (la stessa di Gruppo → Rapporti)
+  return h + bloccoReputazione();
+}
+// La reputazione del gruppo con le città e le fazioni, da -3 a +3 (rapporti con pg = 'gruppo').
+// Sta nella Valle (la si cambia mentre si gioca) e in Gruppo → Rapporti (1.8).
+function bloccoReputazione() {
   const luoghi = elenco('voci', v => (v.tipo === 'luogo' && (SACRIFICI[v.sacrificio] || ['citta', 'villaggio', 'porto'].includes(v.icona)) && !v.luogo) || v.tipo === 'fazione')
     .sort((a, b) => (a.tipo === b.tipo ? 0 : a.tipo === 'luogo' ? -1 : 1) || String(a.nome).localeCompare(String(b.nome), 'it'));
-  if (luoghi.length) {
-    h += `<section class="sezione"><h2>Reputazione del gruppo</h2><p class="fioco piccolo" style="margin-top:0">Come vi vedono le città e le fazioni, da -3 a +3. Le rivalità tra le città contano: aiutarne una può non piacere a un'altra.</p>` +
-      luoghi.map(v => {
-        const r = DB.rapporti['gruppo__' + v.id];
-        const val = r && visibile(r) ? Number(r.valore) || 0 : 0;
-        return `<div class="rapporto rapporto--corto"><div class="alto">${sigillo(v, 'sigillo--piccolo')}<div class="nome"><a href="#/voce/${encodeURIComponent(v.id)}">${esc(v.nome)}</a><div class="valore">${scala(val, 3)}<span>${esc(RAPPORTI[val])}</span></div></div>
-          <button class="btn-icona" data-a="rap" data-pg="gruppo" data-png="${esc(v.id)}" data-d="-1" aria-label="Peggiora">${ico('meno')}</button>
-          <button class="btn-icona" data-a="rap" data-pg="gruppo" data-png="${esc(v.id)}" data-d="1" aria-label="Migliora">${ico('piu')}</button></div></div>`;
-      }).join('') + '</section>';
-  }
-  return h;
+  if (!luoghi.length) return '';
+  return `<section class="sezione"><h2>Reputazione del gruppo</h2><p class="fioco piccolo" style="margin-top:0">Come vi vedono le città e le fazioni, da -3 a +3. Le rivalità tra le città contano: aiutarne una può non piacere a un'altra.</p>` +
+    luoghi.map(v => {
+      const r = DB.rapporti['gruppo__' + v.id];
+      const val = r && visibile(r) ? Number(r.valore) || 0 : 0;
+      return `<div class="rapporto rapporto--corto"><div class="alto">${sigillo(v, 'sigillo--piccolo')}<div class="nome"><a href="#/voce/${encodeURIComponent(v.id)}">${esc(v.nome)}</a><div class="valore">${scala(val, 3)}<span>${esc(RAPPORTI[val])}</span></div></div>
+        <button class="btn-icona" data-a="rap" data-pg="gruppo" data-png="${esc(v.id)}" data-d="-1" aria-label="Peggiora">${ico('meno')}</button>
+        <button class="btn-icona" data-a="rap" data-pg="gruppo" data-png="${esc(v.id)}" data-d="1" aria-label="Migliora">${ico('piu')}</button></div></div>`;
+    }).join('') + '</section>';
 }
 
 // Una riga del freddo: abiti, indebolimento e acqua gelida di un personaggio
@@ -7852,6 +8328,12 @@ function rigaFreddo(p) {
 function razzaAdattataAlFreddo(p) {
   const r = REGOLE.razze[chiaveRazzaDi(p)];
   return !!(r && r.freddo);
+}
+// Chi tira per il freddo a ogni ora all'aperto: non è adattato, non ha un oggetto che lo fa resistere e ha gli abiti
+// bagnati o niente (Rime pag. 11 e 20). Lo usano il viaggio e il cruscotto della serata (1.8); rigaFreddo fa lo
+// stesso conto, ma tiene i tre motivi separati per scriverli.
+function espostiAlFreddo() {
+  return personaggi().filter(p => !razzaAdattataAlFreddo(p) && !oggettoControFreddo(p) && (p.abiti || 'asciutti') !== 'asciutti');
 }
 // L'oggetto del bottino che fa resistere al freddo un personaggio (1.7), o null. Nel catalogo: freddo = 1 (anello del
 // calore, stivali dell'inverno, bastone del gelo), oppure una parola che deve stare nella cosa segnata sull'oggetto
@@ -7997,7 +8479,7 @@ function calcolaViaggio(V) {
   if (V.meteo === 'bufera') out.note.push(`Bufera: ${oreAperto} prove del navigatore, Saggezza (Sopravvivenza) CD 15 a fine ora. Ogni prova fallita è un'ora senza avanzare; se fallisce di 5 o più e non siete legati, uno di voi si perde (Rime pag. 11).`);
   if (V.terreno === 'montagna') out.note.push(`Montagna: ${oreAperto} prove di chi guida, Saggezza (Sopravvivenza) CD 15 a fine ora. Se fallisce si torna indietro e si perde un'ora; di 5 o più arriva una valanga (Rime pag. 11).`);
   if (V.mezzo === 'piedi' && V.terreno !== 'strada') out.note.push('Senza racchette nella neve alta si va a metà velocità: costano 2 mo (Rime pag. 20).');
-  const esposti = personaggi().filter(p => !razzaAdattataAlFreddo(p) && !oggettoControFreddo(p) && (p.abiti || 'asciutti') !== 'asciutti');
+  const esposti = espostiAlFreddo();
   out.note.push(esposti.length ? `Freddo: ${esposti.map(p => p.nome).join(', ')} ${esposti.length === 1 ? 'fa' : 'fanno'} il tiro su Costituzione CD 10 a ogni ora all'aperto (${oreAperto}).` : 'Freddo: nessuno tira, tra abiti pesanti asciutti, chi è adattato e chi resiste al freddo.');
   if (out.totale > 4) out.note.push('La penombra dura solo dalle 10 alle 14: il resto del viaggio è al buio.');
   return out;
@@ -8031,14 +8513,14 @@ function sezioneViaggio() {
       <p class="fioco piccolo">"Viaggio fatto" sposta il gruppo sulla mappa, aggiunge le tappe al percorso della sessione, fa passare le ore sull'orologio del gruppo (si annulla da La valle) e lo segna nel taccuino della serata (o, senza serata, nei fatti dell'ultima sessione).</p></div>`;
   }
   h += `<p class="fioco piccolo">Sulla tundra: in slitta un miglio all'ora, con le racchette mezzo, senza un quarto; in montagna la metà (Rime pag. 11-12). Sulle strade tra le città valgono le ore a piedi delle tratte, in slitta circa la metà. Le tratte sono in Commercio, Mercato: ognuna è un pezzo di strada tra due luoghi con le sue ore, e il viaggio le mette in fila da solo.</p></section>`;
-  // gli incontri casuali li tiene il Master, in una riga segreta: ai giocatori non arrivano
+  // gli incontri casuali li tiene il Master: dalla 1.8 la tabella sta in Regia, con le altre tabelle casuali
+  // (righe segrete, ai giocatori non arrivano). Qui resta il tiro, con lo stesso risultato della Regia
   if (IMPOST.master) {
-    const inc = cfg('incontri', '');
+    const inc = tabelleRegia().find(t => t.k === 'incontri');
     h += `<section class="sezione"><h2>${ico('nascosto')}Incontri del Master</h2>
-      <p class="fioco piccolo" style="margin-top:0">Incolla la tua tabella, una riga per risultato con i numeri davanti (per esempio <b>1-4 testo</b>). Resta segreta: la vedi solo tu.</p>
-      <form data-a="tav-incontri"><textarea name="tabella" spellcheck="false" placeholder="1-4 ...">${esc(typeof inc === 'string' ? inc : '')}</textarea>
-      <div class="azioni"><button class="btn btn--piccolo" type="submit">${ico('check')}Salva la tabella</button>${inc ? `<button type="button" class="btn btn--primario btn--piccolo" data-a="tav-incontro">${ico('dado')}Tira un incontro</button>` : ''}</div></form>
-      <div id="esito-incontro" class="esito-dado" hidden></div></section>`;
+      ${inc.righe.length ? `<div class="azioni" style="margin-top:0"><button class="btn btn--primario btn--piccolo" data-a="tav-reg-tira" data-id="${esc(inc.id)}">${ico('dado')}Tira un incontro</button>
+        <span class="fioco piccolo">${esc(inc.dado)}, ${inc.righe.length} ${inc.righe.length === 1 ? 'riga' : 'righe'}</span></div>${esitoTabella(inc)}` : '<p class="fioco piccolo" style="margin-top:0">La tabella degli incontri è ancora vuota.</p>'}
+      <p class="fioco piccolo">La tabella si scrive in <a href="#/stasera?sez=regia">Regia</a>, con le altre tabelle casuali. Resta segreta: la vedi solo tu.</p></section>`;
   }
   return h;
 }
@@ -8129,6 +8611,16 @@ function tiraDadi(espr) {
   const dadi = Array.from({ length: clamp(Number(m[1] || 1), 1, 100) }, () => 1 + Math.floor(Math.random() * facce));
   const somma = dadi.reduce((t, d) => t + d, 0);
   return { n: somma + agg, dettaglio: dadi.length > 1 || agg ? dadi.join(' + ') + (agg ? (agg > 0 ? ' + ' : ' − ') + Math.abs(agg) : '') : '' };
+}
+// Il motore delle tabelle: il bottino (dalla 1.7) e la Regia (1.8) tirano allo stesso modo. t = { dado, righe },
+// con le righe [da, a, testo] oppure [numero, testo]. "carta" pesca una riga a caso (il mazzo delle illusioni).
+// Restituisce { n, riga, dettaglio }: riga è l'indice della riga uscita, -1 se il numero non ne ha una.
+function tiraTabella(t) {
+  const righe = t.righe || [];
+  if (t.dado === 'carta') return { n: null, riga: Math.floor(Math.random() * righe.length), dettaglio: 'pescata a caso tra ' + righe.length + ' carte' };
+  const r = tiraDadi(t.dado);
+  if (!r) return null;
+  return { n: r.n, riga: righe.findIndex(x => r.n >= x[0] && r.n <= x[x.length > 2 ? 1 : 0]), dettaglio: t.dado + (r.dettaglio ? ': ' + r.dettaglio : '') };
 }
 // Quante cariche tornano con una ricarica: "1d6+1 all'alba" si tira, "2 ogni 12 ore" ne dà 2,
 // tutto il resto ("tutte all'alba", "dopo 7 giorni", "dopo un riposo lungo") le rimette tutte.
@@ -8335,7 +8827,11 @@ function extraBottino(o) {
   return h;
 }
 
-let BOTTINO_SCHEDA = null;   // la scheda aperta in "Chi porta cosa": '' = del gruppo, altrimenti l'id del personaggio
+let BOTTINO_SCHEDA = null;   // la scheda aperta in "Chi porta cosa": '' = oggetti del gruppo, altrimenti l'id del personaggio
+// 1.8, bottino compatto: due filtri dentro la scheda aperta (restano accesi cambiando scheda, finché l'app è aperta)
+// e le descrizioni chiuse su una riga, che si aprono con un tocco (qui quelle aperte, per non chiuderle a ogni disegno)
+const BOTTINO_FILTRI = { sintonia: false, cariche: false };
+const BOTTINO_APERTE = new Set();
 function sezioneBottino() {
   const pgs = personaggi();
   const fondo = comm('moneta').reduce((t, m) => t + (Number(m.importo) || 0), 0);
@@ -8351,10 +8847,15 @@ function sezioneBottino() {
   // chi porta cosa: una scheda per il gruppo e una per personaggio, con quanti oggetti ha ciascuno.
   // Un portatore che non è (più) un personaggio del gruppo conta come "del gruppo".
   const di = id => oggetti.filter(o => id ? o.portatore === id : !pgs.some(p => p.id === o.portatore));
-  const schede = [{ id: '', nome: 'Del gruppo' }].concat(pgs.map(p => ({ id: p.id, nome: p.nome })));
+  const schede = [{ id: '', nome: 'Oggetti del gruppo' }].concat(pgs.map(p => ({ id: p.id, nome: p.nome })));
   // si parte sempre dalla scheda del gruppo: lì arriva il bottino dell'import, da dividere
   if (BOTTINO_SCHEDA === null || !schede.some(x => x.id === BOTTINO_SCHEDA)) BOTTINO_SCHEDA = '';
   const qui = di(BOTTINO_SCHEDA);
+  // i filtri valgono per la scheda aperta: "in sintonia" (con chiunque) e "con cariche" (rombi o cariche da tirare).
+  // Un filtro compare solo se nella scheda c'è qualcosa da filtrare, oppure se è acceso
+  const FILTRI = { sintonia: ['In sintonia', o => !!o.sintonia], cariche: ['Con cariche', o => scorteDi(o).length > 0] };
+  const filtriQui = Object.keys(FILTRI).filter(k => BOTTINO_FILTRI[k] || qui.some(FILTRI[k][1]));
+  const mostrati = qui.filter(o => Object.keys(FILTRI).every(k => !BOTTINO_FILTRI[k] || FILTRI[k][1](o)));
   const sintonie = BOTTINO_SCHEDA ? oggetti.filter(o => o.sintonia === BOTTINO_SCHEDA).length : 0;
   const peso = qui.reduce((t, o) => t + (Number(o.peso) || 0) * (Number(o.quantita) || 1), 0);
   // l'alba ricarica insieme tutti gli oggetti che tornano all'alba (anche quelli nelle altre schede)
@@ -8362,17 +8863,21 @@ function sezioneBottino() {
   const alba = riquadroAlba();   // l'orologio ha passato le 6: la proposta sta in cima
   h += `<section class="sezione"><h2>Chi porta cosa <span class="conta">${oggetti.length}</span></h2>${alba}
     <div class="schede-bottino" role="tablist">${schede.map(x => `<button class="chip chip--tasto ${x.id === BOTTINO_SCHEDA ? 'on' : ''}" role="tab" aria-selected="${x.id === BOTTINO_SCHEDA}" data-a="tav-bot-scheda" data-k="${esc(x.id)}">${esc(x.nome)} <span class="conta">${di(x.id).length}</span></button>`).join('')}</div>
-    <p class="fioco piccolo">${[peso ? peso + ' lb in tutto' : '', BOTTINO_SCHEDA ? 'sintonie ' + sintonie + ' su 3' : 'le cose di tutti, non ancora assegnate'].filter(Boolean).join(', ')}</p>`;
-  h += qui.length ? '<ul class="lista">' + qui.map(o => {
+    <p class="fioco piccolo">${[peso ? peso + ' lb in tutto' : '', BOTTINO_SCHEDA ? 'sintonie ' + sintonie + ' su 3' : 'le cose di tutti, non ancora assegnate'].filter(Boolean).join(', ')}</p>
+    ${filtriQui.length ? `<div class="filtri-bottino" role="group" aria-label="Filtra gli oggetti"><span class="fioco piccolo">Solo</span>${filtriQui.map(k =>
+      `<button class="chip chip--tasto${BOTTINO_FILTRI[k] ? ' on' : ''}" aria-pressed="${BOTTINO_FILTRI[k]}" data-a="tav-bot-filtro" data-k="${k}">${BOTTINO_FILTRI[k] ? ico('check') : ''}${FILTRI[k][0]} <span class="conta">${qui.filter(FILTRI[k][1]).length}</span></button>`).join('')}</div>` : ''}`;
+  h += mostrati.length ? '<ul class="lista">' + mostrati.map(o => {
     const base = oggettoCatalogo(o.catalogo);
     const extra = extraBottino(o);   // cariche e tabelle, sotto la riga, larghe quanto la pagina
     const sotto = [base && norm(base.nome) !== norm(o.nome) ? base.nome : '', base ? sottotitoloCatalogo(base) : '', base && base.requisiti ? 'serve: ' + base.requisiti.charAt(0).toLowerCase() + base.requisiti.slice(1) : '',
       Number(o.valore) ? mo(o.valore) : '', Number(o.peso) ? o.peso + ' lb' : '', o.sessione && DB.sessioni[o.sessione] ? 'sessione ' + DB.sessioni[o.sessione].numero : ''].filter(Boolean);
     return `<li class="riga riga-bottino" id="bot-${esc(o.id)}"><div class="corpo"><div class="tit">${Number(o.quantita) > 1 ? esc(o.quantita) + ' × ' : ''}${esc(o.nome)}${o.richiede ? ' <span class="chip chip--mini">sintonia' + (o.sintonia ? ': ' + esc(nomeDi(o.sintonia)) : '') + '</span>' : ''}</div>
-        <div class="sub">${sotto.map(esc).join(', ')}</div>${o.note ? `<div class="sub desc-bottino">${testoRicco(o.note, 'riga')}</div>` : ''}</div>
+        <div class="sub">${sotto.map(esc).join(', ')}</div>${o.note ? `<div class="sub desc-bottino${BOTTINO_APERTE.has(o.id) ? '' : ' chiusa'}" data-a="tav-bot-desc" data-id="${esc(o.id)}" role="button" tabindex="0" aria-expanded="${BOTTINO_APERTE.has(o.id)}" title="Tocca per aprire o chiudere la descrizione">${testoRicco(o.note, 'riga')}</div>` : ''}</div>
         <button class="btn btn--testo btn--piccolo" data-a="tav-vendi" data-id="${esc(o.id)}">Vendi</button>
         <button class="btn-icona btn-icona--mini" data-a="modifica" data-tab="commercio" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button>${extra ? `<div class="extra-bottino">${extra}</div>` : ''}</li>`;
-  }).join('') + '</ul>' : `<p class="vuoto">${BOTTINO_SCHEDA ? esc(nomeDi(BOTTINO_SCHEDA)) + ' non porta niente del gruppo.' : 'Niente da dividere.'}</p>`;
+  }).join('') + '</ul>'
+    : qui.length ? `<p class="vuoto">Nessun oggetto ${Object.keys(FILTRI).filter(k => BOTTINO_FILTRI[k]).map(k => FILTRI[k][0].toLowerCase()).join(' e ')} in questa scheda: tocca il filtro per spegnerlo.</p>`
+    : `<p class="vuoto">${BOTTINO_SCHEDA ? esc(nomeDi(BOTTINO_SCHEDA)) + ' non porta niente del gruppo.' : 'Niente da dividere.'}</p>`;
   h += `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-bot-nuovo" data-k="${esc(BOTTINO_SCHEDA)}">${ico('piu')}Aggiungi un oggetto${BOTTINO_SCHEDA ? ' a ' + esc(nomeDi(BOTTINO_SCHEDA)) : ''}</button>
     ${allAlba && !alba ? `<button class="btn btn--piccolo" data-a="tav-alba">${ico('lanterna')}È l'alba: ricarica gli oggetti</button>` : ''}</div>`;
   return h + `<p class="fioco piccolo">L'import propone da solo il bottino della serata. ${catalogoOggetti().length ? `Il catalogo ha ${catalogoOggetti().length} oggetti: nell'oggetto scrivi per cercare. Con il catalogo arrivano anche le cariche (i rombi: tocca un rombo pieno per usarne una) e le tabelle da tirare.` : "Con il catalogo degli oggetti (un pacchetto da importare) l'oggetto si sceglie da un elenco."} Le monete divise vanno poi sulla scheda di ognuno su D&amp;D Beyond.</p></section>`;
@@ -8424,25 +8929,371 @@ function linkCalendario(d) {
 // ---------------------------------------------------------------------
 // DICERIE: voci di taverna sentite in gioco (dall'import o a mano). Il Master può prepararne di segrete
 // e rivelarle quando i personaggi le sentono.
+// Dalla 1.8 ogni diceria ha uno stato, con chi l'ha segnato (veraDa) e quando (veraIl), e l'elenco si filtra
+// per stato. Le chiavi restano quelle di prima ('' da verificare, si, parte, no): le dicerie già nel foglio
+// non cambiano, e quelle mai segnate restano "da verificare".
 // ---------------------------------------------------------------------
-const VERITA = { '': 'Da verificare', si: 'Era vera', parte: 'Vera in parte', no: 'Era falsa' };
-function sezioneDicerie() {
+const VERITA = { '': 'Da verificare', si: 'Vera', parte: 'Vera in parte', no: 'Falsa' };
+const VERITA_FILTRO = { '': 'Da verificare', si: 'Vere', parte: 'Vere in parte', no: 'False' };
+let FILTRO_DICERIE = 'tutte';   // 'tutte' oppure una chiave di VERITA: resta finché l'app è aperta
+let DICERIA_IN_CAMBIO = '';     // la diceria già segnata di cui si sta cambiando lo stato: mostra di nuovo le scelte
+// soloPreparate (1.8): la Regia mostra solo le dicerie preparate dal Master, con il titolo suo
+function sezioneDicerie(soloPreparate) {
   const tutte = righeConfig('dic-').map(r => Object.assign({ id: r.id, segreto: r.segreto, agg: r.agg }, r.valore)).filter(d => d.testo)
     .sort((a, b) => String(b.agg || '').localeCompare(String(a.agg || '')));
   const pubbliche = tutte.filter(d => !d.segreto), preparate = tutte.filter(d => d.segreto);
-  const riga = d => `<li class="diceria v-${esc(d.vera || 'nd')}"><div class="corpo"><p>${testoRicco(d.testo, 'riga')}</p>
-      <p class="piccolo fioco">${[d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : '', d.sessione && DB.sessioni[d.sessione] ? 'sessione ' + esc(DB.sessioni[d.sessione].numero) : ''].filter(Boolean).join(', ')}</p>
-      <div class="chips">${Object.entries(VERITA).map(([k, l]) => `<button class="chip chip--tasto${(d.vera || '') === k ? ' on' : ''}" data-a="tav-vera" data-id="${esc(d.id)}" data-v="${k}">${l}</button>`).join('')}</div></div>
+  const statoDi = d => VERITA[d.vera] !== undefined ? d.vera || '' : '';
+  const quante = k => pubbliche.filter(d => statoDi(d) === k).length;
+  const riga = d => {
+    const k = statoDi(d);
+    const meta = [d.chi ? 'da ' + esc(nomeDi(d.chi)) : '', d.dove ? 'a ' + esc(nomeDi(d.dove)) : '', d.sessione && DB.sessioni[d.sessione] ? 'sessione ' + esc(DB.sessioni[d.sessione].numero) : ''].filter(Boolean).join(', ');
+    // le preparate dal Master non le ha ancora sentite nessuno: niente stato finché non le rivela.
+    // Da verificare (o mentre la si cambia): le quattro scelte, con quella di adesso accesa. Già segnata: lo stato,
+    // chi l'ha segnato e "Cambia", così l'elenco resta corto
+    let stato = '';
+    if (!d.segreto && (!k || DICERIA_IN_CAMBIO === d.id)) {
+      stato = `<div class="chips dic-scelte" role="group" aria-label="Com'era questa diceria">${Object.keys(VERITA).map(v =>
+        `<button class="chip chip--tasto${k === v ? ' on' : ''}" data-a="tav-vera" data-id="${esc(d.id)}" data-v="${v}">${v === 'parte' ? 'In parte' : VERITA[v]}</button>`).join('')}</div>`;
+    } else if (!d.segreto) {
+      stato = `<p class="dic-stato"><span class="stato-dic">${VERITA[k]}</span>${d.veraDa ? ` <span class="fioco piccolo">segnata da ${esc(d.veraDa)}</span>` : ''}
+        <button class="btn btn--testo btn--in-riga piccolo" data-a="tav-dic-cambia" data-id="${esc(d.id)}">Cambia</button></p>`;
+    }
+    return `<li class="diceria v-${k || 'nd'}"><div class="corpo"><p>${testoRicco(d.testo, 'riga')}</p>${meta ? `<p class="piccolo fioco">${meta}</p>` : ''}${stato}</div>
       <div class="azioni-riga">${d.segreto ? `<button class="btn btn--piccolo btn--primario" data-a="tav-dic-rivela" data-id="${esc(d.id)}">Rivela</button>` : ''}<button class="btn-icona btn-icona--mini" data-a="tav-diceria" data-id="${esc(d.id)}" aria-label="Modifica">${ico('modifica')}</button></div></li>`;
-  let h = `<section class="sezione"><h2>Voci di taverna <span class="conta">${pubbliche.length}</span></h2>
-    <div class="azioni" style="margin-top:0"><button class="btn btn--primario btn--piccolo" data-a="tav-diceria">${ico('piu')}Segna una diceria</button></div>
-    ${pubbliche.length ? '<ul class="dicerie">' + pubbliche.map(riga).join('') + '</ul>' : '<p class="vuoto">Nessuna diceria. Le aggiunge anche l\'import, quando in una sessione qualcuno racconta una voce.</p>'}</section>`;
-  if (IMPOST.master) {
-    h += `<section class="sezione"><h2>${ico('nascosto')}Preparate dal Master <span class="conta">${preparate.length}</span></h2>
+  };
+  // i filtri compaiono quando gli stati sono almeno due; un filtro acceso resta anche se si svuota (l'ultima
+  // da verificare appena segnata sparisce dall'elenco, e "Tutte" è lì accanto)
+  const stati = Object.keys(VERITA).filter(k => quante(k));
+  if (FILTRO_DICERIE !== 'tutte' && VERITA[FILTRO_DICERIE] === undefined) FILTRO_DICERIE = 'tutte';
+  const filtri = stati.length > 1 || FILTRO_DICERIE !== 'tutte'
+    ? `<div class="chips filtri-dicerie" role="group" aria-label="Mostra le dicerie">${['tutte'].concat(Object.keys(VERITA).filter(k => quante(k) || FILTRO_DICERIE === k)).map(k =>
+      `<button class="chip chip--tasto${FILTRO_DICERIE === k ? ' on' : ''}" data-a="tav-dic-filtro" data-v="${k}">${k === 'tutte' ? 'Tutte' : VERITA_FILTRO[k]} <span class="conta">${k === 'tutte' ? pubbliche.length : quante(k)}</span></button>`).join('')}</div>` : '';
+  const mostrate = FILTRO_DICERIE === 'tutte' ? pubbliche : pubbliche.filter(d => statoDi(d) === FILTRO_DICERIE);
+  const blocco = titolo => `<section class="sezione"><h2>${ico('nascosto')}${titolo} <span class="conta">${preparate.length}</span></h2>
       <p class="fioco piccolo" style="margin-top:0">Le vedi solo tu. Quando i personaggi le sentono, toccare "Rivela" le fa comparire a tutti.</p>
       <div class="azioni" style="margin-top:0"><button class="btn btn--piccolo" data-a="tav-diceria" data-segreta="1">${ico('piu')}Prepara una diceria</button></div>
       ${preparate.length ? '<ul class="dicerie">' + preparate.map(riga).join('') + '</ul>' : ''}</section>`;
+  if (soloPreparate) return IMPOST.master ? blocco('Dicerie preparate') : '';
+  let h = `<section class="sezione"><h2>Voci di taverna <span class="conta">${pubbliche.length}</span></h2>
+    <div class="azioni" style="margin-top:0"><button class="btn btn--primario btn--piccolo" data-a="tav-diceria">${ico('piu')}Segna una diceria</button></div>
+    ${filtri}
+    ${mostrate.length ? '<ul class="dicerie">' + mostrate.map(riga).join('') + '</ul>'
+      : pubbliche.length ? `<p class="vuoto">Nessuna diceria ${esc(VERITA[FILTRO_DICERIE].toLowerCase())}.</p>`
+      : '<p class="vuoto">Nessuna diceria. Le aggiunge anche l\'import, quando in una sessione qualcuno racconta una voce.</p>'}</section>`;
+  if (IMPOST.master) h += blocco('Preparate dal Master');
+  return h;
+}
+
+// ---------------------------------------------------------------------
+// REGIA (1.8): la scheda del Master dentro Stasera, solo con la chiave del Master. Raccoglie i suoi strumenti:
+// le tabelle casuali, le dicerie preparate, le voci e le missioni segrete (dal passo 4 anche orologi ed eventi).
+// Le TABELLE CASUALI sono righe config segrete 'tab-…' con { nome, dado, testo }: ai giocatori non arrivano.
+// Il testo è quello che scrive il Master, una riga per risultato ("1-4 testo"): le righe da tirare si ricavano
+// ogni volta dal testo, così una riga che l'app non capisce (un titolo, una nota) resta lì e non si perde.
+// Cinque tabelle sono già pronte, vuote, con un dado suggerito (le righe le scrive il Master: niente testo dei
+// manuali nell'app); le altre le crea lui. Gli incontri sono 'tab-incontri': finché il Master non la salva vale la
+// tabella incollata in Viaggio fino alla 1.7 (riga 'incontri'), che resta nel foglio com'è. Viaggio tira da qui.
+// Il tiro usa il motore del bottino (tiraTabella) e resta su questo telefono. "Rivela al tavolo", a serata
+// aperta, mette il risultato tra i segnalibri: lo vedono tutti e finisce nel diario con l'import.
+// ---------------------------------------------------------------------
+const TABELLE_PRONTE = {
+  incontri: { nome: 'Incontri', dado: 'd20', aiuto: 'chi o cosa incontrate, per strada o in un luogo' },
+  viaggio: { nome: 'Complicazioni di viaggio', dado: 'd12', aiuto: 'quello che rallenta o complica una tappa' },
+  meteo: { nome: 'Meteo', dado: 'd20', aiuto: 'il tempo che fa, per la giornata o per il viaggio' },
+  png: { nome: 'Reazioni dei PNG', dado: '2d6', aiuto: 'come reagisce un PNG al primo incontro' },
+  campo: { nome: 'Accampamento', dado: 'd10', aiuto: 'cosa succede quando vi fermate per la notte' }
+};
+let TIRO_REGIA = null;   // l'ultimo tiro su una tabella della Regia, solo su questo telefono: { id, n, riga, testo, dettaglio, rivelato }
+
+// Le righe da tirare di una tabella scritta a mano: "1-4 testo", "5 testo", "05–08. testo", "12) testo",
+// "96-00 testo" (00 vale 100). Senza nessun numero le righe valgono 1, 2, 3… nell'ordine. In una tabella con
+// i numeri, le righe senza (titoli, note) restano nel testo ma non si tirano: le restituisco in "senza".
+function righeDaTesto(testo) {
+  const linee = String(testo || '').split('\n').map(r => r.trim()).filter(Boolean);
+  const num = x => /^0+$/.test(x) ? 100 : Number(x);
+  const trovate = linee.map(l => l.match(/^(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?[\s.:)|\]]+(.+)$/));
+  if (linee.length && !trovate.some(Boolean)) return { righe: linee.map((l, i) => [i + 1, i + 1, l]), senza: [] };
+  return {
+    righe: trovate.filter(Boolean).map(m => { const a = num(m[1]), b = m[2] !== undefined ? num(m[2]) : a; return [Math.min(a, b), Math.max(a, b), m[3].trim()]; }),
+    senza: linee.filter((l, i) => !trovate[i])
+  };
+}
+
+// Quello che non torna in una tabella, detto al Master mentre la scrive (non blocca niente): un dado che non si
+// capisce, i numeri che il dado fa ma nessuna riga copre, quelli in due righe, quelli che il dado non fa mai,
+// le righe senza numero. In testa quante righe si tirano e con che dado.
+function anteprimaTabella(dado, testo) {
+  const { righe, senza } = righeDaTesto(testo);
+  const d = String(dado || '').replace(/\s+/g, '').toLowerCase();
+  const m = d.match(/^(\d*)d(\d+|%)([+-]\d+)?$/);
+  if (!m) return `<p class="avviso-tabella">${ico('info')}Il dado non si capisce: scrivi per esempio d20, 2d6 o d100.</p>`;
+  if (!righe.length) return '<p class="fioco piccolo">Ancora nessuna riga.</p>';
+  const k = clamp(Number(m[1] || 1), 1, 100), f = m[2] === '%' ? 100 : Number(m[2]), agg = Number(m[3] || 0);
+  const min = k + agg, max = k * f + agg;
+  const conta = {};
+  righe.forEach(r => { for (let n = r[0]; n <= r[1] && n <= 10000; n++) conta[n] = (conta[n] || 0) + 1; });
+  // 7, 8, 9, 15 diventa "7–9, 15"
+  const intervalli = nn => nn.reduce((out, n) => { const u = out[out.length - 1]; if (u && n === u[1] + 1) u[1] = n; else out.push([n, n]); return out; }, [])
+    .map(([a, b]) => a === b ? String(a) : a + '–' + b).join(', ');
+  const mancano = [], doppi = [];
+  for (let n = min; n <= max; n++) { if (!conta[n]) mancano.push(n); else if (conta[n] > 1) doppi.push(n); }
+  const fuori = Object.keys(conta).map(Number).filter(n => n < min || n > max).sort((a, b) => a - b);
+  const note = [];
+  if (mancano.length) note.push(`Con ${d} escono numeri senza riga: ${intervalli(mancano)}.`);
+  if (doppi.length) note.push(`Numeri in due righe: ${intervalli(doppi)}.`);
+  if (fuori.length) note.push(`Con ${d} non escono mai: ${intervalli(fuori)}.`);
+  if (senza.length) note.push(senza.length === 1 ? 'Una riga senza numero resta come nota e non si tira.' : senza.length + ' righe senza numero restano come note e non si tirano.');
+  return `<p class="fioco piccolo">${righe.length} ${righe.length === 1 ? 'riga' : 'righe'} da tirare con ${esc(d)}.</p>` +
+    (note.length ? `<p class="avviso-tabella">${ico('info')}${esc(note.join(' '))}</p>` : '');
+}
+
+// Le tabelle della Regia: le cinque pronte (anche vuote) e quelle del Master, con le righe ricavate dal testo
+function tabelleRegia() {
+  const pronte = Object.entries(TABELLE_PRONTE).map(([k, p]) => {
+    const r = DB.config['tab-' + k];
+    let v = r && visibile(r) && r.valore && typeof r.valore === 'object' ? r.valore : null;
+    let vecchia = false;
+    // la tabella degli incontri incollata in Viaggio fino alla 1.7: vale finché il Master non salva quella nuova.
+    // Il dado è quello che usava allora: il numero più alto della tabella
+    const prima = cfg('incontri', '');
+    if (!v && k === 'incontri' && typeof prima === 'string' && prima.trim()) {
+      const alto = Math.max(0, ...righeDaTesto(prima).righe.map(x => x[1]));
+      v = { nome: p.nome, dado: 'd' + (alto || 20), testo: prima };
+      vecchia = true;
+    }
+    return Object.assign({ id: 'tab-' + k, k, nome: p.nome, dado: p.dado, testo: '', aiuto: p.aiuto }, v || {}, { vecchia });
+  });
+  const proprie = righeConfig('tab-').filter(r => !TABELLE_PRONTE[r.id.slice(4)])
+    .map(r => Object.assign({ id: r.id, k: '', nome: 'Tabella', dado: 'd20', testo: '' }, r.valore))
+    .sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'it'));
+  return pronte.concat(proprie).map(t => Object.assign(t, { testo: String(t.testo || '') }, righeDaTesto(t.testo)));
+}
+
+// Il riquadro del tiro (in Regia e, per gli incontri, in Viaggio): il numero, la riga uscita e i dadi.
+// "Rivela al tavolo" c'è solo a serata aperta, perché il risultato diventa un segnalibro della serata
+function esitoTabella(t) {
+  const x = TIRO_REGIA && TIRO_REGIA.id === t.id ? TIRO_REGIA : null;
+  if (!x) return '';
+  const ser = serata();
+  const aperta = !!(ser && !ser.fine);
+  const rivela = !x.testo || !aperta ? ''
+    : x.rivelato ? `<span class="fioco piccolo">${ico('check')}Rivelato: è tra i segnalibri della serata</span>`
+    : `<button class="btn btn--primario btn--piccolo" data-a="tav-reg-rivela">${ico('occhio')}Rivela al tavolo</button>`;
+  return `<div class="esito-dado esito-bottino" role="status"><span class="n">${esc(x.n)}</span><div class="eb-testo">
+    <strong>${esc(t.nome)}</strong><span>${x.testo ? esc(x.testo) : 'Nessuna riga per il ' + esc(x.n)}</span><span class="fioco piccolo">${esc(x.dettaglio)}</span>
+    <div class="azioni azioni--strette">${rivela}<button class="btn btn--testo btn--piccolo" data-a="tav-reg-chiudi">Chiudi</button></div></div></div>`;
+}
+
+function sezioneRegia() {
+  if (!IMPOST.master) return '';
+  const tabelle = tabelleRegia();
+  const piene = tabelle.filter(t => t.testo.trim()), vuote = tabelle.filter(t => !t.testo.trim());
+  let h = `<p class="fioco piccolo regia-nota">${ico('nascosto')}Questa scheda la vedi solo tu. Tabelle, dicerie preparate e voci segrete non arrivano ai giocatori finché non le riveli.</p>`;
+  // passo 4: gli avvisi (eventi scaduti, orologi pieni) in cima, poi orologi ed eventi programmati
+  h += avvisiMaster() + bloccoOrologiEventi('regia');
+
+  // le tabelle: quelle con le righe come riquadri con il tasto Tira (la grafica delle tabelle del bottino),
+  // quelle ancora vuote in una riga di chip da toccare per scriverle
+  h += `<section class="sezione"><h2>Tabelle casuali <span class="conta">${piene.length}</span></h2>` + piene.map(t => {
+    const avviso = anteprimaTabella(t.dado, t.testo).match(/<p class="avviso-tabella">[\s\S]*<\/p>/);
+    const uscita = TIRO_REGIA && TIRO_REGIA.id === t.id ? TIRO_REGIA.riga : -1;
+    return `<div class="tab-bottino tab-regia" id="${esc(t.id)}"><div class="tb-testa"><span class="tb-titolo">${esc(t.nome)} <span class="fioco piccolo">${esc(t.dado)}, ${t.righe.length} ${t.righe.length === 1 ? 'riga' : 'righe'}</span></span>
+      ${t.righe.length ? `<button class="btn btn--piccolo" data-a="tav-reg-tira" data-id="${esc(t.id)}">${ico('dado')}Tira ${esc(t.dado)}</button>` : ''}</div>
+      ${t.vecchia ? '<p class="fioco piccolo" style="margin:4px 0 0">È la tabella che avevi incollato in Viaggio: con Modifica e Salva passa qui.</p>' : ''}
+      ${esitoTabella(t)}${avviso ? avviso[0] : ''}
+      <details><summary>Vedi la tabella (${t.righe.length} ${t.righe.length === 1 ? 'riga' : 'righe'})</summary><ol class="elenco-impulsi elenco-tabella">` +
+      t.righe.map((r, j) => `<li class="${j === uscita ? 'uscito' : ''}"><b>${esc(r[0] === r[1] ? String(r[0]) : r[0] + '–' + r[1])}</b><span>${esc(r[2])}</span></li>`).join('') +
+      `</ol>${t.senza.length ? `<p class="fioco piccolo">${esc(t.senza.join(' · '))}</p>` : ''}</details>
+      <div class="azioni azioni--strette"><button class="btn btn--testo btn--piccolo" data-a="tav-reg-tabella" data-id="${esc(t.id)}">${ico('modifica')}Modifica</button></div></div>`;
+  }).join('') +
+    (vuote.length ? `<div class="tabelle-vuote"><span class="fioco piccolo">Da scrivere</span>${vuote.map(t => `<button class="chip chip--tasto" data-a="tav-reg-tabella" data-id="${esc(t.id)}">${ico('piu')}${esc(t.nome)}</button>`).join('')}</div>` : '') +
+    `<div class="azioni"><button class="btn btn--piccolo" data-a="tav-reg-tabella">${ico('piu')}Nuova tabella</button></div>
+    <p class="fioco piccolo">Le righe le scrivi tu, una per risultato con i numeri davanti (<b>1-4 testo</b>), anche incollate. Il tiro lo vedi solo tu; a serata aperta "Rivela al tavolo" lo mette tra i segnalibri di tutti.</p></section>`;
+
+  // le dicerie preparate, come in Dicerie
+  h += sezioneDicerie(true);
+
+  // le voci segrete: prima quelle previste stasera (il nome entra nel prompt dell'import come aiuto a scriverlo
+  // giusto), poi le altre, chiuse. "Rivela" chiede conferma, come nella pagina della voce
+  const segrete = elenco('voci', v => v.segreto).sort((a, b) => String(a.nome).localeCompare(String(b.nome), 'it'));
+  const previste = segrete.filter(v => v.previsto), altre = segrete.filter(v => !v.previsto);
+  const missioni = elenco('missioni', m => m.segreto).sort((a, b) => String(a.titolo).localeCompare(String(b.titolo), 'it'));
+  const riga = v => `<li class="riga-segreta"><a class="riga" href="#/voce/${encodeURIComponent(v.id)}">${sigillo(v, 'sigillo--piccolo')}<div class="corpo"><div class="tit">${esc(v.nome)}</div><div class="sub">${esc((TIPI_VOCE[v.tipo] || {}).nome || '')}</div></div></a>
+    <button class="chip chip--tasto${v.previsto ? ' on' : ''}" data-a="previsto" data-id="${esc(v.id)}" aria-pressed="${v.previsto ? 'true' : 'false'}">${v.previsto ? ico('check') : ''}Stasera</button>
+    <button class="btn btn--testo btn--piccolo" data-a="rivela" data-id="${esc(v.id)}">Rivela</button></li>`;
+  h += `<section class="sezione"><h2>${ico('nascosto')}Voci segrete <span class="conta">${segrete.length}</span></h2>` + (segrete.length
+    ? `<p class="fioco piccolo" style="margin-top:0">"Stasera" mette il nome nel prompt dell'import, solo come aiuto a scriverlo giusto; "Rivela" la fa vedere a tutti.</p>
+      ${previste.length ? '<ul class="lista segrete">' + previste.map(riga).join('') + '</ul>' : ''}
+      ${altre.length ? `<details class="altre-segrete"${previste.length ? '' : ' open'}><summary>${previste.length ? 'Le altre' : 'Tutte'} (${altre.length})</summary><ul class="lista segrete">${altre.map(riga).join('')}</ul></details>` : ''}`
+    : '<p class="vuoto">Nessuna voce segreta. Una voce del wiki diventa segreta con "Visibile solo al Master" nel modulo.</p>') +
+    (missioni.length ? `<h3 class="gruppo-azione">Missioni segrete</h3><ul class="lista">${missioni.map(m => `<li><a class="riga" href="#/missione/${encodeURIComponent(m.id)}"><span class="sigillo sigillo--piccolo t-missione">${ico('missioni')}</span><div class="corpo"><div class="tit">${esc(m.titolo)}</div><div class="sub">${esc((STATI_MISSIONE[m.stato] || m.stato || '').toString())}</div></div></a></li>`).join('')}</ul>` : '') + '</section>';
+
+  // quello che il Master tiene altrove: gli esiti segreti delle spedizioni
+  const esiti = comm('spedizione', sp => sp.segreto && sp.esito).length;
+  if (esiti) h += `<p class="fioco piccolo">${ico('slitta')}${esiti === 1 ? 'Un esito segreto' : esiti + ' esiti segreti'} delle spedizioni: sono in <a href="#/commercio">Gruppo, Commercio</a>.</p>`;
+  return h;
+}
+
+// ---------------------------------------------------------------------
+// OROLOGI NARRATIVI ED EVENTI PROGRAMMATI (1.8)
+// Due strumenti del Master, senza doppioni tra loro: un OROLOGIO si riempie solo a mano (un pericolo che cresce,
+// una pazienza che finisce), un EVENTO scatta con il tempo della campagna (la carovana alle 8, la pattuglia ogni
+// giorno alle 18). Un orologio "a tempo" sarebbe un evento: per questo gli orologi non hanno scadenze.
+// Orologio: riga config 'oro-…' { nome, spicchi 4/6/8/10, pieni, luogo, visto }, segreta se è privato. Quello che
+// il Master scrive per sé (descrizione e condizione di completamento) sta sempre nella riga segreta 'orn-…' con lo
+// stesso seguito: un orologio reso pubblico non si porta dietro le note (come i PF dei nemici nei turni).
+// Evento: riga config 'evt-…' { nome, quando, ripeti, luogo, stato, ultimo }, segreta finché il Master non lo
+// rivela; la nota privata sta in 'evn-…'. quando è il momento della campagna in ore dalla mezzanotte del giorno 1
+// (momentoCampagna): il giorno del calendario, che conta anche i giorni delle sessioni, più l'ora dell'orologio.
+// Quando il tempo del gruppo passa la scadenza il Master vede l'avviso, come per l'alba: avvenuto, ignora,
+// rinvia, rivela ai giocatori. Un evento che si ripete riparte dalla volta dopo. Non è un sistema di missioni:
+// niente obiettivi né passi, solo un promemoria con un'ora (e un luogo, se c'è).
+// ---------------------------------------------------------------------
+const SPICCHI = [4, 6, 8, 10];
+const RIPETIZIONI = { 0: 'Una volta sola', 24: 'Ogni giorno', 48: 'Ogni due giorni', 72: 'Ogni tre giorni', 240: 'Ogni decade (10 giorni)', 720: 'Ogni mese (30 giorni)' };
+
+function momentoCampagna() {
+  const ore = oreCampagna();
+  return (calendario(ore).giorno - 1) * 24 + (((ore % 24) + 24) % 24);
+}
+// Il momento scritto in un modulo: il campo giorno (della campagna) e il campo ora (hh:mm)
+function momentoDaModulo(f) {
+  const g = Math.max(1, Number((f.querySelector('[name="giorno"]') || {}).value) || 1);
+  const [hh, mm] = String((f.querySelector('[name="ora"]') || {}).value || '0:0').split(':').map(Number);
+  return (g - 1) * 24 + (Number(hh) || 0) + (Number(mm) || 0) / 60;
+}
+// "Giorno 12, 18:00", oppure, rispetto ad adesso, "oggi alle 18:00", "domani alle 8:00", "fra 3 giorni"
+function testoMomento(m, rispettoAdesso) {
+  const giorno = Math.floor(m / 24) + 1;
+  if (!rispettoAdesso) return 'Giorno ' + giorno + ', ' + testoOra(m);
+  const oggi = Math.floor(momentoCampagna() / 24) + 1, d = giorno - oggi;
+  if (d === 0) return 'oggi alle ' + testoOra(m);
+  if (d === 1) return 'domani alle ' + testoOra(m);
+  if (d === -1) return 'ieri alle ' + testoOra(m);
+  return 'giorno ' + giorno + ' alle ' + testoOra(m) + (d > 0 ? ', fra ' + d + ' giorni' : ', ' + (-d) + ' giorni fa');
+}
+
+// Gli orologi visibili su questo telefono (i giocatori ricevono solo i pubblici), con le note del Master se le ha
+function orologi() {
+  return righeConfig('oro-').map(r => {
+    const v = r.valore, n = SPICCHI.includes(Number(v.spicchi)) ? Number(v.spicchi) : 4;
+    const note = DB.config['orn-' + r.id.slice(4)];
+    return Object.assign({ nome: 'Orologio', luogo: '' }, v, { id: r.id, segreto: !!r.segreto, spicchi: n, pieni: clamp(Number(v.pieni) || 0, 0, n),
+      privato: note && visibile(note) && note.valore && typeof note.valore === 'object' ? note.valore : {} });
+  }).sort((a, b) => (a.segreto ? 1 : 0) - (b.segreto ? 1 : 0) || String(a.nome).localeCompare(String(b.nome), 'it'));
+}
+// Gli eventi visibili: per i giocatori solo quelli rivelati; da fare prima, in ordine di scadenza
+function eventiProgrammati() {
+  return righeConfig('evt-').map(r => {
+    const note = DB.config['evn-' + r.id.slice(4)];
+    return Object.assign({ nome: 'Evento', luogo: '', stato: 'attivo' }, r.valore, { id: r.id, segreto: !!r.segreto,
+      quando: Number(r.valore.quando) || 0, ripeti: Number(r.valore.ripeti) || 0,
+      nota: note && visibile(note) && note.valore ? String(note.valore.nota || '') : '' });
+  }).sort((a, b) => (a.stato === 'attivo' ? 0 : 1) - (b.stato === 'attivo' ? 0 : 1) || a.quando - b.quando);
+}
+// Un luogo e quelli che contiene: un orologio della locanda compare anche sulla città (come le missioni)
+function nelLuogo(x, id) { return !!x.luogo && (x.luogo === id || discendenti(id).includes(x.luogo)); }
+// Un evento rivelato resta in vista finché deve succedere e per un giorno dopo (poi se ne ricorda solo la Regia)
+function eventoInVista(e) {
+  const ora = momentoCampagna();
+  if (e.stato === 'attivo') return true;
+  const ultimo = e.ultimo && Number(e.ultimo.quando);
+  return !!ultimo && ora - ultimo <= 24;
+}
+
+// L'orologio disegnato: un cerchio a spicchi, i pieni in lanterna. Lo stesso nella Home, in Stasera, sulla mappa
+function cerchioOrologio(o, px) {
+  const n = o.spicchi, p = o.pieni, c = 12, r = 10.5;
+  let h = '';
+  for (let i = 0; i < n; i++) {
+    const a0 = i / n * 2 * Math.PI - Math.PI / 2, a1 = (i + 1) / n * 2 * Math.PI - Math.PI / 2;
+    h += `<path class="${i < p ? 'pieno' : ''}" d="M${c} ${c}L${(c + r * Math.cos(a0)).toFixed(2)} ${(c + r * Math.sin(a0)).toFixed(2)}A${r} ${r} 0 0 1 ${(c + r * Math.cos(a1)).toFixed(2)} ${(c + r * Math.sin(a1)).toFixed(2)}Z"/>`;
   }
+  return `<svg class="cerchio-orologio${p >= n ? ' tutto' : ''}" viewBox="0 0 24 24" width="${px}" height="${px}" role="img" aria-label="${p} spicchi su ${n}">${h}</svg>`;
+}
+
+// Gli avvisi del Master (come l'alba): gli eventi scaduti e gli orologi appena riempiti. In cima a La valle,
+// alla Regia e al cruscotto della serata, finché non ha scelto cosa fare
+function avvisiMaster() {
+  if (!IMPOST.master) return '';
+  const ora = momentoCampagna();
+  let h = '';
+  eventiProgrammati().filter(e => e.stato === 'attivo' && e.quando <= ora).forEach(e => {
+    const dettagli = [e.luogo ? 'a ' + nomeDi(e.luogo) : '', e.ripeti ? RIPETIZIONI[e.ripeti] || 'si ripete' : '', e.segreto ? 'i giocatori non lo sanno' : 'i giocatori lo sanno'].filter(Boolean).join(' · ');
+    h += `<div class="riquadro-alba riquadro-evento" role="status">${ico('evento')}<div><strong>${esc(testoMomento(e.quando))}: ${esc(e.nome)}</strong>
+      <span class="fioco piccolo">${esc(dettagli)}</span>${e.nota ? `<span class="piccolo nota-master">${testoRicco(e.nota, 'riga')}</span>` : ''}
+      <div class="azioni azioni--strette"><button class="btn btn--primario btn--piccolo" data-a="tav-evt-esito" data-id="${esc(e.id)}" data-esito="avvenuto">${ico('check')}Avvenuto</button>
+      ${e.segreto ? `<button class="btn btn--piccolo" data-a="tav-evt-esito" data-id="${esc(e.id)}" data-esito="rivela">${ico('occhio')}Rivela ai giocatori</button>` : ''}
+      <button class="btn btn--piccolo" data-a="tav-evt-rinvia" data-id="${esc(e.id)}">${ico('orologio')}Rinvia</button>
+      <button class="btn btn--testo btn--piccolo" data-a="tav-evt-esito" data-id="${esc(e.id)}" data-esito="ignorato">Ignora</button></div></div></div>`;
+  });
+  orologi().filter(o => o.pieni >= o.spicchi && !o.visto).forEach(o => {
+    const cosa = o.privato.condizione || o.privato.descrizione || '';
+    h += `<div class="riquadro-alba riquadro-orologio" role="status">${cerchioOrologio(o, 30)}<div><strong>"${esc(o.nome)}" è pieno</strong>
+      <span class="fioco piccolo">Cosa succede lo decidi tu.${o.segreto ? '' : ' I giocatori lo vedono pieno.'}</span>${cosa ? `<span class="piccolo nota-master">${testoRicco(cosa, 'riga')}</span>` : ''}
+      <div class="azioni azioni--strette"><button class="btn btn--primario btn--piccolo" data-a="tav-oro-visto" data-id="${esc(o.id)}">${ico('check')}Va bene, resta pieno</button>
+      <button class="btn btn--piccolo" data-a="tav-oro-azzera" data-id="${esc(o.id)}">Ricomincia da zero</button>
+      <button class="btn btn--testo btn--piccolo" data-a="tav-oro-togli" data-id="${esc(o.id)}">Toglilo</button></div></div></div>`;
+  });
+  return h;
+}
+
+// Orologi ed eventi dove servono, con quello che serve in ogni posto:
+//   'valle'      Stasera → La valle: gli orologi (il Master con − e +) e gli eventi rivelati in arrivo
+//   'regia'      la Regia: tutto, anche i privati, con le note del Master, Modifica e i tasti per crearne
+//   'cruscotto'  la Home della serata: gli orologi come chip piccoli (al massimo quattro), niente eventi
+//   'luogo'      la pagina di un luogo (id) e la sua scheda sulla mappa ('mappa', più corta): quelli del luogo
+function bloccoOrologiEventi(dove, id) {
+  const master = !!IMPOST.master;
+  let oro = orologi(), evt = eventiProgrammati();
+  if (dove === 'luogo' || dove === 'mappa') { oro = oro.filter(o => nelLuogo(o, id)); evt = evt.filter(e => nelLuogo(e, id) && eventoInVista(e)); }
+  if (dove === 'valle') evt = evt.filter(e => !e.segreto && eventoInVista(e));
+
+  if (dove === 'cruscotto') {
+    if (!oro.length) return '';
+    return `<div class="cr-orologi">${oro.slice(0, 4).map(o => `<a class="cr-orologio${o.segreto ? ' privato' : ''}" href="#/stasera?sez=valle">${cerchioOrologio(o, 20)}<span class="nome">${esc(o.nome)}</span><b>${o.pieni}/${o.spicchi}</b>${o.segreto ? ico('nascosto') : ''}</a>`).join('')}
+      ${oro.length > 4 ? `<a class="cr-orologio altri" href="#/stasera?sez=valle">Altri ${oro.length - 4}</a>` : ''}</div>`;
+  }
+
+  // un orologio: il cerchio, il nome, gli spicchi; al Master − e +, e (in Regia e nel luogo) le sue note
+  const rigaO = o => {
+    const note = master && dove !== 'mappa' ? [o.privato.descrizione ? testoRicco(o.privato.descrizione, 'riga') : '', o.privato.condizione ? '<b>Quando si riempie:</b> ' + testoRicco(o.privato.condizione, 'riga') : ''].filter(Boolean) : [];
+    const sotto = [o.pieni + ' su ' + o.spicchi + ' spicchi', dove !== 'luogo' && dove !== 'mappa' && o.luogo ? nomeDi(o.luogo) : '', o.segreto ? 'privato' : master ? 'lo vedono tutti' : ''].filter(Boolean);
+    return `<li class="orologio${o.segreto ? ' privato' : ''}${o.pieni >= o.spicchi ? ' tutto' : ''}" id="${esc(o.id)}">${cerchioOrologio(o, dove === 'mappa' ? 30 : 42)}
+      <div class="corpo"><div class="tit">${esc(o.nome)}${o.segreto ? ico('nascosto') : ''}</div><div class="sub">${esc(sotto.join(' · '))}</div>${note.map(t => `<div class="sub nota-master">${t}</div>`).join('')}</div>
+      ${master && dove !== 'mappa' ? `<div class="oro-tasti"><button class="btn-icona btn-icona--mini" data-a="tav-oro-meno" data-id="${esc(o.id)}" aria-label="Togli uno spicchio a ${esc(o.nome)}"${o.pieni ? '' : ' disabled'}>${ico('meno')}</button>
+        <button class="btn-icona btn-icona--mini" data-a="tav-oro-piu" data-id="${esc(o.id)}" aria-label="Riempi uno spicchio di ${esc(o.nome)}"${o.pieni < o.spicchi ? '' : ' disabled'}>${ico('piu')}</button>
+        ${dove === 'regia' ? `<button class="btn-icona btn-icona--mini" data-a="tav-oro-modifica" data-id="${esc(o.id)}" aria-label="Modifica ${esc(o.nome)}">${ico('modifica')}</button>` : ''}</div>` : ''}</li>`;
+  };
+  // un evento: cosa, quando (rispetto ad adesso), dove, se si ripete; al Master la nota e, in Regia, Modifica
+  const rigaE = e => {
+    const quando = e.stato === 'attivo' ? testoMomento(e.quando, true) : 'è successo ' + testoMomento(Number((e.ultimo || {}).quando) || e.quando, true);
+    const sotto = [quando, dove !== 'luogo' && dove !== 'mappa' && e.luogo ? nomeDi(e.luogo) : '', e.ripeti ? (RIPETIZIONI[e.ripeti] || 'si ripete').toLowerCase() : '', master && e.segreto ? 'segreto' : master ? 'i giocatori lo sanno' : ''].filter(Boolean);
+    return `<li class="evento-riga${e.segreto ? ' privato' : ''}${e.stato !== 'attivo' ? ' passato' : ''}" id="${esc(e.id)}">${ico('evento')}<div class="corpo"><div class="tit">${esc(e.nome)}</div><div class="sub">${esc(sotto.join(' · '))}</div>
+      ${master && e.nota && dove !== 'mappa' ? `<div class="sub nota-master">${testoRicco(e.nota, 'riga')}</div>` : ''}</div>
+      ${master && dove === 'regia' ? `<button class="btn-icona btn-icona--mini" data-a="tav-evt-modifica" data-id="${esc(e.id)}" aria-label="Modifica ${esc(e.nome)}">${ico('modifica')}</button>` : ''}</li>`;
+  };
+
+  if (dove === 'mappa') {
+    return (oro.length ? `<h3>Orologi</h3><ul class="lista orologi orologi--corti">${oro.map(rigaO).join('')}</ul>` : '') +
+      (evt.length ? `<h3>Eventi</h3><ul class="lista eventi-prog">${evt.map(rigaE).join('')}</ul>` : '');
+  }
+  if (dove === 'regia') {
+    const attivi = evt.filter(e => e.stato === 'attivo'), passati = evt.filter(e => e.stato !== 'attivo');
+    return `<section class="sezione"><h2>Orologi <span class="conta">${oro.length}</span></h2>
+        ${oro.length ? `<ul class="lista orologi">${oro.map(rigaO).join('')}</ul>` : '<p class="vuoto">Nessun orologio. Uno per ogni cosa che cresce finché succede: un pericolo, una pazienza che finisce, un piano dei cattivi.</p>'}
+        <div class="azioni"><button class="btn btn--piccolo" data-a="tav-oro-modifica">${ico('piu')}Nuovo orologio</button></div></section>
+      <section class="sezione"><h2>Eventi programmati <span class="conta">${attivi.length}</span></h2>
+        ${attivi.length ? `<ul class="lista eventi-prog">${attivi.map(rigaE).join('')}</ul>` : '<p class="vuoto">Nessun evento in arrivo. Per le cose che succedono a un\'ora precisa: la carovana che parte, l\'accordo che scade, chi arriva in città.</p>'}
+        ${passati.length ? `<details class="altre-segrete"><summary>Già passati (${passati.length})</summary><ul class="lista eventi-prog">${passati.map(rigaE).join('')}</ul></details>` : ''}
+        <div class="azioni"><button class="btn btn--piccolo" data-a="tav-evt-modifica">${ico('piu')}Nuovo evento</button></div>
+        <p class="fioco piccolo">Quando il tempo del gruppo passa l'ora di un evento, qui, in La valle e nel cruscotto della serata compare l'avviso: avvenuto, ignora, rinvia o rivela ai giocatori.</p></section>`;
+  }
+  // La valle e la pagina del luogo: solo se c'è qualcosa
+  let h = '';
+  if (oro.length) h += `<section class="sezione"><h2>Orologi <span class="conta">${oro.length}</span></h2><ul class="lista orologi">${oro.map(rigaO).join('')}</ul>
+    ${master && dove === 'valle' ? '<p class="fioco piccolo">Si creano e si cambiano in <a href="#/stasera?sez=regia">Regia</a>.</p>' : ''}</section>`;
+  if (evt.length) h += `<section class="sezione"><h2>${dove === 'valle' ? 'Eventi annunciati' : 'Eventi'} <span class="conta">${evt.length}</span></h2><ul class="lista eventi-prog">${evt.map(rigaE).join('')}</ul></section>`;
   return h;
 }
 
@@ -8708,17 +9559,6 @@ async function azioneTavolo(a, el, form) {
       if (tr) apriEditor('commercio', tr.id); else apriEditor('commercio', null, { tipo: 'tratta', da: VIAGGIO.da, a: VIAGGIO.a, pericolo: 1 });
       return;
     }
-    case 'tav-incontri': salva('config', { id: 'incontri', valore: val('tabella'), segreto: 1 }); avviso('Tabella salvata: la vedi solo tu'); break;
-    case 'tav-incontro': {
-      const righe = String(cfg('incontri', '')).split('\n').map(r => r.trim().match(/^(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?[\s.:)]+(.+)$/)).filter(Boolean);
-      if (!righe.length) return;
-      const max = Math.max(...righe.map(m => Number(m[2] || m[1]) || 0)) || 20;
-      const n = 1 + Math.floor(Math.random() * max);
-      const m = righe.find(x => n >= Number(x[1]) && n <= Number(x[2] || x[1]));
-      const box = document.getElementById('esito-incontro');
-      if (box) { box.innerHTML = `<span class="n">${n}</span><div>${m ? esc(m[3]) : 'Nessuna riga per questo numero'}</div>`; box.hidden = false; }
-      return;
-    }
 
     // --- bottino ---
     case 'tav-monete':
@@ -8741,6 +9581,16 @@ async function azioneTavolo(a, el, form) {
       break;
     }
     case 'tav-bot-scheda': BOTTINO_SCHEDA = el.dataset.k || ''; break;
+    case 'tav-bot-filtro': BOTTINO_FILTRI[el.dataset.k] = !BOTTINO_FILTRI[el.dataset.k]; break;
+    case 'tav-bot-desc': {
+      // la descrizione si apre e si chiude sul posto, senza ridisegnare la pagina; il Set la tiene aperta
+      // anche quando la pagina si ridisegna (un tocco su un rombo, i dati che arrivano dal foglio)
+      const id = el.dataset.id;
+      if (BOTTINO_APERTE.has(id)) BOTTINO_APERTE.delete(id); else BOTTINO_APERTE.add(id);
+      el.classList.toggle('chiusa', !BOTTINO_APERTE.has(id));
+      el.setAttribute('aria-expanded', String(BOTTINO_APERTE.has(id)));
+      return;
+    }
     case 'tav-bot-nuovo': apriEditor('commercio', null, { tipo: 'bottino', portatore: el.dataset.k || '' }); return;
     case 'tav-vendi': {
       const o = DB.commercio[el.dataset.id];
@@ -8816,20 +9666,10 @@ async function azioneTavolo(a, el, form) {
       const i = Number(el.dataset.t);
       const t = o ? [].concat((oggettoCatalogo(o.catalogo) || {}).tabella || [])[i] : null;
       if (!t || !t.dado) return;
-      const righe = t.righe || [];
-      let n = null, dettaglio = '', riga = -1;
-      if (t.dado === 'carta') {
-        // una carta a caso del mazzo: quelle già usate l'app non le conosce, se ne esce una si pesca ancora
-        riga = Math.floor(Math.random() * righe.length);
-        dettaglio = 'pescata a caso tra ' + righe.length + ' carte';
-      } else {
-        const r = tiraDadi(t.dado);
-        if (!r) return;
-        n = r.n;
-        dettaglio = t.dado + (r.dettaglio ? ': ' + r.dettaglio : '');
-        riga = righe.findIndex(x => n >= x[0] && n <= x[x.length > 2 ? 1 : 0]);
-      }
-      ULTIMO_TIRO = { id: o.id, t: i, riga, n, avviso: t.titolo || '', testo: '', dettaglio };
+      // una carta del mazzo esce a caso: quelle già usate l'app non le conosce, se ne esce una si pesca ancora
+      const r = tiraTabella(t);
+      if (!r) return;
+      ULTIMO_TIRO = { id: o.id, t: i, riga: r.riga, n: r.n, avviso: t.titolo || '', testo: '', dettaglio: r.dettaglio };
       break;
     }
     case 'tav-tiro-chiudi': ULTIMO_TIRO = null; break;
@@ -8921,7 +9761,224 @@ async function azioneTavolo(a, el, form) {
       break;
     }
     case 'tav-diceria-togli': elimina('config', el.dataset.id); chiudiFoglio(); break;
-    case 'tav-vera': { const r = DB.config[el.dataset.id]; if (r) salva('config', { id: r.id, valore: Object.assign({}, r.valore, { vera: el.dataset.v }) }); break; }
+    case 'tav-vera': {
+      // lo stato di una diceria con chi l'ha segnato e quando; "da verificare" toglie anche il nome
+      const r = DB.config[el.dataset.id];
+      if (!r) break;
+      const v = VERITA[el.dataset.v] !== undefined ? el.dataset.v : '';
+      salva('config', { id: r.id, valore: Object.assign({}, r.valore, { vera: v, veraDa: v ? chiSono() : '', veraIl: v ? Date.now() : 0 }) });
+      DICERIA_IN_CAMBIO = '';
+      // con un filtro acceso la diceria appena segnata esce dall'elenco: dico dove è finita
+      if (FILTRO_DICERIE !== 'tutte' && FILTRO_DICERIE !== v) avviso('Segnata: ' + VERITA[v].toLowerCase() + '. La trovi in "' + (v ? VERITA_FILTRO[v] : 'Da verificare') + '" o in "Tutte"');
+      break;
+    }
+    case 'tav-dic-cambia': DICERIA_IN_CAMBIO = el.dataset.id; break;
+
+    // --- orologi narrativi (1.8): solo il Master li riempie e li svuota ---
+    case 'tav-oro-piu': case 'tav-oro-meno': {
+      const r = DB.config[el.dataset.id];
+      if (!r || !r.valore || !IMPOST.master) return;
+      const n = SPICCHI.includes(Number(r.valore.spicchi)) ? Number(r.valore.spicchi) : 4;
+      const pieni = clamp((Number(r.valore.pieni) || 0) + (a === 'tav-oro-piu' ? 1 : -1), 0, n);
+      // riempito l'ultimo spicchio parte l'avviso (visto: false); se lo si svuota anche di uno, l'avviso torna buono
+      salva('config', { id: r.id, valore: Object.assign({}, r.valore, { pieni, visto: false }) });
+      if (pieni >= n) avviso('"' + (r.valore.nome || 'L\'orologio') + '" è pieno: cosa succede lo decidi tu');
+      break;
+    }
+    case 'tav-oro-visto': { const r = DB.config[el.dataset.id]; if (r && r.valore) salva('config', { id: r.id, valore: Object.assign({}, r.valore, { visto: true }) }); break; }
+    case 'tav-oro-azzera': { const r = DB.config[el.dataset.id]; if (r && r.valore) salva('config', { id: r.id, valore: Object.assign({}, r.valore, { pieni: 0, visto: false }) }); break; }
+    case 'tav-oro-togli': {
+      // via l'orologio e le sue note (le righe restano nel foglio come cancellate)
+      const r = DB.config[el.dataset.id];
+      if (!r) return;
+      if (!await chiedi('Togliere "' + ((r.valore || {}).nome || 'l\'orologio') + '"?', 'Sparisce per tutti, con le tue note.', 'Togli', true)) return;
+      elimina('config', r.id);
+      elimina('config', 'orn-' + r.id.slice(4));
+      chiudiFoglio();
+      break;
+    }
+    case 'tav-oro-modifica': {
+      // nome e spicchi li vedono i giocatori (se è pubblico); descrizione e condizione solo il Master
+      const o = el.dataset.id ? orologi().find(x => x.id === el.dataset.id) : null;
+      const luoghi = elenco('voci', v => v.tipo === 'luogo').sort((x, y) => String(x.nome).localeCompare(String(y.nome), 'it'));
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">${o ? 'Modifica l\'orologio' : 'Nuovo orologio'}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <form data-a="tav-oro-salva" data-id="${esc(o ? o.id : '')}">
+          <label class="campo"><span>Nome</span><input type="text" name="nome" required value="${esc(o ? o.nome : '')}" placeholder="Es. La pazienza della megera"><small>Di un orologio pubblico i giocatori vedono il nome e gli spicchi, nient'altro.</small></label>
+          <div class="campo"><span>Spicchi</span><div class="chips scelta-spicchi" role="radiogroup" aria-label="Spicchi">${SPICCHI.map(n => `<label class="chip chip--tasto"><input type="radio" name="spicchi" value="${n}"${(o ? o.spicchi : 4) === n ? ' checked' : ''}>${n}</label>`).join('')}</div></div>
+          <div class="riga-campi"><label class="campo campo--dado"><span>Pieni</span><input type="number" name="pieni" min="0" max="10" value="${o ? o.pieni : 0}"></label>
+          <label class="campo"><span>Luogo</span><select name="luogo"><option value="">Nessun luogo</option>${luoghi.map(l => `<option value="${esc(l.id)}"${o && o.luogo === l.id ? ' selected' : ''}>${esc(l.nome)}</option>`).join('')}</select></label></div>
+          <label class="interruttore"><span>Lo vedono anche i giocatori: nella Home della serata, in Stasera e sulla mappa</span><input type="checkbox" name="pubblico"${o && !o.segreto ? ' checked' : ''}></label>
+          <label class="campo"><span>Descrizione, solo per te</span><textarea name="descrizione" rows="3" placeholder="Cosa misura, cosa lo fa avanzare">${esc(o ? o.privato.descrizione || '' : '')}</textarea></label>
+          <label class="campo"><span>Quando si riempie, solo per te</span><input type="text" name="condizione" value="${esc(o ? o.privato.condizione || '' : '')}" placeholder="Es. la megera scopre il nascondiglio"><small>Te lo ricorda l'avviso quando l'ultimo spicchio è pieno.</small></label>
+          <div class="foglio-piede">${o ? `<button type="button" class="btn btn--pericolo" data-a="tav-oro-togli" data-id="${esc(o.id)}">Togli</button>` : '<button type="button" class="btn" data-a="chiudi">Annulla</button>'}<button class="btn btn--primario" type="submit">${ico('check')}Salva</button></div></form>`);
+      return;
+    }
+    case 'tav-oro-salva': {
+      // privato di base: il nome di un orologio arriva ai giocatori solo se il Master lo vuole
+      const id = form.dataset.id || nuovoIdConfig('oro-');
+      const prima = (DB.config[id] || {}).valore || {};
+      // gli spicchi sono radio: val() leggerebbe il primo, qui serve quello scelto
+      const scelto = Number((form.querySelector('[name="spicchi"]:checked') || {}).value);
+      const spicchi = SPICCHI.includes(scelto) ? scelto : 4;
+      const pieni = clamp(Number(val('pieni')) || 0, 0, spicchi);
+      const pubblico = !!(form.querySelector('[name="pubblico"]') || {}).checked;
+      salva('config', { id, valore: Object.assign({}, prima, { nome: val('nome') || 'Orologio', spicchi, pieni, luogo: val('luogo'), visto: pieni >= spicchi ? !!prima.visto && Number(prima.pieni) >= spicchi : false }), segreto: pubblico ? 0 : 1 });
+      salva('config', { id: 'orn-' + id.slice(4), valore: { descrizione: val('descrizione'), condizione: val('condizione') }, segreto: 1 });
+      chiudiFoglio();
+      avviso(pubblico ? 'Orologio salvato: lo vedono tutti' : 'Orologio salvato: lo vedi solo tu');
+      break;
+    }
+    // --- eventi programmati (1.8) ---
+    case 'tav-evt-modifica': {
+      const e = el.dataset.id ? eventiProgrammati().find(x => x.id === el.dataset.id) : null;
+      const ora = momentoCampagna();
+      // un evento nuovo propone l'ora piena dopo adesso
+      const q = e ? e.quando : Math.floor(ora) + 1;
+      const luoghi = elenco('voci', v => v.tipo === 'luogo').sort((x, y) => String(x.nome).localeCompare(String(y.nome), 'it'));
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">${e ? 'Modifica l\'evento' : 'Nuovo evento'}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <form data-a="tav-evt-salva" data-id="${esc(e ? e.id : '')}">
+          <label class="campo"><span>Cosa succede</span><input type="text" name="nome" required value="${esc(e ? e.nome : '')}" placeholder="Es. La carovana per Targos parte"><small>Se lo riveli, i giocatori vedono questo, l'ora e il luogo.</small></label>
+          <div class="riga-campi"><label class="campo campo--dado"><span>Giorno</span><input type="number" name="giorno" min="1" required value="${Math.floor(q / 24) + 1}"></label>
+          <label class="campo"><span>Ora</span><input type="time" name="ora" required value="${testoOra(q)}"></label></div>
+          <p class="fioco piccolo" style="margin:-6px 0 12px">Adesso è il giorno ${Math.floor(ora / 24) + 1}, sono le ${testoOra(ora)}.</p>
+          <div class="riga-campi"><label class="campo"><span>Si ripete</span><select name="ripeti">${Object.entries(RIPETIZIONI).map(([k, t]) => `<option value="${k}"${(e ? e.ripeti : 0) === Number(k) ? ' selected' : ''}>${t}</option>`).join('')}</select></label>
+          <label class="campo"><span>Luogo</span><select name="luogo"><option value="">Nessun luogo</option>${luoghi.map(l => `<option value="${esc(l.id)}"${e && e.luogo === l.id ? ' selected' : ''}>${esc(l.nome)}</option>`).join('')}</select></label></div>
+          <label class="interruttore"><span>I giocatori lo sanno già: compare in La valle e, se ha un luogo, sulla mappa</span><input type="checkbox" name="pubblico"${e && !e.segreto ? ' checked' : ''}></label>
+          <label class="campo"><span>Nota, solo per te</span><textarea name="nota" rows="3" placeholder="Quello che i giocatori non devono sapere">${esc(e ? e.nota : '')}</textarea></label>
+          <div class="foglio-piede">${e ? `<button type="button" class="btn btn--pericolo" data-a="tav-evt-togli" data-id="${esc(e.id)}">Togli</button>` : '<button type="button" class="btn" data-a="chiudi">Annulla</button>'}<button class="btn btn--primario" type="submit">${ico('check')}Salva</button></div></form>`);
+      return;
+    }
+    case 'tav-evt-salva': {
+      // un evento spostato nel futuro torna "da fare" anche se era già passato; segreto finché non è pubblico
+      const id = form.dataset.id || nuovoIdConfig('evt-');
+      const prima = (DB.config[id] || {}).valore || {};
+      const quando = momentoDaModulo(form);
+      const pubblico = !!(form.querySelector('[name="pubblico"]') || {}).checked;
+      const stato = quando > momentoCampagna() || !prima.stato ? 'attivo' : prima.stato;
+      salva('config', { id, valore: Object.assign({}, prima, { nome: val('nome') || 'Evento', quando, ripeti: Number(val('ripeti')) || 0, luogo: val('luogo'), stato }), segreto: pubblico ? 0 : 1 });
+      salva('config', { id: 'evn-' + id.slice(4), valore: { nota: val('nota') }, segreto: 1 });
+      chiudiFoglio();
+      avviso('Evento salvato: ' + testoMomento(quando, true));
+      break;
+    }
+    case 'tav-evt-togli': {
+      const r = DB.config[el.dataset.id];
+      if (!r) return;
+      if (!await chiedi('Togliere "' + ((r.valore || {}).nome || 'l\'evento') + '"?', 'Sparisce dalla Regia e, se era rivelato, anche per i giocatori.', 'Togli', true)) return;
+      elimina('config', r.id);
+      elimina('config', 'evn-' + r.id.slice(4));
+      chiudiFoglio();
+      break;
+    }
+    case 'tav-evt-esito': {
+      // avvenuto, ignorato o rivelato: la volta passata resta in "ultimo"; un evento che si ripete riparte dalla
+      // prima volta dopo adesso (se il gruppo ha viaggiato tre giorni, la pattuglia non chiede tre avvisi)
+      const r = DB.config[el.dataset.id];
+      if (!r || !r.valore || !IMPOST.master) return;
+      const v = r.valore, esito = el.dataset.esito, ora = momentoCampagna();
+      const q = Number(v.quando) || 0, ripeti = Number(v.ripeti) || 0;
+      const nuovo = Object.assign({}, v, { ultimo: { quando: q, esito: esito === 'ignorato' ? 'ignorato' : 'avvenuto', il: Date.now() } });
+      if (ripeti > 0) { let n = q + ripeti; while (n <= ora) n += ripeti; nuovo.quando = n; nuovo.stato = 'attivo'; }
+      else nuovo.stato = esito === 'ignorato' ? 'ignorato' : 'avvenuto';
+      const riga = { id: r.id, valore: nuovo };
+      if (esito === 'rivela') {
+        // i giocatori lo vedono da adesso (in La valle e, con un luogo, sulla mappa); a serata aperta diventa
+        // anche un segnalibro, così finisce nel diario con l'import
+        riga.segreto = 0;
+        const ser = serata();
+        if (ser && !ser.fine) salva('config', { id: 'seg-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), valore: { quando: Date.now(), tipo: 'nota', testo: 'Evento: ' + (v.nome || '') + (v.luogo ? ' (' + nomeDi(v.luogo) + ')' : ''), chi: chiSono() }, segreto: 0 });
+      }
+      salva('config', riga);
+      avviso(esito === 'rivela' ? 'Rivelato ai giocatori' + (ripeti ? ': la prossima volta è ' + testoMomento(nuovo.quando, true) : '')
+        : esito === 'ignorato' ? 'Ignorato' + (ripeti ? ': la prossima volta è ' + testoMomento(nuovo.quando, true) : '')
+        : 'Segnato come avvenuto' + (ripeti ? ': la prossima volta è ' + testoMomento(nuovo.quando, true) : ''));
+      break;
+    }
+    case 'tav-evt-rinvia': {
+      // fra un'ora (da adesso), domani alla stessa ora (la prima dopo adesso) o un momento scelto
+      const e = eventiProgrammati().find(x => x.id === el.dataset.id);
+      if (!e) return;
+      const ora = momentoCampagna();
+      let domani = e.quando + 24;
+      while (domani <= ora) domani += 24;
+      const fra1 = Math.round((ora + 1) * 60) / 60;
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">Rinvia: ${esc(e.nome)}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <div class="azioni rinvia-tasti" style="margin-top:0"><button class="btn" data-a="tav-evt-sposta" data-id="${esc(e.id)}" data-q="${fra1}">Fra un'ora<span class="fioco piccolo">${esc(testoMomento(fra1, true))}</span></button>
+        <button class="btn" data-a="tav-evt-sposta" data-id="${esc(e.id)}" data-q="${domani}">Domani alla stessa ora<span class="fioco piccolo">${esc(testoMomento(domani, true))}</span></button></div>
+        <form data-a="tav-evt-sposta" data-id="${esc(e.id)}"><h3 class="t3" style="margin:18px 0 8px">Oppure scegli quando</h3>
+          <div class="riga-campi"><label class="campo campo--dado"><span>Giorno</span><input type="number" name="giorno" min="1" required value="${Math.floor(domani / 24) + 1}"></label>
+          <label class="campo"><span>Ora</span><input type="time" name="ora" required value="${testoOra(e.quando)}"></label></div>
+          <div class="foglio-piede"><button type="button" class="btn" data-a="chiudi">Annulla</button><button class="btn btn--primario" type="submit">${ico('orologio')}Rinvia</button></div></form>`);
+      return;
+    }
+    case 'tav-evt-sposta': {
+      const r = DB.config[el.dataset.id];
+      if (!r || !r.valore) return;
+      const q = form && form.tagName === 'FORM' ? momentoDaModulo(form) : Number(el.dataset.q);
+      salva('config', { id: r.id, valore: Object.assign({}, r.valore, { quando: q, stato: 'attivo' }) });
+      chiudiFoglio();
+      avviso('Rinviato a ' + testoMomento(q, true));
+      break;
+    }
+    // --- regia: le tabelle casuali del Master ---
+    case 'tav-reg-tira': {
+      // il tiro resta su questo telefono; la riga uscita la tengo come testo, se la tabella cambia dopo il tiro
+      const t = tabelleRegia().find(x => x.id === el.dataset.id);
+      if (!t || !t.righe.length) return;
+      const r = tiraTabella(t);
+      if (!r) { avviso('Il dado della tabella non si capisce: correggilo con Modifica'); return; }
+      TIRO_REGIA = { id: t.id, n: r.n, riga: r.riga, testo: r.riga >= 0 ? t.righe[r.riga][2] : '', dettaglio: r.dettaglio };
+      break;
+    }
+    case 'tav-reg-chiudi': TIRO_REGIA = null; break;
+    case 'tav-reg-rivela': {
+      // il risultato diventa un segnalibro della serata (pubblico): lo vedono tutti e va nel diario con l'import.
+      // Una volta sola per tiro
+      const ser = serata();
+      if (!TIRO_REGIA || TIRO_REGIA.rivelato || !TIRO_REGIA.testo || !ser || ser.fine) return;
+      const t = tabelleRegia().find(x => x.id === TIRO_REGIA.id);
+      salva('config', { id: 'seg-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), valore: { quando: Date.now(), tipo: 'nota', testo: (t ? t.nome : 'Tabella') + ': ' + TIRO_REGIA.testo, chi: chiSono() }, segreto: 0 });
+      TIRO_REGIA.rivelato = true;
+      avviso('Rivelato: adesso è tra i segnalibri della serata');
+      break;
+    }
+    case 'tav-reg-tabella': {
+      // scrivere o cambiare una tabella: nome, dado e righe, con sotto cosa non torna mentre si scrive
+      const t = el.dataset.id ? tabelleRegia().find(x => x.id === el.dataset.id) : null;
+      const dado = t ? t.dado : 'd20';
+      apriFoglio(`<div class="foglio-testa"><h2 class="t2">${t ? esc(t.nome) : 'Nuova tabella'}</h2><button class="btn-icona" data-a="chiudi" aria-label="Chiudi">${ico('chiudi')}</button></div>
+        <form data-a="tav-reg-salva" data-id="${esc(t ? t.id : '')}">
+          ${t && t.aiuto ? `<p class="fioco piccolo" style="margin-top:0">Per ${esc(t.aiuto)}.</p>` : ''}
+          <div class="riga-campi"><label class="campo"><span>Nome</span><input type="text" name="nome" required value="${esc(t ? t.nome : '')}" placeholder="Es. Tesori del relitto"></label>
+          <label class="campo campo--dado"><span>Dado</span><input type="text" name="dado" required value="${esc(dado)}" list="dl-dadi" autocapitalize="off" spellcheck="false" data-a="reg-anteprima"></label></div>
+          <datalist id="dl-dadi">${['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100', '2d6', '3d6', '2d10'].map(d => `<option value="${d}">`).join('')}</datalist>
+          <label class="campo"><span>Righe</span><textarea name="testo" rows="9" spellcheck="false" data-a="reg-anteprima" placeholder="1-4 ...&#10;5-8 ...&#10;9-12 ...">${esc(t ? t.testo : '')}</textarea>
+          <small>Una riga per risultato, con i numeri davanti: <b>1-4 testo</b> oppure <b>5 testo</b>. Senza numeri le righe valgono 1, 2, 3… Si può incollare. Resta segreta: la vedi solo tu.</small></label>
+          <div id="anteprima-tabella">${anteprimaTabella(dado, t ? t.testo : '')}</div>
+          <div class="foglio-piede">${t && !t.k ? `<button type="button" class="btn btn--pericolo" data-a="tav-reg-togli" data-id="${esc(t.id)}">Elimina</button>` : '<button type="button" class="btn" data-a="chiudi">Annulla</button>'}<button class="btn btn--primario" type="submit">${ico('check')}Salva</button></div></form>`);
+      return;
+    }
+    case 'tav-reg-salva': {
+      // le tabelle pronte tengono il loro id (tab-incontri…), le nuove ne prendono uno. Sempre segrete
+      const id = form.dataset.id || nuovoIdConfig('tab-');
+      const area = form.querySelector('[name="testo"]');
+      salva('config', { id, valore: { nome: val('nome') || 'Tabella', dado: val('dado').replace(/\s+/g, '').toLowerCase() || 'd20', testo: area ? area.value.replace(/\s+$/, '') : '' }, segreto: 1 });
+      if (TIRO_REGIA && TIRO_REGIA.id === id) TIRO_REGIA = null;
+      chiudiFoglio();
+      avviso('Tabella salvata: la vedi solo tu');
+      break;
+    }
+    case 'tav-reg-togli': {
+      // solo le tabelle del Master: quelle pronte si svuotano cancellando le righe
+      const r = DB.config[el.dataset.id];
+      if (!r || TABELLE_PRONTE[r.id.slice(4)]) return;
+      if (!await chiedi('Eliminare "' + ((r.valore || {}).nome || 'la tabella') + '"?', 'La tabella e le sue righe spariscono dalla Regia.', 'Elimina', true)) return;
+      elimina('config', r.id);
+      if (TIRO_REGIA && TIRO_REGIA.id === r.id) TIRO_REGIA = null;
+      chiudiFoglio();
+      break;
+    }
+    case 'tav-dic-filtro': FILTRO_DICERIE = el.dataset.v; DICERIA_IN_CAMBIO = ''; break;
     case 'tav-dic-rivela': salva('config', { id: el.dataset.id, segreto: 0 }); avviso('Adesso la vedono tutti'); break;
   }
   render();
@@ -9398,6 +10455,20 @@ document.addEventListener('click', async e => {
     case 'comm-prepara': preparaCommercio(); break;
     case 'comm-slitta': apriCompraSlitta(); break;
     case 'comm-olio': aggiungiOlioDiBalena(); avviso("Aggiunto l'olio di balena tra le merci"); render(); break;
+    case 'comm-mercato': {
+      // le sezioni del Mercato si aprono una alla volta (1.8) e il telefono si ricorda l'ultima. Apro e chiudo io,
+      // senza ridisegnare, al posto del <details>: così chiudere le altre vale anche sui browser più vecchi
+      e.preventDefault();
+      const det = el.closest('details');
+      const apri = !det.open;
+      document.querySelectorAll('details.mercato-sez').forEach(d => { d.open = apri && d === det; });
+      IMPOST.mercato = apri ? el.dataset.k : '';
+      salvaLocale('impost');
+      // se si chiude una sezione lunga sopra, quella appena aperta sale fuori dallo schermo: la riporto sotto la barra
+      const alto = el.getBoundingClientRect().top;
+      if (apri && alto < 70) window.scrollTo(0, Math.max(0, window.scrollY + alto - 70));
+      break;
+    }
     case 'comm-regole': {
       const R = regoleCommercio();
       const campi = [['abilita', 'Bonus per ogni stella di esperienza'], ['scorta', 'Bonus della scorta armata'], ['costoScorta', 'Costo della scorta (mo)'], ['pericolo', 'Malus per ogni livello di pericolo'], ['neve', 'Neve (negativo)'], ['bufera', 'Bufera (negativo)'], ['danneggiato', 'Mezzo danneggiato (negativo)']];
@@ -9442,7 +10513,9 @@ document.addEventListener('click', async e => {
     case 'cond-togli': salva('voci', { id: el.dataset.id, conducente: 0 }); chiudiFoglio(); render(); break;
 
     // --- taccuino della serata (condiviso: vedi azioneSerata in 5-importa.js) ---
-    case 'tac-inizia': azioneSerata('inizia', el); break;
+    // dal riepilogo "Prima di cominciare" (data-poi="home") si va al cruscotto della serata appena aperta
+    case 'tac-inizia': await azioneSerata('inizia', el); if (el.dataset.poi === 'home') location.hash = '#/home'; break;
+    case 'tac-tutti': SEGNALIBRI_TUTTI = !SEGNALIBRI_TUTTI; render(); break;
     case 'tac-termina': azioneSerata('termina', el); break;
     case 'tac-riprendi': azioneSerata('riprendi', el); break;
     case 'tac-registra': azioneSerata('registra', el); break;
@@ -9834,6 +10907,8 @@ document.addEventListener('input', e => {
   if (el.matches && el.matches('textarea.breve')) altezzaTesto(el);
   switch (el.dataset.a) {
     case 'slitta-calcola': aggiornaContoSlitta(); break;
+    // la tabella della Regia mentre il Master la scrive: quante righe e cosa non torna (8-tavolo.js)
+    case 'reg-anteprima': { const f = el.form, box = document.getElementById('anteprima-tabella'); if (f && box) box.innerHTML = anteprimaTabella(f.querySelector('[name="dado"]').value, f.querySelector('[name="testo"]').value); break; }
     case 'ed-catalogo': compilaDaCatalogo(el); break;
     case 'tav-priv-testo': if (NOTE_APERTE[el.dataset.id]) NOTE_APERTE[el.dataset.id].bozza = el.value; break;
     case 'wiki-cerca': {
@@ -9876,6 +10951,9 @@ document.addEventListener('focusout', e => {
   if (e.target.matches && e.target.matches('[data-menzioni]')) setTimeout(() => { document.getElementById('suggerimenti').hidden = true; }, 200);
 });
 document.addEventListener('keydown', e => {
+  // un elemento che fa da tasto senza essere un <button> (la descrizione di un oggetto del bottino, 1.8):
+  // con la tastiera Invio e spazio lo toccano
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[role=button][data-a]:not(button)')) { e.preventDefault(); e.target.click(); return; }
   if (e.key !== 'Escape') return;
   const sugg = document.getElementById('suggerimenti');
   if (!sugg.hidden) { sugg.hidden = true; return; }
@@ -9922,10 +11000,8 @@ async function collega(f) {
 }
 
 function costruisciShell() {
-  document.querySelector('.nav').innerHTML = [
-    ['home', '#/home', 'taverna', 'Taverna'], ['diario', '#/diario', 'diario', 'Diario'], ['mappa', '#/mappa', 'mappa', 'Mappa'],
-    ['missioni', '#/missioni', 'missioni', 'Missioni'], ['commercio', '#/commercio', 'slitta', 'Commercio'], ['wiki', '#/wiki', 'wiki', 'Wiki']
-  ].map(([s, h, i, l]) => `<a href="${h}" data-sez="${s}">${ico(i)}<span>${l}</span></a>`).join('');
+  // le cinque voci della barra (SEZIONI in 2-viste.js); la Home si apre dal nome in alto
+  document.querySelector('.nav').innerHTML = Object.entries(SEZIONI).map(([s, x]) => `<a href="${x.href}" data-sez="${s}">${ico(x.ico)}<span>${esc(x.nome)}</span></a>`).join('');
   document.querySelector('.barra-top .indietro').innerHTML = ico('indietro');
   document.querySelector('.stato-sync').innerHTML = ico('sync');
   document.getElementById('link-impostazioni').innerHTML = ico('impostazioni');
